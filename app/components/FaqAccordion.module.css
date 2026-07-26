@@ -1,0 +1,73 @@
+.tabList {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.tab {
+  padding: 10px 22px;
+  border-radius: 24px;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-sub);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.tab:hover {
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.tabActive {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+.item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text);
+  text-align: left;
+}
+
+.toggle {
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--color-accent);
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.answer {
+  font-size: 14px;
+  color: var(--color-text-sub);
+  line-height: 1.75;
+  padding: 0 0 24px;
+  white-space: pre-line;
+}
+
+@media (max-width: 767px) {
+  .question {
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,214 @@
+/* ========================================================
+   404 Not Found Page
+   ======================================================== */
+
+.main {
+  position: relative;
+  min-height: calc(100vh - 64px - 200px);
+  background: var(--gradient-hero);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Particle canvas — fills the main area */
+.particleCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Soft glow behind the 404 number */
+.glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(79, 142, 247, 0.12) 0%, transparent 60%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+/* Content stack */
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 100px 24px 80px;
+
+  /* entrance animation */
+  animation: fadeInUp 0.6s ease both;
+}
+
+/* Error badge */
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  color: #4F8EF7;
+  background: rgba(79, 142, 247, 0.1);
+  border: 1px solid rgba(79, 142, 247, 0.3);
+  border-radius: 100px;
+  padding: 4px 16px;
+  margin-bottom: 24px;
+
+  animation: fadeInUp 0.6s ease 0.05s both;
+}
+
+/* 404 large number */
+.number {
+  font-size: clamp(120px, 20vw, 200px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.02em;
+
+  /* gradient text */
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* floating animation */
+  animation: fadeInUp 0.6s ease 0.1s both, float 4s ease-in-out 0.7s infinite;
+}
+
+/* Divider */
+.divider {
+  width: 60px;
+  height: 2px;
+  background: var(--gradient-accent);
+  border: none;
+  border-radius: 2px;
+  margin-top: 8px;
+
+  animation: fadeInUp 0.6s ease 0.15s both;
+}
+
+/* Heading */
+.heading {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  color: #F0F4FF;
+  margin-top: 24px;
+  margin-bottom: 16px;
+
+  animation: fadeInUp 0.6s ease 0.2s both;
+}
+
+/* Sub text */
+.sub {
+  font-size: 15px;
+  color: #C0D3FF;
+  line-height: 1.8;
+  max-width: 480px;
+  text-align: center;
+  margin-bottom: 40px;
+
+  animation: fadeInUp 0.6s ease 0.25s both;
+}
+
+/* Button group */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  animation: fadeInUp 0.6s ease 0.3s both;
+}
+
+/* Primary button */
+.btnPrimary {
+  display: inline-block;
+  background: var(--gradient-accent);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 36px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(79, 142, 247, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 32px rgba(79, 142, 247, 0.5);
+}
+
+/* Secondary link / button */
+.btnSecondary {
+  background: none;
+  border: none;
+  color: #C0D3FF;
+  font-size: 14px;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: color 0.25s ease, opacity 0.25s ease;
+  font-family: var(--font);
+  padding: 0;
+}
+
+.btnSecondary:hover {
+  color: #F0F4FF;
+  opacity: 1;
+}
+
+/* ========================================================
+   Animations
+   ======================================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* ========================================================
+   Responsive — 767px and below
+   ======================================================== */
+
+@media (max-width: 767px) {
+  .sub {
+    max-width: 100%;
+    padding: 0 24px;
+  }
+
+  .btnPrimary {
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+  }
+
+  .btnSecondary {
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+  }
+}

@@ -1,0 +1,77 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-bg:           #0A0E1A;
+  --color-bg-secondary: #0F1526;
+  --color-bg-muted:     #0F1526;
+  --color-surface:      #161D35;
+  --color-bg-dark:      #0A0E1A;
+
+  --color-primary:      #4F8EF7;
+  --color-primary-dark: #3D7DE8;
+  --color-accent:       #4F8EF7;
+  --color-accent-end:   #8B5CF6;
+  --color-accent-hover: #3D7DE8;
+
+  --color-text:         #F0F4FF;
+  --color-text-sub:     #C0D3FF;
+  --color-text-dark:    #F0F4FF;
+  --color-muted:        #4A5578;
+
+  --color-border:       #1E2A4A;
+  --color-tag-bg:       rgba(79, 142, 247, 0.15);
+  --color-tag-text:     #4F8EF7;
+
+  --gradient-accent:    linear-gradient(135deg, #4F8EF7 0%, #8B5CF6 100%);
+  --gradient-hero:      radial-gradient(ellipse at 60% 40%, #1a2456 0%, #0A0E1A 70%);
+
+  --font: "Noto Sans JP", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* 代表紹介セクション用 */
+  --color-ceo-bg:       #0D1220;
+
+  /* 強みセクション 3軸アクセント */
+  --color-strength-dx:  #06B6D4;
+  --color-strength-ax:  #8B5CF6;
+  --color-strength-int: #10B981;
+
+  /* /partner ページ 専用トークン */
+  --color-partner-warm:    #E8A838;
+  --gradient-partner-hero: radial-gradient(ellipse at 30% 60%, rgba(232,168,56,0.12) 0%, transparent 55%),
+                            radial-gradient(ellipse at 75% 25%, rgba(79,142,247,0.14) 0%, transparent 50%),
+                            linear-gradient(160deg, #0C1020 0%, #0A0E1A 45%, #0D0C18 100%);
+  --gradient-partner-num:  linear-gradient(135deg, #E8A838 0%, #4F8EF7 100%);
+}
+
+html {
+  scroll-behavior: smooth;
+  /* ブラウザ既定(通常16px)に対してほんの少しだけ拡大。rem・継承フォントが一括で追従 */
+  font-size: 105%;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-size: 1rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+h1, h2, h3 { line-height: 1.3; font-weight: 700; }
+
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+@media (max-width: 767px) {
+  .container { padding: 0 20px; }
+}

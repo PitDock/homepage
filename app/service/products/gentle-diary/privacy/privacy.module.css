@@ -1,0 +1,25 @@
+.bulletList {
+  margin: 0;
+  padding-left: 1.35em;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bulletList > li {
+  padding-left: 0.25em;
+}
+
+.subTitle {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 20px 0 12px;
+  line-height: 1.45;
+}
+
+@media (max-width: 767px) {
+  .subTitle {
+    font-size: 1rem;
+  }
+}

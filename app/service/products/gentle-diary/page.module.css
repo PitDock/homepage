@@ -1,0 +1,432 @@
+/* base/gentlediary_LP.html の <style> を CSS Modules 化 */
+
+.page {
+  --bg: #f5fbfb;
+  --bg-soft: #eef6f7;
+  --text: #1f2a2e;
+  --muted: #5f6d75;
+  --primary: #4aa6b1;
+  --primary-dark: #2f7f88;
+  --accent: #8ad0b4;
+  --card: #ffffff;
+  --shadow: 0 10px 30px rgba(31, 42, 46, 0.08);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+
+  box-sizing: border-box;
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, #f7fcfc 0%, #f1f8f8 100%);
+  line-height: 1.7;
+  padding-top: 72px;
+}
+
+.page *,
+.page *::before,
+.page *::after {
+  box-sizing: border-box;
+}
+
+.container {
+  width: min(1120px, 92vw);
+  margin: 0 auto;
+}
+
+.section {
+  padding: 64px 0;
+}
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 80;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(31, 42, 46, 0.06);
+}
+
+.topbarInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 6px 0;
+}
+
+.topbarLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.topbarLogoImg {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  object-fit: contain;
+  display: block;
+}
+
+.topbarRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.topbarCta {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: nowrap;
+}
+
+.topbarCta .storeBtn img {
+  height: 35px;
+  width: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+.contactBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 999px;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(74, 166, 177, 0.35);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+}
+
+.contactBtn:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(74, 166, 177, 0.4);
+}
+
+.topbarContactBtn {
+  height: 35px;
+  padding: 0 16px;
+  font-size: 13px;
+}
+
+.hero {
+  padding: 32px 0 64px;
+}
+
+.heroGrid {
+  display: grid;
+  gap: 24px;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 6vw, 44px);
+  line-height: 1.25;
+  margin: 16px 0;
+}
+
+.heroLead {
+  color: var(--muted);
+  font-size: clamp(15px, 4vw, 18px);
+  margin: 0 0 24px;
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.ctaRow .storeBtn img {
+  height: 42px;
+  width: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+.ctaRow .storeBtn {
+  min-width: 0;
+}
+
+.storeCta {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+
+.storeCta .contactBtn {
+  margin-left: 4px;
+}
+
+.heroCard {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 16px;
+}
+
+.heroIllus {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  display: block;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.stat {
+  background: var(--bg-soft);
+  border-radius: 16px;
+  padding: 12px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.stat strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--text);
+  font-size: 13px;
+}
+
+.gridTwo {
+  display: grid;
+  gap: 20px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.cardMedia {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  margin-top: 12px;
+  display: block;
+}
+
+.card h3 {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+.card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.featureSection {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(238, 246, 247, 0.8) 100%);
+  padding: 80px 0;
+}
+
+.featureList {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+
+.feature {
+  display: grid;
+  gap: 10px;
+  padding: 28px 24px;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(74, 166, 177, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(74, 166, 177, 0.18);
+  border-color: rgba(74, 166, 177, 0.25);
+}
+
+.feature span {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  letter-spacing: 0.02em;
+}
+
+.feature p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+}
+
+.sectionTitle {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.sectionTitle h2 {
+  font-size: clamp(24px, 5vw, 36px);
+  margin: 0 0 12px;
+  color: var(--text);
+}
+
+.sectionTitle p {
+  font-size: clamp(14px, 3vw, 18px);
+  color: var(--muted);
+  margin: 0;
+}
+
+.cta {
+  background: var(--bg-soft);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  text-align: center;
+  display: grid;
+  gap: 18px;
+}
+
+.cta h2 {
+  margin: 0;
+  font-size: clamp(22px, 4vw, 30px);
+}
+
+.cta > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(14px, 3vw, 17px);
+}
+
+.ctaButtonsWrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.storeButtons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  justify-content: center;
+  max-width: 400px;
+}
+
+.storeBtn {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+}
+
+.storeBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.18);
+}
+
+.storeButtons .storeBtn img {
+  width: 100%;
+  max-width: 160px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 16px;
+  display: block;
+}
+
+.fadeIn {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.isVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.footerSlot {
+  margin-top: 64px;
+}
+
+@media (min-width: 640px) {
+  .featureList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 820px) {
+  .heroGrid {
+    grid-template-columns: 0.95fr 1.05fr;
+    align-items: center;
+  }
+
+  .gridTwo {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .featureList {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding-top: 118px;
+  }
+
+  .topbarInner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .topbarLeft {
+    justify-content: center;
+  }
+
+  .topbarRight {
+    justify-content: center;
+  }
+
+  .topbarCta {
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+}

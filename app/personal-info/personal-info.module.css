@@ -1,0 +1,162 @@
+.pageHeroInner {
+  padding-top: 52px;
+}
+
+.contentWrap {
+  max-width: 880px;
+  margin: 0 auto;
+  font-size: 15px;
+  line-height: 1.95;
+  color: var(--color-text-sub);
+}
+
+.lead {
+  font-size: 15px;
+  color: var(--color-text-sub);
+  line-height: 1.95;
+  margin-bottom: 40px;
+}
+
+/* ---- Top-level numbered cards ---- */
+.policyList {
+  list-style: none;
+  counter-reset: policy;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.policyItem {
+  counter-increment: policy;
+  position: relative;
+  padding: 28px 28px 28px 60px;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 12px;
+}
+
+.policyItem::before {
+  content: counter(policy);
+  position: absolute;
+  top: 28px;
+  left: 22px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-accent);
+  font-family: "Inter", sans-serif;
+  line-height: 1;
+}
+
+.policyHeading {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.policyBody {
+  font-size: 14px;
+  color: var(--color-text-sub);
+  line-height: 1.95;
+  white-space: pre-line;
+}
+
+/* ---- Nested numbered list ---- */
+.nestedOl {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 0;
+  counter-reset: nested;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nestedItem {
+  counter-increment: nested;
+  position: relative;
+  padding-left: 36px;
+  font-size: 14px;
+  color: var(--color-text-sub);
+  line-height: 1.85;
+}
+
+.nestedItem::before {
+  content: counter(nested) ".";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 28px;
+  text-align: right;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-accent);
+  font-family: "Inter", sans-serif;
+}
+
+.nestedItemText {
+  white-space: pre-line;
+}
+
+/* ---- Bullet list (deepest leaf level) ---- */
+.bulletList {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bulletItem {
+  position: relative;
+  padding-left: 18px;
+  font-size: 14px;
+  color: var(--color-text-sub);
+  line-height: 1.85;
+  white-space: pre-line;
+}
+
+.bulletItem::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0.7em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+@media (max-width: 767px) {
+  .pageHeroInner {
+    padding-top: 48px;
+  }
+
+  .policyItem {
+    padding: 22px 20px 22px 50px;
+  }
+
+  .policyItem::before {
+    top: 22px;
+    left: 18px;
+    font-size: 16px;
+  }
+
+  .policyHeading {
+    font-size: 16px;
+  }
+
+  .nestedItem {
+    padding-left: 28px;
+  }
+
+  .nestedItem::before {
+    width: 22px;
+    font-size: 12px;
+  }
+}

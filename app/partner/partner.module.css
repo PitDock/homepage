@@ -1,0 +1,837 @@
+/* ---- Keyframes ---- */
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+  40%       { transform: translate(40px, -30px) scale(1.08); opacity: 0.7; }
+  70%       { transform: translate(-20px, 20px) scale(0.94); opacity: 0.4; }
+}
+
+@keyframes partnerPanelIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ======================================
+   HERO
+   ====================================== */
+.partnerHero {
+  position: relative;
+  overflow: hidden;
+  background: var(--gradient-partner-hero);
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  padding: 140px 0 96px;
+}
+
+.partnerHeroOrb {
+  position: absolute;
+  right: -200px;
+  bottom: -120px;
+  width: 680px;
+  height: 680px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(232, 168, 56, 0.1) 0%,
+    rgba(79, 142, 247, 0.06) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  animation: orbFloat 20s ease-in-out infinite;
+}
+
+.partnerHeroLabel {
+  display: inline-block;
+  font-family: "Inter", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-partner-warm);
+  border: 1px solid rgba(232, 168, 56, 0.4);
+  border-radius: 100px;
+  padding: 5px 16px;
+  margin-bottom: 24px;
+  background: rgba(232, 168, 56, 0.06);
+}
+
+.partnerHeroH1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  max-width: 800px;
+}
+
+.partnerHeroH1 em {
+  font-style: normal;
+  background: linear-gradient(90deg, var(--color-partner-warm) 0%, #F0C060 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.partnerHeroSub {
+  font-size: 17px;
+  color: rgba(240, 244, 255, 0.88);
+  line-height: 1.9;
+  max-width: 800px;
+  margin-bottom: 40px;
+}
+
+.partnerHeroCtaRow {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.partnerBtnPrimary {
+  display: inline-block;
+  background: linear-gradient(135deg, #E8A838 0%, #F0C060 100%);
+  color: #0A0E1A;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 15px 36px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.partnerBtnPrimary:hover {
+  opacity: 0.92;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(232, 168, 56, 0.45);
+}
+
+.partnerBtnGhost {
+  display: inline-block;
+  border: 1px solid rgba(232, 168, 56, 0.5);
+  color: var(--color-partner-warm);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px 30px;
+  border-radius: 10px;
+  background: transparent;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+}
+.partnerBtnGhost:hover {
+  border-color: rgba(232, 168, 56, 0.8);
+  background: rgba(232, 168, 56, 0.08);
+  transform: translateY(-2px);
+}
+
+/* ======================================
+   SECTION COMMON
+   ====================================== */
+.partnerSectionHead {
+  max-width: 700px;
+  margin-bottom: 64px;
+}
+.partnerSectionHead.center {
+  text-align: center;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.center {
+  text-align: center;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.partnerSectionLabel {
+  display: block;
+  font-family: "Inter", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-partner-warm);
+  margin-bottom: 12px;
+}
+
+.partnerSectionH2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+
+.partnerSectionDesc {
+  font-size: 16px;
+  color: var(--color-text-sub);
+  line-height: 1.85;
+}
+
+/* ======================================
+   WORK WITH US (特徴カード)
+   ====================================== */
+.partnerWorkSection {
+  padding: 112px 0 96px;
+  background: var(--color-bg);
+}
+
+.partnerWorkGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.partnerWorkCard {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.partnerWorkCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+  border-color: rgba(232, 168, 56, 0.3);
+}
+.partnerWorkCard:nth-child(2) {
+  margin-top: 40px;
+}
+
+.partnerWorkIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.partnerWorkKeyword {
+  display: block;
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 8px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.partnerWorkH3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.partnerWorkBody {
+  font-size: 15px;
+  color: var(--color-text-sub);
+  line-height: 1.85;
+  flex: 1;
+}
+
+/* ======================================
+   ROLES (タブUI)
+   ====================================== */
+.partnerRoleSection {
+  padding: 96px 0;
+  background: var(--color-bg-secondary);
+}
+
+.partnerRoleTabList {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  list-style: none;
+  padding: 0;
+}
+
+.partnerRoleTab {
+  padding: 10px 28px;
+  border-radius: 100px;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-sub);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.partnerRoleTab:hover {
+  border-color: var(--color-partner-warm);
+  color: var(--color-text);
+}
+
+.partnerRoleTabActive {
+  background: rgba(232, 168, 56, 0.12);
+  border-color: rgba(232, 168, 56, 0.5);
+  color: var(--color-partner-warm);
+}
+
+.partnerRolePanel {
+  display: none;
+}
+.partnerRolePanelActive {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+  max-width: 900px;
+  margin: 0 auto;
+  animation: partnerPanelIn 0.25s ease;
+}
+
+.partnerRoleBadge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 4px 14px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+.partnerRoleBadgeBlue   { background: rgba(79, 142, 247, 0.12);  color: #4F8EF7; }
+.partnerRoleBadgeGreen  { background: rgba(16, 185, 129, 0.12);  color: #10B981; }
+.partnerRoleBadgePurple { background: rgba(139, 92, 246, 0.12);  color: #8B5CF6; }
+
+.partnerRolePanelH3 {
+  font-size: clamp(1.4rem, 3vw, 1.75rem);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+
+.partnerRolePanelDesc {
+  font-size: 15px;
+  color: var(--color-text-sub);
+  line-height: 1.85;
+  margin-bottom: 24px;
+}
+
+.partnerRoleFitLabel {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-sub);
+  margin-bottom: 12px;
+}
+
+.partnerRoleFitList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--color-text-sub);
+  line-height: 1.65;
+}
+.partnerRoleFitList li span { color: var(--color-partner-warm); font-weight: 700; margin-right: 6px; }
+
+.partnerRolePanelSkills {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 32px;
+}
+
+.partnerRoleSkillLabel {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-sub);
+  margin-bottom: 16px;
+}
+
+.partnerSkillList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.partnerSkillItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--color-text-sub);
+  line-height: 1.65;
+}
+.partnerSkillItem span { color: var(--color-accent); font-weight: 700; flex-shrink: 0; }
+
+.partnerRoleNote {
+  max-width: 760px;
+  margin: 48px auto 0;
+  background: rgba(232, 168, 56, 0.04);
+  border: 1px solid rgba(232, 168, 56, 0.2);
+  border-left: 3px solid var(--color-partner-warm);
+  border-radius: 0 12px 12px 0;
+  padding: 20px 28px;
+  font-size: 15px;
+  color: var(--color-text-sub);
+  line-height: 1.85;
+}
+
+/* ======================================
+   STEP (タイムライン)
+   ====================================== */
+.partnerStepSection {
+  padding: 96px 0;
+  background: var(--color-bg);
+}
+
+.partnerStepList {
+  max-width: 680px;
+  margin: 0 auto;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.partnerStepItem {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 0 32px;
+  padding-bottom: 48px;
+  position: relative;
+}
+
+.partnerStepItem:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 35px;
+  top: 64px;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    rgba(232, 168, 56, 0.5) 0%,
+    rgba(79, 142, 247, 0.15) 60%,
+    transparent 100%
+  );
+}
+
+.partnerStepNum {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background:
+    linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+    linear-gradient(135deg, var(--color-partner-warm), var(--color-accent)) border-box;
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  flex-shrink: 0;
+}
+
+.partnerStepContent {
+  padding-top: 14px;
+}
+
+.partnerStepH3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+
+.partnerStepBody {
+  font-size: 15px;
+  color: var(--color-text-sub);
+  line-height: 1.8;
+}
+
+.partnerStepPill {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 4px 14px;
+  border-radius: 100px;
+  background: rgba(232, 168, 56, 0.1);
+  border: 1px solid rgba(232, 168, 56, 0.3);
+  color: var(--color-partner-warm);
+}
+
+/* ======================================
+   FAQ
+   ====================================== */
+.partnerFaqSection {
+  padding: 96px 0;
+  background: var(--color-bg-secondary);
+}
+
+.partnerFaqGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.partnerFaqCard {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.partnerFaqCard:hover {
+  border-color: rgba(232, 168, 56, 0.25);
+  box-shadow: 0 0 24px rgba(232, 168, 56, 0.06);
+}
+
+.partnerFaqQ {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.partnerFaqQMark {
+  font-family: "Inter", sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--color-partner-warm), #F0C060);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  flex-shrink: 0;
+}
+
+.partnerFaqQText {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.5;
+  padding-top: 4px;
+}
+
+.partnerFaqA {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.partnerFaqAMark {
+  font-family: "Inter", sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--color-text-sub);
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+.partnerFaqAText {
+  font-size: 14px;
+  color: var(--color-text-sub);
+  line-height: 1.8;
+  padding-top: 6px;
+}
+
+/* ======================================
+   ENTRY FORM
+   ====================================== */
+.partnerEntrySection {
+  padding: 96px 0;
+  background: var(--color-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.partnerEntryBg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(232, 168, 56, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 0%, rgba(79, 142, 247, 0.05) 0%, transparent 50%);
+}
+
+.partnerEntryForm {
+  max-width: 760px;
+  margin: 0 auto;
+  background: var(--color-bg-secondary);
+  border: 1px solid rgba(232, 168, 56, 0.15);
+  border-radius: 24px;
+  padding: 56px;
+  position: relative;
+  z-index: 1;
+}
+
+.partnerFormGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.partnerFieldWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.partnerFieldFull { grid-column: 1 / -1; }
+
+.partnerLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.partnerRequired {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-partner-warm);
+  background: rgba(232, 168, 56, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(232, 168, 56, 0.25);
+}
+
+.partnerInput,
+.partnerSelect,
+.partnerTextarea {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 15px;
+  color: var(--color-text);
+  font-family: var(--font);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+.partnerInput:focus,
+.partnerSelect:focus,
+.partnerTextarea:focus {
+  outline: none;
+  border-color: var(--color-partner-warm);
+  box-shadow: 0 0 0 3px rgba(232, 168, 56, 0.15);
+}
+.partnerInput::placeholder,
+.partnerTextarea::placeholder { color: var(--color-muted, #4a5568); }
+
+.partnerSelect {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238899BB' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+  color-scheme: dark;
+}
+
+.partnerTextarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.75;
+}
+
+.partnerRadioGroup,
+.partnerCheckGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.partnerRadioItem,
+.partnerCheckItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--color-text-sub);
+  cursor: pointer;
+}
+.partnerRadioItem input,
+.partnerCheckItem input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-partner-warm);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.partnerFormDivider {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 8px 0;
+  grid-column: 1 / -1;
+}
+
+.partnerPrivacyCheck {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--color-text-sub);
+}
+.partnerPrivacyCheck a { color: var(--color-partner-warm); text-decoration: underline; }
+.partnerPrivacyCheck input { accent-color: var(--color-partner-warm); margin-top: 2px; }
+
+.partnerSubmitRow {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.partnerSubmitBtn {
+  background: linear-gradient(135deg, #E8A838 0%, #F0C060 100%);
+  color: #0A0E1A;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px 56px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+  font-family: var(--font);
+}
+.partnerSubmitBtn:hover {
+  opacity: 0.92;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(232, 168, 56, 0.4);
+}
+.partnerSubmitBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.partnerErrorMsg {
+  font-size: 13px;
+  color: #f87171;
+  margin-top: 4px;
+}
+
+.partnerSubmitError {
+  grid-column: 1 / -1;
+  font-size: 14px;
+  color: #f87171;
+  text-align: center;
+  padding: 12px;
+  background: rgba(248, 113, 113, 0.08);
+  border-radius: 8px;
+  border: 1px solid rgba(248, 113, 113, 0.2);
+}
+
+/* 送信成功 */
+.partnerSuccessBox {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 80px 0;
+}
+
+.partnerSuccessIcon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #E8A838, #F0C060);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: #0A0E1A;
+  margin: 0 auto 28px;
+}
+
+.partnerSuccessH2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 16px;
+}
+
+.partnerSuccessText {
+  font-size: 15px;
+  color: var(--color-text-sub);
+  line-height: 1.85;
+}
+
+/* ======================================
+   RESPONSIVE
+   ====================================== */
+@media (max-width: 767px) {
+  .partnerHero { min-height: auto; padding: 120px 0 80px; }
+  .partnerHeroH1 { font-size: clamp(1.75rem, 7vw, 2.4rem); }
+  .partnerHeroSub { font-size: 15px; }
+  .partnerHeroCtaRow { flex-direction: column; align-items: stretch; }
+  .partnerBtnPrimary, .partnerBtnGhost { text-align: center; }
+  .partnerHeroOrb { width: 380px; height: 380px; right: -120px; bottom: -80px; }
+
+  .partnerWorkSection { padding: 80px 0 72px; }
+  .partnerWorkGrid { grid-template-columns: 1fr; }
+  .partnerWorkCard:nth-child(2) { margin-top: 0; }
+  .partnerWorkCard { padding: 32px 28px; }
+  .partnerWorkKeyword { font-size: clamp(1.6rem, 7vw, 2rem); }
+
+  .partnerRoleSection { padding: 72px 0; }
+  .partnerRoleTabList { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+  .partnerRoleTab { padding: 10px 5px; }
+  .partnerRolePanelActive { grid-template-columns: 1fr; gap: 24px; }
+  .partnerRolePanelH3 { font-size: 1.3rem; }
+  .partnerRolePanelSkills { padding: 24px; }
+
+  .partnerStepSection { padding: 72px 0; }
+  .partnerStepList { max-width: 100%; }
+  .partnerStepItem { grid-template-columns: 56px 1fr; gap: 0 20px; }
+  .partnerStepItem:not(:last-child)::after { left: 27px; }
+  .partnerStepNum { width: 48px; height: 48px; font-size: 15px; }
+  .partnerStepH3 { font-size: 18px; }
+
+  .partnerFaqSection { padding: 72px 0; }
+  .partnerFaqGrid { grid-template-columns: 1fr; }
+  .partnerFaqQMark, .partnerFaqAMark { font-size: 22px; }
+
+  .partnerEntrySection { padding: 72px 0; }
+  .partnerEntryForm { padding: 32px 20px; border-radius: 16px; }
+  .partnerFormGrid { grid-template-columns: 1fr; }
+  .partnerSubmitBtn { width: 100%; }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .partnerWorkGrid { grid-template-columns: repeat(2, 1fr); }
+  .partnerWorkCard:nth-child(3) { grid-column: span 2; margin-top: 0; }
+  .partnerRolePanelActive { grid-template-columns: 1fr; gap: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partnerHeroOrb { animation: none; }
+}

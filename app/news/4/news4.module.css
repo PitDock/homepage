@@ -1,0 +1,66 @@
+.heroInner {
+  padding-top: 52px;
+}
+
+.article {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.meta {
+  font-size: 14px;
+  color: var(--color-muted);
+  font-family: "Inter", sans-serif;
+  margin-bottom: 28px;
+}
+
+.body p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--color-text);
+  margin: 0 0 1.25em;
+}
+
+.body p:last-child {
+  margin-bottom: 0;
+}
+
+.pressFigures {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 2rem 0 0;
+}
+
+.pressFigure {
+  margin: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.pressImg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.linkList {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.linkList a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.linkList a:hover {
+  text-decoration: none;
+}

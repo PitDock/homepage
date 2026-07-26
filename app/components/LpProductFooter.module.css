@@ -1,0 +1,231 @@
+/* Duosub LP フッターと同一レイアウト。アクセントは variant で切替（SafePage は footerSafepage） */
+
+.footer {
+  --lp-accent: #22c55e;
+  --lp-accent-rgb: 34, 197, 94;
+  background: #111827;
+  color: #ffffff;
+  border-top: 3px solid var(--lp-accent);
+  padding: 48px 24px 32px;
+}
+
+.footerTeal {
+  --lp-accent: #4aa6b1;
+  --lp-accent-rgb: 74, 166, 177;
+}
+
+.footerOrange {
+  --lp-accent: #f37c19;
+  --lp-accent-rgb: 243, 124, 25;
+}
+
+.footerSafepage {
+  --lp-accent: #0d9488;
+  --lp-accent-rgb: 13, 148, 136;
+}
+
+.lpFooterMain {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 48px;
+  align-items: start;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lpFooterBrand {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lpFooterBrandRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lpFooterIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+.lpFooterName {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--lp-accent);
+}
+
+.lpFooterTagline {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.lpFooterNote {
+  margin: 8px 0 0;
+  max-width: 28rem;
+  color: #6b7280;
+  font-size: 0.75rem;
+  line-height: 1.55;
+}
+
+.lpFooterNav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lpFooterLink {
+  color: #d1d5db;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.15s;
+}
+
+.lpFooterLink:hover {
+  color: var(--lp-accent);
+}
+
+.lpFooterDownload {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lpFooterStoreBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 8px 16px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.lpFooterStoreBtn:hover {
+  background: rgba(var(--lp-accent-rgb), 0.15);
+  border-color: rgba(var(--lp-accent-rgb), 0.4);
+}
+
+.iconSm {
+  width: 0.75rem;
+  height: 0.75rem;
+  flex-shrink: 0;
+}
+
+.lpFooterBottom {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding-top: 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.lpFooterCopy {
+  font-size: 0.8125rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.lpFooterSocial {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lpFooterSocial li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lpFooterSocialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #9ca3af;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.lpFooterSocialLink:hover {
+  background: rgba(var(--lp-accent-rgb), 0.15);
+  color: var(--lp-accent);
+}
+
+.lpFooterSocialIcon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .lpFooterMain {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-bottom: 32px;
+  }
+
+  .lpFooterNav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+  }
+
+  .lpFooterDownload {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .lpFooterStoreBtn {
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: center;
+    padding: 8px 10px;
+    font-size: 0.8125rem;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.25;
+  }
+
+  .lpFooterBottom {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .lpFooterCopy {
+    flex-shrink: 0;
+  }
+
+  .lpFooterSocial {
+    flex-shrink: 0;
+  }
+}

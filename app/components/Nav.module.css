@@ -1,0 +1,256 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(10, 14, 26, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.scrolled {
+  border-bottom-color: var(--color-border);
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  height: 72px;
+  gap: 32px;
+}
+
+.logo {
+  font-family: "Inter", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #FFA500;
+  flex-shrink: 0;
+  letter-spacing: -0.02em;
+}
+
+.links {
+  display: flex;
+  list-style: none;
+  gap: 22px;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.links li {
+  display: flex;
+  align-items: center;
+}
+
+.links a {
+  font-size: 16px;
+  color: var(--color-text-sub);
+  transition: color 0.15s;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.links a:hover {
+  color: var(--color-text);
+}
+
+.ctaGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.cta {
+  flex-shrink: 0;
+  background: var(--gradient-accent);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 7px 18px;
+  border-radius: 8px;
+  transition: opacity 0.15s, transform 0.15s;
+  white-space: nowrap;
+}
+
+.cta:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.ctaSecondary {
+  flex-shrink: 0;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 7px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  transition: border-color 0.15s, color 0.15s, background 0.15s, transform 0.15s;
+  white-space: nowrap;
+}
+
+.ctaSecondary:hover {
+  border-color: var(--color-accent);
+  color: var(--color-text);
+  background: rgba(79, 142, 247, 0.1);
+  transform: translateY(-1px);
+}
+
+.menuButton {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  background: rgba(15, 21, 38, 0.9);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0;
+}
+
+.menuIconLine {
+  width: 18px;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 99px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.menuIconLineOpenTop {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menuIconLineOpenMiddle {
+  opacity: 0;
+}
+
+.menuIconLineOpenBottom {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.mobileMenu {
+  display: none;
+}
+
+.mobileLinks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mobileLinks a {
+  display: block;
+  color: var(--color-text-sub);
+  font-size: 14px;
+  padding: 10px 0;
+}
+
+.mobileCta {
+  display: none;
+}
+
+.mobileCtaPrimary {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: var(--gradient-accent);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 18px;
+  border-radius: 8px;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+@media (min-width: 768px) and (max-width: 1244px) {
+  /*
+   * 768px〜1244px の間は、ロゴ + リンク6項目 + CTA2ボタンが1行に収まらず
+   * はみ出す（.links の nowrap により右側がコンテナ外へ押し出される）。
+   * この範囲でのみ .links を2行に折り返し、あわせてフォント・gapを
+   * 詰めることで .inner の height: 72px 内に収める。
+   * 1245px以上では元々1行に収まるため、このブロックは影響しない。
+   */
+  .inner {
+    gap: 12px;
+  }
+
+  .links {
+    flex-wrap: wrap;
+    gap: 6px 10px;
+  }
+
+  .links a {
+    font-size: 13px;
+  }
+
+  .cta,
+  .ctaSecondary {
+    font-size: 13px;
+    padding: 6px 14px;
+  }
+}
+
+@media (max-width: 767px) {
+  .inner {
+    height: 64px;
+    gap: 16px;
+  }
+
+  .links {
+    display: none;
+  }
+
+  .ctaGroup {
+    display: none;
+  }
+
+  .menuButton {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
+  .mobileMenu {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.25s ease, opacity 0.2s ease;
+    border-top: 1px solid transparent;
+    background: rgba(10, 14, 26, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .mobileMenuOpen {
+    max-height: 580px;
+    opacity: 1;
+    border-top-color: var(--color-border);
+  }
+
+  .mobileLinks {
+    padding: 14px 20px 0;
+  }
+
+  .mobileCta {
+    display: block;
+    padding: 16px 20px 20px;
+  }
+
+  .mobileCtaPrimary:active {
+    opacity: 0.9;
+    transform: translateY(1px);
+  }
+}
