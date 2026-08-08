@@ -418,7 +418,7 @@ export default function Home() {
       </section>
 
       {/* PitDockの強みセクション */}
-      <section className={s.strengthSection} id="why-gows">
+      <section className={s.strengthSection} id="why-pitdock">
         <div className="container">
           <h2 className={`${s.sectionTitle} ${s.reveal}`}>なぜPitDockが選ばれるのか</h2>
           <p className={`${s.sectionSub} ${s.reveal} ${s.strengthLead}`}>
@@ -487,11 +487,11 @@ export default function Home() {
               <div className={s.ceoPhoto}>
                 <img
                   src="/images/company/koyama-nozomi.png"
-                  alt="代表 小山望海"
+                  alt="代表取締役 小山望海"
                   loading="lazy"
                 />
               </div>
-              <span className={s.ceoRoleBadge}>代表 / CEO・Founder</span>
+              <span className={s.ceoRoleBadge}>代表取締役 / CEO・Founder</span>
             </div>
 
             {/* 右カラム：テキスト */}

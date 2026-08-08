@@ -1,7 +1,7 @@
 /** 本番サイトの正規 URL（環境変数で上書き可能） */
 export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://gows-llc.com")
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://pit-dock.com")
 );
 
 export const SITE_NAME = "PitDock株式会社";

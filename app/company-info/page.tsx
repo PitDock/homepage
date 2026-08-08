@@ -100,7 +100,7 @@ export default function CompanyPage() {
                 />
               </div>
               <div className={cs.officerInfo}>
-                <p className={cs.officerRole}>代表（CEO / Founder）</p>
+                <p className={cs.officerRole}>代表取締役（CEO / Founder）</p>
                 <p className={cs.officerName}>小山 望海</p>
                 <p className={cs.officerNameEn}>KOYAMA Nozomi</p>
                 <p className={cs.officerBio}>
@@ -109,7 +109,8 @@ export default function CompanyPage() {
                   2018年4月に新卒でフューチャーアーキテクト株式会社にITコンサルタントとして入社。{"\n"}
                   金融業界や小売業のプロジェクトでコンサルタント兼エンジニアとして従事。{"\n"}
                   2022年8月にフリーランスとして独立。{"\n"}
-                  2024年4月にGOWS合同会社を設立。
+                  2024年4月にGOWS合同会社を設立。{"\n"}
+                  2026年8月にPitDock株式会社に社名変更。
                 </p>
               </div>
             </li>
