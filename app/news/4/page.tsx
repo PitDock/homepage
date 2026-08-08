@@ -15,7 +15,7 @@ export const metadata: Metadata = createPageMetadata({
     "2025年10月28日(火)の朝日新聞朝刊にてマイベストプロ東京が紹介する専門家として弊社代表の小山が掲載されました。「マイベストプロ東京」は、東京都を拠点に活躍するさまざまな専門家が掲載されている、朝日新聞が運営するWebガイドです。",
   path: "/news/4",
   type: "article",
-  keywords: ["GOWS", "朝日新聞", "マイベストプロ", "メディア掲載", "小山望海"],
+  keywords: ["PitDock", "朝日新聞", "マイベストプロ", "メディア掲載", "小山望海"],
 });
 
 function listPressImages(): string[] {

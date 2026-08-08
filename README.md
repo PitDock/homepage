@@ -1,6 +1,6 @@
-# GOWS Homepage
+# PitDock Homepage
 
-GOWS合同会社のコーポレートサイト。Next.js (App Router) + TypeScript + Tailwind CSS で構築。
+PitDock株式会社のコーポレートサイト。Next.js (App Router) + TypeScript + Tailwind CSS で構築。
 
 ## 事業概要
 

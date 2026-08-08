@@ -3,7 +3,7 @@ import { createPageMetadata } from "../../lib/seo/metadata";
 
 export const metadata: Metadata = createPageMetadata({
   title: "プライバシーポリシー",
-  description: "GOWS合同会社のプライバシーポリシー",
+  description: "PitDock株式会社のプライバシーポリシー",
   path: "/privacy",
 });
 

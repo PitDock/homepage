@@ -511,7 +511,7 @@
   margin-top: 48px;
 }
 
-/* ---- GOWSの強みセクション ---- */
+/* ---- PitDockの強みセクション ---- */
 .strengthSection {
   background: var(--color-bg-secondary);
   padding: 96px 0;
@@ -1491,7 +1491,7 @@
   line-height: 1.75;
 }
 
-/* ---- Features Section (GOWSが選ばれる理由) ---- */
+/* ---- Features Section (PitDockが選ばれる理由) ---- */
 .featuresSection {
   background: var(--color-bg-secondary);
   padding: 96px 0;

@@ -152,7 +152,7 @@ const services: Service[] = [
   },
   {
     name: "自社プロダクト",
-    desc: "現場の知見と日常の課題から生まれたサービスを複数展開。GOWSの開発力は自社プロダクトで証明されています。延べ1,000名以上のユーザーに使われています。",
+    desc: "現場の知見と日常の課題から生まれたサービスを複数展開。PitDockの開発力は自社プロダクトで証明されています。延べ1,000名以上のユーザーに使われています。",
     tags: ["iOS", "Android", "自社開発"],
     cta: "プロダクトを見る",
     href: "/service/products",
@@ -173,7 +173,7 @@ const strengthCards: StrengthCard[] = [
     accentColor: "#06B6D4",
     glowColor: "rgba(6,182,212,0.08)",
     heading: "ツールを入れて終わりにしない。",
-    body: "「システムを導入したのに、現場が使ってくれない」「デジタル化したのに、業務が変わらない、会社の成長に繋がらない」——これはツールの問題ではなく、変革の進め方の問題です。GOWSのDX支援は、ツールの選定・導入にとどまりません。現場の業務フロー・組織の動き方・人の意識まで変えることを前提に伴走します。",
+    body: "「システムを導入したのに、現場が使ってくれない」「デジタル化したのに、業務が変わらない、会社の成長に繋がらない」——これはツールの問題ではなく、変革の進め方の問題です。PitDockのDX支援は、ツールの選定・導入にとどまりません。現場の業務フロー・組織の動き方・人の意識まで変えることを前提に伴走します。",
     points: [
       "戦略・ロードマップ設計から着手し、現場定着まで伴走",
       "定着・活用状況をモニタリングしてPDCAを回す",
@@ -184,7 +184,7 @@ const strengthCards: StrengthCard[] = [
     accentColor: "#8B5CF6",
     glowColor: "rgba(139,92,246,0.08)",
     heading: "AIで何ができるか、具体的に答えられる。",
-    body: "代表の小山は学生時代、AIの研究をしていました。代表だけでなくGOWSのメンバーはAIの仕組みを原理から理解した上で、「あなたのビジネスに対してAIでどのような効果が出せるか」を具体的に設計します。流行のツールを当てはめるのではなく、課題から逆算してAIの活用方法を設計します。",
+    body: "代表の小山は学生時代、AIの研究をしていました。代表だけでなくPitDockのメンバーはAIの仕組みを原理から理解した上で、「あなたのビジネスに対してAIでどのような効果が出せるか」を具体的に設計します。流行のツールを当てはめるのではなく、課題から逆算してAIの活用方法を設計します。",
     points: [
       "ただ流行に乗るだけではないAI活用",
       "AI活用業務設計から具体的な実装まで担う",
@@ -195,7 +195,7 @@ const strengthCards: StrengthCard[] = [
     accentColor: "#10B981",
     glowColor: "rgba(16,185,129,0.08)",
     heading: "「何をつくるか」から、一緒に考えます。",
-    body: "コンサルが出した戦略を開発会社が理解しきれない、開発の制約をコンサルが把握していなかった——この分断が、手戻り・追加費用の原因になります。GOWSは、戦略策定から要件定義・設計・開発・運用まで、すべてを自社内のチームが担当します。",
+    body: "コンサルが出した戦略を開発会社が理解しきれない、開発の制約をコンサルが把握していなかった——この分断が、手戻り・追加費用の原因になります。PitDockは、戦略策定から要件定義・設計・開発・運用まで、すべてを自社内のチームが担当します。",
     points: [
       "戦略→要件定義→設計→開発→運用をワンチームで担当",
       "コンサルと開発の「伝言ゲーム」「認識のズレ」を構造的に排除",
@@ -334,7 +334,7 @@ export default function Home() {
             テクノロジーの最前線で、<br />課題を解く。
           </h1>
           <p className={s.heroSub}>
-            AIを『使う』時代から、AIで『事業を作り変える』時代へ。GOWSは、DX・AX（AI Transformation）の専門チームとして、戦略立案から実装・運用まであなたの変革に伴走します。
+            AIを『使う』時代から、AIで『事業を作り変える』時代へ。PitDockは、DX・AX（AI Transformation）の専門チームとして、戦略立案から実装・運用まであなたの変革に伴走します。
           </p>
           <div className={s.ctaRow}>
             <a href={CONTACT_URL} className={s.btnPrimary}>
@@ -351,7 +351,7 @@ export default function Home() {
       <section className={s.section} id="problems">
         <div className="container">
           <h2 className={`${s.sectionTitle} ${s.reveal}`}>こんなお悩み、ありませんか？</h2>
-          <p className={`${s.sectionSub} ${s.reveal}`}>GOWSは、戦略立案から実装・運用まで一気通貫でサポートします。</p>
+          <p className={`${s.sectionSub} ${s.reveal}`}>PitDockは、戦略立案から実装・運用まで一気通貫でサポートします。</p>
           <ul className={s.cardGridFour} role="list">
             {problems.map((p, i) => (
               <li
@@ -417,12 +417,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* GOWSの強みセクション */}
+      {/* PitDockの強みセクション */}
       <section className={s.strengthSection} id="why-gows">
         <div className="container">
-          <h2 className={`${s.sectionTitle} ${s.reveal}`}>なぜGOWSが選ばれるのか</h2>
+          <h2 className={`${s.sectionTitle} ${s.reveal}`}>なぜPitDockが選ばれるのか</h2>
           <p className={`${s.sectionSub} ${s.reveal} ${s.strengthLead}`}>
-            ただ流行っているからという理由でAIを導入する、あるいは、紙やExcelで行なっていた業務をただシステム化するだけでは十分な効果を得ることはできません。GOWSはせっかくのIT投資の効果を最大化するために、業務の本質を理解し、課題の根本を解決するDX・AI戦略を提案します。
+            ただ流行っているからという理由でAIを導入する、あるいは、紙やExcelで行なっていた業務をただシステム化するだけでは十分な効果を得ることはできません。PitDockはせっかくのIT投資の効果を最大化するために、業務の本質を理解し、課題の根本を解決するDX・AI戦略を提案します。
           </p>
 
           {/* 主軸3カード */}
@@ -499,10 +499,10 @@ export default function Home() {
               <p className={s.ceoName}>小山 望海</p>
               <p className={s.ceoNameEn}>KOYAMA Nozomi</p>
               <p className={s.ceoBio}>
-                DXやAX（AI Transformation）は、一朝一夕で成し遂げられるものではありません。技術の選定・業務プロセスの再設計・組織の変化・現場への定着まで、複数の壁を乗り越えて初めて成果になります。そしてその壁を越えるには、AI・DXを技術として深く理解していることと、現場で何が起きているかを見続けることの両方が必要です。GOWSは、その両方に向き合い続けるパートナーでありたいと思っています。
+                DXやAX（AI Transformation）は、一朝一夕で成し遂げられるものではありません。技術の選定・業務プロセスの再設計・組織の変化・現場への定着まで、複数の壁を乗り越えて初めて成果になります。そしてその壁を越えるには、AI・DXを技術として深く理解していることと、現場で何が起きているかを見続けることの両方が必要です。PitDockは、その両方に向き合い続けるパートナーでありたいと思っています。
               </p>
               <blockquote className={s.ceoQuote}>
-                GOWSは、戦略と実装の両方ができるチームとして、お客様の事業成長に本気で向き合います。
+                PitDockは、戦略と実装の両方ができるチームとして、お客様の事業成長に本気で向き合います。
               </blockquote>
             </div>
           </div>

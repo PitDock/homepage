@@ -4,16 +4,16 @@ export const SITE_URL = (
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://gows-llc.com")
 );
 
-export const SITE_NAME = "GOWS合同会社";
-export const SITE_NAME_EN = "GOWS Inc.";
+export const SITE_NAME = "PitDock株式会社";
+export const SITE_NAME_EN = "PitDock, Inc.";
 export const SITE_DESCRIPTION =
-  "中小企業・スタートアップのDX推進・AI活用（AX）を戦略立案から実装まで支援。GOWS合同会社のITコンサルティング・システム開発サービス。";
+  "中小企業・スタートアップのDX推進・AI活用（AX）を戦略立案から実装まで支援。PitDock株式会社のITコンサルティング・システム開発サービス。";
 
 export const DEFAULT_OG_IMAGE = "/images/gows_favicon.png";
 
 export const ORGANIZATION = {
   name: SITE_NAME,
-  legalName: "GOWS合同会社",
+  legalName: "PitDock株式会社",
   alternateName: SITE_NAME_EN,
   url: SITE_URL,
   logo: `${SITE_URL}/images/gows_favicon.png`,

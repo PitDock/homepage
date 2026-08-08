@@ -50,7 +50,7 @@ export default function CompanyPage() {
             <dl className={cs.companyTable}>
               <div className={cs.companyRow}>
                 <dt className={cs.companyTh}>社名</dt>
-                <dd className={cs.companyTd}>GOWS合同会社（GOWS Inc.）</dd>
+                <dd className={cs.companyTd}>PitDock株式会社（PitDock, Inc.）</dd>
               </div>
               <div className={cs.companyRow}>
                 <dt className={cs.companyTh}>設立</dt>

@@ -48,7 +48,7 @@ const features = [
   {
     num: "03",
     title: "月額2万円からのスモールスタート",
-    body: "CTOを正社員で採用する場合、年収800万円〜以上が相場です。GOWSの技術顧問サービスは月額2万円から始められます。最短3ヶ月契約なので、まず試してから継続を判断できます。",
+    body: "CTOを正社員で採用する場合、年収800万円〜以上が相場です。PitDockの技術顧問サービスは月額2万円から始められます。最短3ヶ月契約なので、まず試してから継続を判断できます。",
   },
 ];
 
@@ -123,7 +123,7 @@ export default function TechAdvisorPage() {
         <div className="container">
           <h2 className={`${s.sectionTitle} ${s.reveal}`}>技術顧問サービスとは</h2>
           <p className={`${s.advisorLead} ${s.reveal}`}>
-            「技術のことは、社内に判断できる人間がいない」——その状況で、技術的な意思決定を迫られ続けていませんか。GOWSの技術顧問サービスは、月額2万円からの固定費で、経営目線と技術目線を兼ね備えたコンサルタントがサポートします。CTOを正社員で採用するコストと時間をかけずに、技術判断・開発会社との折衝・アーキテクチャ設計など、本来CTOが担う役割を必要な分だけ手に入れられます。まずは3ヶ月から、試してみてください。
+            「技術のことは、社内に判断できる人間がいない」——その状況で、技術的な意思決定を迫られ続けていませんか。PitDockの技術顧問サービスは、月額2万円からの固定費で、経営目線と技術目線を兼ね備えたコンサルタントがサポートします。CTOを正社員で採用するコストと時間をかけずに、技術判断・開発会社との折衝・アーキテクチャ設計など、本来CTOが担う役割を必要な分だけ手に入れられます。まずは3ヶ月から、試してみてください。
           </p>
           <h2 className={`${s.sectionTitle} ${s.reveal}`}>提供サービス</h2>
           <p className={`${s.sectionSub} ${s.reveal}`}>ご要望に合わせて、必要な支援を組み合わせてご提供します。</p>
@@ -142,7 +142,7 @@ export default function TechAdvisorPage() {
       {/* Features */}
       <section className={s.featuresSection}>
         <div className="container">
-          <h2 className={`${s.sectionTitle} ${s.reveal}`}>GOWSが選ばれる理由</h2>
+          <h2 className={`${s.sectionTitle} ${s.reveal}`}>PitDockが選ばれる理由</h2>
           <p className={`${s.sectionSub} ${s.reveal}`}>&nbsp;</p>
           <ul className={s.featureList} role="list">
             {features.map((f, i) => (
@@ -187,7 +187,7 @@ export default function TechAdvisorPage() {
             </table>
           </div>
           <p className={`${s.advisorCompareNote} ${s.reveal}`}>
-            CTOを正社員で採用する場合の年収相場は800万円〜以上。GOWSの技術顧問サービスは月額2万円から、最短3ヶ月からお試しいただけます。
+            CTOを正社員で採用する場合の年収相場は800万円〜以上。PitDockの技術顧問サービスは月額2万円から、最短3ヶ月からお試しいただけます。
           </p>
         </div>
       </section>

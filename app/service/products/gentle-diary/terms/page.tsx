@@ -7,7 +7,7 @@ import ps from "../privacy/privacy.module.css";
 export const metadata: Metadata = createPageMetadata({
   title: "Gentle Diary 利用規約",
   description:
-    "GOWS合同会社が提供するアプリケーション「Gentle Diary」の利用に関する規約です。",
+    "PitDock株式会社が提供するアプリケーション「Gentle Diary」の利用に関する規約です。",
   path: "/service/products/gentle-diary/terms",
 });
 
@@ -53,7 +53,7 @@ export default function GentleDiaryTermsPage() {
               <br />
               2026年2月1日最終改訂
               <br />
-              GOWS合同会社
+              PitDock株式会社
               <br />
               代表　小山 望海
             </p>
@@ -61,7 +61,7 @@ export default function GentleDiaryTermsPage() {
             <hr className={ts.divider} />
 
             <p className={ts.lead}>
-              GOWS合同会社（以下「弊社」といいます）は、弊社が運営し提供するアプリ「Gentle Diary」（以下「本サービス」といいます）について、以下のとおり利用規約（以下「本規約」といいます）を定めます。
+              PitDock株式会社（以下「弊社」といいます）は、弊社が運営し提供するアプリ「Gentle Diary」（以下「本サービス」といいます）について、以下のとおり利用規約（以下「本規約」といいます）を定めます。
             </p>
 
             <div className={ts.articleBlock}>

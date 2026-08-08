@@ -130,7 +130,7 @@ export default function NewsPage() {
           </nav>
           <h1 className={s.pageH1}>News</h1>
           <p className={s.pageSubCopy}>
-            GOWSの最新情報・プレスリリースをお届けします。
+            PitDockの最新情報・プレスリリースをお届けします。
           </p>
         </div>
       </section>

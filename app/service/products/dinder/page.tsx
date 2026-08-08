@@ -7,7 +7,7 @@ import { softwareApplicationJsonLd, webPageJsonLd } from "../../../../lib/seo/js
 import s from "./page.module.css";
 
 const PAGE_PATH = "/service/products/dinder";
-const PAGE_TITLE = "dinder - GOWS合同会社";
+const PAGE_TITLE = "dinder - PitDock株式会社";
 const PAGE_DESCRIPTION =
   "dinder - 位置情報をもとに近くの飲食店からアプリがお店を提案！ 提案されたお店が気に入れば右にスワイプするだけでお店までナビしてくれる！ 気に入らなければ左にスワイプすればアプリが次の候補を提案！ 事前に細かい条件を設定可能！";
 

@@ -91,11 +91,11 @@ const steps: Step[] = [
   {
     num: "01",
     h3: "まずカジュアルに話しましょう",
-    body: "オンラインまたは対面でお話させてください。あなたの経験・スキル・希望条件をヒアリングし、GOWSの案件状況もお伝えします。",
+    body: "オンラインまたは対面でお話させてください。あなたの経験・スキル・希望条件をヒアリングし、PitDockの案件状況もお伝えします。",
   },
   {
     num: "02",
-    h3: "GOWSと案件についてすり合わせ",
+    h3: "PitDockと案件についてすり合わせ",
     body: "スキル・稼働可能日数・希望条件について詳しくヒアリングします。今すぐ動けない状況でも歓迎です。",
   },
   {
@@ -273,7 +273,7 @@ export default function PartnerPage() {
             </h1>
 
             <p className={p.partnerHeroSub}>
-              GOWS合同会社は、DX・AX推進とシステム開発を手がけるITコンサルティング会社です。
+              PitDock株式会社は、DX・AX推進とシステム開発を手がけるITコンサルティング会社です。
               事業の最前線で動く案件に、一緒に向き合ってくれるコンサルタントやエンジニアを随時募集しています。「請負って終わり」ではなく、戦略から実装まで本質的な課題解決を追求するチームに、参加しませんか。
             </p>
 
@@ -285,17 +285,17 @@ export default function PartnerPage() {
         </section>
 
         {/* ======================================
-            Section 2: GOWSと一緒に働くとは
+            Section 2: PitDockと一緒に働くとは
             ====================================== */}
         <section className={p.partnerWorkSection}>
           <div className="container">
             <div className={`${p.partnerSectionHead} ${s.reveal}`}>
               <span className={p.partnerSectionLabel}>WORK WITH US</span>
               <h2 className={p.partnerSectionH2}>
-                GOWSのパートナー
+                PitDockのパートナー
               </h2>
               <p className={p.partnerSectionDesc}>
-                GOWSが扱う案件は「ツールを入れて終わり」の仕事ではありません。
+                PitDockが扱う案件は「ツールを入れて終わり」の仕事ではありません。
                 クライアントの経営課題・業務課題を深掘りし、テクノロジーで本質的に解決するプロジェクトに参画いただきます。
               </p>
             </div>

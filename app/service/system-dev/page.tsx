@@ -117,7 +117,7 @@ export default function SystemDevPage() {
       {/* Features */}
       <section className={s.featuresSection}>
         <div className="container">
-          <h2 className={`${s.sectionTitle} ${s.reveal}`}>GOWSが選ばれる理由</h2>
+          <h2 className={`${s.sectionTitle} ${s.reveal}`}>PitDockが選ばれる理由</h2>
           <p className={`${s.sectionSub} ${s.reveal}`}>&nbsp;</p>
           <ul className={s.featureList} role="list">
             {features.map((f, i) => (

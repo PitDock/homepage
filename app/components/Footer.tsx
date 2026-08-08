@@ -39,10 +39,10 @@ export default function Footer() {
       <div className="container">
         <div className={s.footerGrid}>
           <div className={s.footerBrand}>
-            <span className={s.footerLogo}>GOWS</span>
+            <span className={s.footerLogo}>PitDock</span>
             <p className={s.footerTagline}>
               ITで未来を切り拓く、課題解決のプロフェッショナル。<br/>
-              GOWS合同会社は、DX・AXコンサルティングとシステム開発を通じて、
+              PitDock株式会社は、DX・AXコンサルティングとシステム開発を通じて、
               事業を加速させ、企業の成長を支援します。
             </p>
             <ul className={s.footerSocial} role="list" aria-label="SNSリンク・お問い合わせ">
@@ -94,7 +94,7 @@ export default function Footer() {
             </ul>
           </nav>
         </div>
-        <p className={s.copyright}>© GOWS合同会社</p>
+        <p className={s.copyright}>© PitDock株式会社</p>
       </div>
     </footer>
   );

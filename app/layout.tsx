@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     image: DEFAULT_OG_IMAGE,
     imageAlt: SITE_NAME,
     keywords: [
-      "GOWS",
+      "PitDock",
       "DX",
       "AX",
       "AI活用",

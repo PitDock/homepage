@@ -28,7 +28,7 @@ export default function Nav() {
   return (
     <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ""}`} aria-label="メインナビゲーション">
       <div className={`container ${styles.inner}`}>
-        <a href="/" className={styles.logo} aria-label="GOWS合同会社 トップへ">GOWS</a>
+        <a href="/" className={styles.logo} aria-label="PitDock株式会社 トップへ">PitDock</a>
         <ul className={styles.links} role="list">
           <li><a href="/service/dx-ax">DX・AXコンサルティング</a></li>
           <li><a href="/service/system-dev">システム開発</a></li>

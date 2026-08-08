@@ -177,7 +177,7 @@ export function LpProductFooter({
       </div>
 
       <div className={s.lpFooterBottom}>
-        <p className={s.lpFooterCopy}>© GOWS合同会社</p>
+        <p className={s.lpFooterCopy}>© PitDock株式会社</p>
         {social && social.length > 0 ? (
           <ul className={s.lpFooterSocial} aria-label={socialNavLabel}>
             {social.map((item) => (

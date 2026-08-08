@@ -52,7 +52,7 @@ export default function SafepageTermsOfUsePage() {
               <br />
               2025年12月27日最終改訂
               <br />
-              GOWS合同会社
+              PitDock株式会社
               <br />
               代表　小山 望海
             </p>
@@ -60,7 +60,7 @@ export default function SafepageTermsOfUsePage() {
             <hr className={ts.divider} />
 
             <p className={ts.lead}>
-              GOWS合同会社（以下「弊社」といいます）は、弊社が運営し提供するサービス「SafePage」（以下「本サービス」といいます）について、以下のとおり利用規約（以下「本規約」といいます）を定めます。
+              PitDock株式会社（以下「弊社」といいます）は、弊社が運営し提供するサービス「SafePage」（以下「本サービス」といいます）について、以下のとおり利用規約（以下「本規約」といいます）を定めます。
             </p>
 
             <div className={ts.articleBlock}>

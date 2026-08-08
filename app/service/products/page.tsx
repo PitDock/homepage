@@ -131,7 +131,7 @@ export default function ProductsPage() {
       {/* Why section */}
       <section className={s.featuresSection}>
         <div className="container">
-          <h2 className={`${s.sectionTitle} ${s.reveal}`}>GOWSがプロダクトをつくる理由</h2>
+          <h2 className={`${s.sectionTitle} ${s.reveal}`}>PitDockがプロダクトをつくる理由</h2>
           <div className={`${s.productsNote} ${s.reveal}`}>
             <p className={s.productsNoteText}>
               コンサルティング・開発の現場や日常生活で感じた課題や「あったらいいな」を、プロダクトに変えています。<br />

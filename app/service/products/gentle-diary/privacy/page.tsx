@@ -9,7 +9,7 @@ import ps from "./privacy.module.css";
 export const metadata: Metadata = createPageMetadata({
   title: "Gentle Diary プライバシーポリシー",
   description:
-    "GOWS合同会社が提供するアプリケーション「Gentle Diary」における個人情報およびプライバシー情報の取り扱いについて定めたプライバシーポリシーです。",
+    "PitDock株式会社が提供するアプリケーション「Gentle Diary」における個人情報およびプライバシー情報の取り扱いについて定めたプライバシーポリシーです。",
   path: "/service/products/gentle-diary/privacy",
 });
 
@@ -60,7 +60,7 @@ export default function GentleDiaryPrivacyPage() {
               <br />
               2026年3月22日最終改訂
               <br />
-              GOWS合同会社
+              PitDock株式会社
               <br />
               代表　小山 望海
             </p>
@@ -68,7 +68,7 @@ export default function GentleDiaryPrivacyPage() {
             <hr className={ts.divider} />
 
             <p className={ts.lead}>
-              GOWS合同会社（以下、弊社といいます。）は、提供するアプリケーション「Gentle Diary」（以下「本サービス」といいます。）におけるユーザーの個人情報およびプライバシー情報の取り扱いについて、以下のとおりプライバシーポリシー（以下「本ポリシー」といいます。）を定めます。
+              PitDock株式会社（以下、弊社といいます。）は、提供するアプリケーション「Gentle Diary」（以下「本サービス」といいます。）におけるユーザーの個人情報およびプライバシー情報の取り扱いについて、以下のとおりプライバシーポリシー（以下「本ポリシー」といいます。）を定めます。
             </p>
 
             <div className={ts.articleBlock}>
