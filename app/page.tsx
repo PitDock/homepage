@@ -351,7 +351,7 @@ export default function Home() {
       <section className={s.section} id="problems">
         <div className="container">
           <h2 className={`${s.sectionTitle} ${s.reveal}`}>こんなお悩み、ありませんか？</h2>
-          <p className={`${s.sectionSub} ${s.reveal}`}>PitDockは、戦略立案から実装・運用まで一気通貫でサポートします。</p>
+          <p className={`${s.sectionSub} ${s.reveal}`}>PitDockは、戦略立案から実装・運用まで一気通貫で伴走します。</p>
           <ul className={s.cardGridFour} role="list">
             {problems.map((p, i) => (
               <li

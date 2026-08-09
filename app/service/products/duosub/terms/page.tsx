@@ -54,7 +54,7 @@ export default function DuosubTermsPage() {
               <br />
               PitDock株式会社
               <br />
-              代表　小山 望海
+              代表取締役　小山 望海
             </p>
 
             <hr className={ts.divider} />

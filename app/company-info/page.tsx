@@ -54,10 +54,10 @@ export default function CompanyPage() {
               </div>
               <div className={cs.companyRow}>
                 <dt className={cs.companyTh}>設立</dt>
-                <dd className={cs.companyTd}>2024年4月8日</dd>
+                <dd className={cs.companyTd}>2024年4月8日<br />(2026年8月16日 社名変更)</dd>
               </div>
               <div className={cs.companyRow}>
-                <dt className={cs.companyTh}>代表</dt>
+                <dt className={cs.companyTh}>代表取締役</dt>
                 <dd className={cs.companyTd}>小山 望海</dd>
               </div>
               <div className={cs.companyRow}>
@@ -95,7 +95,7 @@ export default function CompanyPage() {
               <div className={cs.officerPhoto}>
                 <img
                   src="/images/company/koyama-nozomi.png"
-                  alt="代表 小山望海"
+                  alt="代表取締役 小山望海"
                   loading="lazy"
                 />
               </div>
@@ -109,8 +109,7 @@ export default function CompanyPage() {
                   2018年4月に新卒でフューチャーアーキテクト株式会社にITコンサルタントとして入社。{"\n"}
                   金融業界や小売業のプロジェクトでコンサルタント兼エンジニアとして従事。{"\n"}
                   2022年8月にフリーランスとして独立。{"\n"}
-                  2024年4月にGOWS合同会社を設立。{"\n"}
-                  2026年8月にPitDock株式会社に社名変更。
+                  2024年4月にPitDock株式会社の前身であるGOWS合同会社を設立。
                 </p>
               </div>
             </li>
