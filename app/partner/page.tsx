@@ -306,7 +306,7 @@ export default function PartnerPage() {
                 <div>
                   <span
                     className={p.partnerWorkKeyword}
-                    style={{ background: "linear-gradient(135deg, #4F8EF7, #8B5CF6)" }}
+                    style={{ background: "var(--gradient-accent)" }}
                   >
                     上流から
                   </span>
@@ -323,7 +323,7 @@ export default function PartnerPage() {
                 <div>
                   <span
                     className={p.partnerWorkKeyword}
-                    style={{ background: "linear-gradient(135deg, #10B981, #06B6D4)" }}
+                    style={{ background: "linear-gradient(135deg, #2DD4BF, #22D3EE)" }}
                   >
                     多業種
                   </span>

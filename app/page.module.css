@@ -33,14 +33,14 @@
 
 /* ---- Shared ---- */
 .section {
-  padding: 96px 0;
+  padding: var(--space-section) 0;
 }
 
 .sectionTitle {
-  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-size: clamp(1.75rem, 3.6vw, 2.375rem);
   font-weight: 700;
   text-align: center;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   color: var(--color-text);
 }
 
@@ -48,7 +48,7 @@
   font-size: 16px;
   color: var(--color-text-sub);
   text-align: center;
-  margin-bottom: 56px;
+  margin-bottom: 64px;
 }
 
 /* ---- Buttons ---- */
@@ -57,25 +57,25 @@
   background: var(--gradient-accent);
   color: #ffffff;
   font-size: 16px;
-  font-weight: 600;
-  padding: 14px 32px;
-  border-radius: 8px;
+  font-weight: 700;
+  padding: 15px 34px;
+  border-radius: var(--radius-btn);
   transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
 }
 .btnPrimary:hover {
   opacity: 0.9;
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(79, 142, 247, 0.4);
+  box-shadow: 0 8px 28px rgba(43, 147, 214, 0.4);
 }
 
 .btnGhost {
   display: inline-block;
-  border: 1px solid rgba(79, 142, 247, 0.6);
+  border: 1.5px solid rgba(79, 142, 247, 0.55);
   color: var(--color-accent);
   font-size: 16px;
   font-weight: 600;
-  padding: 13px 30px;
-  border-radius: 8px;
+  padding: 14px 32px;
+  border-radius: var(--radius-btn);
   transition: border-color 0.2s, background 0.2s, transform 0.15s;
 }
 .btnGhost:hover {
@@ -91,7 +91,7 @@
   font-size: 15px;
   font-weight: 600;
   padding: 10px 20px;
-  border-radius: 8px;
+  border-radius: var(--radius-btn);
   transition: border-color 0.2s, background 0.2s, transform 0.15s;
   margin-top: auto;
   align-self: flex-start;
@@ -104,27 +104,28 @@
 
 .btnSecondary {
   display: inline-block;
-  background: var(--color-accent);
-  color: #ffffff;
+  background: transparent;
+  border: 1.5px solid var(--color-accent);
+  color: var(--color-accent);
   font-size: 16px;
   font-weight: 600;
-  padding: 13px 30px;
-  border-radius: 8px;
-  transition: opacity 0.2s, transform 0.15s;
+  padding: 14px 32px;
+  border-radius: var(--radius-btn);
+  transition: background 0.2s, transform 0.15s;
 }
 .btnSecondary:hover {
-  opacity: 0.88;
+  background: rgba(79, 142, 247, 0.1);
   transform: translateY(-2px);
 }
 
 .btnWhite {
   display: inline-block;
   background: #ffffff;
-  color: #4F8EF7;
+  color: var(--color-brand-deep);
   font-size: 16px;
-  font-weight: 600;
-  padding: 14px 32px;
-  border-radius: 8px;
+  font-weight: 700;
+  padding: 15px 34px;
+  border-radius: var(--radius-btn);
   transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
 }
 .btnWhite:hover {
@@ -148,7 +149,7 @@
   min-height: 100svh;
   display: flex;
   align-items: center;
-  padding: 160px 0 96px;
+  padding: 160px 0 var(--space-section);
 }
 
 .particleCanvas {
@@ -165,7 +166,7 @@
   height: 640px;
   right: -160px;
   top: -120px;
-  background: radial-gradient(circle, rgba(79, 142, 247, 0.2) 0%, rgba(139, 92, 246, 0.1) 50%, transparent 70%);
+  background: radial-gradient(circle, rgba(43, 147, 214, 0.2) 0%, rgba(34, 211, 238, 0.1) 50%, transparent 70%);
   animation: orbFloat 16s ease-in-out infinite;
   pointer-events: none;
   border-radius: 50%;
@@ -178,19 +179,19 @@
 }
 
 .heroH1 {
-  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-size: clamp(2.4rem, 6vw, 4.25rem);
   font-weight: 900;
-  color: #ffffff;
-  line-height: 1.15;
+  color: var(--color-text);
+  line-height: 1.12;
   width: min(100%, 1100px);
   margin-bottom: 24px;
   animation: slideUpFade 0.8s ease 0.22s both;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 .heroSub {
   font-size: 18px;
-  color: rgba(240, 244, 255, 0.96);
+  color: var(--color-text-sub);
   line-height: 1.8;
   max-width: 1100px;
   width: min(100%, 1100px);
@@ -435,12 +436,12 @@
 .problemCard {
   background: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
-  border-radius: 16px;
-  padding: 32px;
+  border-radius: var(--radius-lg);
+  padding: var(--space-card-pad);
   display: flex;
   flex-direction: column;
   gap: 12px;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   position: relative;
   overflow: hidden;
 }
@@ -452,9 +453,9 @@
   background: var(--card-accent, var(--gradient-accent));
 }
 .problemCard:hover {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 24px rgba(79, 142, 247, 0.15);
-  transform: translateY(-4px);
+  border-color: var(--color-border-strong);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 0 28px rgba(43, 147, 214, 0.18);
+  transform: translateY(-6px);
 }
 
 .cardIcon {
@@ -499,10 +500,11 @@
   display: inline-block;
   background: var(--color-tag-bg);
   color: var(--color-tag-text);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 6px;
+  letter-spacing: 0.01em;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
   align-self: flex-start;
 }
 
@@ -514,7 +516,7 @@
 /* ---- PitDockの強みセクション ---- */
 .strengthSection {
   background: var(--color-bg-secondary);
-  padding: 96px 0;
+  padding: var(--space-section) 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
@@ -529,28 +531,29 @@
 .strengthGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: var(--space-card-gap);
   list-style: none;
-  margin-bottom: 24px;
+  margin-bottom: var(--space-card-gap);
 }
 
 .strengthCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: 16px;
-  padding: 36px 32px;
+  border-radius: var(--radius-lg);
+  padding: var(--space-card-pad);
   display: flex;
   flex-direction: column;
   gap: 20px;
   position: relative;
   overflow: hidden;
   border-top: 3px solid var(--strength-accent, var(--color-accent));
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .strengthCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 28px var(--strength-glow, rgba(79, 142, 247, 0.2));
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 0 28px var(--strength-glow, rgba(43, 147, 214, 0.18));
+  border-color: var(--color-border-strong);
 }
 
 .strengthCardGlow {
@@ -568,7 +571,7 @@
   font-size: 12px;
   font-weight: 700;
   padding: 3px 10px;
-  border-radius: 6px;
+  border-radius: var(--radius-pill);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   align-self: flex-start;
@@ -622,7 +625,7 @@
 .strengthSubGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: var(--space-card-gap);
   list-style: none;
 }
 
@@ -630,8 +633,8 @@
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-left: 3px solid var(--color-accent);
-  border-radius: 16px;
-  padding: 28px 32px;
+  border-radius: var(--radius-lg);
+  padding: var(--space-card-pad);
   display: flex;
   align-items: flex-start;
   gap: 20px;
@@ -697,8 +700,8 @@
 .caseCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: 16px;
-  padding: 28px 32px;
+  border-radius: var(--radius-lg);
+  padding: var(--space-card-pad);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -723,8 +726,8 @@
 
 /* ---- 代表紹介セクション ---- */
 .ceoSection {
-  background: var(--color-ceo-bg, #0D1220);
-  padding: 96px 0;
+  background: var(--color-ceo-bg, #0A0F1C);
+  padding: var(--space-section) 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
@@ -770,7 +773,7 @@
   font-size: 12px;
   font-weight: 600;
   padding: 4px 12px;
-  border-radius: 4px;
+  border-radius: var(--radius-pill);
   margin-top: 12px;
   white-space: nowrap;
 }
@@ -814,7 +817,7 @@
 /* ---- Services ---- */
 .serviceSection {
   background: var(--color-surface);
-  padding: 96px 0;
+  padding: var(--space-section) 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
@@ -836,18 +839,18 @@
 .serviceCard {
   background: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
-  border-radius: 16px;
-  padding: 32px;
+  border-radius: var(--radius-lg);
+  padding: var(--space-card-pad);
   display: flex;
   flex-direction: column;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 .serviceCard:hover {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 28px rgba(79, 142, 247, 0.18);
-  transform: translateY(-5px);
+  border-color: var(--color-border-strong);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 0 28px var(--card-glow, rgba(43, 147, 214, 0.18));
+  transform: translateY(-6px);
 }
 
 .serviceCardGlow {
@@ -903,32 +906,18 @@
 }
 
 .darkTag {
-  background: rgba(79, 142, 247, 0.15);
-  color: #93c5fd;
-  font-size: 13px;
+  background: var(--color-tag-bg);
+  color: var(--color-tag-text);
+  font-size: 12.5px;
   font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 6px;
-}
-
-.darkTagAmber {
-  background: rgba(245, 158, 11, 0.12);
-  color: #fbbf24;
-  border: 1px solid rgba(245, 158, 11, 0.25);
-  border-radius: 9999px;
-  padding: 2px 10px;
-  font-size: 0.72rem;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.serviceCard[data-glow="amber"]:hover {
-  box-shadow: 0 0 32px 4px rgba(245, 158, 11, 0.18);
+  letter-spacing: 0.01em;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
 }
 
 /* ---- Testimonial ---- */
 .testimonialSection {
-  padding: 96px 0;
+  padding: var(--space-section) 0;
   background: var(--color-bg);
 }
 
@@ -939,7 +928,7 @@
   border: 1px solid var(--color-border);
   border-left: 4px solid;
   border-image: var(--gradient-accent) 1;
-  border-radius: 0 16px 16px 0;
+  border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
   padding: 40px 48px;
   position: relative;
 }
@@ -972,14 +961,14 @@
 
 /* ---- News ---- */
 .newsSection {
-  padding: 96px 0;
+  padding: var(--space-section) 0;
   background: var(--color-bg-secondary);
   border-top: 1px solid var(--color-border);
 }
 
 /* /news ページ専用: 全件一覧セクション */
 .newsListSection {
-  padding: 96px 0;
+  padding: var(--space-section) 0;
   background: var(--color-bg-secondary);
   border-top: 1px solid var(--color-border);
 }
@@ -987,7 +976,7 @@
 .newsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: var(--space-card-gap);
   list-style: none;
   margin-bottom: 40px;
 }
@@ -1032,18 +1021,18 @@
 .newsCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   padding: 28px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 .newsCard:hover,
 .newsCard:focus-within {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 20px rgba(79, 142, 247, 0.12);
-  transform: translateY(-4px);
+  border-color: var(--color-border-strong);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 0 28px rgba(43, 147, 214, 0.14);
+  transform: translateY(-6px);
 }
 
 .newsCardLink {
@@ -1079,7 +1068,7 @@
   font-size: 12px;
   font-weight: 600;
   padding: 3px 10px;
-  border-radius: 4px;
+  border-radius: var(--radius-pill);
 }
 
 .newsDate {
@@ -1150,10 +1139,10 @@
 .footerCta {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #1a2a5e 0%, #0d1a3a 50%, #1a1040 100%);
+  background: linear-gradient(135deg, #123A6B 0%, #0A1024 50%, #0C1220 100%);
   background-size: 200% 200%;
   animation: gradientShift 12s ease infinite;
-  padding: 96px 0;
+  padding: var(--space-section) 0;
   text-align: center;
   border-top: 1px solid var(--color-border);
 }
@@ -1163,8 +1152,8 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(79, 142, 247, 0.15) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 50%, rgba(139, 92, 246, 0.12) 0%, transparent 60%);
+    radial-gradient(ellipse at 20% 50%, rgba(43, 147, 214, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(34, 211, 238, 0.12) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -1178,7 +1167,7 @@
 
 .footerCtaSub {
   font-size: 17px;
-  color: rgba(240, 244, 255, 0.96);
+  color: var(--color-text-sub);
   margin-bottom: 40px;
   position: relative;
 }
@@ -1204,10 +1193,10 @@
 }
 
 .footerLogo {
-  font-family: "Inter", sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: #FFA500;
+  height: 32px;
+  width: auto;
+  display: block;
+  align-self: flex-start;
 }
 
 .footerTagline {
@@ -1321,7 +1310,7 @@
   width: 48px;
   height: 48px;
   background: var(--gradient-accent);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1335,8 +1324,8 @@
 .pageHero {
   position: relative;
   background:
-    radial-gradient(ellipse at 70% 30%, rgba(79, 142, 247, 0.12) 0%, transparent 60%),
-    linear-gradient(135deg, #0F1526 0%, #0A0E1A 60%, #110a1f 100%);
+    radial-gradient(ellipse at 70% 30%, rgba(43, 147, 214, 0.14) 0%, transparent 60%),
+    linear-gradient(135deg, #0C1220 0%, #070B14 60%, #0A1024 100%);
   min-height: 360px;
   display: flex;
   align-items: flex-start;
@@ -1404,9 +1393,9 @@
 }
 
 .pageH1 {
-  font-size: clamp(1.8rem, 4vw, 2.75rem);
-  font-weight: 900;
-  color: #ffffff;
+  font-size: clamp(1.9rem, 4.2vw, 2.75rem);
+  font-weight: 800;
+  color: var(--color-text);
   line-height: 1.2;
   margin-bottom: 20px;
   letter-spacing: -0.02em;
@@ -1414,7 +1403,7 @@
 
 .pageSubCopy {
   font-size: 16px;
-  color: rgba(240, 244, 255, 0.94);
+  color: var(--color-text-sub);
   line-height: 1.8;
   max-width: 720px;
   margin-bottom: 36px;
@@ -1433,24 +1422,24 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-left: 3px solid var(--color-accent);
-  border-radius: 14px;
-  padding: 28px;
+  border-radius: var(--radius-lg);
+  padding: var(--space-card-pad);
   display: flex;
   flex-direction: column;
   gap: 12px;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .menuCard:hover {
-  border-color: rgba(79, 142, 247, 0.5);
-  box-shadow: 0 0 20px rgba(79, 142, 247, 0.1);
+  border-color: var(--color-border-strong);
+  box-shadow: 0 0 20px rgba(43, 147, 214, 0.12);
 }
 
 .menuIcon {
   width: 40px;
   height: 40px;
   background: rgba(79, 142, 247, 0.15);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1494,7 +1483,7 @@
 /* ---- Features Section (PitDockが選ばれる理由) ---- */
 .featuresSection {
   background: var(--color-bg-secondary);
-  padding: 96px 0;
+  padding: var(--space-section) 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
@@ -1555,7 +1544,7 @@
   margin: 0 auto;
   background: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   padding: 40px 48px;
   text-align: center;
 }
@@ -1602,12 +1591,12 @@
   .trustBar,
   .strengthSection,
   .ceoSection {
-    padding: 64px 0;
+    padding: var(--space-section-mobile) 0;
   }
 
   .hero {
     min-height: auto;
-    padding: 120px 0 64px;
+    padding: 120px 0 var(--space-section-mobile);
   }
 
   .heroH1 { font-size: 2rem; }
@@ -1635,6 +1624,15 @@
   .newsGrid { grid-template-columns: 1fr; }
   .newsGridSingle { max-width: 100%; }
   .menuGrid { grid-template-columns: 1fr; }
+
+  /* カード内パディング: mobile は縮小 */
+  .problemCard,
+  .strengthCard,
+  .strengthSubCard,
+  .serviceCard,
+  .menuCard {
+    padding: var(--space-card-pad-mobile);
+  }
 
   /* 信頼バー: mobile は2カラム */
   .trustGrid {

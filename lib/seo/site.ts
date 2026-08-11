@@ -9,14 +9,14 @@ export const SITE_NAME_EN = "PitDock, Inc.";
 export const SITE_DESCRIPTION =
   "中小企業・スタートアップのDX推進・AI活用（AX）を戦略立案から実装まで支援。PitDock株式会社のITコンサルティング・システム開発サービス。";
 
-export const DEFAULT_OG_IMAGE = "/images/gows_favicon.png";
+export const DEFAULT_OG_IMAGE = "/opengraph-image";
 
 export const ORGANIZATION = {
   name: SITE_NAME,
   legalName: "PitDock株式会社",
   alternateName: SITE_NAME_EN,
   url: SITE_URL,
-  logo: `${SITE_URL}/images/gows_favicon.png`,
+  logo: `${SITE_URL}/images/logo.png`,
   foundingDate: "2024-04-08",
   address: {
     streetAddress: "神泉町10-15-301",

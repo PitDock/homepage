@@ -5,45 +5,81 @@
 }
 
 :root {
-  --color-bg:           #0A0E1A;
-  --color-bg-secondary: #0F1526;
-  --color-bg-muted:     #0F1526;
-  --color-surface:      #161D35;
-  --color-bg-dark:      #0A0E1A;
+  /* ===== 背景 ===== */
+  --color-bg:             #070B14;  /* ページ背景・最暗。旧 #0A0E1A から純度の高いブルーブラックへ */
+  --color-bg-secondary:   #0C1220;  /* セクション交互 */
+  --color-bg-muted:       #0C1220;
+  --color-surface:        #121A2E;  /* カード・サーフェス */
+  --color-surface-raised: #17213A;  /* ホバー時・重ね面（新規） */
+  --color-bg-dark:        #070B14;
 
-  --color-primary:      #4F8EF7;
-  --color-primary-dark: #3D7DE8;
-  --color-accent:       #4F8EF7;
-  --color-accent-end:   #8B5CF6;
-  --color-accent-hover: #3D7DE8;
+  /* ===== ブランドブルー（ロゴ実測値） ===== */
+  --color-brand-deep:     #0E5AA6;  /* ロゴ "Pit" 側（#105FAD）を微調整した基準値 */
+  --color-brand-bright:   #2B93D6;  /* ロゴ "Dock" 側（#288FCF）を微調整した基準値 */
 
-  --color-text:         #F0F4FF;
-  --color-text-sub:     #C0D3FF;
-  --color-text-dark:    #F0F4FF;
-  --color-muted:        #4A5578;
+  /* ===== UIインタラクション用アクセント（維持） ===== */
+  --color-primary:        #4F8EF7;
+  --color-primary-dark:   #3D7DE8;
+  --color-accent:         #4F8EF7;  /* リンク・タグ・フォーカスリング等 */
+  --color-accent-end:     #2B93D6;  /* 旧パープル(#8B5CF6)→ロゴ実測ブルーへ */
+  --color-accent-hover:   #3D7DE8;
 
-  --color-border:       #1E2A4A;
-  --color-tag-bg:       rgba(79, 142, 247, 0.15);
-  --color-tag-text:     #4F8EF7;
+  /* ===== グラデーション ===== */
+  --gradient-accent: linear-gradient(135deg, #0E5AA6 0%, #2B93D6 100%);
+    /* ロゴの "Pit"(深)→"Dock"(明) と同じ方向・同じ2色。CTA・カード番号・強調テキスト等に使用 */
+  --gradient-hero:   radial-gradient(ellipse at 60% 35%, #123A6B 0%, #070B14 68%);
+    /* 旧 #1a2456（紫寄りの藍色）→ 純粋なブルー系ハイライトへ */
 
-  --gradient-accent:    linear-gradient(135deg, #4F8EF7 0%, #8B5CF6 100%);
-  --gradient-hero:      radial-gradient(ellipse at 60% 40%, #1a2456 0%, #0A0E1A 70%);
+  /* ===== シグナルカラー（カテゴリ差別化・ブルー〜シアン〜ティール系に統一） ===== */
+  --color-signal-cyan:   #22D3EE;  /* DX軸／システム開発カテゴリ */
+  --color-signal-teal:   #2DD4BF;  /* 一気通貫軸／技術顧問カテゴリ */
+  --color-signal-indigo: #6C8CF5;  /* 自社プロダクトカテゴリ（周辺色相・パープルには寄せない） */
+
+  /* ===== テキスト ===== */
+  --color-text:      #F4F7FF;
+  --color-text-sub:  #B7C4E6;
+  --color-text-dark: #F4F7FF;
+  --color-muted:     #57628A;
+
+  /* ===== ボーダー・タグ ===== */
+  --color-border:        #223055;
+  --color-border-strong: #2E4166;  /* ホバー時等の強調ボーダー（新規） */
+  --color-tag-bg:        rgba(79, 142, 247, 0.14);
+  --color-tag-text:      #4F8EF7;
+
+  /* ===== 機能色 ===== */
+  --color-danger: #F87171;  /* フォームエラー（既存のハードコード値をトークン化） */
+
+  /* ===== 角丸スケール（新規） ===== */
+  --radius-sm:   8px;   /* フォーム入力・小要素 */
+  --radius-btn:  10px;  /* ボタン全般 */
+  --radius-md:   14px;  /* コンパクトカード・テーブル系コンテナ */
+  --radius-lg:   20px;  /* 標準カード（サイト共通の基準値） */
+  --radius-xl:   28px;  /* フォームカード等の大型パネル */
+  --radius-pill: 9999px; /* タグ・バッジ・ピルボタン */
+
+  /* ===== スペーシングスケール（新規） ===== */
+  --space-section:        112px; /* セクション上下パディング（旧96px） */
+  --space-section-mobile: 72px;  /* 同モバイル（旧64px） */
+  --space-card-pad:        40px; /* カード内パディング（旧32px） */
+  --space-card-pad-mobile: 28px; /* 同モバイル（旧24px） */
+  --space-card-gap:        28px; /* カードグリッドgap（旧24px） */
 
   --font: "Noto Sans JP", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* 代表紹介セクション用 */
-  --color-ceo-bg:       #0D1220;
+  /* ===== 代表紹介セクション ===== */
+  --color-ceo-bg: #0A0F1C;
 
-  /* 強みセクション 3軸アクセント */
-  --color-strength-dx:  #06B6D4;
-  --color-strength-ax:  #8B5CF6;
-  --color-strength-int: #10B981;
+  /* ===== 強み3軸（ブルーファミリーに統一） ===== */
+  --color-strength-dx:  var(--color-signal-cyan);   /* 旧 #06B6D4 → 維持相当（シアン） */
+  --color-strength-ax:  var(--color-brand-deep);    /* 旧 #8B5CF6 パープル → ブランドブルーへ */
+  --color-strength-int: var(--color-signal-teal);   /* 旧 #10B981 グリーン → ティールへ */
 
-  /* /partner ページ 専用トークン */
+  /* ===== /partner ページ専用トークン（維持・背景の藍成分のみ微調整） ===== */
   --color-partner-warm:    #E8A838;
   --gradient-partner-hero: radial-gradient(ellipse at 30% 60%, rgba(232,168,56,0.12) 0%, transparent 55%),
-                            radial-gradient(ellipse at 75% 25%, rgba(79,142,247,0.14) 0%, transparent 50%),
-                            linear-gradient(160deg, #0C1020 0%, #0A0E1A 45%, #0D0C18 100%);
+                            radial-gradient(ellipse at 75% 25%, rgba(43,147,214,0.14) 0%, transparent 50%),
+                            linear-gradient(160deg, #090D18 0%, #070B14 45%, #0A0916 100%);
   --gradient-partner-num:  linear-gradient(135deg, #E8A838 0%, #4F8EF7 100%);
 }
 
