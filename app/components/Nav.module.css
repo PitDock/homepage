@@ -195,56 +195,19 @@
   outline-offset: 2px;
 }
 
-/* タブレット（768〜1244px）— 常時2段固定レイアウト */
-@media (min-width: 768px) and (max-width: 1244px) {
-  .inner {
-    height: auto;
-    flex-wrap: wrap;
-    align-items: center;
-    row-gap: 10px;
-    gap: 10px 16px;
-    padding: 16px 48px;      /* 旧14px 24px。横paddingをデスクトップと同じ48pxに統一（コンテナ幅と整列） */
-  }
-
-  .links {
-    order: 3;                /* 常に2段目へ。表示順: [1段目] ロゴ ... CTA群 / [2段目] リンク一覧 */
-    flex-basis: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px 20px;
-  }
-
-  .links a { font-size: 14px; }
-
-  .cta,
-  .ctaSecondary {
-    font-size: 14px;
-    padding: 8px 16px;
-  }
-
-  .logo img { height: 26px; }  /* 旧24px。§6.2の原型値へ復帰 */
-}
-
-@media (max-width: 767px) {
-  .inner {
-    height: 64px;              /* 旧56px。§6.2の原型値へ復帰 */
-    padding: 0 20px;           /* 旧16px。サイト共通 .container のモバイルpaddingと統一 */
-    gap: 16px;
-  }
-
-  .logo img { height: 24px; }  /* 旧22px。§6.2の原型値へ復帰 */
-
+/* 1245px未満（タブレット・スマホ共通）— 1行に収まらないためリンクをハンバーガーメニューへ格納。
+   CTAボタン（お問い合わせ／無料相談を予約する）はスマホ幅（767px以下）になるまで表示を維持する。 */
+@media (max-width: 1400px) {
   .links {
     display: none;
   }
 
   .ctaGroup {
-    display: none;
+    margin-left: auto;   /* CTA群＋ハンバーガーをまとめて右端へ寄せる */
   }
 
   .menuButton {
     display: inline-flex;
-    margin-left: auto;
   }
 
   .mobileMenu {
@@ -269,6 +232,24 @@
 
   .mobileLinks {
     padding: 14px 20px 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .inner {
+    height: 64px;              /* 旧56px。§6.2の原型値へ復帰 */
+    padding: 0 20px;           /* 旧16px。サイト共通 .container のモバイルpaddingと統一 */
+    gap: 16px;
+  }
+
+  .logo img { height: 24px; }  /* 旧22px。§6.2の原型値へ復帰 */
+
+  .ctaGroup {
+    display: none;
+  }
+
+  .menuButton {
+    margin-left: auto;   /* ctaGroupが非表示になるため、ハンバーガー自身を右端へ寄せる */
   }
 
   .mobileCta {

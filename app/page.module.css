@@ -1337,10 +1337,6 @@
   max-width: 1720px;
 }
 
-@media (min-width: 768px) and (max-width: 1244px) {
-  .pageHero { padding-top: 144px; }   /* 旧168px。breadcrumb 124px + breadcrumb自体の高さ・下マージン分約20px */
-}
-
 /* 利用規約ページ（グローバル Nav 無し）：ヘッダー分の余白を詰める */
 .pageHeroTerms {
   padding: 24px 0 36px;
@@ -1360,15 +1356,9 @@
 
 .breadcrumb {
   position: absolute;
-  top: 96px;   /* 旧108px。新Navデスクトップ下端(0+72=72px)から24pxの余白を確保 */
+  top: 96px;   /* 新Nav下端(0+72=72px)から24pxの余白を確保。タブレット帯もNav高さが同一(72px)のため共通 */
   left: clamp(20px, 3vw, 48px);
   z-index: 2;
-}
-
-@media (min-width: 768px) and (max-width: 1244px) {
-  .breadcrumb {
-    top: 124px;  /* 旧148px。タブレット帯Nav高さ約100px + 24pxクリアランス */
-  }
 }
 
 .breadcrumb ol {
