@@ -28,13 +28,13 @@ export default function Nav() {
 
   return (
     <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ""}`} aria-label="メインナビゲーション">
-      <div className={`container ${styles.inner}`}>
+      <div className={styles.inner}>
         <a href="/" className={styles.logo} aria-label="PitDock株式会社 トップへ">
           <Image
-            src="/images/logo_white.png"
+            src="/images/logo.png"
             alt="PitDock"
-            width={780}
-            height={123}
+            width={952}
+            height={151}
             priority
           />
         </a>

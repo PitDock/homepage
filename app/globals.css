@@ -81,6 +81,25 @@
                             radial-gradient(ellipse at 75% 25%, rgba(43,147,214,0.14) 0%, transparent 50%),
                             linear-gradient(160deg, #090D18 0%, #070B14 45%, #0A0916 100%);
   --gradient-partner-num:  linear-gradient(135deg, #E8A838 0%, #4F8EF7 100%);
+
+  /* ===== ライトフレーム用トークン（Nav・将来のライト面共通・新規・§12） ===== */
+  --color-chrome-bg:             #FFFFFF;              /* カプセル背景（完全不透明時の基準色） */
+  --color-chrome-bg-translucent: rgba(255, 255, 255, 0.8); /* 通常時（わずかにガラス感） */
+  --color-chrome-bg-solid:       rgba(255, 255, 255, 0.8); /* scrolled時（ほぼ不透明） */
+  --color-chrome-border:         rgba(16, 26, 46, 0.07);
+  --color-chrome-shadow:         rgba(7, 11, 20, 0.16);
+  --color-chrome-shadow-strong:  rgba(7, 11, 20, 0.22);
+
+  --color-ink:        #101A2E;  /* ライト面上の見出し・強調テキスト */
+  --color-ink-sub:    #4B5972;  /* ライト面上の本文・リンク既定色 */
+  --color-ink-muted:  #8592AA;  /* ライト面上の補助テキスト・プレースホルダー */
+
+  /* ===== Nav CTAボタン専用グラデーション（新規・WCAG AA適合・§12.3/12.6） ===== */
+  --gradient-accent-onlight: linear-gradient(135deg, #0E5AA6 0%, #1B6FB0 100%);
+    /* --gradient-accent（#0E5AA6→#2B93D6）は明部#2B93D6に白文字を乗せると約3.36:1でAA(4.5:1)未達。
+       明部のみ#1B6FB0に差し替え、両端で白文字4.5:1以上を確保した専用トークン。
+       用途はNav内CTA（.cta / .mobileCtaPrimary）に限定し、他の --gradient-accent 使用箇所
+      （.btnPrimary 等、ダーク背景上に単体で置かれるボタン）は対象外・変更しない */
 }
 
 html {
