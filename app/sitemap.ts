@@ -21,6 +21,7 @@ const routes: { path: string; changeFrequency?: MetadataRoute.Sitemap[number]["c
   { path: "/service/products/gentle-diary/privacy", changeFrequency: "yearly", priority: 0.4 },
   { path: "/news", changeFrequency: "weekly", priority: 0.8 },
   { path: "/news/4", changeFrequency: "yearly", priority: 0.6 },
+  { path: "/news/8", changeFrequency: "yearly", priority: 0.6 },
   { path: "/partner", changeFrequency: "monthly", priority: 0.8 },
 ];
 
