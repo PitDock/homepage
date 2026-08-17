@@ -34,7 +34,9 @@ export const metadata: Metadata = {
     ],
   }),
   icons: {
-    icon: "/images/gows_favicon.png",
+    icon: "/images/favicon.png",
+    shortcut: "/images/favicon.png",
+    apple: "/images/favicon_sub.png",
   },
   category: "technology",
 };

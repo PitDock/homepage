@@ -7,7 +7,7 @@
 
 .tab {
   padding: 10px 22px;
-  border-radius: 24px;
+  border-radius: var(--radius-pill);
   border: 1px solid var(--color-border);
   background: transparent;
   color: var(--color-text-sub);

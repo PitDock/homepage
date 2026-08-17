@@ -1,3 +1,4 @@
+import Image from "next/image";
 import s from "../page.module.css";
 import { XLogo } from "./XLogo";
 import { InstagramLogo } from "./InstagramLogo";
@@ -39,7 +40,13 @@ export default function Footer() {
       <div className="container">
         <div className={s.footerGrid}>
           <div className={s.footerBrand}>
-            <span className={s.footerLogo}>PitDock</span>
+            <Image
+              src="/images/logo_white.png"
+              alt="PitDock"
+              width={780}
+              height={123}
+              className={s.footerLogo}
+            />
             <p className={s.footerTagline}>
               ITで未来を切り拓く、課題解決のプロフェッショナル。<br/>
               PitDock株式会社は、DX・AXコンサルティングとシステム開発を通じて、

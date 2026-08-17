@@ -20,7 +20,7 @@
   min-height: 520px;
   display: flex;
   align-items: center;
-  padding: 140px 0 96px;
+  padding: 140px 0 var(--space-section);
 }
 
 .partnerHeroOrb {
@@ -58,7 +58,7 @@
 .partnerHeroH1 {
   font-size: clamp(2rem, 5vw, 3.2rem);
   font-weight: 900;
-  color: #ffffff;
+  color: var(--color-text);
   line-height: 1.2;
   letter-spacing: -0.02em;
   margin-bottom: 24px;
@@ -75,7 +75,7 @@
 
 .partnerHeroSub {
   font-size: 17px;
-  color: rgba(240, 244, 255, 0.88);
+  color: var(--color-text-sub);
   line-height: 1.9;
   max-width: 800px;
   margin-bottom: 40px;
@@ -92,11 +92,11 @@
 .partnerBtnPrimary {
   display: inline-block;
   background: linear-gradient(135deg, #E8A838 0%, #F0C060 100%);
-  color: #0A0E1A;
+  color: var(--color-bg);
   font-size: 16px;
   font-weight: 700;
   padding: 15px 36px;
-  border-radius: 10px;
+  border-radius: var(--radius-btn);
   text-decoration: none;
   transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
 }
@@ -113,7 +113,7 @@
   font-size: 16px;
   font-weight: 600;
   padding: 14px 30px;
-  border-radius: 10px;
+  border-radius: var(--radius-btn);
   background: transparent;
   text-decoration: none;
   transition: border-color 0.2s, background 0.2s, transform 0.15s;
@@ -174,7 +174,7 @@
    WORK WITH US (特徴カード)
    ====================================== */
 .partnerWorkSection {
-  padding: 112px 0 96px;
+  padding: var(--space-section) 0;
   background: var(--color-bg);
 }
 
@@ -207,7 +207,7 @@
 .partnerWorkIcon {
   width: 44px;
   height: 44px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -244,7 +244,7 @@
    ROLES (タブUI)
    ====================================== */
 .partnerRoleSection {
-  padding: 96px 0;
+  padding: var(--space-section) 0;
   background: var(--color-bg-secondary);
 }
 
@@ -299,12 +299,12 @@
   font-weight: 700;
   letter-spacing: 0.06em;
   padding: 4px 14px;
-  border-radius: 6px;
+  border-radius: var(--radius-pill);
   margin-bottom: 16px;
 }
-.partnerRoleBadgeBlue   { background: rgba(79, 142, 247, 0.12);  color: #4F8EF7; }
-.partnerRoleBadgeGreen  { background: rgba(16, 185, 129, 0.12);  color: #10B981; }
-.partnerRoleBadgePurple { background: rgba(139, 92, 246, 0.12);  color: #8B5CF6; }
+.partnerRoleBadgeBlue   { background: rgba(79, 142, 247, 0.12);   color: #4F8EF7; }
+.partnerRoleBadgeGreen  { background: rgba(45, 212, 191, 0.12);   color: var(--color-signal-teal); }
+.partnerRoleBadgePurple { background: rgba(108, 140, 245, 0.12);  color: var(--color-signal-indigo); }
 
 .partnerRolePanelH3 {
   font-size: clamp(1.4rem, 3vw, 1.75rem);
@@ -345,7 +345,7 @@
 .partnerRolePanelSkills {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   padding: 32px;
 }
 
@@ -393,7 +393,7 @@
    STEP (タイムライン)
    ====================================== */
 .partnerStepSection {
-  padding: 96px 0;
+  padding: var(--space-section) 0;
   background: var(--color-bg);
 }
 
@@ -482,7 +482,7 @@
    FAQ
    ====================================== */
 .partnerFaqSection {
-  padding: 96px 0;
+  padding: var(--space-section) 0;
   background: var(--color-bg-secondary);
 }
 
@@ -497,7 +497,7 @@
 .partnerFaqCard {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   padding: 32px;
   display: flex;
   flex-direction: column;
@@ -564,7 +564,7 @@
    ENTRY FORM
    ====================================== */
 .partnerEntrySection {
-  padding: 96px 0;
+  padding: var(--space-section) 0;
   background: var(--color-bg);
   position: relative;
   overflow: hidden;
@@ -584,7 +584,7 @@
   margin: 0 auto;
   background: var(--color-bg-secondary);
   border: 1px solid rgba(232, 168, 56, 0.15);
-  border-radius: 24px;
+  border-radius: var(--radius-xl);
   padding: 56px;
   position: relative;
   z-index: 1;
@@ -628,7 +628,7 @@
 .partnerTextarea {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   padding: 12px 16px;
   font-size: 15px;
   color: var(--color-text);
@@ -713,11 +713,11 @@
 
 .partnerSubmitBtn {
   background: linear-gradient(135deg, #E8A838 0%, #F0C060 100%);
-  color: #0A0E1A;
+  color: var(--color-bg);
   font-size: 16px;
   font-weight: 700;
   padding: 16px 56px;
-  border-radius: 12px;
+  border-radius: var(--radius-btn);
   border: none;
   cursor: pointer;
   transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
@@ -736,14 +736,14 @@
 
 .partnerErrorMsg {
   font-size: 13px;
-  color: #f87171;
+  color: var(--color-danger);
   margin-top: 4px;
 }
 
 .partnerSubmitError {
   grid-column: 1 / -1;
   font-size: 14px;
-  color: #f87171;
+  color: var(--color-danger);
   text-align: center;
   padding: 12px;
   background: rgba(248, 113, 113, 0.08);
@@ -768,7 +768,7 @@
   align-items: center;
   justify-content: center;
   font-size: 28px;
-  color: #0A0E1A;
+  color: var(--color-bg);
   margin: 0 auto 28px;
 }
 
@@ -789,39 +789,39 @@
    RESPONSIVE
    ====================================== */
 @media (max-width: 767px) {
-  .partnerHero { min-height: auto; padding: 120px 0 80px; }
+  .partnerHero { min-height: auto; padding: 120px 0 var(--space-section-mobile); }
   .partnerHeroH1 { font-size: clamp(1.75rem, 7vw, 2.4rem); }
   .partnerHeroSub { font-size: 15px; }
   .partnerHeroCtaRow { flex-direction: column; align-items: stretch; }
   .partnerBtnPrimary, .partnerBtnGhost { text-align: center; }
   .partnerHeroOrb { width: 380px; height: 380px; right: -120px; bottom: -80px; }
 
-  .partnerWorkSection { padding: 80px 0 72px; }
+  .partnerWorkSection { padding: var(--space-section-mobile) 0; }
   .partnerWorkGrid { grid-template-columns: 1fr; }
   .partnerWorkCard:nth-child(2) { margin-top: 0; }
-  .partnerWorkCard { padding: 32px 28px; }
+  .partnerWorkCard { padding: var(--space-card-pad-mobile); }
   .partnerWorkKeyword { font-size: clamp(1.6rem, 7vw, 2rem); }
 
-  .partnerRoleSection { padding: 72px 0; }
+  .partnerRoleSection { padding: var(--space-section-mobile) 0; }
   .partnerRoleTabList { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
   .partnerRoleTab { padding: 10px 5px; }
   .partnerRolePanelActive { grid-template-columns: 1fr; gap: 24px; }
   .partnerRolePanelH3 { font-size: 1.3rem; }
   .partnerRolePanelSkills { padding: 24px; }
 
-  .partnerStepSection { padding: 72px 0; }
+  .partnerStepSection { padding: var(--space-section-mobile) 0; }
   .partnerStepList { max-width: 100%; }
   .partnerStepItem { grid-template-columns: 56px 1fr; gap: 0 20px; }
   .partnerStepItem:not(:last-child)::after { left: 27px; }
   .partnerStepNum { width: 48px; height: 48px; font-size: 15px; }
   .partnerStepH3 { font-size: 18px; }
 
-  .partnerFaqSection { padding: 72px 0; }
+  .partnerFaqSection { padding: var(--space-section-mobile) 0; }
   .partnerFaqGrid { grid-template-columns: 1fr; }
   .partnerFaqQMark, .partnerFaqAMark { font-size: 22px; }
 
-  .partnerEntrySection { padding: 72px 0; }
-  .partnerEntryForm { padding: 32px 20px; border-radius: 16px; }
+  .partnerEntrySection { padding: var(--space-section-mobile) 0; }
+  .partnerEntryForm { padding: var(--space-card-pad-mobile) 20px; border-radius: var(--radius-lg); }
   .partnerFormGrid { grid-template-columns: 1fr; }
   .partnerSubmitBtn { width: 100%; }
 }

@@ -67,10 +67,10 @@
   grid-template-columns: 180px 1fr;
   gap: 40px;
   align-items: start;
-  padding: 40px;
+  padding: var(--space-card-pad);
   background: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
 }
 
 .officerPhoto {
@@ -130,7 +130,7 @@
 
   .officerCard {
     grid-template-columns: 1fr;
-    padding: 28px;
+    padding: var(--space-card-pad-mobile);
     gap: 24px;
   }
 
