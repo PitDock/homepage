@@ -87,7 +87,7 @@ function ParticleCanvas() {
 }
 
 // 課題カード
-const cardAccents = ["#4F8EF7", "#8B5CF6", "#06B6D4", "#10B981"];
+const cardAccents = ["#2B93D6", "#0E5AA6", "#22D3EE", "#2DD4BF"];
 
 const problems = [
   {
@@ -112,12 +112,18 @@ const problems = [
   },
 ];
 
-// サービスカード
+// サービスカード（グロー色・カテゴリ差別化カラー）
 const serviceGlows = [
-  "radial-gradient(ellipse at top left, rgba(79,142,247,0.18) 0%, transparent 65%)",
-  "radial-gradient(ellipse at top left, rgba(139,92,246,0.18) 0%, transparent 65%)",
-  "radial-gradient(ellipse at top left, rgba(6,182,212,0.15) 0%, transparent 65%)",
-  "amber",
+  "radial-gradient(ellipse at top left, rgba(43,147,214,0.18) 0%, transparent 65%)",
+  "radial-gradient(ellipse at top left, rgba(34,211,238,0.16) 0%, transparent 65%)",
+  "radial-gradient(ellipse at top left, rgba(45,212,191,0.16) 0%, transparent 65%)",
+  "radial-gradient(ellipse at top left, rgba(108,140,245,0.16) 0%, transparent 65%)",
+];
+const serviceCardGlowVars = [
+  "rgba(43,147,214,0.18)",
+  "rgba(34,211,238,0.16)",
+  "rgba(45,212,191,0.16)",
+  "rgba(108,140,245,0.16)",
 ];
 
 type Service = {
@@ -170,8 +176,8 @@ type StrengthCard = {
 
 const strengthCards: StrengthCard[] = [
   {
-    accentColor: "#06B6D4",
-    glowColor: "rgba(6,182,212,0.08)",
+    accentColor: "#22D3EE",
+    glowColor: "rgba(34,211,238,0.10)",
     heading: "ツールを入れて終わりにしない。",
     body: "「システムを導入したのに、現場が使ってくれない」「デジタル化したのに、業務が変わらない、会社の成長に繋がらない」——これはツールの問題ではなく、変革の進め方の問題です。PitDockのDX支援は、ツールの選定・導入にとどまりません。現場の業務フロー・組織の動き方・人の意識まで変えることを前提に伴走します。",
     points: [
@@ -181,8 +187,8 @@ const strengthCards: StrengthCard[] = [
     ],
   },
   {
-    accentColor: "#8B5CF6",
-    glowColor: "rgba(139,92,246,0.08)",
+    accentColor: "#0E5AA6",
+    glowColor: "rgba(14,90,166,0.14)",
     heading: "AIで何ができるか、具体的に答えられる。",
     body: "代表の小山は学生時代、AIの研究をしていました。代表だけでなくPitDockのメンバーはAIの仕組みを原理から理解した上で、「あなたのビジネスに対してAIでどのような効果が出せるか」を具体的に設計します。流行のツールを当てはめるのではなく、課題から逆算してAIの活用方法を設計します。",
     points: [
@@ -192,8 +198,8 @@ const strengthCards: StrengthCard[] = [
     ],
   },
   {
-    accentColor: "#10B981",
-    glowColor: "rgba(16,185,129,0.08)",
+    accentColor: "#2DD4BF",
+    glowColor: "rgba(45,212,191,0.10)",
     heading: "「何をつくるか」から、一緒に考えます。",
     body: "コンサルが出した戦略を開発会社が理解しきれない、開発の制約をコンサルが把握していなかった——この分断が、手戻り・追加費用の原因になります。PitDockは、戦略策定から要件定義・設計・開発・運用まで、すべてを自社内のチームが担当します。",
     points: [
@@ -391,12 +397,14 @@ export default function Home() {
               <li
                 key={sv.name}
                 className={`${s.serviceCard} ${s.reveal}`}
-                style={{ transitionDelay: `${i * 0.1}s` }}
-                data-glow={serviceGlows[i]}
+                style={{
+                  transitionDelay: `${i * 0.1}s`,
+                  "--card-glow": serviceCardGlowVars[i],
+                } as React.CSSProperties}
               >
                 <div
                   className={s.serviceCardGlow}
-                  style={{ background: serviceGlows[i] === "amber" ? "radial-gradient(ellipse at top left, rgba(245,158,11,0.13) 0%, transparent 65%)" : serviceGlows[i] }}
+                  style={{ background: serviceGlows[i] }}
                   aria-hidden="true"
                 />
                 <h3 className={s.serviceH3}>{sv.name}</h3>

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import styles from "./Nav.module.css";
 
 export default function Nav() {
@@ -27,8 +28,16 @@ export default function Nav() {
 
   return (
     <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ""}`} aria-label="メインナビゲーション">
-      <div className={`container ${styles.inner}`}>
-        <a href="/" className={styles.logo} aria-label="PitDock株式会社 トップへ">PitDock</a>
+      <div className={styles.inner}>
+        <a href="/" className={styles.logo} aria-label="PitDock株式会社 トップへ">
+          <Image
+            src="/images/logo.png"
+            alt="PitDock"
+            width={952}
+            height={151}
+            priority
+          />
+        </a>
         <ul className={styles.links} role="list">
           <li><a href="/service/dx-ax">DX・AXコンサルティング</a></li>
           <li><a href="/service/system-dev">システム開発</a></li>

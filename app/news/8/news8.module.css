@@ -1,0 +1,100 @@
+.heroInner {
+  padding-top: 52px;
+}
+
+.article {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.meta {
+  font-size: 14px;
+  color: var(--color-muted);
+  font-family: "Inter", sans-serif;
+  margin-bottom: 28px;
+}
+
+.body p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--color-text);
+  margin: 0 0 1.25em;
+}
+
+.body p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- 変更内容テーブル --- */
+.changeTableHeading {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 40px 0 20px;
+}
+
+.changeTableWrap {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.changeTable {
+  width: 100%;
+}
+
+.changeRow {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-border);
+  gap: 32px;
+}
+
+.changeRow:first-child {
+  border-top: 1px solid var(--color-border);
+}
+
+.changeTh {
+  flex: 0 0 120px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-sub);
+  padding-top: 2px;
+}
+
+.changeTd {
+  flex: 1;
+  font-size: 15px;
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .changeRow {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .changeTh {
+    flex: none;
+  }
+}
+
+.linkList {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.linkList a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.linkList a:hover {
+  text-decoration: none;
+}

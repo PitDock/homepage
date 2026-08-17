@@ -60,4 +60,11 @@ export const news: NewsEntry[] = [
     title: "技術顧問サービスを開始しました。月額2万円〜、最短3ヶ月からご利用いただけます。",
     url: "/service/tech-advisor",
   },
+  {
+    id: 8,
+    tags: ["お知らせ"],
+    date: "2026.08.16",
+    title: "社名変更のお知らせ（GOWS合同会社 → PitDock株式会社）",
+    url: "/news/8",
+  },
 ];
