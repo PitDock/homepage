@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
     tel,
     roles,
     status,
-    availDays,
+    availHours,
     skills,
     message,
   } = body as {
@@ -17,12 +17,12 @@ export async function POST(req: NextRequest) {
     tel?: string;
     roles: string[];
     status: string;
-    availDays: string;
+    availHours: string;
     skills?: string;
     message?: string;
   };
 
-  if (!name || !email || !roles || roles.length === 0 || !status || !availDays) {
+  if (!name || !email || !roles || roles.length === 0 || !status || !availHours) {
     return NextResponse.json({ error: "Required fields missing" }, { status: 400 });
   }
 
@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
         { type: "mrkdwn", text: `*電話*\n${tel || "未入力"}` },
         { type: "mrkdwn", text: `*職種*\n${roles.join(", ")}` },
         { type: "mrkdwn", text: `*稼働状況*\n${status}` },
-        { type: "mrkdwn", text: `*稼働日数*\n${availDays}` },
+        { type: "mrkdwn", text: `*稼働可能時間*\n${availHours}` },
       ],
     },
   ];
