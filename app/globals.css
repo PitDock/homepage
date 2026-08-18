@@ -84,8 +84,8 @@
 
   /* ===== ライトフレーム用トークン（Nav・将来のライト面共通・新規・§12） ===== */
   --color-chrome-bg:             #FFFFFF;              /* カプセル背景（完全不透明時の基準色） */
-  --color-chrome-bg-translucent: rgba(255, 255, 255, 0.8); /* 通常時（わずかにガラス感） */
-  --color-chrome-bg-solid:       rgba(255, 255, 255, 0.8); /* scrolled時（ほぼ不透明） */
+  --color-chrome-bg-translucent: rgba(255, 255, 255, 0.9); /* 通常時（わずかにガラス感） */
+  --color-chrome-bg-solid:       rgba(255, 255, 255, 0.95); /* scrolled時（ほぼ不透明） */
   --color-chrome-border:         rgba(16, 26, 46, 0.07);
   --color-chrome-shadow:         rgba(7, 11, 20, 0.16);
   --color-chrome-shadow-strong:  rgba(7, 11, 20, 0.22);
