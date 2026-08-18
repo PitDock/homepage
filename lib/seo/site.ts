@@ -26,9 +26,9 @@ export const ORGANIZATION = {
     addressCountry: "JP",
   },
   sameAs: [
-    "https://www.linkedin.com/company/gows-inc",
-    "https://x.com/gows_ktma",
-    "https://www.instagram.com/gows_ktma/",
+    "https://www.linkedin.com/feed/update/urn:li:activity:7495083231109730304/?actorCompanyId=105150520",
+    "https://x.com/pitdock",
+    "https://www.instagram.com/pitdock_official/",
   ],
 } as const;
 
