@@ -48,7 +48,7 @@ export default function Nav() {
         </ul>
         <div className={styles.ctaGroup}>
           <a
-            href="https://forms.gle/BGJ5MAuT8nHxxkXK9"
+            href="https://forms.gle/9EPiyGuYy5HdvDVZ8"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.ctaSecondary}
@@ -86,7 +86,7 @@ export default function Nav() {
           <li><a href="/#news" onClick={closeMobileMenu}>お知らせ</a></li>
           <li>
             <a
-              href="https://forms.gle/BGJ5MAuT8nHxxkXK9"
+              href="https://forms.gle/9EPiyGuYy5HdvDVZ8"
               target="_blank"
               rel="noopener noreferrer"
               onClick={closeMobileMenu}
