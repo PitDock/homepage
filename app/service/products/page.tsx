@@ -8,7 +8,7 @@ import { XLogo } from "../../components/XLogo";
 import s from "../../page.module.css";
 
 const CONTACT_URL = "/contact";
-const PRODUCT_CONTACT_URL = "https://forms.gle/BGJ5MAuT8nHxxkXK9";
+const PRODUCT_CONTACT_URL = "https://forms.gle/9EPiyGuYy5HdvDVZ8";
 const DUOSUB_X_URL = "https://x.com/duosub_app";
 
 type ProductEntry = {
