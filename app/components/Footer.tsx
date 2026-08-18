@@ -68,7 +68,7 @@ export default function Footer() {
               ))}
               <li>
                 <a
-                  href="https://forms.gle/BGJ5MAuT8nHxxkXK9"
+                  href="https://forms.gle/9EPiyGuYy5HdvDVZ8"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={s.footerContactBtn}
