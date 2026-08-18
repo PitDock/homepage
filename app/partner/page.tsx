@@ -96,7 +96,7 @@ const steps: Step[] = [
   {
     num: "02",
     h3: "PitDockと案件についてすり合わせ",
-    body: "スキル・稼働可能日数・希望条件について詳しくヒアリングします。今すぐ動けない状況でも歓迎です。",
+    body: "スキル・稼働可能時間・希望条件について詳しくヒアリングします。今すぐ動けない状況でも歓迎です。",
   },
   {
     num: "03",
@@ -126,7 +126,7 @@ type PartnerFormData = {
   tel: string;
   roles: string[];
   status: string;
-  availDays: string;
+  availHours: string;
   skills: string;
   message: string;
   privacy: boolean;
@@ -138,7 +138,7 @@ const initialForm: PartnerFormData = {
   tel: "",
   roles: [],
   status: "",
-  availDays: "",
+  availHours: "",
   skills: "",
   message: "",
   privacy: false,
@@ -157,12 +157,20 @@ const statusOptions = [
   "その他",
 ];
 
+const availHoursOptions = [
+  "週10時間程度",
+  "週20時間程度",
+  "週30時間程度",
+  "週40時間以上",
+  "未定・相談したい",
+];
+
 // ---- コンポーネント ----
 
 export default function PartnerPage() {
   const [activeTab, setActiveTab] = useState(0);
   const [form, setForm] = useState<PartnerFormData>(initialForm);
-  const [errors, setErrors] = useState<Partial<Record<keyof PartnerFormData | "roles" | "status" | "availDays", string>>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof PartnerFormData | "roles" | "status" | "availHours", string>>>({});
   const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   // IntersectionObserver による reveal アニメーション
@@ -213,7 +221,7 @@ export default function PartnerPage() {
     }
     if (form.roles.length === 0) e.roles = "1つ以上選択してください";
     if (!form.status) e.status = "必須項目です";
-    if (!form.availDays) e.availDays = "必須項目です";
+    if (!form.availHours) e.availHours = "必須項目です";
     if (!form.privacy) e.privacy = "同意が必要です";
     return e;
   };
@@ -236,7 +244,7 @@ export default function PartnerPage() {
           tel: form.tel || undefined,
           roles: form.roles,
           status: form.status,
-          availDays: form.availDays,
+          availHours: form.availHours,
           skills: form.skills || undefined,
           message: form.message || undefined,
         }),
@@ -602,6 +610,28 @@ export default function PartnerPage() {
                       ))}
                     </div>
                     {errors.status && <p className={p.partnerErrorMsg}>{errors.status}</p>}
+                  </div>
+
+                  {/* 稼働可能時間 */}
+                  <div className={`${p.partnerFieldWrap} ${p.partnerFieldFull}`}>
+                    <label className={p.partnerLabel} htmlFor="partner-avail-hours">
+                      稼働可能時間 <span className={p.partnerRequired}>必須</span>
+                    </label>
+                    <select
+                      id="partner-avail-hours"
+                      name="availHours"
+                      className={p.partnerSelect}
+                      value={form.availHours}
+                      onChange={handleTextChange}
+                    >
+                      <option value="">選択してください</option>
+                      {availHoursOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.availHours && <p className={p.partnerErrorMsg}>{errors.availHours}</p>}
                   </div>
 
                   <hr className={p.partnerFormDivider} />
