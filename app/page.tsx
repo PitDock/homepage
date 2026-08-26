@@ -499,7 +499,7 @@ export default function Home() {
                   loading="lazy"
                 />
               </div>
-              <span className={s.ceoRoleBadge}>代表取締役 / CEO・Founder</span>
+              <span className={s.ceoRoleBadge}>代表取締役 / CEO</span>
             </div>
 
             {/* 右カラム：テキスト */}
