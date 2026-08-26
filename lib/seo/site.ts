@@ -1,7 +1,13 @@
 /** 本番サイトの正規 URL（環境変数で上書き可能） */
+const PRODUCTION_URL = "https://www.pit-dock.com";
+
 export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://pit-dock.com")
+  // VERCEL_URL はデプロイごとに変わる internal URL のため、Production 環境では使わない。
+  // Preview 環境（PRごとのプレビューなど）でのみ VERCEL_URL にフォールバックする。
+  (process.env.VERCEL_ENV === "preview" && process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : PRODUCTION_URL)
 );
 
 export const SITE_NAME = "PitDock株式会社";
