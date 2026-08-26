@@ -100,7 +100,7 @@ export default function CompanyPage() {
                 />
               </div>
               <div className={cs.officerInfo}>
-                <p className={cs.officerRole}>代表取締役（CEO / Founder）</p>
+                <p className={cs.officerRole}>代表取締役 CEO</p>
                 <p className={cs.officerName}>小山 望海</p>
                 <p className={cs.officerNameEn}>KOYAMA Nozomi</p>
                 <p className={cs.officerBio}>
