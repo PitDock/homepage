@@ -34,9 +34,9 @@ export const metadata: Metadata = {
     ],
   }),
   icons: {
-    icon: "/images/favicon.png",
+    icon: { url: "/images/favicon.png", sizes: "288x288", type: "image/png" },
     shortcut: "/images/favicon.png",
-    apple: "/images/favicon_sub.png",
+    apple: { url: "/images/favicon_sub.png", sizes: "288x288", type: "image/png" },
   },
   category: "technology",
 };
