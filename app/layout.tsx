@@ -4,7 +4,14 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { JsonLd } from "./components/JsonLd";
 import { createPageMetadata } from "../lib/seo/metadata";
 import { faqPageJsonLd, organizationJsonLd, webSiteJsonLd } from "../lib/seo/json-ld";
-import { DEFAULT_OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "../lib/seo/site";
+import {
+  DEFAULT_OG_IMAGE,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_NAME_KANA,
+  SITE_NAME_KANA_SHORT,
+  SITE_URL,
+} from "../lib/seo/site";
 import "./globals.css";
 
 const homeTitle = `${SITE_NAME} | DX・AXコンサルティング・システム開発`;
@@ -24,6 +31,8 @@ export const metadata: Metadata = {
     imageAlt: SITE_NAME,
     keywords: [
       "PitDock",
+      SITE_NAME_KANA,
+      SITE_NAME_KANA_SHORT,
       "DX",
       "AX",
       "AI活用",
