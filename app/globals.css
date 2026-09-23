@@ -100,12 +100,44 @@
        明部のみ#1B6FB0に差し替え、両端で白文字4.5:1以上を確保した専用トークン。
        用途はNav内CTA（.cta / .mobileCtaPrimary）に限定し、他の --gradient-accent 使用箇所
       （.btnPrimary 等、ダーク背景上に単体で置かれるボタン）は対象外・変更しない */
+
+  /* ===== 補助テキスト用（WCAG AA適合） ===== */
+  --color-text-help: #8C9AC0;
+    /* --color-muted(#57628A) は --color-bg 上で約3.27:1 しかなく AA(4.5:1) 未達。
+       フォームのヘルパーテキスト・注記・プレースホルダーなど「読ませる補助文」には
+       本トークン(約7.07:1)を使う。--color-muted はパンくず等の装飾用途に限定する */
+
+  /* ===== 中間セクション用の圧縮スペーシング ===== */
+  --space-section-compact:        96px;
+  --space-section-compact-mobile: 64px;
+    /* セクション数の多いLP型ページで --space-section(112px) を全セクションに適用すると
+       ページ全長が過剰になる。説明系セクションのみ圧縮する用途 */
+
+  /* ===== 固定要素のレイヤー ===== */
+  --z-sticky-cta: 90;
+    /* Nav(.nav) の z-index:100 より必ず下。モバイル追従CTAがNavメニューを覆わないため */
 }
 
 html {
   scroll-behavior: smooth;
   /* ブラウザ既定(通常16px)に対してほんの少しだけ拡大。rem・継承フォントが一括で追従 */
   font-size: 105%;
+}
+
+/* Nav が position:fixed / height:72px（SP 64px）のため、アンカー先の見出しが
+   Nav の下に隠れる。id を持つ要素全体に補正を入れて是正する
+   （/contact の #form 等に加え、/partner の #entry・トップの #services にも効く） */
+[id] {
+  scroll-margin-top: 96px;
+}
+
+@media (max-width: 767px) {
+  [id] { scroll-margin-top: 88px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* スムーススクロールは前庭障害のトリガーになり得る */
+  html { scroll-behavior: auto; }
 }
 
 body {

@@ -1798,3 +1798,28 @@
     animation: none;
   }
 }
+
+/* ---- Eyebrow（デザインシステム §5.4 の型・全ページ共通） ---- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  border: 1px solid rgba(79, 142, 247, 0.35);
+  border-radius: var(--radius-pill);
+  padding: 5px 16px;
+  background: rgba(79, 142, 247, 0.06);
+  margin-bottom: 16px;
+  font-family: "Inter", sans-serif;
+}
+
+/* 和文アイブロー用の修飾（0.14em の字送り・uppercase は欧文前提のため解除） */
+.eyebrowJa {
+  font-family: var(--font);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
