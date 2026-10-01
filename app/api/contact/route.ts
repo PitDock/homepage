@@ -1,30 +1,37 @@
 import { NextRequest, NextResponse } from "next/server";
 
-function formatDate(dateStr: string): string {
-  if (!dateStr) return "";
-  const [y, m, d] = dateStr.split("-");
-  return `${y}/${m}/${d}`;
-}
-
-function formatSlot(date: string, start: string, end: string): string {
-  if (!date && !start) return "未記入";
-  const datePart = formatDate(date);
-  const timePart = start || end ? `${start || "?"}〜${end || "?"}` : "";
-  return [datePart, timePart].filter(Boolean).join(" ");
-}
+/** ご相談のテーマの許可値（app/contact/page.tsx の THEME_OPTIONS と一致させる） */
+const ALLOWED_CATEGORIES = [
+  "DX推進・業務改善",
+  "AI・生成AIの活用（AX）",
+  "システム・アプリ開発",
+  "技術顧問（外部CTO）",
+  "まだ決まっていない・まとめて相談したい",
+  "その他",
+] as const;
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const {
-    company, name, email, content,
-    date1Date, date1Start, date1End,
-    date2Date, date2Start, date2End,
-    date3Date, date3Start, date3End,
-    date4Date, date4Start, date4End,
-    date5Date, date5Start, date5End,
-  } = body;
+  const { company, name, email, content, categories, preferredDate, privacy } = body as {
+    company?: string;
+    name?: string;
+    email?: string;
+    content?: string;
+    categories?: unknown;
+    preferredDate?: string;
+    privacy?: boolean;
+  };
 
-  if (!company || !name || !email || !content) {
+  // ユーザー入力をそのまま埋め込まないよう、テーマは許可値リストと照合する
+  const safeCategories = Array.isArray(categories)
+    ? (categories.filter(
+        (c): c is (typeof ALLOWED_CATEGORIES)[number] =>
+          typeof c === "string" &&
+          (ALLOWED_CATEGORIES as readonly string[]).includes(c)
+      ) as string[])
+    : [];
+
+  if (!name || !email || safeCategories.length === 0 || privacy !== true) {
     return NextResponse.json({ error: "Required fields missing" }, { status: 400 });
   }
 
@@ -33,53 +40,41 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Webhook not configured" }, { status: 500 });
   }
 
-  const slots = [
-    { label: "第1希望", date: date1Date, start: date1Start, end: date1End },
-    { label: "第2希望", date: date2Date, start: date2Start, end: date2End },
-    { label: "第3希望", date: date3Date, start: date3Start, end: date3End },
-    { label: "第4希望", date: date4Date, start: date4Start, end: date4End },
-    { label: "第5希望", date: date5Date, start: date5Start, end: date5End },
-  ]
-    .filter((slot) => slot.date || slot.start || slot.end)
-    .map((slot) => ({
-      label: slot.label,
-      value: formatSlot(slot.date, slot.start, slot.end),
-    }));
+  const blocks: object[] = [
+    {
+      type: "header",
+      text: { type: "plain_text", text: "無料相談のお申し込みが届きました", emoji: true },
+    },
+    {
+      type: "section",
+      fields: [
+        { type: "mrkdwn", text: `*お名前*\n${name}` },
+        { type: "mrkdwn", text: `*メールアドレス*\n${email}` },
+        { type: "mrkdwn", text: `*会社名・屋号*\n${company || "（未記入）"}` },
+      ],
+    },
+    {
+      type: "section",
+      text: { type: "mrkdwn", text: `*ご相談のテーマ*\n${safeCategories.join(" / ")}` },
+    },
+    {
+      type: "section",
+      text: { type: "mrkdwn", text: `*ご相談内容*\n${content || "（記載なし）"}` },
+    },
+  ];
 
-  const dateLines = slots.length > 0
-    ? slots.map((sl) => `${sl.label}: ${sl.value}`).join("\n")
-    : "（ご希望日時の記入なし）";
-
-  const payload = {
-    blocks: [
-      {
-        type: "header",
-        text: { type: "plain_text", text: "無料相談のご予約が届きました", emoji: true },
-      },
-      {
-        type: "section",
-        fields: [
-          { type: "mrkdwn", text: `*会社名 / 部署・役職名*\n${company}` },
-          { type: "mrkdwn", text: `*お名前*\n${name}` },
-          { type: "mrkdwn", text: `*メールアドレス*\n${email}` },
-        ],
-      },
-      {
-        type: "section",
-        text: { type: "mrkdwn", text: `*ご相談内容*\n${content}` },
-      },
-      { type: "divider" },
-      {
-        type: "section",
-        text: { type: "mrkdwn", text: `*ご希望日時*\n${dateLines}` },
-      },
-    ],
-  };
+  if (preferredDate) {
+    blocks.push({ type: "divider" });
+    blocks.push({
+      type: "section",
+      text: { type: "mrkdwn", text: `*ご希望の日時*\n${preferredDate}` },
+    });
+  }
 
   const res = await fetch(webhookUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    body: JSON.stringify({ blocks }),
   });
 
   if (!res.ok) {
