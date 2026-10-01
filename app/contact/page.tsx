@@ -537,9 +537,6 @@ export default function ContactPage() {
           <ul className={cs.promiseGrid}>
             {PROMISES.map(({ title, body, Icon }) => (
               <li key={title} className={cs.promiseCard}>
-                <span className={cs.promiseIconBox}>
-                  <Icon />
-                </span>
                 <h3 className={cs.promiseH3}>{title}</h3>
                 <p className={cs.promiseBody}>{body}</p>
               </li>
