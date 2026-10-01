@@ -67,4 +67,11 @@ export const news: NewsEntry[] = [
     title: "社名変更のお知らせ（GOWS合同会社 → PitDock株式会社）",
     url: "/news/8",
   },
+  {
+    id: 9,
+    tags: ["メディア掲載"],
+    date: "2026.09.28",
+    title: "「企業名鑑」に弊社の紹介記事「技術を成果に変える」が掲載されました。",
+    url: "https://kigyo-meikan.com/archives/pit-dock/",
+  },
 ];
