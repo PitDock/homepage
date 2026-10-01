@@ -12,6 +12,9 @@ export const SITE_URL = (
 
 export const SITE_NAME = "PitDock株式会社";
 export const SITE_NAME_EN = "PitDock, Inc.";
+/** 社名のカタカナ表記（検索用。画面には表示しない） */
+export const SITE_NAME_KANA = "ピットドック株式会社";
+export const SITE_NAME_KANA_SHORT = "ピットドック";
 export const SITE_DESCRIPTION =
   "中小企業・スタートアップのDX推進・AI活用（AX）を戦略立案から実装まで支援。PitDock株式会社のITコンサルティング・システム開発サービス。";
 
@@ -20,7 +23,7 @@ export const DEFAULT_OG_IMAGE = "/opengraph-image";
 export const ORGANIZATION = {
   name: SITE_NAME,
   legalName: "PitDock株式会社",
-  alternateName: SITE_NAME_EN,
+  alternateName: [SITE_NAME_EN, SITE_NAME_KANA, SITE_NAME_KANA_SHORT],
   url: SITE_URL,
   logo: `${SITE_URL}/images/logo.png`,
   foundingDate: "2024-04-08",
