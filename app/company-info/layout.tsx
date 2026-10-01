@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "../../lib/seo/metadata";
+import { SITE_NAME_KANA, SITE_NAME_KANA_SHORT } from "../../lib/seo/site";
 
 export const metadata: Metadata = createPageMetadata({
   title: "会社概要",
   description:
     "PitDock株式会社（PitDock, Inc.）の会社概要。DX・AXコンサルティング、システム開発、自社プロダクトの開発・運営を行っています。",
   path: "/company-info",
-  keywords: ["PitDock", "ITコンサルティング", "DX", "AX", "AI", "システム開発", "自社プロダクト", "小山望海"],
+  keywords: ["PitDock", SITE_NAME_KANA, SITE_NAME_KANA_SHORT, "ITコンサルティング", "DX", "AX", "AI", "システム開発", "自社プロダクト", "小山望海"],
 });
 
 export default function CompanyLayout({ children }: { children: React.ReactNode }) {

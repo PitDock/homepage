@@ -1,4 +1,13 @@
-import { ORGANIZATION, PUBLISHER_ID, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "./site";
+import {
+  ORGANIZATION,
+  PUBLISHER_ID,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_NAME_EN,
+  SITE_NAME_KANA,
+  SITE_NAME_KANA_SHORT,
+  SITE_URL,
+} from "./site";
 import { SITE_FAQS } from "./faqs";
 
 type JsonLd = Record<string, unknown>;
@@ -28,6 +37,7 @@ export function webSiteJsonLd(): JsonLd {
     "@type": "WebSite",
     "@id": `${SITE_URL}/#website`,
     name: SITE_NAME,
+    alternateName: [SITE_NAME_EN, SITE_NAME_KANA, SITE_NAME_KANA_SHORT],
     url: SITE_URL,
     description: SITE_DESCRIPTION,
     publisher: { "@id": PUBLISHER_ID },
