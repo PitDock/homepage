@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { sendAutoReply } from "../../../lib/mail/send-auto-reply";
 
 /** ご相談のテーマの許可値（app/contact/page.tsx の THEME_OPTIONS と一致させる） */
 const ALLOWED_CATEGORIES = [
@@ -33,6 +34,12 @@ export async function POST(req: NextRequest) {
 
   if (!name || !email || safeCategories.length === 0 || privacy !== true) {
     return NextResponse.json({ error: "Required fields missing" }, { status: 400 });
+  }
+
+  // 自動返信メールの送信先になるため、サーバ側でも形式を検証する
+  // （フロントのバリデーションはAPIを直接叩かれると素通りする）
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return NextResponse.json({ error: "Invalid email format" }, { status: 400 });
   }
 
   const webhookUrl = process.env.SLACK_WEBHOOK_URL;
@@ -79,6 +86,21 @@ export async function POST(req: NextRequest) {
 
   if (!res.ok) {
     return NextResponse.json({ error: "Slack notification failed" }, { status: 500 });
+  }
+
+  // 申込者への自動返信メール。
+  // 失敗しても申込は成立しているため 500 にはしない（ユーザーに再送信させないため）。
+  try {
+    await sendAutoReply({
+      name,
+      email,
+      categories: safeCategories,
+      company,
+      content,
+      preferredDate,
+    });
+  } catch (e) {
+    console.error("[resend] auto-reply threw:", e);
   }
 
   return NextResponse.json({ ok: true });

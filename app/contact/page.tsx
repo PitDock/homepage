@@ -162,7 +162,6 @@ function IconChevronDown({ className }: IconProps) {
    ========================================================= */
 
 /** Resend による自動返信メールの実装が完了したら true にする（フェーズ3） */
-const AUTO_REPLY_ENABLED = false;
 
 const TRUST_BADGES = [
   { label: "相談無料", Icon: IconNoCost },
@@ -430,10 +429,10 @@ export default function ContactPage() {
   }, [status]);
 
   const successSteps = [
-    ...(AUTO_REPLY_ENABLED ? ["数分以内に、確認の自動返信メールをお送りします"] : []),
+    "数分以内に、確認の自動返信メールをお送りします",
     "メールが届かない場合は、迷惑メールフォルダをご確認ください",
     "当日までにご準備いただくものはありません",
-    "ご予定が変わった場合は、返信メールにそのままご返信ください",
+    "ご予定が変わった場合は、担当者からのご連絡メールにご返信ください",
   ];
 
   const stickyCtaVisible = passedHero && !formInView && status !== "success";
