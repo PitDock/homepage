@@ -2,9 +2,10 @@ import Image from "next/image";
 import { XLogo } from "./XLogo";
 import { InstagramLogo } from "./InstagramLogo";
 import { YouTubeLogo } from "./YouTubeLogo";
+import { TikTokLogo } from "./TikTokLogo";
 import s from "./LpProductFooter.module.css";
 
-export type LpProductSocialIcon = "x" | "instagram" | "youtube";
+export type LpProductSocialIcon = "x" | "instagram" | "youtube" | "tiktok";
 
 export type LpProductFooterLink = {
   href: string;
@@ -12,8 +13,8 @@ export type LpProductFooterLink = {
 };
 
 export type LpProductFooterProps = {
-  /** Duosub: default（緑） / Gentle Diary: teal / dinder: orange / SafePage: safepage */
-  variant?: "default" | "teal" | "orange" | "safepage";
+  /** default（緑・旧Duosub） / Duosub: duosub / Gentle Diary: teal / dinder: orange / SafePage: safepage */
+  variant?: "default" | "duosub" | "teal" | "orange" | "safepage";
   iconSrc: string;
   iconAlt: string;
   productName: string;
@@ -28,6 +29,8 @@ export type LpProductFooterProps = {
   footerNote?: string;
   social?: { href: string; ariaLabel: string; icon: LpProductSocialIcon }[];
   socialNavLabel?: string;
+  /** コピーライトの上に出す1行の表記（商標表記など） */
+  legalNote?: string;
 };
 
 function IconChrome({ className }: { className?: string }) {
@@ -84,6 +87,8 @@ function SocialIcon({ icon, className }: { icon: LpProductSocialIcon; className?
       return <InstagramLogo className={className} />;
     case "youtube":
       return <YouTubeLogo className={className} />;
+    case "tiktok":
+      return <TikTokLogo className={className} />;
     default:
       return null;
   }
@@ -102,9 +107,11 @@ export function LpProductFooter({
   footerNote,
   social,
   socialNavLabel = "公式SNS",
+  legalNote,
 }: LpProductFooterProps) {
   const footerClass = [
     s.footer,
+    variant === "duosub" ? s.footerDuosub : "",
     variant === "teal" ? s.footerTeal : "",
     variant === "orange" ? s.footerOrange : "",
     variant === "safepage" ? s.footerSafepage : "",
@@ -175,6 +182,8 @@ export function LpProductFooter({
           ) : null}
         </div>
       </div>
+
+      {legalNote ? <p className={s.lpFooterLegal}>{legalNote}</p> : null}
 
       <div className={s.lpFooterBottom}>
         <p className={s.lpFooterCopy}>© PitDock株式会社</p>
