@@ -24,6 +24,53 @@
   --lp-accent-rgb: 13, 148, 136;
 }
 
+/* Duosub LP（アプリの配色 #070707 / #4BD254 に合わせる。Tailwind 由来のグレーは使わない） */
+.footerDuosub {
+  --lp-accent: #4BD254;
+  --lp-accent-rgb: 75, 210, 84;
+  background: #070707;
+  color: #E7E7E7;
+  border-top: 1px solid #2C2E2C;
+  /* Duosub LP は viewport-fit=cover のため、横向きiPhoneのノッチ側を避ける */
+  padding-left: max(24px, env(safe-area-inset-left));
+  padding-right: max(24px, env(safe-area-inset-right));
+}
+
+.footerDuosub .lpFooterMain {
+  border-bottom-color: #2C2E2C;
+}
+
+.footerDuosub .lpFooterTagline,
+.footerDuosub .lpFooterLink {
+  color: #CFD0CF;
+}
+
+.footerDuosub .lpFooterLink:hover {
+  color: var(--lp-accent);
+}
+
+.footerDuosub .lpFooterCopy,
+.footerDuosub .lpFooterNote,
+.footerDuosub .lpFooterLegal {
+  color: #9B9B9B;
+}
+
+.footerDuosub .lpFooterSocialLink {
+  color: #9B9B9B;
+  background: #171A17;
+  border-color: #2C2E2C;
+}
+
+.footerDuosub .lpFooterSocialLink:hover {
+  color: var(--lp-accent);
+  background: #1F1F1F;
+}
+
+.footerDuosub a:focus-visible {
+  outline: 2px solid var(--lp-accent);
+  outline-offset: 3px;
+}
+
 .lpFooterMain {
   max-width: 1040px;
   margin: 0 auto;
@@ -133,6 +180,19 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+}
+
+.lpFooterLegal {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding-top: 24px;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #6b7280;
+}
+
+.lpFooterLegal + .lpFooterBottom {
+  padding-top: 8px;
 }
 
 .lpFooterCopy {

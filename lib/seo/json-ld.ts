@@ -45,11 +45,14 @@ export function webSiteJsonLd(): JsonLd {
   };
 }
 
-export function faqPageJsonLd(): JsonLd {
+export type FaqEntry = { q: string; a: string };
+
+/** 引数を省略するとサイト共通FAQ（SITE_FAQS）を出力する */
+export function faqPageJsonLd(faqs: readonly FaqEntry[] = SITE_FAQS): JsonLd {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: SITE_FAQS.map(({ q, a }) => ({
+    mainEntity: faqs.map(({ q, a }) => ({
       "@type": "Question",
       name: q,
       acceptedAnswer: {
