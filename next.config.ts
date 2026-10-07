@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  images: {
+    // 75 は既定値。85 は Duosub LP のスクリーンショット（字幕の細い文字をつぶさないため）
+    qualities: [75, 85],
+  },
   async redirects() {
     return [
       {

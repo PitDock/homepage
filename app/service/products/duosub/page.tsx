@@ -1,277 +1,214 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import { JsonLd } from "../../../components/JsonLd";
 import { LpProductFooter } from "../../../components/LpProductFooter";
 import { createPageMetadata } from "../../../../lib/seo/metadata";
-import { softwareApplicationJsonLd, webPageJsonLd } from "../../../../lib/seo/json-ld";
+import {
+  faqPageJsonLd,
+  softwareApplicationJsonLd,
+  webPageJsonLd,
+} from "../../../../lib/seo/json-ld";
+import { DUOSUB_FAQS } from "../../../../lib/seo/duosub-faqs";
+import { APP_STORE_URL, GOOGLE_PLAY_URL, StoreBadges } from "./_components/StoreBadges";
+import { HERO_POSTER, HeroVideo } from "./_components/HeroVideo";
+import { HowToTabs } from "./_components/HowToTabs";
+import { PipDiagram } from "./_components/PipDiagram";
+import { StickyStoreBar } from "./_components/StickyStoreBar";
 import s from "./page.module.css";
 
 const PAGE_PATH = "/service/products/duosub";
-const PAGE_TITLE = "Duosub | 映画・ドラマで楽しくネイティブの英語を習得";
+const PAGE_TITLE = "Duosub｜海外ドラマ・YouTubeを日英字幕で観る英語学習アプリ";
 const PAGE_DESCRIPTION =
-  "映画・ドラマで楽しくスマホ留学。英語・日本語の字幕を同時表示してネイティブの英語を学べるアプリ。全機能無料。";
+  "Duosubは、映画や海外ドラマ、YouTubeを日英字幕（英語字幕と日本語字幕）で同時に観られる英語学習アプリ。いつもの見方のまま、リスニングと英語耳づくりができるながら学習向け。iPhone・Android対応、無料で始められます。";
+const OG_TITLE = "映画もドラマもYouTubeも、英語と日本語の字幕で。｜Duosub";
+const OG_DESCRIPTION =
+  "英語字幕と日本語字幕を同時に表示する英語学習アプリ。海外ドラマや映画を観ながら、リスニングと英語耳づくり。iPhone・Android対応。";
+const OG_IMAGE = "/images/products/Duosub/ogp.png";
+const OG_IMAGE_ALT = "英語字幕と日本語字幕が同時に表示されたDuosubのアプリ画面";
+
+const baseMetadata = createPageMetadata({
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  path: PAGE_PATH,
+  absoluteTitle: true,
+  image: OG_IMAGE,
+  imageAlt: OG_IMAGE_ALT,
+  keywords: [
+    "Duosub",
+    "英語学習",
+    "海外ドラマ",
+    "英語字幕",
+    "日英字幕",
+    "2か国語字幕",
+    "リスニング",
+    "英語耳",
+    "ながら学習",
+    "YouTube",
+    "英語アプリ",
+  ],
+});
 
 export const metadata: Metadata = {
-  ...createPageMetadata({
-    title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
-    path: PAGE_PATH,
-    absoluteTitle: true,
-    image: "/images/products/Duosub_logo.png",
-    imageAlt: "Duosub ロゴ",
-    keywords: [
-      "Duosub",
-      "英語学習",
-      "映画",
-      "ドラマ",
-      "YouTube",
-      "2ヶ国語字幕",
-      "英語アプリ",
-    ],
-  }),
+  ...baseMetadata,
+  openGraph: { ...baseMetadata.openGraph, title: OG_TITLE, description: OG_DESCRIPTION },
+  twitter: { ...baseMetadata.twitter, title: OG_TITLE, description: OG_DESCRIPTION },
   icons: {
     icon: "/images/products/Duosub/duosub-icon.webp",
   },
 };
 
-/** base/duosub_LP.html と同一のリンク（App Store URL のエンコード含む） */
-const APP_STORE_URL =
-  "https://apps.apple.com/jp/app/id6507464076";
-const GOOGLE_PLAY_URL =
-  "https://play.google.com/store/apps/details?id=com.gows.duosub&hl=ja";
+// 下部固定バーの env(safe-area-inset-bottom) を有効にするため（このページだけ）
+export const viewport: Viewport = {
+  viewportFit: "cover",
+};
+
 const CONTACT_URL = "https://forms.gle/SZQG3Hra9YyfNSh16";
 const OFFICIAL_X_URL = "https://x.com/duosub_app";
-const OFFICIAL_INSTAGRAM_URL = "https://www.instagram.com/duosub_gows/";
-const OFFICIAL_YOUTUBE_URL =
-  "https://www.youtube.com/channel/UCEOc0Q8Z6fUpJ1ah_txyY4A";
-const VIDEO_POSTER = "/images/products/Duosub使い方_映画・ドラマ_サムネ.jpg";
-const VIDEO_SRC = "/images/products/Duosub使い方_映画・ドラマ.mp4";
-const FOOTER_ICON_URL = "/images/products/duosub-icon.webp";
+const OFFICIAL_INSTAGRAM_URL = "https://www.instagram.com/duosub_app/";
+const OFFICIAL_TIKTOK_URL = "https://www.tiktok.com/@duosub1";
 
-const LOGO_PATH = "/images/products/Duosub_logo.png";
-const SCREENSHOT_PATH = "/images/products/app-screenshot.png";
+const ICON_PATH = "/images/products/Duosub/duosub-icon.webp";
+const LOGO_PATH = "/images/products/Duosub/duosub-logo.png";
+const SCREENSHOT_PATH = "/images/products/Duosub/app-screenshot.png";
+const SCREENSHOT_YOUTUBE_PATH = "/images/products/Duosub/app-screenshot-youtube.png";
+const HOWTO_VIDEO_SRC = "/images/products/Duosub使い方_映画・ドラマ.mp4#t=4.5";
+const HOWTO_POSTER = "/images/products/Duosub/howto-poster.webp";
 
-function IconDownload({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={24}
-      height={24}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden
-    >
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-      <polyline points="7 10 12 15 17 10" />
-      <line x1="12" x2="12" y1="15" y2="3" />
-    </svg>
-  );
-}
-
-function IconPlay({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={24}
-      height={24}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden
-    >
-      <polygon points="6 3 20 12 6 21 6 3" />
-    </svg>
-  );
-}
-
-function IconSearch({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={24}
-      height={24}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden
-    >
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.3-4.3" />
-    </svg>
-  );
-}
-
-function IconHeart({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={24}
-      height={24}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden
-    >
-      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-    </svg>
-  );
-}
-
-function IconClock({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={24}
-      height={24}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden
-    >
-      <circle cx="12" cy="12" r="10" />
-      <polyline points="12 6 12 12 16 14" />
-    </svg>
-  );
-}
-
-function IconUsers({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={24}
-      height={24}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden
-    >
-      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-      <circle cx="9" cy="7" r="4" />
-      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-    </svg>
-  );
-}
-
-function IconBookOpen({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={24}
-      height={24}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden
-    >
-      <path d="M12 7v14" />
-      <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
-    </svg>
-  );
-}
-
-function IconSmartphone({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={24}
-      height={24}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden
-    >
-      <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
-      <path d="M12 18h.01" />
-    </svg>
-  );
-}
-
-function IconStar({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={24}
-      height={24}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden
-    >
-      <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
-    </svg>
-  );
-}
-
-const problemCards = [
-  {
-    key: "fun",
-    icon: IconHeart,
-    iconWrap: s.problemIconRed,
-    label: "英語を勉強したいけど楽しくない",
-  },
-  {
-    key: "desk",
-    icon: IconClock,
-    iconWrap: s.problemIconOrange,
-    label: "机で英語を勉強していても聞き取ったり喋れるようにならない",
-  },
-  {
-    key: "abroad",
-    icon: IconUsers,
-    iconWrap: s.problemIconBlue,
-    label: "留学したいけど時間やお金がない",
-  },
-  {
-    key: "video",
-    icon: IconPlay,
-    iconWrap: s.problemIconPurple,
-    label: "海外の動画をオリジナルの音声で見たいけど内容が理解できない",
-  },
+const ANNOTATIONS = [
+  { n: 1, text: "英語の字幕", x: 6, y: 40.2, side: "left" },
+  { n: 2, text: "日本語の字幕（機械翻訳）", x: 6, y: 45.2, side: "left" },
+  { n: 3, text: "いま流れているセリフ。動画に合わせて進む", x: 94, y: 52.4, side: "right" },
+  { n: 4, text: "タップでAIの和訳と、単語ごとの意味", x: 94, y: 61.6, side: "right" },
 ] as const;
 
-const contentTags = ["アベンジャーズ", "フレンズ", "ハリー・ポッター", "+数百万作品"] as const;
+type Step = { title: string; body: string };
+
+const MOVIE_STEPS: Step[] = [
+  {
+    title: "字幕を取得する",
+    body: "Duosubで作品名を検索。日本語のタイトルでも探せます。ドラマは話数を選んで、字幕モードを決めて取得します。",
+  },
+  {
+    title: "動画をPiPにして重ねる",
+    body: "いつもの動画アプリで作品を再生し、ピクチャーインピクチャーに。Duosubの画面上部の点線の枠に、動画の小窓を重ねます。",
+  },
+  {
+    title: "セリフに合う行をタップ",
+    body: "今のセリフに合う字幕の行をタップすると、その行から字幕が流れはじめます。ずれたら、また合う行をタップするだけです。",
+  },
+];
+
+const YOUTUBE_STEPS: Step[] = [
+  {
+    title: "動画を探す",
+    body: "Duosubの中で、YouTubeの動画をタイトルやチャンネル名で検索します。",
+  },
+  {
+    title: "そのまま再生",
+    body: "字幕は自動で同期します。手で合わせる必要はありません。",
+  },
+  {
+    title: "聞き逃したら、行をタップ",
+    body: "字幕の行をタップすると、動画がそのシーンに戻ります。",
+  },
+];
+
+function Steps({ steps }: { steps: Step[] }) {
+  return (
+    <ol className={`${s.ruleList} ${s.steps}`}>
+      {steps.map((step, i) => (
+        <li key={step.title} className={i === steps.length - 1 ? s.stepActive : undefined}>
+          <p className={s.stepLabel}>STEP {i + 1}</p>
+          <h4 className={s.stepTitle}>{step.title}</h4>
+          <p className={s.body}>{step.body}</p>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+const moviePanel = (
+  <div>
+    <div className={s.panelIntro}>
+      <h3 className={s.h3}>
+        <span className={s.nb}>動画アプリを小窓にして、</span>
+        <span className={s.nb}>字幕の上に重ねる。</span>
+      </h3>
+      <p className={`${s.body} ${s.panelLead}`}>
+        ピクチャーインピクチャー（PiP）は、動画を小さな窓にして、ほかのアプリの上に重ねて再生する機能です。Duosubの画面上部にある枠に動画を重ね、その下に字幕が流れます。
+      </p>
+      <div className={s.pipWrap}>
+        <PipDiagram />
+      </div>
+    </div>
+    <div className={`${s.panelGrid} ${s.panelGridMovie}`}>
+      <div>
+        <Steps steps={MOVIE_STEPS} />
+        <p className={`${s.note} ${s.stepsNoteFirst}`}>
+          スマホを横にすると、動画を左、字幕を右に並べて見られます。
+        </p>
+        <p className={`${s.note} ${s.stepsNoteNext}`}>
+          PiPに対応した動画アプリと一緒に使えます。Duosubは特定の動画配信サービスと提携しているわけではありません。
+        </p>
+      </div>
+      <div className={s.howtoVideoBlock}>
+        <p className={s.howtoVideoTitle}>実際の操作を見る（約1分45秒）</p>
+        <div className={s.howtoVideoFrame}>
+          <video
+            className={s.howtoVideo}
+            src={HOWTO_VIDEO_SRC}
+            poster={HOWTO_POSTER}
+            controls
+            preload="metadata"
+            playsInline
+            width={720}
+            height={1280}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+const youtubePanel = (
+  <div>
+    <div className={s.panelIntro}>
+      <h3 className={s.h3}>
+        <span className={s.nb}>Duosubの中で、</span>
+        <span className={s.nb}>そのまま再生。</span>
+      </h3>
+      <p className={`${s.body} ${s.panelLead}`}>
+        隙間時間に、好きな海外YouTuberの動画を。字幕は動画に合わせて自動で流れます。
+      </p>
+    </div>
+    <div className={`${s.panelGrid} ${s.panelGridYoutube}`}>
+      <div className={s.ytShot}>
+        <Image
+          src={SCREENSHOT_YOUTUBE_PATH}
+          alt="DuosubでYouTubeを再生中の画面。動画の中の字幕と、下の再生中の行が同じセリフになっている"
+          width={1378}
+          height={1960}
+          quality={85}
+          sizes="(min-width: 1024px) 320px, min(80vw, 320px)"
+          className={s.shotImg}
+        />
+      </div>
+      <div className={s.ytSteps}>
+        <Steps steps={YOUTUBE_STEPS} />
+        <p className={`${s.note} ${s.stepsNoteFirst}`}>
+          英語字幕（自動生成を含む）が付いている動画で使えます。
+        </p>
+      </div>
+    </div>
+  </div>
+);
 
 export default function DuosubPage() {
   return (
     <>
+      {/* ヒーロー動画のポスターを LCP として先読みする（React が head へ移す） */}
+      <link rel="preload" as="image" href={HERO_POSTER} fetchPriority="high" />
       <JsonLd
         data={[
           webPageJsonLd({ name: PAGE_TITLE, description: PAGE_DESCRIPTION, path: PAGE_PATH }),
@@ -282,370 +219,286 @@ export default function DuosubPage() {
             operatingSystem: "iOS, Android",
             applicationCategory: "EducationalApplication",
             downloadUrl: [APP_STORE_URL, GOOGLE_PLAY_URL],
-            image: "/images/products/Duosub_logo.png",
-            offers: { price: "0", description: "基本機能は無料。プレミアムプランは月額300円。" },
+            image: ICON_PATH,
+            offers: {
+              price: "0",
+              description:
+                "無料（チケット制）。チケット無制限プランは月額300円（税込）、初回登録の方は最初の1か月無料。",
+            },
           }),
+          faqPageJsonLd(DUOSUB_FAQS),
         ]}
       />
       <div className={s.root}>
-      <header className={s.header}>
-        <div className={s.headerInner}>
-          <div className={s.headerLogo}>
-            <Image
-              src={LOGO_PATH}
-              alt="Duosub"
-              width={200}
-              height={60}
-              className={s.headerLogoImg}
-              priority
-            />
-          </div>
-          <div className={s.headerRight}>
-            <div className={s.headerCopy}>
-              <p className={s.headerCopyMain}>今すぐ無料でダウンロード！</p>
-              <p className={s.headerCopySub}>全機能無料 • 広告なしは月額300円</p>
-            </div>
-            <div className={s.headerStoreRow}>
-              <a
-                href={APP_STORE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={s.headerStoreLink}
-              >
-                <span className={s.headerStoreBtn}>
-                  <IconDownload className={s.iconSm} />
-                  App Store
-                </span>
-              </a>
-              <a
-                href={GOOGLE_PLAY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={s.headerStoreLink}
-              >
-                <span className={s.headerStoreBtn}>
-                  <IconDownload className={s.iconSm} />
-                  Google Play
-                </span>
-              </a>
-            </div>
-            <a
-              href={CONTACT_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={s.headerContactBtn}
-            >
-              お問い合わせ
-            </a>
-          </div>
-        </div>
-      </header>
-
-      <section className={s.heroSection}>
-        <div className={s.heroGrid}>
-          <div className={s.heroCol}>
-            <div className={s.heroIntro}>
-              <h1 className={s.heroH1}>
-                海外コンテンツで学ぶ
-                <br />
-                <span className={s.textGreen600}>本物の英語</span>
-              </h1>
-              <p className={s.heroLead}>
-                海外動画で
-                <br />
-                <span className={s.heroLeadStrong}>楽しくネイティブの英語を習得</span>
-              </p>
-            </div>
-            <div className={s.heroCtaRow}>
-              <a href="#download-section" className={s.heroCta}>
-                <IconDownload className={s.iconMd} />
-                無料で今すぐ始める
-              </a>
-            </div>
-            <div className={s.heroTagsBlock}>
-              <p className={s.mutedLabel}>人気コンテンツ</p>
-              <div className={s.tagRow}>
-                {contentTags.map((t) => (
-                  <span key={t} className={s.pill}>
-                    {t}
-                  </span>
-                ))}
-              </div>
-              <p className={s.mutedLabel}>YouTubeの全動画も視聴可能</p>
-            </div>
-          </div>
-
-          <div className={s.heroVisualCol}>
-            <div className={s.heroPosterGrid} aria-hidden>
-              {Array.from({ length: 9 }).map((_, i) => (
-                <div key={i} className={s.heroPosterCell}>
-                  <IconPlay className={s.heroPosterPlay} />
-                </div>
-              ))}
-            </div>
-            <div className={s.heroPhoneWrap}>
+        <header className={s.header}>
+          <div className={`${s.container} ${s.headerInner}`}>
+            <div className={s.headerLogo}>
               <Image
-                src={SCREENSHOT_PATH}
-                alt="Duosub アプリのスクリーンショット - 映画/ドラマの英語字幕と日本語字幕が同時表示"
-                width={400}
-                height={800}
-                className={s.heroPhoneImg}
+                src={LOGO_PATH}
+                alt="Duosub"
+                width={901}
+                height={250}
+                sizes="101px"
+                className={s.headerLogoImg}
                 priority
               />
             </div>
-            <div className={`${s.floatingCard} ${s.floatingBounce}`}>
-              <span className={s.floatingDot} />
-              <span className={s.floatingText}>日英同時字幕</span>
-            </div>
-            <div className={`${s.floatingCard} ${s.floatingPulse} ${s.floatingBottom}`}>
-              <IconSearch className={s.iconSearchBlue} />
-              <span className={s.floatingText}>辞書機能で即座に確認</span>
-            </div>
+            <StoreBadges size={40} className={s.headerBadges} />
           </div>
-        </div>
-      </section>
+        </header>
 
-      <section className={s.statsSection}>
-        <div className={s.statsInner}>
-          <p className={s.statsIntro}>多くの方に選ばれています</p>
-          <div className={s.statsGrid}>
-            <div className={s.statCell}>
-              <div className={s.statValue}>数百万作品</div>
-              <div className={s.statSub}>映画・ドラマ</div>
-            </div>
-            <div className={s.statCell}>
-              <div className={s.statValue}>YouTubeにも対応</div>
-              <div className={s.statSub} />
-            </div>
-            <div className={s.statCell}>
-              <div className={s.statValue}>30日</div>
-              <div className={s.statSub}>で効果実感</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className={s.sectionPad}>
-        <h2 className={s.h2Center}>こんなお悩みありませんか？</h2>
-        <div className={s.problemGrid}>
-          {problemCards.map(({ key, icon: Icon, iconWrap, label }) => (
-            <div key={key} className={s.problemCard}>
-              <div className={s.problemCardInner}>
-                <div className={`${s.problemIconCircle} ${iconWrap}`}>
-                  <Icon className={s.problemIcon} />
-                </div>
-                <p className={s.problemText}>{label}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className={s.solutionBand}>
-        <div className={s.solutionInner}>
-          <h2 className={s.h2CenterDark}>
-            そのお悩み、<span className={s.textGreen600}>Duosub</span>で解決できます！
-          </h2>
-          <div className={s.solutionGrid}>
-            <div className={s.solutionStack}>
-              <div className={s.solutionCard}>
-                <div className={s.solutionCardHead}>
-                  <div className={`${s.solutionIconCircle} ${s.solutionIconGreen}`}>
-                    <IconPlay className={s.solutionIconSvg} />
-                  </div>
-                  <h3 className={s.solutionCardTitle}>リアルな英会話</h3>
-                </div>
-                <p className={s.solutionCardBody}>
-                  吹替ではないオリジナルの音声を聞きながら
+        <main>
+          {/* ===== 1. ファーストビュー ===== */}
+          <section className={s.hero}>
+            <div className={`${s.container} ${s.heroGrid}`}>
+              <div className={s.heroCopy}>
+                <h1 className={s.h1}>
+                  <span className={s.nb}>映画もドラマも</span>
+                  <span className={s.nb}>YouTubeも、</span>
                   <br />
-                  ネイティブのリアルな英会話で楽しく英語学習ができる！
+                  <span className={s.nb}>
+                    <em className={s.em}>英語と日本語の字幕</em>で。
+                  </span>
+                </h1>
+                <p className={`${s.lead} ${s.heroLead}`}>
+                  <span className={s.nb}>2か国語の字幕を同時に表示。</span>
+                </p>
+                <p className={s.heroSupport}>
+                  iPhone・Android
+                </p>
+                <StoreBadges align="hero" className={s.heroBadges} />
+                <p className={s.heroFree}>
+                  <span className={s.markAccent}>無料で始められます</span>
                 </p>
               </div>
-              <div className={s.solutionCard}>
-                <div className={s.solutionCardHead}>
-                  <div className={`${s.solutionIconCircle} ${s.solutionIconBlue}`}>
-                    <IconBookOpen className={s.solutionIconSvg} />
-                  </div>
-                  <h3 className={s.solutionCardTitle}>日英同時字幕</h3>
-                </div>
-                <p className={s.solutionCardBody}>
-                  英語の字幕と日本語の字幕が同時に見えるから
-                  <br />
-                  英語初心者でも安心！
-                </p>
+              <div className={s.heroVisual}>
+                <HeroVideo />
               </div>
             </div>
-            <div className={s.solutionImgCol}>
-              <Image
-                src={SCREENSHOT_PATH}
-                alt="Duosub アプリの機能紹介"
-                width={300}
-                height={600}
-                className={s.solutionImg}
+          </section>
+
+          {/* ===== 2. 画面の見方 ===== */}
+          <section className={`${s.section} ${s.bgAlt}`} aria-labelledby="ds-screen">
+            <div className={s.container}>
+              <div className={s.sectionHead}>
+                <h2 id="ds-screen" className={s.h2}>
+                  <span className={s.nb}>上に英語、</span>
+                  <span className={s.nb}>下に日本語。</span>
+                </h2>
+                <p className={`${s.lead} ${s.sectionLead}`}>
+                  英語を聞きながら、意味は下の行で確認。
+                  <br />
+                  内容も英語も、置いていかない。
+                </p>
+              </div>
+
+              <div className={s.shotArea}>
+                <div className={s.shotWrap}>
+                  <div className={s.shotImgBox}>
+                    <Image
+                      src={SCREENSHOT_PATH}
+                      alt="Duosubの字幕画面。上に動画、下に英語と日本語の字幕が行ごとに並び、再生中の行が緑の線で挟まれている"
+                      width={1378}
+                      height={2674}
+                      quality={85}
+                      sizes="(min-width: 1024px) 360px, min(80vw, 320px)"
+                      className={s.shotImg}
+                    />
+                    {ANNOTATIONS.map((a) => (
+                      <span
+                        key={a.n}
+                        className={`${s.marker} ${s.shotMarker}`}
+                        style={{ "--x": `${a.x}%`, "--y": `${a.y}%` } as CSSProperties}
+                        aria-hidden="true"
+                      >
+                        {a.n}
+                      </span>
+                    ))}
+                  </div>
+                  <ol className={s.annoList}>
+                    {ANNOTATIONS.map((a) => (
+                      <li
+                        key={a.n}
+                        data-side={a.side}
+                        style={{ "--x": `${a.x}%`, "--y": `${a.y}%` } as CSSProperties}
+                      >
+                        <span className={s.annoDot} aria-hidden="true" />
+                        <span className={s.annoLine} aria-hidden="true" />
+                        <span className={s.annoLabel}>
+                          <span className={s.annoNum} aria-hidden="true">
+                            {a.n}
+                          </span>
+                          <span className={s.annoBody}>{a.text}</span>
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+                <p className={s.shotNote}>英語だけの字幕モードも選べます。</p>
+              </div>
+            </div>
+          </section>
+
+          {/* ===== 3. 使い方 ===== */}
+          <section className={`${s.section} ${s.bgBase}`} aria-labelledby="ds-howto">
+            <div className={s.container}>
+              <div className={s.sectionHead}>
+                <h2 id="ds-howto" className={s.h2}>
+                  <span className={s.nb}>動画はいつものアプリで。</span>
+                  <span className={s.nb}>字幕はDuosubで。</span>
+                </h2>
+                <p className={`${s.lead} ${s.sectionLead}`}>
+                  <span className={s.nb}>映画・ドラマとYouTubeで、使い方が少し違います。</span>
+                  <span className={s.nb}>iPhoneでもAndroidでも、手順は同じです。</span>
+                </p>
+              </div>
+              <HowToTabs
+                tabs={[
+                  { key: "movie", label: "映画・ドラマ", content: moviePanel },
+                  { key: "youtube", label: "YouTube", content: youtubePanel },
+                ]}
               />
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      <section className={s.sectionPad}>
-        <h2 className={s.h2Center}>Duosubの特徴</h2>
-        <div className={s.featureGrid}>
-          <div className={s.featureCell}>
-            <div className={`${s.featureIconCircle} ${s.featureIconGreen}`}>
-              <IconSmartphone className={s.featureIconSvg} />
-            </div>
-            <h3 className={s.featureTitle}>いつでもどこでも学習</h3>
-            <p className={s.featureBody}>
-              スマートフォンがあれば、通勤時間や休憩時間など、いつでもどこでも英語学習が可能です。
-            </p>
-          </div>
-          <div className={s.featureCell}>
-            <div className={`${s.featureIconCircle} ${s.featureIconBlue}`}>
-              <IconStar className={s.featureIconSvg} />
-            </div>
-            <h3 className={s.featureTitle}>豊富なコンテンツライブラリ</h3>
-            <p className={s.featureBody}>
-              不朽の名作から最新作まで幅広いジャンルの映画・ドラマをご用意。お気に入りの作品で楽しく学習できます。
-            </p>
-          </div>
-          <div className={s.featureCell}>
-            <div className={`${s.featureIconCircle} ${s.featureIconPurple}`}>
-              <IconSearch className={s.featureIconSvg} />
-            </div>
-            <h3 className={s.featureTitle}>内蔵辞書機能</h3>
-            <p className={s.featureBody}>
-              単語の意味もその場で確認。学習の流れを止めることなくボキャブラリーを増やせます。
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className={s.sectionPad}>
-        <h2 className={s.h2Center}>シンプルな料金プラン</h2>
-        <div className={s.planGrid}>
-          <div className={s.planCard}>
-            <div className={s.planCardPad}>
-              <h3 className={s.planName}>無料プラン</h3>
-              <div className={s.planPrice}>
-                ¥0<span className={s.planPeriod}>/月</span>
+          {/* ===== 4. 料金 ===== */}
+          <section className={`${s.section} ${s.bgAlt}`} aria-labelledby="ds-price">
+            <div className={s.container}>
+              <div className={s.sectionHead}>
+                <h2 id="ds-price" className={s.h2}>
+                  料金
+                </h2>
+                <p className={`${s.lead} ${s.sectionLead}`}>
+                  <span className={s.nb}>字幕を取得するときに、チケットを使います。</span>
+                  <span className={s.nb}>チケットは、動画広告を1本見るたびに1枚もらえます。</span>
+                </p>
               </div>
-              <ul className={s.planList}>
-                <li className={s.planRow}>
-                  <span className={s.planCheckOk}>✓</span>
-                  全ての映画・ドラマ・YouTubeの字幕が利用可能
-                </li>
-                <li className={s.planRow}>
-                  <span className={s.planCheckOk}>✓</span>
-                  日英同時字幕機能
-                </li>
-                <li className={s.planRow}>
-                  <span className={s.planCheckOk}>✓</span>
-                  内蔵辞書機能
-                </li>
-                <li className={`${s.planRow} ${s.planRowMuted}`}>
-                  <span className={s.planCheckNg}>×</span>
-                  広告表示が必要
-                </li>
-              </ul>
-              <a href="#download-section" className={s.planBtnGray}>
-                無料でダウンロード
-              </a>
-            </div>
-          </div>
-          <div className={`${s.planCard} ${s.planCardPremium}`}>
-            <div className={s.planBadge}>おすすめ</div>
-            <div className={s.planCardPad}>
-              <h3 className={s.planName}>プレミアムプラン</h3>
-              <div className={`${s.planPrice} ${s.planPriceGreen}`}>
-                ¥300<span className={s.planPeriod}>/月</span>
+
+              <div className={s.plans}>
+                <article className={s.planCard}>
+                  <h3 className={s.planName}>
+                    <span className={s.markAccent}>無料</span>
+                  </h3>
+                  <p className={s.price}>
+                    <span className={s.priceNum}>0</span>
+                    <span className={s.priceUnit}>円</span>
+                  </p>
+                  <ul className={`${s.ruleList} ${s.planList}`}>
+                    <li>最初にチケット3枚</li>
+                    <li>
+                      字幕1本の取得に使うチケット
+                      <span className={s.ticketRow}>
+                        <span className={s.ticketItem}>
+                          <span className={s.ticketLabel}>英語のみ</span>
+                          <span className={s.ticketNum}>1枚</span>
+                        </span>
+                        <span className={s.ticketItem}>
+                          <span className={s.ticketLabel}>英語＋日本語</span>
+                          <span className={s.ticketNum}>3枚</span>
+                        </span>
+                      </span>
+                      <span className={`${s.note} ${s.ticketNote}`}>映画・ドラマもYouTubeも同じ</span>
+                    </li>
+                    <li>30〜60秒の動画広告を1本見ると、チケット1枚</li>
+                    <li>取得した字幕を同じモードで見直すときは、チケット不要</li>
+                    <li>行ごとのAI和訳は、チケットを使いません</li>
+                  </ul>
+                  <p className={`${s.note} ${s.planNote}`}>
+                    最初の3枚で、英語＋日本語の字幕なら1本分です。
+                    <span className={s.planNoteStrong}>無料でも、勝手に流れる広告はありません。</span>
+                    広告は、チケットがほしいときに自分で選んで見るものだけです。
+                  </p>
+                </article>
+
+                <article className={s.planCard}>
+                  <h3 className={s.planName}>チケット無制限プラン</h3>
+                  <p className={s.price}>
+                    <span className={s.priceUnit}>月額</span>
+                    <span className={s.priceNum}>300</span>
+                    <span className={s.priceUnit}>円（税込）</span>
+                  </p>
+                  <p className={s.trialLabel}>
+                    <span className={s.markAccent}>初回登録の方は、最初の1か月無料</span>
+                  </p>
+                  <ul className={`${s.ruleList} ${s.planList}`}>
+                    <li>チケットなしで字幕を取得できる</li>
+                    <li>チケットのために広告を見る必要がない</li>
+                  </ul>
+                  <p className={`${s.note} ${s.planNote}`}>
+                    字幕モードを選ぶ画面から申し込めます。無料期間が終わると、月額300円（税込）で自動更新されます。解約はApp Store / Google Playのサブスクリプション設定からできます。
+                  </p>
+                </article>
               </div>
-              <ul className={s.planList}>
-                <li className={s.planRow}>
-                  <span className={s.planCheckOk}>✓</span>
-                  全ての映画・ドラマ・YouTubeの字幕が利用可能
-                </li>
-                <li className={s.planRow}>
-                  <span className={s.planCheckOk}>✓</span>
-                  日英同時字幕機能
-                </li>
-                <li className={s.planRow}>
-                  <span className={s.planCheckOk}>✓</span>
-                  内蔵辞書機能
-                </li>
-                <li className={`${s.planRow} ${s.planRowGreenBold}`}>
-                  <span className={s.planCheckOk}>✓</span>
-                  広告なしで快適学習
-                </li>
-              </ul>
-              <a href="#download-section" className={s.planBtnGreen}>
-                1ヶ月無料で試す
-              </a>
+
+              <StoreBadges className={s.priceBadges} />
             </div>
-          </div>
-        </div>
-        <p className={s.planFootnote}>※プレミアムプランはいつでもキャンセル可能です</p>
-      </section>
+          </section>
 
-      <section className={s.sectionPad}>
-        <h2 className={s.h2Center}>使い方はとても簡単！</h2>
-        <div className={s.videoWrap}>
-          <div className={s.videoFrame}>
-            <video controls className={s.video} poster={VIDEO_POSTER} preload="metadata">
-              <source src={VIDEO_SRC} type="video/mp4" />
-              お使いのブラウザは動画の再生に対応していません。
-            </video>
-          </div>
-        </div>
-      </section>
+          {/* ===== 5. よくある質問 ===== */}
+          <section className={`${s.section} ${s.bgBase}`} aria-labelledby="ds-faq">
+            <div className={s.container}>
+              <div className={s.sectionHead}>
+                <h2 id="ds-faq" className={s.h2}>
+                  よくある質問
+                </h2>
+                <p className={s.definition}>
+                  Duosubは、映画・ドラマ・YouTubeの英語字幕と日本語字幕を同時に表示できる、iPhone・Android向けの英語学習アプリです。
+                </p>
+              </div>
+              <div className={s.faqList}>
+                {DUOSUB_FAQS.map((faq) => (
+                  <details key={faq.q} className={s.faqItem}>
+                    <summary className={s.faqQ}>
+                      <h3 className={s.faqQText}>{faq.q}</h3>
+                      <span className={s.faqMark} aria-hidden="true" />
+                    </summary>
+                    <p className={s.faqA}>{faq.a}</p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          </section>
 
-      <section id="download-section" className={s.downloadBand}>
-        <div className={s.downloadInner}>
-          <h2 className={s.downloadTitle}>今すぐDuosubで英語学習を始めよう！</h2>
-          <p className={s.downloadSub}>
-            無料で全機能が使える！まずはダウンロードして体験してみましょう
-          </p>
-          <div className={s.downloadBtns}>
-            <a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer" className={s.downloadBtn}>
-              <IconDownload className={s.iconMd} />
-              App Store
-            </a>
-            <a
-              href={GOOGLE_PLAY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={s.downloadBtn}
-            >
-              <IconDownload className={s.iconMd} />
-              Google Play
-            </a>
-          </div>
-        </div>
-      </section>
+          {/* ===== 6. 最終CTA ===== */}
+          <section className={s.finalCta} aria-labelledby="ds-cta">
+            <div className={s.container}>
+              <Image src={ICON_PATH} alt="" width={64} height={64} className={s.ctaIcon} />
+              <h2 id="ds-cta" className={s.h2}>
+                <span className={s.nb}>今夜の1本から、</span>
+                <span className={s.nb}>字幕を2つに。</span>
+              </h2>
+              <p className={`${s.note} ${s.ctaSub}`}>
+                累計ダウンロード数 約5,000（2026年10月時点・iOS／Android合計）。iPhone・Androidで使えます。
+              </p>
+              <StoreBadges className={s.ctaBadges} />
+            </div>
+          </section>
+        </main>
 
-      <LpProductFooter
-        iconSrc={FOOTER_ICON_URL}
-        iconAlt="Duosub Icon"
-        productName="Duosub"
-        tagline="映画・ドラマで楽しく英語学習"
-        links={[
-          { href: "/company-info", label: "会社概要" },
-          { href: "/privacy", label: "プライバシーポリシー" },
-          {
-            href: "/service/products/duosub/terms",
-            label: "利用規約",
-          },
-        ]}
-        appStoreUrl={APP_STORE_URL}
-        googlePlayUrl={GOOGLE_PLAY_URL}
-        socialNavLabel="Duosub公式SNS"
-        social={[
-          { href: OFFICIAL_X_URL, ariaLabel: "Duosub公式X", icon: "x" },
-          { href: OFFICIAL_INSTAGRAM_URL, ariaLabel: "Duosub公式Instagram", icon: "instagram" },
-          { href: OFFICIAL_YOUTUBE_URL, ariaLabel: "Duosub公式YouTube", icon: "youtube" },
-        ]}
-      />
-    </div>
+        <LpProductFooter
+          variant="duosub"
+          iconSrc={ICON_PATH}
+          iconAlt="Duosub Icon"
+          productName="Duosub"
+          tagline="海外の動画を、日英同時字幕で。"
+          links={[
+            { href: "/company-info", label: "会社概要" },
+            { href: "/privacy", label: "プライバシーポリシー" },
+            { href: "/service/products/duosub/terms", label: "利用規約" },
+            { href: CONTACT_URL, label: "お問い合わせ" },
+          ]}
+          socialNavLabel="Duosub公式SNS"
+          social={[
+            { href: OFFICIAL_X_URL, ariaLabel: "Duosub公式X", icon: "x" },
+            { href: OFFICIAL_INSTAGRAM_URL, ariaLabel: "Duosub公式Instagram", icon: "instagram" },
+            { href: OFFICIAL_TIKTOK_URL, ariaLabel: "Duosub公式TikTok", icon: "tiktok" },
+          ]}
+          legalNote="Google Play および Google Play ロゴは Google LLC の商標です。"
+        />
+
+        <StickyStoreBar />
+        <div className={s.barSpacer} aria-hidden="true" />
+      </div>
     </>
   );
 }

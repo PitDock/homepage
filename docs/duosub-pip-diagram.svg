@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 760" width="520" height="760" role="img" aria-labelledby="pipTitle pipDesc" font-family="'Noto Sans JP', 'Inter', sans-serif">
+  <!-- Duosub LP / PiP図解 リファレンス（docs/duosub-lp-design.md §6.3） -->
+  <!-- 実装時は TSX にインライン化し、fill/stroke の色は CSS 変数（ds- で始まるトークン）に置き換える -->
+  <title id="pipTitle">ピクチャーインピクチャーの使い方の図</title>
+  <desc id="pipDesc">スマホのDuosub画面の上部にある緑の点線の枠に、動画アプリの小窓を重ねる。その下に英語と日本語の字幕が流れる。</desc>
+
+  <!-- ===== スマホ外形 ===== -->
+  <rect x="10" y="10" width="330" height="740" rx="52" fill="#070707" stroke="#5C5E5C" stroke-width="2"/>
+  <rect x="22" y="22" width="306" height="716" rx="42" fill="#000000"/>
+  <!-- ノッチ -->
+  <rect x="125" y="22" width="100" height="22" rx="11" fill="#070707"/>
+
+  <!-- ===== PiP の設置枠（アプリ実装どおり：緑の点線・角丸・16:9） ===== -->
+  <rect x="38" y="66" width="274" height="154" rx="14" fill="none" stroke="#06C168" stroke-width="2" stroke-dasharray="7 6"/>
+
+  <!-- ===== 動画アプリの小窓（PiP）：枠の内側に 6px 余らせて重ね、点線が見えるようにする ===== -->
+  <rect x="44" y="72" width="262" height="142" rx="10" fill="#2C302C"/>
+  <!-- 再生アイコン（抽象。実在サービスのUIは描かない） -->
+  <path d="M164 125 L164 161 L196 143 Z" fill="#E7E7E7" fill-opacity="0.85"/>
+  <!-- シークバー -->
+  <rect x="58" y="198" width="234" height="3" rx="1.5" fill="#E7E7E7" fill-opacity="0.25"/>
+  <rect x="58" y="198" width="96" height="3" rx="1.5" fill="#E7E7E7" fill-opacity="0.7"/>
+
+  <!-- ===== 字幕の行（スクショの行デザインに合わせる） ===== -->
+  <!-- 行1 -->
+  <g>
+    <circle cx="50" cy="268" r="8" fill="none" stroke="#9B9B9B" stroke-width="1.6"/>
+    <path d="M50 263 V268 L53.5 270.5" fill="none" stroke="#9B9B9B" stroke-width="1.6" stroke-linecap="round"/>
+    <text x="66" y="273" font-family="Inter, sans-serif" font-size="13" fill="#9B9B9B">0:00:08</text>
+    <text x="40" y="306" font-size="14" fill="#E7E7E7" letter-spacing="0.6">EVERY PERSON, PLACE OR THING…</text>
+    <text x="40" y="330" font-size="13" fill="#CFD0CF">私たちが知っているあらゆる人、場所…</text>
+    <text x="300" y="318" font-size="16" font-weight="700" fill="#06C168">…</text>
+  </g>
+  <line x1="22" y1="358" x2="328" y2="358" stroke="#2C2E2C" stroke-width="1"/>
+
+  <!-- 行2：再生中（上下を緑の線で挟む） -->
+  <line x1="22" y1="370" x2="328" y2="370" stroke="#06C168" stroke-width="2"/>
+  <g>
+    <circle cx="50" cy="398" r="8" fill="none" stroke="#9B9B9B" stroke-width="1.6"/>
+    <path d="M50 393 V398 L53.5 400.5" fill="none" stroke="#9B9B9B" stroke-width="1.6" stroke-linecap="round"/>
+    <text x="66" y="403" font-family="Inter, sans-serif" font-size="13" fill="#9B9B9B">0:00:12</text>
+    <text x="40" y="436" font-size="15" fill="#E7E7E7" letter-spacing="0.6">EVERY MEMORY WE MAKE.</text>
+    <text x="40" y="462" font-size="14" fill="#CFD0CF">私たちが作るすべての思い出。</text>
+    <text x="300" y="450" font-size="16" font-weight="700" fill="#06C168">…</text>
+  </g>
+  <line x1="22" y1="492" x2="328" y2="492" stroke="#06C168" stroke-width="2"/>
+
+  <!-- 行3 -->
+  <g>
+    <circle cx="50" cy="526" r="8" fill="none" stroke="#9B9B9B" stroke-width="1.6"/>
+    <path d="M50 521 V526 L53.5 528.5" fill="none" stroke="#9B9B9B" stroke-width="1.6" stroke-linecap="round"/>
+    <text x="66" y="531" font-family="Inter, sans-serif" font-size="13" fill="#9B9B9B">0:00:14</text>
+    <text x="40" y="564" font-size="14" fill="#E7E7E7" letter-spacing="0.6">IT'S HERE.</text>
+    <text x="40" y="588" font-size="13" fill="#CFD0CF">ここにあります。</text>
+    <text x="300" y="576" font-size="16" font-weight="700" fill="#06C168">…</text>
+  </g>
+  <line x1="22" y1="616" x2="328" y2="616" stroke="#2C2E2C" stroke-width="1"/>
+
+  <!-- 下部バー（Back / 一時停止） -->
+  <text x="40" y="690" font-size="14" fill="#9B9B9B">← Back</text>
+  <rect x="296" y="676" width="4" height="16" rx="1" fill="#9B9B9B"/>
+  <rect x="304" y="676" width="4" height="16" rx="1" fill="#9B9B9B"/>
+
+  <!-- ===== 引き出し線とラベル（LPのメインカラー #4BD254。矢印は使わない） ===== -->
+  <!-- ラベルA：動画アプリ（PiP） -->
+  <circle cx="306" cy="110" r="4" fill="#4BD254"/>
+  <polyline points="306,110 372,110" fill="none" stroke="#4BD254" stroke-width="1.5"/>
+  <text x="380" y="106" font-size="22" font-weight="700" fill="#E7E7E7">動画アプリ</text>
+  <text class="pipSubLabel" x="380" y="136" font-size="17" fill="#9B9B9B">PiPの小窓</text>
+
+  <!-- ラベルB：Duosub（字幕） -->
+  <circle cx="328" cy="430" r="4" fill="#4BD254"/>
+  <polyline points="328,430 372,430" fill="none" stroke="#4BD254" stroke-width="1.5"/>
+  <text x="380" y="426" font-size="22" font-weight="700" fill="#E7E7E7">Duosub</text>
+  <text class="pipSubLabel" x="380" y="456" font-size="17" fill="#9B9B9B">英語と日本語の字幕</text>
+</svg>
