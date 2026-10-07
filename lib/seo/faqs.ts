@@ -112,8 +112,8 @@ export const FAQ_GROUPS = [
 
 /**
  * /contact（無料相談ページ）専用FAQ。
- * ルート layout が SITE_FAQS を元に FAQPage の JSON-LD を全ページへ出力しているため、
- * こちらは意図的に構造化データ化せず、HTML表示のみに使用する（FAQPage の重複回避）。
+ * サイト共通FAQ（SITE_FAQS）の FAQPage JSON-LD はトップページのみに出力している。
+ * こちらは構造化データ化せず、HTML表示のみに使用する。
  */
 export const CONTACT_FAQS = [
   {

@@ -3,7 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { JsonLd } from "./components/JsonLd";
 import { createPageMetadata } from "../lib/seo/metadata";
-import { faqPageJsonLd, organizationJsonLd, webSiteJsonLd } from "../lib/seo/json-ld";
+import { organizationJsonLd, webSiteJsonLd } from "../lib/seo/json-ld";
 import {
   DEFAULT_OG_IMAGE,
   SITE_DESCRIPTION,
@@ -64,7 +64,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
           rel="stylesheet"
         />
-        <JsonLd data={[organizationJsonLd(), webSiteJsonLd(), faqPageJsonLd()]} />
+        <JsonLd data={[organizationJsonLd(), webSiteJsonLd()]} />
       </head>
       <body>
         {children}

@@ -4,9 +4,11 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Nav from "./components/Nav";
 import FaqAccordion from "./components/FaqAccordion";
 import Footer from "./components/Footer";
+import { JsonLd } from "./components/JsonLd";
 import s from "./page.module.css";
 // ニュースデータは lib/data/news.ts で一元管理。/news ページでも同データを参照している。
 import { news } from "../lib/data/news";
+import { faqPageJsonLd } from "../lib/seo/json-ld";
 import type { NewsEntry } from "../lib/data/news";
 
 const CONTACT_URL = "/contact";
@@ -536,6 +538,8 @@ export default function Home() {
 
       {/* FAQ */}
       <section className={s.section} id="faq">
+        {/* FAQPage の構造化データはトップページのみに出力する */}
+        <JsonLd data={faqPageJsonLd()} />
         <div className="container">
           <h2 className={`${s.sectionTitle} ${s.reveal}`}>よくあるご質問</h2>
           <div className={s.faqWrap}>
