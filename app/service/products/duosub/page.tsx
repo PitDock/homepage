@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 
 /** base/duosub_LP.html と同一のリンク（App Store URL のエンコード含む） */
 const APP_STORE_URL =
-  "https://apps.apple.com/au/app/duosub-%E6%98%A0%E7%94%BB-%E3%83%89%E3%83%A9%E3%83%9E%E3%81%A7%E8%8B%B1%E8%AA%9E%E5%AD%B8%E7%BF%92/id6507464076";
+  "https://apps.apple.com/jp/app/id6507464076";
 const GOOGLE_PLAY_URL =
   "https://play.google.com/store/apps/details?id=com.gows.duosub&hl=ja";
 const CONTACT_URL = "https://forms.gle/SZQG3Hra9YyfNSh16";
