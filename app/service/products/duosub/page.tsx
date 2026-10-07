@@ -77,9 +77,9 @@ const HOWTO_POSTER = "/images/products/Duosub/howto-poster.webp";
 
 const ANNOTATIONS = [
   { n: 1, text: "英語の字幕", x: 6, y: 40.2, side: "left" },
-  { n: 2, text: "日本語の字幕（機械翻訳）", x: 6, y: 45.2, side: "left" },
+  { n: 2, text: "日本語の字幕（AI翻訳）", x: 6, y: 45.2, side: "left" },
   { n: 3, text: "いま流れているセリフ。動画に合わせて進む", x: 94, y: 52.4, side: "right" },
-  { n: 4, text: "タップでAIの和訳と、単語ごとの意味", x: 94, y: 61.6, side: "right" },
+  { n: 4, text: "「…」タップでAI辞書が単語ごとの意味を表示", x: 94, y: 61.6, side: "right" },
 ] as const;
 
 type Step = { title: string; body: string };
