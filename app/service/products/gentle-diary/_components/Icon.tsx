@@ -19,24 +19,15 @@ export type IconName =
   | "check"
   | "minus"
   | "mapOff"
-  | "homeLock"
-  | "peopleCheck"
-  | "clockTrash"
   | "trash"
   | "person"
   | "arrowRight"
   | "lockCheck"
   | "linkOff"
-  | "phonePocket"
-  | "moonClock"
-  | "mailOpen"
   | "phone"
   | "phonePerson"
   | "warning"
-  | "document"
-  | "relation"
-  | "switchDirection"
-  | "distance";
+  | "document";
 
 const GLYPHS: Record<IconName, ReactNode> = {
   // 目に斜線（D1「見えません」・20〜22pxまで。大きく使わない）
@@ -87,33 +78,6 @@ const GLYPHS: Record<IconName, ReactNode> = {
       <line x1="4" y1="20.5" x2="20" y2="3.5" />
     </>
   ),
-  // 家＋鍵（盾・金庫は使わない）
-  homeLock: (
-    <>
-      <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9.5Z" />
-      <rect x="9.4" y="13.2" width="5.2" height="4.6" rx="1.1" />
-      <path d="M10.7 13.2v-1.1a1.3 1.3 0 0 1 2.6 0v1.1" />
-    </>
-  ),
-  // 人物2つ＋チェック（握手は40pxで潰れるため使わない）
-  peopleCheck: (
-    <>
-      <circle cx="7.6" cy="8.6" r="2.6" />
-      <path d="M3.4 17.6c0-2.4 1.9-4.2 4.2-4.2" />
-      <circle cx="16.4" cy="8.6" r="2.6" />
-      <path d="M20.6 17.6c0-2.4-1.9-4.2-4.2-4.2" />
-      <polyline points="9.4,17.4 11.4,19.4 14.8,15.6" />
-    </>
-  ),
-  // 時計＋ゴミ箱（砂時計・タイマーは使わない）
-  clockTrash: (
-    <>
-      <circle cx="9.8" cy="9.8" r="6.3" />
-      <polyline points="9.8,6.2 9.8,9.8 12.4,11.2" />
-      <line x1="14.8" y1="17" x2="21.5" y2="17" />
-      <path d="M16.2 17l.7 4.2h3.4l.7-4.2" />
-    </>
-  ),
   trash: (
     <>
       <line x1="4" y1="7" x2="20" y2="7" />
@@ -151,32 +115,6 @@ const GLYPHS: Record<IconName, ReactNode> = {
       <line x1="12.6" y1="21.4" x2="12.6" y2="18.8" />
     </>
   ),
-  // ポケットに入ったスマホ（GPS電波・アンテナ波紋は使わない）
-  phonePocket: (
-    <>
-      <rect x="7.6" y="3" width="8.8" height="12.4" rx="2" />
-      <path d="M3.2 21c0-4.3 2.2-7.6 5-8.6" />
-      <path d="M20.8 21c0-4.3-2.2-7.6-5-8.6" />
-    </>
-  ),
-  // 三日月＋小さな時計（3時）
-  moonClock: (
-    <>
-      <path d="M15.6 3.2A8.4 8.4 0 1 0 19.4 12.6" />
-      <circle cx="17.6" cy="17.6" r="4" />
-      <polyline points="17.6,15.7 17.6,17.6 19.3,17.6" />
-    </>
-  ),
-  // 封筒を開いた形＋中に横線2本（ベル・通知バッジは使わない）
-  mailOpen: (
-    <>
-      <path d="M3.4 9.6 12 3.2l8.6 6.4" />
-      <rect x="3.4" y="9.6" width="17.2" height="11.2" rx="1.6" />
-      <line x1="7.8" y1="14" x2="16.2" y2="14" />
-      <line x1="7.8" y1="17.4" x2="13" y2="17.4" />
-    </>
-  ),
-  // スマホ（無地画面）= D9「相手の端末」
   phone: (
     <>
       <rect x="6.6" y="2.6" width="10.8" height="18.8" rx="2.6" />
@@ -203,30 +141,6 @@ const GLYPHS: Record<IconName, ReactNode> = {
     <>
       <path d="M6 3h7l5 5v12.4a.6.6 0 0 1-.6.6H6.6a.6.6 0 0 1-.6-.6V3.6A.6.6 0 0 1 6 3Z" />
       <polyline points="13,3 13,8 18,8" />
-    </>
-  ),
-  // 2つの円が重なる＝関係性
-  relation: (
-    <>
-      <circle cx="9.4" cy="12" r="5.6" />
-      <circle cx="14.6" cy="12" r="5.6" />
-    </>
-  ),
-  // 矢印が別方向に向き直る＝乗り換え
-  switchDirection: (
-    <>
-      <line x1="4" y1="8.5" x2="20" y2="8.5" />
-      <polyline points="16.2,4.7 20,8.5 16.2,12.3" />
-      <line x1="20" y1="15.5" x2="4" y2="15.5" />
-      <polyline points="7.8,11.7 4,15.5 7.8,19.3" />
-    </>
-  ),
-  // 離れた2点を結ぶ線
-  distance: (
-    <>
-      <circle cx="5.2" cy="12" r="2.4" />
-      <circle cx="18.8" cy="12" r="2.4" />
-      <line x1="8.4" y1="12" x2="15.6" y2="12" strokeDasharray="2 2.6" />
     </>
   ),
 };

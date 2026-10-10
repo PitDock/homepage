@@ -33,11 +33,8 @@ export const TERMS_PATH = "/service/products/gentle-diary/terms";
 export const COMPANY_PATH = "/company-info";
 
 /* ===== 「日記」の補足文（設計書 §2-2・A/B同一文言・所定3箇所）===== */
-/** ① ファーストビュー サブコピー直下（短縮版） */
-export const MICRO_NOTE_SHORT =
-  "※日記といっても、書く必要はありません。時刻と場所のリストが自動でできます。";
 /**
- * ② S2 スクショ直下のキャプション（全文版）。③ FAQ Q2 の回答1文目にも同文が入る。
+ * S2 スクショ直下のキャプション。FAQ Q2 の回答1文目にも同文が入る。
  * キャプションでは文ごとに改行したいので配列を正とし、連結したものを MICRO_NOTE_FULL とする
  * （FAQ 本文・JSON-LD は連結版を使うため、文言がズレることがない）
  */
@@ -78,14 +75,9 @@ export const H2_FOR_WHO = "カップル・夫婦の位置共有に、家族の�
 export const H2_PRIVACY = "監視しない位置共有のための、プライバシー設計";
 export const H2_FAQ = "よくあるご質問";
 
-/* ===== D2 のキャプション（A/Bで異なる唯一の図の差分）===== */
-export const D2_CAPTION_A = "ずっと見える必要は、たぶんなかった。";
-export const D2_CAPTION_B = "ずっと見ていなくても、見守ることはできる。";
-
 /* ===== 粒度3点（A3 / B4・順序のみ各セクションの文脈に合わせる）===== */
 export const GRAIN_TIME = "時刻は20分単位のおおよその表記になります（「12:20頃」など）";
 export const GRAIN_PLACE = "場所は「〇〇周辺」という粒度までぼかされます";
-export const GRAIN_HOME = "自宅から約1km以内はすべて「自宅付近」とだけ表示されます";
 
 /* ===== アプリアイコン ===== */
 export const ICON_SRC = "/images/products/GentleDiary.png";

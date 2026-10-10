@@ -124,22 +124,18 @@ export function PrivacyLead() {
 
 const TRUST_BADGES = [
   {
-    icon: "mapOff" as const,
     title: "リアルタイム共有は、機能として存在しません",
     body: "相手の現在地を見る画面も、地図上に表示する機能もありません。共有されるのは、1日1回つくられる日記だけです。",
   },
   {
-    icon: "homeLock" as const,
     title: "自宅の住所は、誰にも公開されません",
     body: "登録した住所は共有対象外です。自宅から約1km以内は「自宅付近」とだけ表示されます。",
   },
   {
-    icon: "peopleCheck" as const,
     title: "共有は承認制。いつでも解除できます",
     body: "相手が申請し、あなたが承認したときだけ共有が始まります。承認したあとも、どちらからでも解除できます。",
   },
   {
-    icon: "clockTrash" as const,
     title: "位置情報は、残り続けません",
     body: "日記を読めるのは直近2日分だけ。記録した位置情報と日記は、取得から10日後に自動的に削除されます。アカウントを削除すれば、データも削除されます。",
   },
@@ -181,7 +177,7 @@ export function PolicyBlock() {
       </div>
 
       <p className={s.operator}>
-        提供: <strong>PitDock株式会社</strong>（代表取締役 小山 望海） ／{" "}
+        提供: <strong>PitDock株式会社</strong> ／{" "}
         <a href={COMPANY_PATH}>会社概要</a>
       </p>
     </div>

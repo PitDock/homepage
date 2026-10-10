@@ -5,7 +5,7 @@
  * `aspect-ratio` は枠（.shotMedia）側が持つため、差し替えでレイアウトは1pxも動かない。
  * 配置先: public/images/products/GentleDiary/
  */
-export type ShotId = "S1" | "S2" | "S3" | "S4" | "S5" | "S6" | "S7a" | "S7b";
+export type ShotId = "S1" | "S2" | "S3" | "S4" | "S6" | "S7a";
 
 export type ShotSpec = {
   /** CSS aspect-ratio に渡す値 */
@@ -54,14 +54,6 @@ export const SHOTS: Record<ShotId, ShotSpec> = {
     height: 870,
     alt: "Gentle Diary の閲覧申請画面。相手のメールアドレスを入力して日記の閲覧を申請する",
   },
-  S5: {
-    ar: "1168 / 1706",
-    label: "設定画面",
-    src: "/images/products/GentleDiary/setting.jpg",
-    width: 1168,
-    height: 1706,
-    alt: "Gentle Diary の設定画面。自宅の住所は誰にも公開されない旨が表示されている",
-  },
   S6: {
     ar: "1170 / 2406",
     label: "ログイン画面",
@@ -77,13 +69,5 @@ export const SHOTS: Record<ShotId, ShotSpec> = {
     width: 1170,
     height: 2286,
     alt: "位置情報の許可で「常に許可」を選ぶ画面。カップル 位置共有や家族 見守りで位置情報日記を作るために必要",
-  },
-  S7b: {
-    ar: "1170 / 1593",
-    label: "設定アプリの位置情報画面",
-    src: "/images/products/GentleDiary/location_setting.png",
-    width: 1170,
-    height: 1593,
-    alt: "端末の設定アプリの位置情報画面。位置情報の利用を「常に」にした状態。カップル 位置共有や家族 見守りで位置情報日記を作るために必要",
   },
 };
