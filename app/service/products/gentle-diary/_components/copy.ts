@@ -47,11 +47,20 @@ export const MICRO_NOTE_FULL_LINES = [
 ];
 export const MICRO_NOTE_FULL = MICRO_NOTE_FULL_LINES.join("");
 
+/**
+ * STEP 1 の補足（A/B 共通）。根拠 F18:
+ * distanceFilter 50m / iOS は significant-change / enableHighAccuracy: false
+ */
+export const STEP1_SUPPLEMENT_LINES = [
+  "位置情報を、常に記録し続けているわけではありません。",
+  "一定の距離を移動したときだけ取得する仕組みなので、電池の消費を抑えられます。",
+];
+
 /* ===== CTA（設計書 §2-6）===== */
 export const CTA_HEADING = "無料でダウンロード";
 export const A_CTA_NOTE = "無料。相手に現在地が見えることはありません。";
 export const B_CTA_NOTE =
-  "無料。居場所を追いかけずに、1日の無事だけがわかります。見守る相手の端末にも登録が必要ですが、あなたが代理で設定できます。";
+  "無料。居場所を追いかけずに、1日の無事だけがわかります。";
 
 /* ===== 言い換え禁止の確定文言（設計書 §2-8）===== */
 /** FAQ Q3・社会的証明セクション・図解 D1 / D6 の3系統で同一文言を使う */

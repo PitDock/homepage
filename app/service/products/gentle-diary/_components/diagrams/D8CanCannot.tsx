@@ -40,17 +40,12 @@ export default function D8CanCannot() {
                 <span>{item}</span>
               </li>
             ))}
-            <li className={s.compareItem}>
-              <Icon name="circleCheck" className={s.compareItemIcon} />
-              <span>
-                相手がスマホの設定に慣れていない場合は、あなたが代理で設定できます
-                <br />
-                <a className={s.anchorLink} href="#proxy-setup">
-                  設定のしかた
-                  <Icon name="arrowRight" className={s.anchorLinkIcon} />
-                </a>
-              </span>
-            </li>
+            <span>
+              <a className={s.anchorLink} href="#proxy-setup">
+                設定のしかた
+                <Icon name="arrowRight" className={s.anchorLinkIcon} />
+              </a>
+            </span>
           </ul>
         </div>
 

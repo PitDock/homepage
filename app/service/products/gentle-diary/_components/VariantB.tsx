@@ -26,6 +26,7 @@ import D9ProxySetup from "./diagrams/D9ProxySetup";
 import {
   B_CTA_NOTE,
   CTA_HEADING,
+  STEP1_SUPPLEMENT_LINES,
   GRAIN_PLACE,
   GRAIN_TIME,
   H2_FAQ,
@@ -131,8 +132,7 @@ export default function VariantB({ isoWeek, variant }: Props) {
         <section className={`${s.section} ${s.bgAlt}`}>
           <div className={s.container}>
             <div className={`${s.sectionHead} ${s.fadeIn}`}>
-              <h2 className={s.h2}>見守りたい気持ちと、監視したくない気持ちのあいだで</h2>
-              <p className={s.lead}>見守りたい気持ちと、監視したくない気持ちのあいだで。</p>
+              <h2 className={s.h2}>見守りたい気持ちと、監視したくない気持ちの間で</h2>
             </div>
             <div className={`${s.grid3} ${s.fadeIn}`}>
               {EMPATHY_CARDS.map((c) => (
@@ -155,7 +155,7 @@ export default function VariantB({ isoWeek, variant }: Props) {
                 <strong>
                   見守る側が安心できることと、見守られる側が自由でいられることを、同じ仕組みで両立させること
                 </strong>
-                です。だから、相手の現在地は見られません。見えるのは、1日の日記だけ。相手から何を奪わないのかを、先にお伝えします。
+                です。だから、相手の現在地は見られません。見えるのは、1日の日記だけ。
               </p>
             </div>
             <div className={s.fadeIn}>
@@ -235,14 +235,10 @@ export default function VariantB({ isoWeek, variant }: Props) {
             <div className={`${s.blockGapLg} ${s.fadeIn}`}>
               <D5Approval showProxyNote />
             </div>
-            <div className={`${s.shotPair} ${s.shotPairTriple} ${s.fadeIn}`}>
+            <div className={`${s.shotPair} ${s.fadeIn}`}>
               <div className={s.shotPairItem}>
                 <Shot id="S3" frame="plain" sizes="240px" />
                 <p className={s.caption}>閲覧権限画面</p>
-              </div>
-              <div className={s.shotPairItem}>
-                <Shot id="S8" frame="phone" sizes="240px" />
-                <p className={s.caption}>タイムライン画面（空状態）</p>
               </div>
             </div>
             <div className={`${s.blockGap} ${s.fadeIn}`}>
@@ -276,6 +272,16 @@ export default function VariantB({ isoWeek, variant }: Props) {
               </div>
             </div>
 
+            {/* STEP 1 の補足（注意ではないのでアンバーにしない・A/B共通） */}
+            <p className={`${s.supplement} ${s.fadeIn}`}>
+              STEP 1 の補足:
+              {STEP1_SUPPLEMENT_LINES.map((line) => (
+                <span key={line} className={s.supplementLine}>
+                  {line}
+                </span>
+              ))}
+            </p>
+
             {/* 代理設定ブロック（前向きな見出し＋同ブロック内の囲みで注意） */}
             <div className={`${s.blockGapLg} ${s.fadeIn}`}>
               <div className={s.proxyBlock} id="proxy-setup">
@@ -299,11 +305,6 @@ export default function VariantB({ isoWeek, variant }: Props) {
               </div>
             </div>
 
-            {/* STEP 1 の補足（注意ではないのでアンバーにしない） */}
-            <p className={`${s.supplement} ${s.fadeIn}`}>
-              STEP 1 の補足:
-              位置情報は、高精度のGPSを常にオンにする方式ではなく、一定の距離を移動したときだけ記録する方式です。
-            </p>
           </div>
         </section>
 

@@ -63,10 +63,6 @@ export default function D5Approval({ showProxyNote = false }: { showProxyNote?: 
           {showProxyNote ? (
             <>
               <p className={s.d5PersonNote}>相手の端末にもアプリの登録が必要</p>
-              <a className={s.anchorLink} href="#proxy-setup">
-                設定のしかた
-                <Icon name="arrowRight" className={s.anchorLinkIcon} />
-              </a>
             </>
           ) : null}
         </div>

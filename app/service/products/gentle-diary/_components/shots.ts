@@ -5,7 +5,7 @@
  * `aspect-ratio` は枠（.shotMedia）側が持つため、差し替えでレイアウトは1pxも動かない。
  * 配置先: public/images/products/GentleDiary/
  */
-export type ShotId = "S1" | "S2" | "S3" | "S4" | "S5" | "S6" | "S7a" | "S7b" | "S8";
+export type ShotId = "S1" | "S2" | "S3" | "S4" | "S5" | "S6" | "S7a" | "S7b";
 
 export type ShotSpec = {
   /** CSS aspect-ratio に渡す値 */
@@ -85,13 +85,5 @@ export const SHOTS: Record<ShotId, ShotSpec> = {
     width: 1170,
     height: 1593,
     alt: "端末の設定アプリの位置情報画面。位置情報の利用を「常に」にした状態。カップル 位置共有や家族 見守りで位置情報日記を作るために必要",
-  },
-  S8: {
-    ar: "393 / 852",
-    label: "タイムライン画面（空状態）",
-    src: null,
-    width: 786,
-    height: 1704,
-    alt: "Gentle Diary のタイムライン画面。閲覧できる日記がない状態と、3日以上前の日記は閲覧できない旨が表示されている",
   },
 };

@@ -1136,3 +1136,7 @@
 
 /* 補足文（キャプション）を文（。）ごとに改行する */
 .microNoteLine { display: block; }
+
+
+/* STEP 1 の補足を文ごとに改行する */
+.supplementLine { display: block; }

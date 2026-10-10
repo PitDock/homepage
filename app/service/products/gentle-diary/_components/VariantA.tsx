@@ -23,6 +23,7 @@ import D5Approval from "./diagrams/D5Approval";
 import {
   A_CTA_NOTE,
   CTA_HEADING,
+  STEP1_SUPPLEMENT_LINES,
   GRAIN_PLACE,
   GRAIN_TIME,
   H2_FAQ,
@@ -205,6 +206,15 @@ export default function VariantA({ isoWeek, variant }: Props) {
                 <SetupList />
               </div>
             </div>
+            {/* STEP 1 の補足（注意ではないのでアンバーにしない・A/B共通） */}
+            <p className={`${s.supplement} ${s.fadeIn}`}>
+              STEP 1 の補足:
+              {STEP1_SUPPLEMENT_LINES.map((line) => (
+                <span key={line} className={s.supplementLine}>
+                  {line}
+                </span>
+              ))}
+            </p>
             <StoreCta
               className={s.blockGap}
               isoWeek={isoWeek}
