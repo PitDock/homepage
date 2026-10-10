@@ -36,7 +36,7 @@ import {
   H2_VISIBILITY,
   ICON_ALT,
   ICON_SRC,
-  MICRO_NOTE_FULL,
+  MICRO_NOTE_FULL_LINES,
 } from "./copy";
 import s from "../page.module.css";
 
@@ -181,7 +181,13 @@ export default function VariantB({ isoWeek, variant }: Props) {
             <div className={`${s.blockGap} ${s.fadeIn}`}>
               <Shot id="S2" frame="plain" className={s.shotS2} sizes="(max-width: 767px) 90vw, 520px" />
               {/* 「日記」の補足文 配置箇所②（全文版・A3 と同一文言・同一位置） */}
-              <p className={`${s.microNote} ${s.microNoteCenter}`}>{MICRO_NOTE_FULL}</p>
+              <p className={`${s.microNote} ${s.microNoteCenter}`}>
+                  {MICRO_NOTE_FULL_LINES.map((line) => (
+                    <span key={line} className={s.microNoteLine}>
+                      {line}
+                    </span>
+                  ))}
+                </p>
               <ul className={s.grainList}>
                 {[GRAIN_TIME, GRAIN_PLACE].map((item) => (
                   <li key={item} className={s.grainItem}>

@@ -36,9 +36,16 @@ export const COMPANY_PATH = "/company-info";
 /** ① ファーストビュー サブコピー直下（短縮版） */
 export const MICRO_NOTE_SHORT =
   "※日記といっても、書く必要はありません。時刻と場所のリストが自動でできます。";
-/** ② S2 スクショ直下のキャプション（全文版）。③ FAQ Q2 の回答1文目にも同文が入る */
-export const MICRO_NOTE_FULL =
-  "※日記といっても、文章を書く必要はありません。1日の行動が「時刻と場所」のリストに自動でまとめられます。";
+/**
+ * ② S2 スクショ直下のキャプション（全文版）。③ FAQ Q2 の回答1文目にも同文が入る。
+ * キャプションでは文ごとに改行したいので配列を正とし、連結したものを MICRO_NOTE_FULL とする
+ * （FAQ 本文・JSON-LD は連結版を使うため、文言がズレることがない）
+ */
+export const MICRO_NOTE_FULL_LINES = [
+  "※日記といっても、文章を書く必要はありません。",
+  "1日の行動が「時刻と場所」のリストに自動でまとめられます。",
+];
+export const MICRO_NOTE_FULL = MICRO_NOTE_FULL_LINES.join("");
 
 /* ===== CTA（設計書 §2-6）===== */
 export const CTA_HEADING = "無料でダウンロード";

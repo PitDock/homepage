@@ -33,7 +33,7 @@ import {
   H2_VISIBILITY,
   ICON_ALT,
   ICON_SRC,
-  MICRO_NOTE_FULL,
+  MICRO_NOTE_FULL_LINES,
 } from "./copy";
 import s from "../page.module.css";
 
@@ -58,7 +58,7 @@ const FOR_WHO = [
   {
     icon: "relation" as const,
     title: "カップル・夫婦の位置共有に",
-    body: "常に見せ合わなくても、1日の終わりに「こんな日だったよ」が伝わる。確認のための連絡が減って、話したいことを話せるようになります。",
+    body: "常に見せ合わなくても、1日の終わりに「ここに行ったよ」が伝わる。確認のための連絡が減って、話したいことを話せるようになります。",
   },
   {
     icon: "switchDirection" as const,
@@ -150,7 +150,13 @@ export default function VariantA({ isoWeek, variant }: Props) {
               <div className={s.blockGapSm}>
                 <Shot id="S2" frame="plain" className={s.shotS2} sizes="(max-width: 767px) 90vw, 520px" />
                 {/* 「日記」の補足文 配置箇所②（全文版） */}
-                <p className={`${s.microNote} ${s.microNoteCenter}`}>{MICRO_NOTE_FULL}</p>
+                <p className={`${s.microNote} ${s.microNoteCenter}`}>
+                  {MICRO_NOTE_FULL_LINES.map((line) => (
+                    <span key={line} className={s.microNoteLine}>
+                      {line}
+                    </span>
+                  ))}
+                </p>
               </div>
               <ul className={s.grainList}>
                 {[GRAIN_TIME, GRAIN_PLACE].map((item) => (

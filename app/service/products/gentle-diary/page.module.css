@@ -1132,3 +1132,7 @@
 
 /* サブコピーを文（。）ごとに改行する。長い文は行の中でさらに折り返す */
 .leadLine { display: block; }
+
+
+/* 補足文（キャプション）を文（。）ごとに改行する */
+.microNoteLine { display: block; }
