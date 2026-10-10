@@ -2,11 +2,6 @@
 
 PitDock株式会社のコーポレートサイト。Next.js (App Router) + TypeScript + Tailwind CSS で構築。
 
-## 事業概要
-
-- **主な事業**: ITコンサルティング（DX・AX）、システム開発
-- **サブ事業**: 自社サービス運営
-
 ## 技術スタック
 
 - [Next.js](https://nextjs.org/) 15 (App Router)
@@ -23,6 +18,8 @@ npm install
 
 ```
 SLACK_WEBHOOK_URL=xxxx
+RESEND_API_KEY=xxxx
+MAIL_FROM=xxxx
 ```
 
 ## 開発
@@ -51,13 +48,3 @@ lib/
   data/                 静的データ（お知らせ記事など）
   seo/                  メタデータ・構造化データ（JSON-LD）・サイト設定
 ```
-
-## Claude Code 運用
-
-このリポジトリは Claude Code を使ったサイト構築を前提としている。運用ルールは [.claude/CLAUDE.md](.claude/CLAUDE.md) を参照。
-
-作業プロセス:
-
-1. `corporate-engagement-specialist` エージェントで構成・文章を作成
-2. `web-designer` エージェントでデザイン仕様を作成
-3. `homepage-builder` エージェントで実装
