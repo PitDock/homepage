@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { hasMailDomain } from "../../../lib/mail/check-email-domain";
 import { sendAutoReply } from "../../../lib/mail/send-auto-reply";
 import { isLikelyBot } from "../../../lib/spam/form-guard";
 
@@ -46,6 +47,11 @@ export async function POST(req: NextRequest) {
   // （フロントのバリデーションはAPIを直接叩かれると素通りする）
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ error: "Invalid email format" }, { status: 400 });
+  }
+
+  // ドメインがメールを受け取れない（打ち間違い・存在しないドメイン）場合は、通知・送信せずに入力を見直してもらう
+  if (!(await hasMailDomain(email))) {
+    return NextResponse.json({ error: "email_undeliverable" }, { status: 422 });
   }
 
   const webhookUrl = process.env.SLACK_WEBHOOK_URL;
