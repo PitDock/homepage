@@ -252,6 +252,18 @@ export default function PartnerPage() {
           guard: getGuard(),
         }),
       });
+      if (res.status === 422) {
+        const data = (await res.json().catch(() => null)) as { error?: string } | null;
+        if (data?.error === "email_undeliverable") {
+          setErrors((prev) => ({
+            ...prev,
+            email: "このメールアドレスにはメールをお送りできませんでした。お手数ですが、入力内容をご確認ください。",
+          }));
+          setSubmitStatus("idle");
+          document.getElementById("partner-email")?.focus();
+          return;
+        }
+      }
       if (!res.ok) throw new Error();
       setSubmitStatus("success");
     } catch {
