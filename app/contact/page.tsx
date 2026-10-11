@@ -266,6 +266,10 @@ type TextField = "name" | "email" | "content" | "company" | "preferredDate";
 
 type FormErrors = Partial<Record<"name" | "email" | "categories" | "privacy", string>>;
 
+/** サーバ側でメールが届かないと判定されたときの案内（API が 422 email_undeliverable を返す） */
+const EMAIL_UNDELIVERABLE_MESSAGE =
+  "このメールアドレスにはメールをお送りできませんでした。お手数ですが、入力内容をご確認ください。";
+
 /** 送信時にフォーカスを移す優先順位 */
 const ERROR_FOCUS_ORDER = ["name", "email", "categories", "privacy"] as const;
 
@@ -413,6 +417,17 @@ export default function ContactPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form, guard: getGuard() }),
       });
+      if (res.status === 422) {
+        const data = (await res.json().catch(() => null)) as { error?: string } | null;
+        if (data?.error === "email_undeliverable") {
+          setErrors({ email: EMAIL_UNDELIVERABLE_MESSAGE });
+          setStatus("idle");
+          const target = fieldRefs.current.email;
+          target?.focus({ preventScroll: true });
+          target?.scrollIntoView({ block: "center" });
+          return;
+        }
+      }
       if (!res.ok) throw new Error("request failed");
       setSubmittedForm(form);
       setStatus("success");
