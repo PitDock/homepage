@@ -1,16 +1,22 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "../../../../lib/seo/metadata";
+import {
+  PAGE_DESCRIPTION,
+  PAGE_KEYWORDS,
+  PAGE_PATH,
+  PAGE_TITLE,
+} from "./_components/copy";
 
+// title / description / keywords / canonical は A/B で変えない（設計書 §3-10 SEO交絡防止）
 export const metadata: Metadata = {
   ...createPageMetadata({
-    title: "Gentle Diary | やさしく見守る行動要約アプリ",
-    description:
-      "リアルタイムな位置情報の共有はしない。1日の行動をやさしく要約して届ける、家族や大切な人のための見守りアプリ。",
-    path: "/service/products/gentle-diary",
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    path: PAGE_PATH,
     absoluteTitle: true,
     image: "/images/products/GentleDiary.png",
-    imageAlt: "Gentle Diary ロゴ",
-    keywords: ["Gentle Diary", "見守り", "位置情報", "プライバシー", "日記", "自動", "家族", "恋人"],
+    imageAlt: "Gentle Diary のアプリアイコン",
+    keywords: PAGE_KEYWORDS,
   }),
   icons: {
     icon: "/images/products/GentleDiary.png",
