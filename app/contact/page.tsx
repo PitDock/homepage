@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import FaqAccordion from "../components/FaqAccordion";
+import { HoneypotField, useFormGuard } from "../components/FormGuard";
 import { CONTACT_FAQS } from "../../lib/seo/faqs";
 import s from "../page.module.css";
 import cs from "./contact.module.css";
@@ -273,6 +274,7 @@ export default function ContactPage() {
   const [submittedForm, setSubmittedForm] = useState<FormState | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errors, setErrors] = useState<FormErrors>({});
+  const { honeypotRef, getGuard } = useFormGuard();
 
   const successRef = useRef<HTMLDivElement | null>(null);
   const heroSentinelRef = useRef<HTMLDivElement | null>(null);
@@ -409,7 +411,7 @@ export default function ContactPage() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, guard: getGuard() }),
       });
       if (!res.ok) throw new Error("request failed");
       setSubmittedForm(form);
@@ -752,6 +754,7 @@ export default function ContactPage() {
               </p>
 
               <form className={cs.form} onSubmit={handleSubmit} noValidate>
+                <HoneypotField inputRef={honeypotRef} />
                 <div className={cs.formGrid}>
                   {/* お名前 */}
                   <div className={cs.fieldWrap}>
