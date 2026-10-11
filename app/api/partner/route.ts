@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isLikelyBot } from "../../../lib/spam/form-guard";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -22,8 +23,18 @@ export async function POST(req: NextRequest) {
     message?: string;
   };
 
+  // bot対策（ハニーポット・送信時間）。不合格なら Slack 通知・メール送信を行わずエラーにする
+  if (isLikelyBot((body as { guard?: unknown }).guard)) {
+    return NextResponse.json({ error: "Rejected" }, { status: 400 });
+  }
+
   if (!name || !email || !roles || roles.length === 0 || !status || !availHours) {
     return NextResponse.json({ error: "Required fields missing" }, { status: 400 });
+  }
+
+  // フロントのバリデーションはAPIを直接叩かれると素通りするため、サーバ側でも形式を検証する
+  if (typeof email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return NextResponse.json({ error: "Invalid email format" }, { status: 400 });
   }
 
   const webhookUrl = process.env.SLACK_WEBHOOK_URL;
