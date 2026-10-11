@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendAutoReply } from "../../../lib/mail/send-auto-reply";
+import { isLikelyBot } from "../../../lib/spam/form-guard";
 
 /** ご相談のテーマの許可値（app/contact/page.tsx の THEME_OPTIONS と一致させる） */
 const ALLOWED_CATEGORIES = [
@@ -22,6 +23,11 @@ export async function POST(req: NextRequest) {
     preferredDate?: string;
     privacy?: boolean;
   };
+
+  // bot対策（ハニーポット・送信時間）。不合格なら Slack 通知・メール送信を行わずエラーにする
+  if (isLikelyBot((body as { guard?: unknown }).guard)) {
+    return NextResponse.json({ error: "Rejected" }, { status: 400 });
+  }
 
   // ユーザー入力をそのまま埋め込まないよう、テーマは許可値リストと照合する
   const safeCategories = Array.isArray(categories)

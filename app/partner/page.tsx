@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
+import { HoneypotField, useFormGuard } from "../components/FormGuard";
 import s from "../page.module.css";
 import p from "./partner.module.css";
 
@@ -172,6 +173,7 @@ export default function PartnerPage() {
   const [form, setForm] = useState<PartnerFormData>(initialForm);
   const [errors, setErrors] = useState<Partial<Record<keyof PartnerFormData | "roles" | "status" | "availHours", string>>>({});
   const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const { honeypotRef, getGuard } = useFormGuard();
 
   // IntersectionObserver による reveal アニメーション
   const mainRef = useRef<HTMLElement>(null);
@@ -247,6 +249,7 @@ export default function PartnerPage() {
           availHours: form.availHours,
           skills: form.skills || undefined,
           message: form.message || undefined,
+          guard: getGuard(),
         }),
       });
       if (!res.ok) throw new Error();
@@ -516,6 +519,7 @@ export default function PartnerPage() {
               </div>
             ) : (
               <form className={`${p.partnerEntryForm} ${s.reveal}`} onSubmit={handleSubmit} noValidate>
+                <HoneypotField inputRef={honeypotRef} />
                 <div className={p.partnerFormGrid}>
                   {/* お名前 */}
                   <div className={`${p.partnerFieldWrap} ${p.partnerFieldFull}`}>
