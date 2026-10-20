@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import FaqAccordion from "../components/FaqAccordion";
-import { HoneypotField, useFormGuard } from "../components/FormGuard";
+import { AgentNotice, HoneypotField, useFormGuard } from "../components/FormGuard";
 import { CONTACT_FAQS } from "../../lib/seo/faqs";
 import s from "../page.module.css";
 import cs from "./contact.module.css";
@@ -769,6 +769,7 @@ export default function ContactPage() {
               </p>
 
               <form className={cs.form} onSubmit={handleSubmit} noValidate>
+                <AgentNotice />
                 <HoneypotField inputRef={honeypotRef} />
                 <div className={cs.formGrid}>
                   {/* お名前 */}
