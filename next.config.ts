@@ -1,3 +1,4 @@
+import { withBotId } from "botid/next/config";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -56,4 +57,6 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+// BotID の判定用スクリプトへの転送設定を追加する。Vercel 上では自動で転送されるため不要だが、
+// これが無いとローカル（next dev）でスクリプトが 404 になり、フォーム送信自体が失敗する
+export default withBotId(nextConfig);
