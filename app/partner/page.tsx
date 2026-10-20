@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import { HoneypotField, useFormGuard } from "../components/FormGuard";
+import { AgentNotice, HoneypotField, useFormGuard } from "../components/FormGuard";
 import s from "../page.module.css";
 import p from "./partner.module.css";
 
@@ -531,6 +531,7 @@ export default function PartnerPage() {
               </div>
             ) : (
               <form className={`${p.partnerEntryForm} ${s.reveal}`} onSubmit={handleSubmit} noValidate>
+                <AgentNotice />
                 <HoneypotField inputRef={honeypotRef} />
                 <div className={p.partnerFormGrid}>
                   {/* お名前 */}
