@@ -1,3 +1,4 @@
+import { checkBotId } from "botid/server";
 import { NextRequest, NextResponse } from "next/server";
 import { hasMailDomain } from "../../../lib/mail/check-email-domain";
 import { sendAutoReply } from "../../../lib/mail/send-auto-reply";
@@ -14,6 +15,12 @@ const ALLOWED_CATEGORIES = [
 ] as const;
 
 export async function POST(req: NextRequest) {
+  // Vercel BotID（クライアント側の登録は instrumentation-client.ts）。ローカル開発では常に人間と判定される
+  const verification = await checkBotId();
+  if (verification.isBot) {
+    return NextResponse.json({ error: "Rejected" }, { status: 403 });
+  }
+
   const body = await req.json();
   const { company, name, email, content, categories, preferredDate, privacy } = body as {
     company?: string;
