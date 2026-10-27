@@ -14,6 +14,15 @@ const ALLOWED_CATEGORIES = [
   "その他",
 ] as const;
 
+/** PitDockを知ったきっかけの許可値（app/contact/page.tsx の REFERRAL_OPTIONS と一致させる） */
+const ALLOWED_REFERRALS = ["検索", "AIツール", "SNS", "紹介", "セミナー・イベント", "その他"] as const;
+
+/** きっかけの補足（SNS名・その他の内容）。選択されている場合のみ採用し、長さを制限する */
+function referralDetail(selected: string[], value: string, detail: unknown): string {
+  if (!selected.includes(value) || typeof detail !== "string") return "";
+  return detail.trim().slice(0, 100);
+}
+
 export async function POST(req: NextRequest) {
   // Vercel BotID（クライアント側の登録は instrumentation-client.ts）。ローカル開発では常に人間と判定される
   const verification = await checkBotId();
@@ -22,13 +31,27 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const { company, name, email, content, categories, preferredDate, privacy } = body as {
+  const {
+    company,
+    name,
+    email,
+    content,
+    categories,
+    preferredDate,
+    referrals,
+    referralSns,
+    referralOther,
+    privacy,
+  } = body as {
     company?: string;
     name?: string;
     email?: string;
     content?: string;
     categories?: unknown;
     preferredDate?: string;
+    referrals?: unknown;
+    referralSns?: unknown;
+    referralOther?: unknown;
     privacy?: boolean;
   };
 
@@ -45,6 +68,20 @@ export async function POST(req: NextRequest) {
           (ALLOWED_CATEGORIES as readonly string[]).includes(c)
       ) as string[])
     : [];
+
+  const safeReferrals = Array.isArray(referrals)
+    ? referrals.filter(
+        (r): r is string =>
+          typeof r === "string" && (ALLOWED_REFERRALS as readonly string[]).includes(r)
+      )
+    : [];
+  const referralDetails: Record<string, string> = {
+    SNS: referralDetail(safeReferrals, "SNS", referralSns),
+    その他: referralDetail(safeReferrals, "その他", referralOther),
+  };
+  const referralText = safeReferrals
+    .map((r) => (referralDetails[r] ? `${r}（${referralDetails[r]}）` : r))
+    .join(" / ");
 
   if (!name || !email || safeCategories.length === 0 || privacy !== true) {
     return NextResponse.json({ error: "Required fields missing" }, { status: 400 });
@@ -86,6 +123,13 @@ export async function POST(req: NextRequest) {
     {
       type: "section",
       text: { type: "mrkdwn", text: `*ご相談内容*\n${content || "（記載なし）"}` },
+    },
+    {
+      type: "section",
+      text: {
+        type: "mrkdwn",
+        text: `*PitDockを知ったきっかけ*\n${referralText || "（未回答）"}`,
+      },
     },
   ];
 
