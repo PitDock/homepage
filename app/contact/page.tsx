@@ -238,6 +238,9 @@ const THEME_OPTIONS = [
   { value: "その他" },
 ] as const;
 
+/** PitDockを知ったきっかけ（流入経路の把握用。任意・複数選択） */
+const REFERRAL_OPTIONS = ["検索", "AIツール", "SNS", "紹介", "セミナー・イベント", "その他"] as const;
+
 /* =========================================================
    フォーム
    ========================================================= */
@@ -249,6 +252,9 @@ type FormState = {
   content: string;
   company: string;
   preferredDate: string;
+  referrals: string[];
+  referralSns: string;
+  referralOther: string;
   privacy: boolean;
 };
 
@@ -259,10 +265,20 @@ const initialForm: FormState = {
   content: "",
   company: "",
   preferredDate: "",
+  referrals: [],
+  referralSns: "",
+  referralOther: "",
   privacy: false,
 };
 
-type TextField = "name" | "email" | "content" | "company" | "preferredDate";
+type TextField =
+  | "name"
+  | "email"
+  | "content"
+  | "company"
+  | "preferredDate"
+  | "referralSns"
+  | "referralOther";
 
 type FormErrors = Partial<Record<"name" | "email" | "categories" | "privacy", string>>;
 
@@ -388,6 +404,15 @@ export default function ContactPage() {
     };
     setForm(next);
     revalidate("categories", next);
+  };
+
+  const handleReferralToggle = (value: string) => {
+    setForm({
+      ...form,
+      referrals: form.referrals.includes(value)
+        ? form.referrals.filter((v) => v !== value)
+        : [...form.referrals, value],
+    });
   };
 
   const handlePrivacyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -753,6 +778,25 @@ export default function ContactPage() {
                           </p>
                         </div>
                       )}
+                      {submittedForm.referrals.length > 0 && (
+                        <div className={cs.submittedRow}>
+                          <p className={cs.submittedLabel}>PitDockを知ったきっかけ</p>
+                          <p className={cs.submittedValue}>
+                            {submittedForm.referrals
+                              .map((value) => {
+                                const detail = (
+                                  value === "SNS"
+                                    ? submittedForm.referralSns
+                                    : value === "その他"
+                                      ? submittedForm.referralOther
+                                      : ""
+                                ).trim();
+                                return detail ? `${value}（${detail}）` : value;
+                              })
+                              .join("、")}
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </details>
@@ -965,6 +1009,72 @@ export default function ContactPage() {
                       </span>
                     </p>
                   </div>
+
+                  {/* PitDockを知ったきっかけ */}
+                  <fieldset className={cs.themeFieldset}>
+                    <legend className={cs.themeLegend}>
+                      PitDockを知ったきっかけ（あてはまるものすべて）
+                      <span className={cs.optional}>任意</span>
+                    </legend>
+                    <div className={cs.themeChipGroup}>
+                      {REFERRAL_OPTIONS.map((value) => {
+                        const checked = form.referrals.includes(value);
+                        return (
+                          <label
+                            key={value}
+                            className={cs.themeChip}
+                            data-checked={checked ? "true" : "false"}
+                          >
+                            <input
+                              type="checkbox"
+                              className={cs.themeChipInput}
+                              value={value}
+                              checked={checked}
+                              onChange={() => handleReferralToggle(value)}
+                            />
+                            <span className={cs.themeChipCheck} aria-hidden="true">
+                              <IconCheck />
+                            </span>
+                            <span className={cs.themeChipLabel}>{value}</span>
+                          </label>
+                        );
+                      })}
+                    </div>
+                    {form.referrals.includes("SNS") && (
+                      <div className={cs.fieldWrap}>
+                        <label className={cs.label} htmlFor="referralSns">
+                          どのSNSでお知りになりましたか？
+                        </label>
+                        <input
+                          id="referralSns"
+                          name="referralSns"
+                          type="text"
+                          className={cs.input}
+                          maxLength={100}
+                          placeholder="例：X、Instagram、Facebook"
+                          value={form.referralSns}
+                          onChange={handleChange}
+                        />
+                      </div>
+                    )}
+                    {form.referrals.includes("その他") && (
+                      <div className={cs.fieldWrap}>
+                        <label className={cs.label} htmlFor="referralOther">
+                          「その他」の内容を具体的にお聞かせください
+                        </label>
+                        <input
+                          id="referralOther"
+                          name="referralOther"
+                          type="text"
+                          className={cs.input}
+                          maxLength={100}
+                          placeholder="例：ブログ記事、YouTube"
+                          value={form.referralOther}
+                          onChange={handleChange}
+                        />
+                      </div>
+                    )}
+                  </fieldset>
 
                   {/* プライバシーポリシー同意 */}
                   <label
