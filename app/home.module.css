@@ -154,11 +154,6 @@
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
-  transition: opacity 0.8s ease-out;
-}
-
-.ribbonLayer[data-faded="true"] {
-  opacity: 0;
 }
 
 .ribbonSvg {

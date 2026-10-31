@@ -12,9 +12,10 @@ import s from "../../home.module.css";
  * - 横は画面幅に合わせて拡大縮小し、縦はセクションごとに区間を対応させて伸縮する
  *   （data-ribbon-anchor を付けた要素の上端が、Figma 上の各セクション上端に対応する）。
  *   セクションの高さが変わってもループやリングが同じセクション内に収まる。
- * - 先端は画面上端から 85% の高さを追いかける（stroke-dashoffset で伸縮）。
+ * - 先端は画面の縦方向の真ん中（上端から 50%）を追いかける（stroke-dashoffset で伸縮）。
+ *   ページ最下部で先端が線の終わりに届かない場合は、最後の 1 画面分で伸び方を速めて描き切る。
  * - 最初のスクロール（約 250px）で、40px 下から浮かび上がりながらフェードイン。
- * - 描き終えたら 1.5 秒止まって 0.8 秒でフェードアウト。上に戻ると再びフェードイン。
+ * - 描き終えた後も消さずに表示したままにする。
  * - prefers-reduced-motion の人には、描き終えた状態で静止表示する。
  */
 
@@ -56,8 +57,7 @@ const SP_SOURCE: RibbonSource = {
 
 const APPEAR_SCROLL = 250;
 const APPEAR_OFFSET = 40;
-const TIP_RATIO = 0.85;
-const HOLD_MS = 1500;
+const TIP_RATIO = 0.75;
 const MOBILE_MAX_WIDTH = 767;
 
 type Segment = { cmd: string; nums: number[] };
@@ -188,6 +188,21 @@ function smoothLoops(lengths: number[], tips: number[], maxTip: number) {
   for (let k = 1; k <= last; k++) tips[k] = Math.max(tips[k], tips[k - 1]);
 }
 
+/*
+ * 線の一番下が、先端の届く一番下（maxTip）より下にある場合は、
+ * 最後の 1 画面分（maxTip - span 〜 線の一番下）を maxTip までに縮めて、最下部までスクロールすれば描き切れるようにする。
+ * 配列はその場で書き換える（単調非減少は保たれる）。
+ */
+function fitToMaxTip(tips: number[], maxTip: number, span: number) {
+  const bottom = tips[tips.length - 1];
+  if (!(bottom > maxTip)) return;
+  const start = Math.max(0, maxTip - span);
+  const scale = (maxTip - start) / (bottom - start);
+  for (let k = 0; k < tips.length; k++) {
+    if (tips[k] > start) tips[k] = start + (tips[k] - start) * scale;
+  }
+}
+
 export default function Ribbon() {
   const layerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -212,8 +227,6 @@ export default function Ribbon() {
     // サンプル点ごとの「そこまで描き終える先端の高さ」（単調非減少。ループは smoothLoops で均す）
     let sampleLengths: number[] = [];
     let sampleMaxY: number[] = [];
-    let holdTimer: number | undefined;
-    let fadedOut = false;
     let frame = 0;
     let disposed = false;
 
@@ -299,6 +312,7 @@ export default function Ribbon() {
       // 先端が届く一番下の位置（ページ最下部までスクロールしたとき）。最後のリングもここまでに描き切る
       const maxTip = height - window.innerHeight * (1 - TIP_RATIO) - 1;
       smoothLoops(sampleLengths, sampleMaxY, maxTip);
+      fitToMaxTip(sampleMaxY, maxTip, window.innerHeight);
       path.style.strokeDasharray = `${total} ${total}`;
       update();
     };
@@ -321,19 +335,11 @@ export default function Ribbon() {
       return sampleLengths[lo] + t * (sampleLengths[lo + 1] - sampleLengths[lo]);
     };
 
-    const setFadedOut = (value: boolean) => {
-      fadedOut = value;
-      layer.dataset.faded = value ? "true" : "false";
-    };
-
     const update = () => {
       frame = 0;
       if (total === 0) return;
 
       if (reducedMotion.matches) {
-        window.clearTimeout(holdTimer);
-        holdTimer = undefined;
-        setFadedOut(false);
         path.style.strokeDashoffset = "0";
         path.style.visibility = "visible";
         motion.style.opacity = "1";
@@ -352,20 +358,6 @@ export default function Ribbon() {
       path.style.strokeDashoffset = String(total - drawn);
       // 長さ 0 でも丸い線端だけが点として描かれてしまうため、伸び始めるまでは隠す
       path.style.visibility = drawn > 0 ? "visible" : "hidden";
-
-      const complete = drawn >= total - 1;
-      if (complete) {
-        if (!fadedOut && holdTimer === undefined) {
-          holdTimer = window.setTimeout(() => {
-            holdTimer = undefined;
-            setFadedOut(true);
-          }, HOLD_MS);
-        }
-      } else {
-        window.clearTimeout(holdTimer);
-        holdTimer = undefined;
-        if (fadedOut) setFadedOut(false);
-      }
     };
 
     const requestUpdate = () => {
@@ -395,7 +387,6 @@ export default function Ribbon() {
       window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestLayout);
       reducedMotion.removeEventListener("change", requestUpdate);
-      window.clearTimeout(holdTimer);
       cancelAnimationFrame(frame);
       cancelAnimationFrame(layoutFrame);
     };
@@ -409,7 +400,6 @@ export default function Ribbon() {
       // 「高さ計測 → SVG 拡大」が際限なく続く。配置に関わる指定だけはインラインでも持たせておく
       style={{ position: "absolute", inset: 0, overflow: "hidden" }}
       aria-hidden="true"
-      data-faded="false"
     >
       <svg ref={svgRef} className={s.ribbonSvg} fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
