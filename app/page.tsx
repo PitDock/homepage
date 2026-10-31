@@ -155,12 +155,16 @@ export default async function Home() {
         <section className={s.fv} data-ribbon-anchor="0" aria-labelledby="fv-heading">
           <div className={`${s.inner} ${s.fvInner}`}>
             <h1 id="fv-heading" className={s.fvCatch}>
-              課題を分解し、
-              <br />
-              噛み合わせ、また走り始める。
+              テクノロジーを味方に
+              <br className={s.spOnly} />
+              走り続ける
             </h1>
             <p className={s.fvLead}>
-              DXも、AI活用も、正しい部品を正しい順番で組み上げなければ動き出しません。PitDock株式会社は、戦略の設計から実装、現場に根づくまでを一気通貫で伴走する、DX・AX（AIトランスフォーメーション）の専門チームです。
+              PitDockは、DX・AXコンサルティングや
+              システム開発を通じて、
+              <br />
+              お客様が成長し続けるための
+              変革を共に進めるパートナーです。
             </p>
             <div className={s.fvVideoWrap}>
               <FvVideo />

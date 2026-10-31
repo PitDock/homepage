@@ -475,7 +475,11 @@
 /* ===== FV ===== */
 
 .fv {
-  height: 840px;
+  /*
+   * ロゴ動画の上下の白い余白を削った分、FV も詰める。
+   * 動画の高さ = コンテンツ幅（最大 1280px）× 3/8。1440px 幅では 280 + 480 - 40 = 720px
+   */
+  height: calc(280px + min(1280px, 100vw - var(--section-pad-x) * 2) * 0.375 - 40px);
   padding: 0 var(--section-pad-x);
 }
 
@@ -499,8 +503,8 @@
 .fvLead {
   position: relative;
   z-index: 2;
-  max-width: 600px;
-  margin: 76px 0 0 40px;
+  max-width: 720px;
+  margin: 48px 0 0 40px;
   font-size: 16px;
   line-height: 2;
   font-weight: 700;
@@ -520,7 +524,12 @@
   left: 0;
   z-index: 1;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  /*
+   * 動画（16:9）の上下 1/6 ずつはどのフレームでも白いだけなので、8:3 の枠で中央を切り出す
+   * （ロゴのアニメーションが最も上下に広がるフレームでも収まる）
+   */
+  aspect-ratio: 8 / 3;
+  overflow: hidden;
 }
 
 .fvVideo {
@@ -1151,18 +1160,18 @@
   }
 
   .fvLead {
-    margin: 24px 0 0 12px;
+    margin: 16px 0 0 12px;
     font-size: 15px;
     line-height: 1.9;
   }
 
-  /* 画面幅いっぱい（375 × 211） */
+  /* 画面幅いっぱい（PC と同じく上下の白い余白を削って 8:3） */
   .fvVideoWrap {
     position: relative;
     top: auto;
     width: calc(100% + 48px);
-    margin: 32px -24px 0;
-    aspect-ratio: 375 / 211;
+    /* リード文を 8px 上げた分を足し、動画の位置は変えない */
+    margin: 40px -24px 0;
   }
 
   .conceptInner {
