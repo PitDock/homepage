@@ -1,9 +1,8 @@
-"use client";
-
-import { useEffect } from "react";
-import SiteHeader from "../../components/site/SiteHeader";
-import SiteFooter from "../../components/site/SiteFooter";
-import s from "../../page.module.css";
+import SubPage from "../../components/sub/SubPage";
+import PageHero from "../../components/sub/PageHero";
+import SectionHeading from "../../components/sub/SectionHeading";
+import CtaBand from "../../components/sub/CtaBand";
+import s from "../../components/sub/sub.module.css";
 
 const CONTACT_URL = "/contact";
 
@@ -50,77 +49,53 @@ const features = [
 ];
 
 export default function DxAxPage() {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add(s.revealed);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
-    );
-    document.querySelectorAll(`.${s.reveal}`).forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <>
-      <SiteHeader />
-
-      {/* Page Hero */}
-      <section className={s.pageHero}>
-        <div className="container">
-          <nav className={s.breadcrumb} aria-label="パンくず">
-            <ol>
-              <li><a href="/">ホーム</a></li>
-              <li aria-hidden="true" className={s.breadcrumbSep}>/</li>
-              <li><a href="/#services">サービス</a></li>
-              <li aria-hidden="true" className={s.breadcrumbSep}>/</li>
-              <li><span aria-current="page">DX・AXコンサルティング</span></li>
-            </ol>
-          </nav>
-          <h1 className={s.pageH1}>DX・AXコンサルティング</h1>
-          <p className={s.pageSubCopy}>
-            AIとデジタルの力で、事業の変革を加速する。{"\n"}お客様と一体になって課題に寄り添い、最新テクノロジーを駆使して根本から解決します。
-          </p>
-          <a href={CONTACT_URL} className={s.btnPrimary}>
-            無料相談を予約する →
+    <SubPage>
+      <PageHero
+        breadcrumbs={[
+          { label: "ホーム", href: "/" },
+          { label: "サービス", href: "/#services" },
+          { label: "DX・AXコンサルティング" },
+        ]}
+        en={["DX / AX", "Consulting."]}
+        title="DX・AXコンサルティング"
+        lead={<>AIとデジタルの力で、事業の変革を加速する。{"\n"}お客様と一体になって課題に寄り添い、最新テクノロジーを駆使して根本から解決します。</>}
+        actions={
+          <a href={CONTACT_URL} className={s.btn}>
+            無料相談を予約する
           </a>
-        </div>
-      </section>
+        }
+      />
 
-      {/* Service Menus */}
       <section className={s.section}>
-        <div className="container">
-          <h2 className={`${s.sectionTitle} ${s.reveal}`}>支援内容</h2>
-          <p className={`${s.sectionSub} ${s.reveal}`}>お客様の課題に合わせて最適なご支援を提供します。</p>
-          <ul className={s.menuGrid} role="list">
+        <div className={`${s.inner} ${s.block}`}>
+          <SectionHeading lead="お客様の課題に合わせて最適なご支援を提供します。">支援内容</SectionHeading>
+          <ul className={s.grid4} role="list">
             {menus.map((m, i) => (
-              <li key={m.name} className={`${s.menuCard} ${s.reveal}`} style={{ transitionDelay: `${i * 0.1}s` }}>
-                <div className={s.menuNum} aria-hidden="true">{String(i + 1).padStart(2, '0')}</div>
-                <h3 className={s.menuH3}>{m.name}</h3>
-                <p className={s.menuBody}>{m.desc}</p>
+              <li key={m.name} className={s.card}>
+                <div className={s.cardNum} aria-hidden="true">
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+                <h3 className={s.cardTitle}>{m.name}</h3>
+                <p className={s.body}>{m.desc}</p>
               </li>
             ))}
           </ul>
         </div>
       </section>
 
-      {/* Features */}
-      <section className={s.featuresSection}>
-        <div className="container">
-          <h2 className={`${s.sectionTitle} ${s.reveal}`}>PitDockが選ばれる理由</h2>
-          <p className={`${s.sectionSub} ${s.reveal}`}>&nbsp;</p>
-          <ul className={s.featureList} role="list">
-            {features.map((f, i) => (
-              <li key={f.num} className={`${s.featureItem} ${s.reveal}`} style={{ transitionDelay: `${i * 0.1}s` }}>
-                <span className={s.featureNum} aria-hidden="true">{f.num}</span>
-                <div className={s.featureContent}>
-                  <h3 className={s.featureH3}>{f.title}</h3>
-                  <p className={s.featureBody}>{f.body}</p>
+      <section className={s.section}>
+        <div className={`${s.inner} ${s.block}`}>
+          <SectionHeading>PitDockが選ばれる理由</SectionHeading>
+          <ul className={s.rowList} role="list">
+            {features.map((f) => (
+              <li key={f.num} className={s.rowItem}>
+                <span className={s.rowNum} aria-hidden="true">
+                  {f.num}
+                </span>
+                <div className={s.rowContent}>
+                  <h3 className={s.rowTitle}>{f.title}</h3>
+                  <p className={s.body}>{f.body}</p>
                 </div>
               </li>
             ))}
@@ -128,22 +103,12 @@ export default function DxAxPage() {
         </div>
       </section>
 
-      {/* Footer CTA */}
-      <section className={s.footerCta}>
-        <div className="container">
-          <h2 className={s.footerCtaH2}>まずは、お気軽にご相談ください。</h2>
-          <p className={s.footerCtaSub}>
-            DX推進・AI活用など、どんな段階でもお声がけください。初回相談は無料です。
-          </p>
-          <div className={`${s.ctaRow} ${s.ctaRowCenter}`}>
-            <a href={CONTACT_URL} className={s.btnPrimary}>
-              無料相談を予約する →
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <SiteFooter />
-    </>
+      <CtaBand
+        heading="まずは、お気軽にご相談ください。"
+        body="DX推進・AI活用など、どんな段階でもお声がけください。初回相談は無料です。"
+        href={CONTACT_URL}
+        label="無料相談を予約する"
+      />
+    </SubPage>
   );
 }

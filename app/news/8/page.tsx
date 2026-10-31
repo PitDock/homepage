@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import SiteHeader from "../../components/site/SiteHeader";
-import SiteFooter from "../../components/site/SiteFooter";
 import { createPageMetadata } from "../../../lib/seo/metadata";
-import s from "../../page.module.css";
+import SubPage from "../../components/sub/SubPage";
+import PageHero from "../../components/sub/PageHero";
+import s from "../../components/sub/sub.module.css";
 import ns from "./news8.module.css";
 
 export const metadata: Metadata = createPageMetadata({
@@ -16,38 +16,19 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function News8Page() {
   return (
-    <>
-      <SiteHeader />
-
-      <section className={s.pageHero}>
-        <div className={`container ${ns.heroInner}`}>
-          <nav className={s.breadcrumb} aria-label="パンくず">
-            <ol>
-              <li>
-                <a href="/">ホーム</a>
-              </li>
-              <li aria-hidden="true" className={s.breadcrumbSep}>
-                /
-              </li>
-              <li>
-                <a href="/news">News</a>
-              </li>
-              <li aria-hidden="true" className={s.breadcrumbSep}>
-                /
-              </li>
-              <li>
-                <span aria-current="page">社名変更のお知らせ</span>
-              </li>
-            </ol>
-          </nav>
-          <h1 className={s.pageH1}>
-            GOWS合同会社は、2026年8月16日をもって PitDock株式会社 に社名変更いたしました。
-          </h1>
-        </div>
-      </section>
+    <SubPage>
+      <PageHero
+        breadcrumbs={[
+          { label: "ホーム", href: "/" },
+          { label: "News", href: "/news" },
+          { label: "社名変更のお知らせ" },
+        ]}
+        title="GOWS合同会社は、2026年8月16日をもって PitDock株式会社 に社名変更いたしました。"
+        titleSize="long"
+      />
 
       <section className={s.section}>
-        <div className="container">
+        <div className={s.inner}>
           <article className={ns.article}>
             <p className={ns.meta}>2026年8月16日</p>
 
@@ -65,50 +46,50 @@ export default function News8Page() {
               </p>
             </div>
 
-            <h2 className={ns.changeTableHeading}>変更内容</h2>
-            <div className={ns.changeTableWrap}>
-              <dl className={ns.changeTable}>
-                <div className={ns.changeRow}>
-                  <dt className={ns.changeTh}>変更日</dt>
-                  <dd className={ns.changeTd}>2026年8月16日</dd>
+            <h2 className={ns.changeTableHeading}>
+              <img src="/brand/p-mark.svg" alt="" className={ns.pMark} width={36} height={30} />
+              <span>変更内容</span>
+            </h2>
+            <dl className={`${s.dataTable} ${ns.changeTable}`}>
+                <div className={s.dataRow}>
+                  <dt className={s.dataLabel}>変更日</dt>
+                  <dd className={s.dataValue}>2026年8月16日</dd>
                 </div>
-                <div className={ns.changeRow}>
-                  <dt className={ns.changeTh}>旧社名</dt>
-                  <dd className={ns.changeTd}>GOWS合同会社</dd>
+                <div className={s.dataRow}>
+                  <dt className={s.dataLabel}>旧社名</dt>
+                  <dd className={s.dataValue}>GOWS合同会社</dd>
                 </div>
-                <div className={ns.changeRow}>
-                  <dt className={ns.changeTh}>新社名</dt>
-                  <dd className={ns.changeTd}>PitDock株式会社（PitDock, Inc.）</dd>
+                <div className={s.dataRow}>
+                  <dt className={s.dataLabel}>新社名</dt>
+                  <dd className={s.dataValue}>PitDock株式会社（PitDock, Inc.）</dd>
                 </div>
-                <div className={ns.changeRow}>
-                  <dt className={ns.changeTh}>組織形態</dt>
-                  <dd className={ns.changeTd}>合同会社 → 株式会社</dd>
+                <div className={s.dataRow}>
+                  <dt className={s.dataLabel}>組織形態</dt>
+                  <dd className={s.dataValue}>合同会社 → 株式会社</dd>
                 </div>
-                <div className={ns.changeRow}>
-                  <dt className={ns.changeTh}>代表者</dt>
-                  <dd className={ns.changeTd}>小山 望海（変更なし）</dd>
+                <div className={s.dataRow}>
+                  <dt className={s.dataLabel}>代表者</dt>
+                  <dd className={s.dataValue}>小山 望海（変更なし）</dd>
                 </div>
-                <div className={ns.changeRow}>
-                  <dt className={ns.changeTh}>所在地</dt>
-                  <dd className={ns.changeTd}>変更なし（東京都渋谷区神泉町10-15-301）</dd>
+                <div className={s.dataRow}>
+                  <dt className={s.dataLabel}>所在地</dt>
+                  <dd className={s.dataValue}>変更なし（東京都渋谷区神泉町10-15-301）</dd>
                 </div>
-                <div className={ns.changeRow}>
-                  <dt className={ns.changeTh}>事業内容</dt>
-                  <dd className={ns.changeTd}>変更なし</dd>
+                <div className={s.dataRow}>
+                  <dt className={s.dataLabel}>事業内容</dt>
+                  <dd className={s.dataValue}>変更なし</dd>
                 </div>
-              </dl>
-            </div>
+            </dl>
 
             <ul className={ns.linkList}>
               <li>
-                <a href="/company-info">会社概要はこちら</a>
+                <a href="/company-info" className={s.textLink}>会社概要はこちら</a>
               </li>
             </ul>
           </article>
         </div>
       </section>
 
-      <SiteFooter />
-    </>
+    </SubPage>
   );
 }

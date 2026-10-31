@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "../../../../../lib/seo/metadata";
-import s from "../../../../page.module.css";
-import ts from "./terms.module.css";
+import SubPage from "../../../../components/sub/SubPage";
+import PageHero from "../../../../components/sub/PageHero";
+import s from "../../../../components/sub/sub.module.css";
+import ts from "../../../../components/sub/terms.module.css";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Duosub 利用規約",
@@ -12,40 +14,19 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function DuosubTermsPage() {
   return (
-    <>
-      <section className={`${s.pageHero} ${s.pageHeroTerms}`}>
-        <div className={`container ${ts.pageHeroInner}`}>
-          <nav className={s.breadcrumb} aria-label="パンくず">
-            <ol>
-              <li>
-                <a href="/">ホーム</a>
-              </li>
-              <li aria-hidden="true" className={s.breadcrumbSep}>
-                /
-              </li>
-              <li>
-                <a href="/service/products">サービス・プロダクト</a>
-              </li>
-              <li aria-hidden="true" className={s.breadcrumbSep}>
-                /
-              </li>
-              <li>
-                <a href="/service/products/duosub">Duosub</a>
-              </li>
-              <li aria-hidden="true" className={s.breadcrumbSep}>
-                /
-              </li>
-              <li>
-                <span aria-current="page">利用規約</span>
-              </li>
-            </ol>
-          </nav>
-          <h1 className={s.pageH1}>Duosub - 利用規約</h1>
-        </div>
-      </section>
+    <SubPage>
+      <PageHero
+        breadcrumbs={[
+          { label: "ホーム", href: "/" },
+          { label: "サービス・プロダクト", href: "/service/products" },
+          { label: "Duosub", href: "/service/products/duosub" },
+          { label: "利用規約" },
+        ]}
+        title="Duosub - 利用規約"
+      />
 
-      <section className={`${s.section} ${s.sectionTerms}`}>
-        <div className="container">
+      <section className={s.section}>
+        <div className={s.inner}>
           <div className={ts.contentWrap}>
             <p className={ts.meta}>
               2024年7月21日制定
@@ -273,6 +254,6 @@ export default function DuosubTermsPage() {
           </div>
         </div>
       </section>
-    </>
+    </SubPage>
   );
 }

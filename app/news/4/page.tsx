@@ -1,10 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
-import SiteHeader from "../../components/site/SiteHeader";
-import SiteFooter from "../../components/site/SiteFooter";
 import { createPageMetadata } from "../../../lib/seo/metadata";
-import s from "../../page.module.css";
+import SubPage from "../../components/sub/SubPage";
+import PageHero from "../../components/sub/PageHero";
+import s from "../../components/sub/sub.module.css";
 import ns from "./news4.module.css";
 
 const MBP_PROFILE_URL = "https://mbp-japan.com/tokyo/koyama/";
@@ -36,36 +36,19 @@ export default function News4Page() {
   const pressImages = listPressImages();
 
   return (
-    <>
-      <SiteHeader />
-
-      <section className={s.pageHero}>
-        <div className={`container ${ns.heroInner}`}>
-          <nav className={s.breadcrumb} aria-label="パンくず">
-            <ol>
-              <li>
-                <a href="/">ホーム</a>
-              </li>
-              <li aria-hidden="true" className={s.breadcrumbSep}>
-                /
-              </li>
-              <li>
-                <a href="/#news">News</a>
-              </li>
-              <li aria-hidden="true" className={s.breadcrumbSep}>
-                /
-              </li>
-              <li>
-                <span aria-current="page">朝日新聞掲載</span>
-              </li>
-            </ol>
-          </nav>
-          <h1 className={s.pageH1}>2025年10月28日(火)の朝日新聞朝刊に掲載されました。</h1>
-        </div>
-      </section>
+    <SubPage>
+      <PageHero
+        breadcrumbs={[
+          { label: "ホーム", href: "/" },
+          { label: "News", href: "/#news" },
+          { label: "朝日新聞掲載" },
+        ]}
+        title="2025年10月28日(火)の朝日新聞朝刊に掲載されました。"
+        titleSize="long"
+      />
 
       <section className={s.section}>
-        <div className="container">
+        <div className={s.inner}>
           <article className={ns.article}>
             <p className={ns.meta}>2025年11月10日</p>
 
@@ -90,7 +73,7 @@ export default function News4Page() {
 
             <ul className={ns.linkList}>
               <li>
-                <a href={MBP_PROFILE_URL} target="_blank" rel="noopener noreferrer">
+                <a href={MBP_PROFILE_URL} target="_blank" rel="noopener noreferrer" className={s.textLink}>
                   「マイベストプロ東京」掲載の弊社代表小山の紹介ページ
                 </a>
               </li>
@@ -99,7 +82,6 @@ export default function News4Page() {
         </div>
       </section>
 
-      <SiteFooter />
-    </>
+    </SubPage>
   );
 }

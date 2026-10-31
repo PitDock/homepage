@@ -1,6 +1,6 @@
-import SiteHeader from "../components/site/SiteHeader";
-import SiteFooter from "../components/site/SiteFooter";
-import s from "../page.module.css";
+import SubPage from "../components/sub/SubPage";
+import PageHero from "../components/sub/PageHero";
+import s from "../components/sub/sub.module.css";
 import ps from "./personal-info.module.css";
 
 type Node = {
@@ -179,26 +179,14 @@ function NestedList({ items }: { items: Node[] }) {
 
 export default function PersonalInfoPage() {
   return (
-    <>
-      <SiteHeader />
+    <SubPage>
+      <PageHero
+        breadcrumbs={[{ label: "ホーム", href: "/" }, { label: "個人情報の取り扱いについて" }]}
+        title="個人情報の取り扱いについて"
+      />
 
-      {/* Page Hero */}
-      <section className={s.pageHero}>
-        <div className={`container ${ps.pageHeroInner}`}>
-          <nav className={s.breadcrumb} aria-label="パンくず">
-            <ol>
-              <li><a href="/">ホーム</a></li>
-              <li aria-hidden="true" className={s.breadcrumbSep}>/</li>
-              <li><span aria-current="page">個人情報の取り扱いについて</span></li>
-            </ol>
-          </nav>
-          <h1 className={s.pageH1}>個人情報の取り扱いについて</h1>
-        </div>
-      </section>
-
-      {/* Content */}
       <section className={s.section}>
-        <div className="container">
+        <div className={s.inner}>
           <div className={ps.contentWrap}>
             <ol className={ps.policyList}>
               {sections.map((sec) => (
@@ -213,7 +201,6 @@ export default function PersonalInfoPage() {
         </div>
       </section>
 
-      <SiteFooter />
-    </>
+    </SubPage>
   );
 }

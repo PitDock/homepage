@@ -1,0 +1,150 @@
+/*
+ * 自社プロダクトの規約・プライバシーポリシー（第N条 形式の文書）
+ * docs/subpages-design-spec.md §8.9 / §8.10 の規約文書レイアウトを、条番号が見出しの文言に含まれる文書向けに当てはめたもの。
+ * SubPage（sub.module.css の .page）の中で使う前提で、トークンは .page から継承する。
+ */
+
+.contentWrap {
+  max-width: 880px;
+  font-size: 15px;
+  line-height: 2;
+  color: var(--brand-ink);
+}
+
+.meta {
+  text-align: right;
+  margin-bottom: 32px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--brand-gray);
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--brand-dock-blue);
+  margin: 0 0 40px;
+}
+
+.lead {
+  margin-bottom: 48px;
+  font-size: 15px;
+  line-height: 2;
+  color: var(--brand-ink);
+}
+
+/* 条項: 薄い罫線で区切る。先頭の上端と末尾の下端だけ dock-blue */
+.articleBlock {
+  padding: 32px 0;
+  border-bottom: 1px solid var(--note-border);
+}
+
+.lead + .articleBlock,
+.divider + .articleBlock {
+  border-top: 1px solid var(--brand-dock-blue);
+}
+
+.articleBlock:last-child {
+  border-bottom-color: var(--brand-dock-blue);
+}
+
+.articleTitle {
+  margin: 0 0 12px;
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 700;
+  color: var(--brand-ink);
+}
+
+.subTitle {
+  margin: 20px 0 8px;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 700;
+  color: var(--brand-ink);
+}
+
+/* sub.module.css の `.page ol/ul { list-style: none }` より強くして番号を残す */
+.contentWrap .mainList {
+  list-style: decimal;
+  margin: 0;
+  padding-left: 1.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mainList > li {
+  padding-left: 0.25em;
+}
+
+.contentWrap .romanList {
+  list-style: lower-roman;
+  margin: 10px 0 0;
+  padding-left: 1.75em;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contentWrap .bulletList {
+  list-style: square;
+  margin: 0;
+  padding-left: 1.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bulletList > li {
+  padding-left: 0.25em;
+}
+
+.mainList > li::marker,
+.romanList > li::marker {
+  font-family: var(--font-space), sans-serif;
+  font-weight: 700;
+  color: var(--brand-pit-blue);
+}
+
+.bulletList > li::marker {
+  color: var(--brand-pit-blue);
+}
+
+.plainPara {
+  margin: 0;
+  font-size: 15px;
+  line-height: 2;
+  color: var(--brand-ink);
+}
+
+.privacyLink {
+  color: var(--brand-pit-blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.privacyLink:hover {
+  color: var(--brand-pit-blue-hover);
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .meta {
+    font-size: 13px;
+  }
+
+  .articleBlock {
+    padding: 24px 0;
+  }
+
+  .articleTitle {
+    font-size: 16px;
+  }
+
+  .contentWrap,
+  .lead,
+  .plainPara {
+    font-size: 14px;
+    line-height: 1.9;
+  }
+}

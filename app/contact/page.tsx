@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import SiteHeader from "../components/site/SiteHeader";
-import SiteFooter from "../components/site/SiteFooter";
+import SubPage from "../components/sub/SubPage";
+import PageHero from "../components/sub/PageHero";
+import SectionHeading from "../components/sub/SectionHeading";
 import FaqAccordion from "../components/FaqAccordion";
 import { AgentNotice, HoneypotField, useFormGuard } from "../components/FormGuard";
 import { CONTACT_FAQS } from "../../lib/seo/faqs";
-import s from "../page.module.css";
+import s from "../components/sub/sub.module.css";
 import cs from "./contact.module.css";
 
 /* =========================================================
@@ -304,23 +305,6 @@ export default function ContactPage() {
   const [passedHero, setPassedHero] = useState(false);
   const [formInView, setFormInView] = useState(false);
 
-  /* スクロールリビール（既存の仕組みを踏襲） */
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add(s.revealed);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
-    );
-    document.querySelectorAll(`.${s.reveal}`).forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
   /* 追従CTAの表示判定（スクロール量ではなくセンチネル方式） */
   useEffect(() => {
     const sentinel = heroSentinelRef.current;
@@ -480,83 +464,90 @@ export default function ContactPage() {
   const stickyCtaVisible = passedHero && !formInView && status !== "success";
 
   return (
-    <>
-      <SiteHeader />
-
-      {/* ============ 【1】Page Hero ============ */}
-      <section className={`${s.pageHero} ${cs.contactHero}`}>
-        <div className="container">
-          <nav className={s.breadcrumb} aria-label="パンくず">
-            <ol>
-              <li>
-                <a href="/">ホーム</a>
-              </li>
-              <li aria-hidden="true" className={s.breadcrumbSep}>
-                /
-              </li>
-              <li>
-                <span aria-current="page">無料相談</span>
-              </li>
-            </ol>
+    <SubPage
+      afterFooter={
+        <>
+          {/* モバイル限定のスクロール追従CTA */}
+          <nav
+            aria-label="フォームへのショートカット"
+            className={`${cs.stickyCta} ${stickyCtaVisible ? cs.stickyCtaVisible : ""}`}
+            aria-hidden={!stickyCtaVisible}
+          >
+            <a
+              href="#form"
+              className={`${s.btn} ${cs.stickyCtaBtn}`}
+              tabIndex={stickyCtaVisible ? undefined : -1}
+            >
+              相談フォームへ進む
+            </a>
+            <p className={cs.stickyCtaNote}>その場で契約を迫ることはありません。</p>
           </nav>
-
-          <h1 className={s.pageH1}>「まだ何も決まっていない」から、どうぞ。</h1>
-
-          <p className={s.pageSubCopy}>
+          <div className={cs.stickyCtaSpacer} aria-hidden="true" />
+        </>
+      }
+    >
+      {/* ============ 【1】Page Hero ============ */}
+      <PageHero
+        breadcrumbs={[{ label: "ホーム", href: "/" }, { label: "無料相談" }]}
+        title="「まだ何も決まっていない」から、どうぞ。"
+        lead={
+          <>
             DX推進、AI活用、システム開発、技術顧問。{"\n"}
             どのテーマでも、「何から手をつけるべきか分からない」段階からのご相談を歓迎しています。
             {"\n"}
             {"\n"}
             資料の準備は不要です。今いちばん困っていることを、そのまま話してください。{"\n"}
             一緒に論点を整理するところからお手伝いします。
-          </p>
-
-          <ul className={cs.trustBadgeRow}>
-            {TRUST_BADGES.map(({ label, Icon }) => (
-              <li key={label} className={cs.trustBadge}>
-                <Icon className={cs.trustBadgeIcon} />
-                {label}
-              </li>
-            ))}
-          </ul>
-
-          <p className={cs.heroSla}>
-            お申し込みから翌営業日（土日祝を除く）までに、担当者よりご返信します。
-          </p>
-
-          <div className={`${s.ctaRow} ${cs.heroCtaRow}`}>
-            <a href="#form" className={`${s.btnPrimary} ${cs.heroCtaMain}`}>
+          </>
+        }
+        actions={
+          <>
+            <a href="#form" className={s.btn}>
               相談フォームへ進む <span aria-hidden="true">↓</span>
             </a>
-            <a href="#flow" className={s.btnGhost}>
+            <a href="#flow" className={s.btnOutline}>
               相談の流れを見る
             </a>
-          </div>
-
-          <p className={cs.heroRiskReversal}>
+          </>
+        }
+        after={
+          <p className={`${s.note} ${cs.heroRiskReversal}`}>
             その場で契約を迫ることはありません。お見積りのご提示も、ご希望があった場合のみです。
           </p>
-        </div>
-      </section>
+        }
+      >
+        <ul className={cs.trustBadgeRow}>
+          {TRUST_BADGES.map(({ label, Icon }) => (
+            <li key={label} className={cs.trustBadge}>
+              <Icon className={cs.trustBadgeIcon} />
+              {label}
+            </li>
+          ))}
+        </ul>
+
+        <p className={cs.heroSla}>
+          お申し込みから翌営業日（土日祝を除く）までに、担当者よりご返信します。
+        </p>
+      </PageHero>
 
       {/* 追従CTAの表示判定用センチネル */}
       <div ref={heroSentinelRef} aria-hidden="true" />
 
       {/* ============ 【2】こんなことでもご相談ください ============ */}
-      <section id="themes" className={`${cs.sectionCompact} ${cs.anchorTarget}`}>
-        <div className={`container ${s.reveal}`}>
-          <h2 className={s.sectionTitle}>こんなことでも、ご相談ください。</h2>
+      <section id="themes" className={s.section}>
+        <div className={`${s.inner} ${s.block}`}>
+          <SectionHeading>こんなことでも、ご相談ください。</SectionHeading>
 
-          <ul className={cs.themeExampleGrid}>
+          <ul className={cs.themeExampleGrid} role="list">
             {THEME_EXAMPLES.map((example) => (
-              <li key={example} className={cs.themeExampleCard}>
+              <li key={example} className={`${s.card} ${cs.themeExampleCard}`}>
                 <IconChat className={cs.themeExampleIcon} />
                 <span>{example}</span>
               </li>
             ))}
           </ul>
 
-          <p className={cs.themeClosing}>
+          <p className={s.body}>
             他社と比較検討中の方、情報収集の段階の方も歓迎しています。
             <br />
             「相談したから発注しなければいけない」ということは一切ありません。
@@ -565,54 +556,55 @@ export default function ContactPage() {
       </section>
 
       {/* ============ 【3】無料相談でお約束すること ============ */}
-      <section
-        id="promise"
-        className={`${cs.sectionCompact} ${cs.sectionAlt} ${cs.anchorTarget}`}
-      >
-        <div className={`container ${s.reveal}`}>
-          <h2 className={s.sectionTitle}>無料相談で、PitDockがやらないこと。</h2>
-          <p className={s.sectionSub}>
-            PitDockの無料相談では、次の3つをお約束します。
-          </p>
+      <section id="promise" className={s.section}>
+        <div className={`${s.inner} ${s.block}`}>
+          <SectionHeading lead="PitDockの無料相談では、次の3つをお約束します。">
+            無料相談で、PitDockがやらないこと。
+          </SectionHeading>
 
-          <ul className={cs.promiseGrid}>
-            {PROMISES.map(({ title, body, Icon }) => (
-              <li key={title} className={cs.promiseCard}>
-                <h3 className={cs.promiseH3}>{title}</h3>
-                <p className={cs.promiseBody}>{body}</p>
+          <ul className={s.grid3} role="list">
+            {PROMISES.map(({ title, body }) => (
+              <li key={title} className={s.card}>
+                <h3 className={s.cardTitleSm}>{title}</h3>
+                <p className={s.body}>{body}</p>
               </li>
             ))}
           </ul>
 
-          <p className={cs.promiseNote}>
+          <p className={`${s.note} ${cs.promiseNote}`}>
             ご相談の内容は外部に開示いたしません。ご希望があれば秘密保持契約（NDA）の締結にも対応します。
           </p>
         </div>
       </section>
 
       {/* ============ 【4】30分で持ち帰れるもの ============ */}
-      <section id="takeaway" className={`${cs.sectionCompact} ${cs.anchorTarget}`}>
-        <div className={`container ${s.reveal}`}>
-          <h2 className={s.sectionTitle}>30分の相談で、持ち帰っていただけるもの。</h2>
-          <p className={s.sectionSub}>
-            限られた時間ですが、「話して終わり」にはしません。
-            その場で以下までをお持ち帰りいただけるよう進行します。
-          </p>
+      <section id="takeaway" className={s.section}>
+        <div className={`${s.inner} ${s.block}`}>
+          <SectionHeading
+            lead={
+              <>
+                限られた時間ですが、「話して終わり」にはしません。
+                その場で以下までをお持ち帰りいただけるよう進行します。
+              </>
+            }
+          >
+            30分の相談で、持ち帰っていただけるもの。
+          </SectionHeading>
 
-          <ul className={cs.takeawayGrid}>
+          <ul className={s.grid3} role="list">
             {TAKEAWAYS.map(({ num, title, body }) => (
-              <li key={num} className={cs.takeawayCard}>
-                <span className={cs.takeawayNum} aria-hidden="true">
+              <li key={num} className={s.card}>
+                <span className={s.cardNum} aria-hidden="true">
                   {num}
                 </span>
-                <h3 className={cs.takeawayH3}>{title}</h3>
-                <p className={cs.takeawayBody}>{body}</p>
+                <h3 className={s.cardTitle}>{title}</h3>
+                <p className={s.body}>{body}</p>
               </li>
             ))}
           </ul>
 
           <div className={cs.timelineWrap}>
-            <h3 className={cs.timelineTitle}>当日の進行（目安）</h3>
+            <h3 className={s.subHeading}>当日の進行（目安）</h3>
             <ol className={cs.timelineTrack}>
               {TIMELINE.map(({ time, body }) => (
                 <li key={time} className={cs.timelineStep}>
@@ -623,69 +615,65 @@ export default function ContactPage() {
             </ol>
           </div>
 
-          <p className={cs.presenterNote}>
+          <p className={`${s.body} ${cs.presenterNote}`}>
             営業担当ではなく、コンサルタントが直接お話しします。
           </p>
         </div>
       </section>
 
       {/* ============ 【5】お申し込みから相談までの流れ ============ */}
-      <section
-        id="flow"
-        className={`${cs.sectionCompact} ${cs.sectionAlt} ${cs.anchorTarget}`}
-      >
-        <div className={`container ${s.reveal}`}>
-          <h2 className={s.sectionTitle}>お申し込みから相談までの流れ</h2>
-          <p className={s.sectionSub}>
-            お申し込みから相談当日、そしてその後までの流れをご説明します。
-          </p>
+      <section id="flow" className={s.section}>
+        <div className={`${s.inner} ${s.block}`}>
+          <SectionHeading lead="お申し込みから相談当日、そしてその後までの流れをご説明します。">
+            お申し込みから相談までの流れ
+          </SectionHeading>
 
-          <ol className={cs.flowList}>
-            <li className={cs.flowItem}>
-              <span className={cs.flowNum} aria-hidden="true">
+          <ol className={s.rowList}>
+            <li className={s.rowItem}>
+              <span className={s.rowNum} aria-hidden="true">
                 01
               </span>
-              <div className={cs.flowContent}>
-                <h3 className={cs.flowH3}>フォームを送信（所要1分）</h3>
-                <p className={cs.flowBody}>
+              <div className={s.rowContent}>
+                <h3 className={s.rowTitle}>フォームを送信（所要1分）</h3>
+                <p className={s.body}>
                   必須はお名前・メールアドレス・ご相談テーマの3つだけです。日程のご希望は任意で、後からメールで調整することもできます。
                 </p>
               </div>
             </li>
 
-            <li className={cs.flowItem}>
-              <span className={cs.flowNum} aria-hidden="true">
+            <li className={s.rowItem}>
+              <span className={s.rowNum} aria-hidden="true">
                 02
               </span>
-              <div className={cs.flowContent}>
-                <h3 className={cs.flowH3}>翌営業日までにご返信・日程確定</h3>
-                <p className={cs.flowBody}>
+              <div className={s.rowContent}>
+                <h3 className={s.rowTitle}>翌営業日までにご返信・日程確定</h3>
+                <p className={s.body}>
                   ご入力のメールアドレス宛に
-                  <strong>翌営業日（土日祝を除く）までに</strong>
+                  <strong className={s.strong}>翌営業日（土日祝を除く）までに</strong>
                   ご連絡し、日程を確定します。いただいた候補日で調整がつかない場合は、こちらから候補をご提案します。
                 </p>
               </div>
             </li>
 
-            <li className={cs.flowItem}>
-              <span className={cs.flowNum} aria-hidden="true">
+            <li className={s.rowItem}>
+              <span className={s.rowNum} aria-hidden="true">
                 03
               </span>
-              <div className={cs.flowContent}>
-                <h3 className={cs.flowH3}>オンラインで30分、お話します</h3>
-                <p className={cs.flowBody}>
+              <div className={s.rowContent}>
+                <h3 className={s.rowTitle}>オンラインで30分、お話します</h3>
+                <p className={s.body}>
                   ご準備いただくものはありません。当日はカメラオフでも構いません。ご都合が悪くなった場合は、前日までにご連絡いただければ日程を変更します。
                 </p>
               </div>
             </li>
 
-            <li className={cs.flowItem}>
-              <span className={cs.flowNum} aria-hidden="true">
+            <li className={s.rowItem}>
+              <span className={s.rowNum} aria-hidden="true">
                 04
               </span>
-              <div className={cs.flowContent}>
-                <h3 className={cs.flowH3}>相談後</h3>
-                <p className={cs.flowBody}>
+              <div className={s.rowContent}>
+                <h3 className={s.rowTitle}>相談後</h3>
+                <p className={s.body}>
                   ご希望があれば、後日ご提案・お見積りをお送りします。ご不要の場合はその旨をお伝えいただければ、こちらから追いかけのご連絡をすることはありません。
                 </p>
               </div>
@@ -695,13 +683,8 @@ export default function ContactPage() {
       </section>
 
       {/* ============ 【6】フォーム ============ */}
-      <section
-        id="form"
-        ref={formSectionRef}
-        className={`${cs.formSection} ${cs.anchorTarget}`}
-      >
-        <div className={cs.formSectionGlow} aria-hidden="true" />
-        <div className={`container ${cs.formInner}`}>
+      <section id="form" ref={formSectionRef} className={s.section}>
+        <div className={`${s.inner} ${cs.formInner}`}>
           {status === "success" ? (
             <div
               className={cs.successBox}
@@ -731,7 +714,7 @@ export default function ContactPage() {
               <p className={cs.successClosing}>お話しできるのを楽しみにしています。</p>
 
               <div className={cs.successActions}>
-                <a href="/" className={s.btnPrimary}>
+                <a href="/" className={s.btn}>
                   トップページに戻る
                 </a>
               </div>
@@ -804,10 +787,10 @@ export default function ContactPage() {
             </div>
           ) : (
             <>
-              <h2 className={s.sectionTitle}>無料相談のお申し込み</h2>
-              <p className={cs.formLead}>
+              <SectionHeading>無料相談のお申し込み</SectionHeading>
+              <p className={`${s.body} ${cs.formLead}`}>
                 入力は1分ほどで完了します。必須はお名前・メールアドレス・ご相談テーマの
-                <strong>3つだけ</strong>です。
+                <strong className={s.strong}>3つだけ</strong>です。
                 <br />
                 詳しい内容は、当日お話しいただければ大丈夫です。
               </p>
@@ -1093,11 +1076,11 @@ export default function ContactPage() {
                       }}
                     />
                     <span>
-                      <a href="/privacy" target="_blank" rel="noopener noreferrer">
+                      <a href="/privacy" target="_blank" rel="noopener noreferrer" className={s.textLink}>
                         プライバシーポリシー
                       </a>
                       および
-                      <a href="/personal-info" target="_blank" rel="noopener noreferrer">
+                      <a href="/personal-info" target="_blank" rel="noopener noreferrer" className={s.textLink}>
                         個人情報の取り扱いについて
                       </a>
                       に同意する <span className={cs.required}>必須</span>
@@ -1165,42 +1148,17 @@ export default function ContactPage() {
       </section>
 
       {/* ============ 【7】よくあるご質問 ============ */}
-      <section
-        id="faq"
-        className={`${cs.sectionStd} ${cs.sectionAltTopOnly} ${cs.anchorTarget}`}
-      >
-        <div className={`container ${s.reveal}`}>
-          <h2 className={s.sectionTitle}>無料相談について、よくあるご質問</h2>
-          <p className={s.sectionSub}>
-            ご相談の前に気になる点があれば、こちらをご確認ください。
-          </p>
-          <div className={cs.contactFaqWrap}>
-            <FaqAccordion
-              groups={[{ label: "無料相談について", faqs: CONTACT_FAQS }]}
-              showTabs={false}
-            />
-          </div>
+      <section id="faq" className={s.section}>
+        <div className={`${s.inner} ${s.block}`}>
+          <SectionHeading lead="ご相談の前に気になる点があれば、こちらをご確認ください。">
+            無料相談について、よくあるご質問
+          </SectionHeading>
+          <FaqAccordion
+            groups={[{ label: "無料相談について", faqs: CONTACT_FAQS }]}
+            showTabs={false}
+          />
         </div>
       </section>
-
-      <SiteFooter />
-
-      {/* モバイル限定のスクロール追従CTA */}
-      <nav
-        aria-label="フォームへのショートカット"
-        className={`${cs.stickyCta} ${stickyCtaVisible ? cs.stickyCtaVisible : ""}`}
-        aria-hidden={!stickyCtaVisible}
-      >
-        <a
-          href="#form"
-          className={cs.stickyCtaBtn}
-          tabIndex={stickyCtaVisible ? undefined : -1}
-        >
-          相談フォームへ進む
-        </a>
-        <p className={cs.stickyCtaNote}>その場で契約を迫ることはありません。</p>
-      </nav>
-      <div className={cs.stickyCtaSpacer} aria-hidden="true" />
-    </>
+    </SubPage>
   );
 }

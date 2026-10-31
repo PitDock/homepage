@@ -365,6 +365,15 @@
   color: var(--brand-pit-blue);
 }
 
+.footerCatchSub {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.9;
+  font-weight: 400;
+  color: var(--brand-ink);
+}
+
 .footerSocial {
   display: flex;
   gap: 20px;
@@ -503,6 +512,10 @@
     font-size: 14px;
   }
 
+  .footerCatchSub {
+    font-size: 13px;
+  }
+
   .footerLinks {
     gap: 16px;
   }
@@ -511,5 +524,28 @@
   .footerTop nav {
     flex-wrap: wrap;
     gap: 32px;
+  }
+}
+
+/*
+ * 画面幅で出し分ける改行。<br className={s.pcOnly} /> のように <br> に付けて使う。
+ * - pcOnly: PC（768px 以上）のときだけ改行する
+ * - spOnly: スマートフォン（767px 以下）のときだけ改行する
+ */
+.pcOnly {
+  display: inline;
+}
+
+.spOnly {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .pcOnly {
+    display: none;
+  }
+
+  .spOnly {
+    display: inline;
   }
 }

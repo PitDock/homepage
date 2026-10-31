@@ -1,117 +1,31 @@
-"use client";
-
-import React, { useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
-import SiteHeader from "./components/site/SiteHeader";
-import SiteFooter from "./components/site/SiteFooter";
-import s from "./not-found.module.css";
-
-function ParticleCanvas() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let animId: number;
-
-    const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-    resize();
-
-    const COUNT = 40;
-    const MAX_DIST = 120;
-
-    const pts = Array.from({ length: COUNT }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.35,
-      vy: (Math.random() - 0.5) * 0.35,
-    }));
-
-    const tick = () => {
-      const W = canvas.width;
-      const H = canvas.height;
-      ctx.clearRect(0, 0, W, H);
-
-      for (const p of pts) {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0) p.x = W;
-        if (p.x > W) p.x = 0;
-        if (p.y < 0) p.y = H;
-        if (p.y > H) p.y = 0;
-      }
-
-      for (let i = 0; i < pts.length; i++) {
-        for (let j = i + 1; j < pts.length; j++) {
-          const dx = pts[i].x - pts[j].x;
-          const dy = pts[i].y - pts[j].y;
-          const d = Math.hypot(dx, dy);
-          if (d < MAX_DIST) {
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(79,142,247,${0.22 * (1 - d / MAX_DIST)})`;
-            ctx.lineWidth = 1;
-            ctx.moveTo(pts[i].x, pts[i].y);
-            ctx.lineTo(pts[j].x, pts[j].y);
-            ctx.stroke();
-          }
-        }
-        ctx.beginPath();
-        ctx.fillStyle = "rgba(79,142,247,0.65)";
-        ctx.arc(pts[i].x, pts[i].y, 1.5, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      animId = requestAnimationFrame(tick);
-    };
-    tick();
-
-    window.addEventListener("resize", resize);
-    return () => {
-      cancelAnimationFrame(animId);
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
-
-  return <canvas ref={canvasRef} className={s.particleCanvas} aria-hidden="true" />;
-}
+import SubPage from "./components/sub/SubPage";
+import BackButton from "./components/sub/BackButton";
+import s from "./components/sub/sub.module.css";
+import nf from "./not-found.module.css";
 
 export default function NotFound() {
-  const router = useRouter();
-
   return (
-    <>
-      <SiteHeader />
-      <main className={s.main}>
-        <ParticleCanvas />
-        <div className={s.glow} aria-hidden="true" />
-        <div className={s.content}>
-          <span className={s.badge}>404 NOT FOUND</span>
-          <div className={s.number} aria-hidden="true">404</div>
-          <div className={s.divider} aria-hidden="true" />
-          <h1 className={s.heading}>ページが見つかりません</h1>
-          <p className={s.sub}>
+    <SubPage>
+      <section className={`${s.section} ${nf.section}`}>
+        <div className={`${s.inner} ${nf.content}`}>
+          <span className={s.tag}>404 NOT FOUND</span>
+          <div className={nf.number} aria-hidden="true" lang="en">
+            <span className={nf.numberPit}>4</span>
+            <span className={nf.numberDock}>04</span>
+          </div>
+          <h1 className={nf.heading}>ページが見つかりません</h1>
+          <p className={s.body}>
             お探しのページは存在しないか、移動・削除された可能性があります。<br />
             URLをご確認いただくか、ホームページからお探しください。
           </p>
-          <div className={s.buttons}>
-            <a href="/" className={s.btnPrimary}>ホームへ戻る</a>
-            <button
-              type="button"
-              className={s.btnSecondary}
-              onClick={() => router.back()}
-            >
-              ← 前のページに戻る
-            </button>
+          <div className={nf.buttons}>
+            <a href="/" className={s.btn}>
+              ホームへ戻る
+            </a>
+            <BackButton className={s.btnOutline}>← 前のページに戻る</BackButton>
           </div>
         </div>
-      </main>
-      <SiteFooter />
-    </>
+      </section>
+    </SubPage>
   );
 }

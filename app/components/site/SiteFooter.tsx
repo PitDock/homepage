@@ -27,7 +27,13 @@ export default function SiteFooter({ ribbonAnchor }: Props) {
             <a href="/" className={s.footerLogo} aria-label="PitDock株式会社 トップへ">
               <img src="/brand/logo.svg" alt="PitDock" width={227} height={36} />
             </a>
-            <p className={s.footerCatch}>課題を分解し、噛み合わせ、また走り始める。</p>
+            <p className={s.footerCatch}>
+              テクノロジーを味方に走り続ける<br/>
+              <span className={s.footerCatchSub}>
+                PitDockは、DX・AXコンサルティングや システム開発を通じて、<br className={s.pcOnly} />
+                お客様が成長し続けるための 変革を共に進めるパートナーです。
+              </span>
+            </p>
             <ul className={s.footerSocial} role="list" aria-label="SNS">
               {socialLinks.map((sn) => (
                 <li key={sn.name}>

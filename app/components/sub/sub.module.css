@@ -1,0 +1,643 @@
+/*
+ * 下層ページ共通（docs/subpages-design-spec.md）
+ * トップ（app/home.module.css）と同じトークン・値を .page に閉じて持つ。
+ * globals.css の :root（旧ダーク）はLPが参照しているため、ここでは上書きしない。
+ */
+
+.page {
+  /* トップ（app/home.module.css .page）と同じ値 */
+  --brand-pit-blue: #14509E;
+  --brand-dock-blue: #3AA0E8;
+  --brand-ink: #0E1B2C;
+  --brand-tint: #EEF5FC;
+  --brand-gray: #5A616B;
+  --brand-white: #FFFFFF;
+  --note-border: #C7CCD1;
+  --brand-pit-blue-hover: #0F3F7E;
+  --brand-white-hover: #DCE9F7;
+  /* 下層ページで追加 */
+  --brand-error: #C62828;
+  --focus-ring: 0 0 0 3px rgba(20, 80, 158, 0.28);
+
+  --header-height: 88px;
+  --section-pad-y: 100px;
+  --section-pad-x: 80px;
+
+  position: relative;
+  overflow-x: clip;
+  background: linear-gradient(180deg, var(--brand-white) 0%, var(--brand-tint) 100%);
+  color: var(--brand-ink);
+  font-family: var(--font-space), var(--font-zen), "Hiragino Sans", sans-serif;
+  font-size: 16px;
+  line-height: 2;
+}
+
+/* globals.css の body（ダーク）がオーバースクロール時に見えないようにする */
+:global(body):has(.page) {
+  background: var(--brand-white);
+}
+
+.page ul,
+.page ol {
+  list-style: none;
+}
+
+.page [id] {
+  scroll-margin-top: var(--header-height);
+}
+
+/* キーボード操作時のフォーカス表示（dock-blue は 3:1 未満なので pit-blue） */
+.page a:focus-visible,
+.page button:focus-visible,
+.page summary:focus-visible {
+  outline: 2px solid var(--brand-pit-blue);
+  outline-offset: 2px;
+}
+
+.main {
+  padding-top: var(--header-height);
+}
+
+.inner {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.section {
+  padding: var(--section-pad-y) var(--section-pad-x);
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.body {
+  font-size: 16px;
+  line-height: 2;
+}
+
+.note {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--brand-gray);
+}
+
+.narrow {
+  max-width: 880px;
+}
+
+.pcOnly {
+  display: inline;
+}
+
+.spOnly {
+  display: none;
+}
+
+/* ===== ページヒーロー ===== */
+
+.hero {
+  padding: 80px var(--section-pad-x) 0;
+}
+
+.heroInner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.breadcrumb a {
+  color: var(--brand-pit-blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.breadcrumb a:hover {
+  color: var(--brand-pit-blue-hover);
+}
+
+.breadcrumbSep {
+  color: var(--brand-gray);
+}
+
+.breadcrumb [aria-current="page"] {
+  color: var(--brand-ink);
+}
+
+.heroEn {
+  margin-top: 40px;
+  font-family: var(--font-space), sans-serif;
+  font-size: 48px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.heroEnPit {
+  color: var(--brand-pit-blue);
+}
+
+.heroEnDock {
+  color: var(--brand-dock-blue);
+}
+
+.heroTitle {
+  margin-top: 40px;
+  font-size: 28px;
+  line-height: 1.5;
+  font-weight: 700;
+  color: var(--brand-ink);
+}
+
+.heroEn + .heroTitle {
+  margin-top: 20px;
+}
+
+.heroTitleLong {
+  font-size: 24px;
+}
+
+.heroLead {
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 2;
+  white-space: pre-line;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+/* ===== セクション見出し ===== */
+
+.secHead {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.secHeading {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 28px;
+  line-height: 1.5;
+  font-weight: 700;
+  color: var(--brand-ink);
+}
+
+.pMark {
+  flex-shrink: 0;
+  width: 36px;
+  height: 28px;
+  object-fit: contain;
+  margin-top: 7px;
+}
+
+.subHeading {
+  font-size: 22px;
+  line-height: 1.45;
+  font-weight: 700;
+  color: var(--brand-pit-blue);
+}
+
+/* ===== ボタン ===== */
+
+.btn,
+.btnOutline,
+.btnWhite {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 18px 36px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 2;
+  border: 1px solid transparent;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-family: inherit;
+}
+
+.btn {
+  background: var(--brand-pit-blue);
+  color: var(--brand-white);
+}
+
+.btn:hover {
+  background: var(--brand-pit-blue-hover);
+}
+
+.btnOutline {
+  padding: 17px 35px;
+  border-color: var(--brand-pit-blue);
+  background: var(--brand-white);
+  color: var(--brand-pit-blue);
+}
+
+.btnOutline:hover {
+  background: var(--brand-white-hover);
+}
+
+.btnWhite {
+  background: var(--brand-white);
+  color: var(--brand-pit-blue);
+}
+
+.btnWhite:hover {
+  background: var(--brand-white-hover);
+}
+
+/* pit-blue の帯の上なので白にする */
+.page .btnWhite:focus-visible {
+  outline-color: var(--brand-white);
+}
+
+.btnSm {
+  padding: 8px 24px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.btnOutline.btnSm {
+  padding: 7px 23px;
+}
+
+/* ===== カード・グリッド ===== */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--brand-dock-blue);
+  background: var(--brand-white);
+}
+
+.cardLoose {
+  gap: 20px;
+}
+
+.cardTitle {
+  font-size: 22px;
+  line-height: 1.45;
+  font-weight: 700;
+  color: var(--brand-pit-blue);
+}
+
+.cardTitleSm {
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--brand-ink);
+}
+
+.cardNum {
+  font-family: var(--font-space), sans-serif;
+  font-size: 32px;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--brand-dock-blue);
+}
+
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 2px;
+  background: var(--brand-tint);
+  color: var(--brand-pit-blue);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* ===== 罫線リスト ===== */
+
+.rowList {
+  border-top: 1px solid var(--brand-dock-blue);
+}
+
+.rowItem {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  column-gap: 40px;
+  align-items: start;
+  padding: 40px 14px;
+  border-bottom: 1px solid var(--brand-dock-blue);
+}
+
+.rowNum {
+  font-family: var(--font-space), sans-serif;
+  font-size: 32px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--brand-dock-blue);
+}
+
+.rowContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rowTitle {
+  font-size: 22px;
+  line-height: 1.45;
+  font-weight: 700;
+  color: var(--brand-pit-blue);
+}
+
+/* ===== データ表 ===== */
+
+.dataTable {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 1px solid var(--brand-dock-blue);
+}
+
+.dataRow {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  column-gap: 40px;
+  padding: 24px 14px;
+  border-bottom: 1px solid var(--brand-dock-blue);
+}
+
+.dataLabel {
+  font-size: 14px;
+  line-height: 1.8;
+  font-weight: 400;
+  text-align: left;
+  color: var(--brand-pit-blue);
+}
+
+.dataValue {
+  font-size: 16px;
+  line-height: 1.8;
+  font-weight: 700;
+  color: var(--brand-ink);
+}
+
+.dataValue ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ===== CTA 帯 ===== */
+
+.ctaBand {
+  padding: var(--section-pad-y) var(--section-pad-x);
+  background: var(--brand-pit-blue);
+}
+
+.ctaInner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 60px;
+}
+
+.ctaText {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ctaHeading {
+  font-size: 28px;
+  line-height: 1.5;
+  font-weight: 700;
+  color: var(--brand-white);
+}
+
+.ctaBody {
+  font-size: 16px;
+  line-height: 2;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ===== テキストリンク・強調 ===== */
+
+.textLink {
+  color: var(--brand-pit-blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.textLink:hover {
+  color: var(--brand-pit-blue-hover);
+  text-decoration: none;
+}
+
+.strong {
+  color: var(--brand-pit-blue);
+  font-weight: 700;
+}
+
+/* ===== レスポンシブ ===== */
+
+@media (max-width: 1199px) {
+  .grid4,
+  .grid3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1151px) {
+  .page {
+    --header-height: 56px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .page {
+    --section-pad-y: 64px;
+    --section-pad-x: 24px;
+    font-size: 15px;
+  }
+
+  .body {
+    font-size: 15px;
+  }
+
+  .block {
+    gap: 32px;
+  }
+
+  .pcOnly {
+    display: none;
+  }
+
+  .spOnly {
+    display: inline;
+  }
+
+  .hero {
+    padding-top: 40px;
+  }
+
+  .heroEn {
+    margin-top: 24px;
+    font-size: 34px;
+  }
+
+  .heroTitle {
+    margin-top: 24px;
+    font-size: 22px;
+  }
+
+  .heroEn + .heroTitle {
+    margin-top: 12px;
+  }
+
+  .heroTitleLong {
+    font-size: 20px;
+  }
+
+  .heroLead {
+    font-size: 15px;
+  }
+
+  .heroActions {
+    margin-top: 32px;
+    gap: 12px;
+  }
+
+  .secHeading {
+    font-size: 22px;
+    gap: 6px;
+  }
+
+  .pMark {
+    width: 30px;
+    height: 25px;
+    margin-top: 4px;
+  }
+
+  .subHeading {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .btn,
+  .btnOutline,
+  .btnWhite {
+    padding: 14px 28px;
+    font-size: 15px;
+  }
+
+  .btnOutline {
+    padding: 13px 27px;
+  }
+
+  .btnSm {
+    padding: 8px 24px;
+    font-size: 14px;
+  }
+
+  .btnOutline.btnSm {
+    padding: 7px 23px;
+  }
+
+  .grid4,
+  .grid3 {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .cardTitle {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .cardNum {
+    font-size: 24px;
+  }
+
+  .rowItem {
+    grid-template-columns: 1fr;
+    row-gap: 8px;
+    padding: 28px 12px;
+  }
+
+  .rowNum {
+    font-size: 24px;
+  }
+
+  .rowTitle {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .dataRow {
+    grid-template-columns: 1fr;
+    row-gap: 6px;
+    padding: 20px 12px;
+  }
+
+  .dataLabel {
+    font-size: 13px;
+  }
+
+  .dataValue {
+    font-size: 15px;
+  }
+
+  .ctaInner {
+    gap: 40px;
+  }
+
+  .ctaHeading {
+    font-size: 22px;
+  }
+
+  .ctaBody {
+    font-size: 15px;
+  }
+}

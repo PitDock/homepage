@@ -1,15 +1,13 @@
-"use client";
-
-import { useEffect } from "react";
 import Image from "next/image";
-import SiteHeader from "../../components/site/SiteHeader";
-import SiteFooter from "../../components/site/SiteFooter";
-import { XLogo } from "../../components/XLogo";
-import s from "../../page.module.css";
+import SubPage from "../../components/sub/SubPage";
+import PageHero from "../../components/sub/PageHero";
+import SectionHeading from "../../components/sub/SectionHeading";
+import CtaBand from "../../components/sub/CtaBand";
+import s from "../../components/sub/sub.module.css";
+import ps from "./products.module.css";
 
 const CONTACT_URL = "/contact";
 const PRODUCT_CONTACT_URL = "https://forms.gle/9EPiyGuYy5HdvDVZ8";
-const DUOSUB_X_URL = "https://x.com/duosub_app";
 
 type ProductEntry = {
   name: string;
@@ -52,74 +50,51 @@ const products: ProductEntry[] = [
 ];
 
 export default function ProductsPage() {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add(s.revealed);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
-    );
-    document.querySelectorAll(`.${s.reveal}`).forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <>
-      <SiteHeader />
-
-      {/* Page Hero */}
-      <section className={s.pageHero}>
-        <div className="container">
-          <nav className={s.breadcrumb} aria-label="パンくず">
-            <ol>
-              <li><a href="/">ホーム</a></li>
-              <li aria-hidden="true" className={s.breadcrumbSep}>/</li>
-              <li><a href="/#services">サービス</a></li>
-              <li aria-hidden="true" className={s.breadcrumbSep}>/</li>
-              <li><span aria-current="page">自社プロダクト</span></li>
-            </ol>
-          </nav>
-          <h1 className={s.pageH1}>自社プロダクト</h1>
-          <p className={s.pageSubCopy}>
-          </p>
-          <a href={PRODUCT_CONTACT_URL} target="_blank" rel="noopener noreferrer" className={s.btnSecondary}>
-            プロダクトについて問い合わせる →
+    <SubPage>
+      <PageHero
+        breadcrumbs={[
+          { label: "ホーム", href: "/" },
+          { label: "サービス", href: "/#services" },
+          { label: "自社プロダクト" },
+        ]}
+        title="自社プロダクト"
+        actions={
+          <a href={PRODUCT_CONTACT_URL} target="_blank" rel="noopener noreferrer" className={s.btnOutline}>
+            プロダクトについて問い合わせる
           </a>
-        </div>
-      </section>
+        }
+      />
 
-      {/* Products List */}
-      <section className={s.serviceSection}>
-        <div className="container">
-          <ul className={s.productListStack} role="list">
+      <section className={s.section}>
+        <div className={s.inner}>
+          <ul className={ps.productList} role="list">
             {products.map((p, i) => (
-              <li key={p.href} className={`${s.serviceCard} ${s.reveal}`} style={{ transitionDelay: `${i * 0.1}s` }}>
-                <div className={s.productCardInner}>
-                  <div className={s.productCardLogo}>
-                    <Image
-                      src={p.logoSrc}
-                      alt={`${p.name} のロゴ`}
-                      fill
-                      className={s.productLogoImg}
-                      sizes="(max-width: 640px) 220px, 200px"
-                      priority={i === 0}
-                    />
-                  </div>
-                  <div className={s.productCardBody}>
-                    <h3 className={s.serviceH3}>{p.name}</h3>
-                    <p className={s.serviceSubtitle}>{p.subtitle}</p>
-                    <p className={s.serviceDesc}>{p.desc}</p>
-                    <ul className={s.darkTagList} role="list" aria-label="タグ">
-                      {p.tags.map((t) => <li key={t} className={s.darkTag}>{t}</li>)}
-                    </ul>
-                    <div className={s.productCardActions}>
-                      <a href={p.href} className={s.btnGhostSm}>{p.cta}</a>
-                    </div>
+              <li key={p.href} className={`${s.card} ${ps.productCard}`}>
+                <div className={ps.productThumb}>
+                  <Image
+                    src={p.logoSrc}
+                    alt={`${p.name} のロゴ`}
+                    fill
+                    sizes="(max-width: 1023px) 100vw, 360px"
+                    priority={i === 0}
+                  />
+                </div>
+                <div className={ps.productBody}>
+                  <h2 className={s.cardTitle}>{p.name}</h2>
+                  <p className={ps.productSubtitle}>{p.subtitle}</p>
+                  <p className={`${s.body} ${ps.productDesc}`}>{p.desc}</p>
+                  <ul className={s.tags} role="list" aria-label="タグ">
+                    {p.tags.map((t) => (
+                      <li key={t} className={s.tag}>
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className={ps.productActions}>
+                    <a href={p.href} className={`${s.btnOutline} ${s.btnSm}`}>
+                      {p.cta}
+                    </a>
                   </div>
                 </div>
               </li>
@@ -128,35 +103,22 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      {/* Why section */}
-      <section className={s.featuresSection}>
-        <div className="container">
-          <h2 className={`${s.sectionTitle} ${s.reveal}`}>PitDockがプロダクトをつくる理由</h2>
-          <div className={`${s.productsNote} ${s.reveal}`}>
-            <p className={s.productsNoteText}>
-              コンサルティング・開発の現場や日常生活で感じた課題や「あったらいいな」を、プロダクトに変えています。<br />
-              ユーザー目線と開発者目線を兼ね備えたチームが、使いやすさと品質にこだわって開発・運営しています。
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer CTA */}
-      <section className={s.footerCta}>
-        <div className="container">
-          <h2 className={s.footerCtaH2}>プロダクト開発のご相談もお気軽に。</h2>
-          <p className={s.footerCtaSub}>
-            アプリやサービスのアイデアをお持ちの方は、ぜひ一度ご相談ください。
+      <section className={s.section}>
+        <div className={`${s.inner} ${s.block}`}>
+          <SectionHeading>PitDockがプロダクトをつくる理由</SectionHeading>
+          <p className={`${s.body} ${s.narrow}`}>
+            コンサルティング・開発の現場や日常生活で感じた課題や「あったらいいな」を、プロダクトに変えています。<br />
+            ユーザー目線と開発者目線を兼ね備えたチームが、使いやすさと品質にこだわって開発・運営しています。
           </p>
-          <div className={`${s.ctaRow} ${s.ctaRowCenter}`}>
-            <a href={CONTACT_URL} className={s.btnPrimary}>
-              無料相談を予約する →
-            </a>
-          </div>
         </div>
       </section>
 
-      <SiteFooter />
-    </>
+      <CtaBand
+        heading="プロダクト開発のご相談もお気軽に。"
+        body="アプリやサービスのアイデアをお持ちの方は、ぜひ一度ご相談ください。"
+        href={CONTACT_URL}
+        label="無料相談を予約する"
+      />
+    </SubPage>
   );
 }

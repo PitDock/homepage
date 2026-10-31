@@ -1,6 +1,6 @@
-import SiteHeader from "../components/site/SiteHeader";
-import SiteFooter from "../components/site/SiteFooter";
-import s from "../page.module.css";
+import SubPage from "../components/sub/SubPage";
+import PageHero from "../components/sub/PageHero";
+import s from "../components/sub/sub.module.css";
 import ps from "./privacy.module.css";
 
 const policies: {
@@ -81,26 +81,14 @@ const policies: {
 
 export default function PrivacyPolicyPage() {
   return (
-    <>
-      <SiteHeader />
+    <SubPage>
+      <PageHero
+        breadcrumbs={[{ label: "ホーム", href: "/" }, { label: "プライバシーポリシー" }]}
+        title="プライバシーポリシー"
+      />
 
-      {/* Page Hero */}
-      <section className={s.pageHero}>
-        <div className={`container ${ps.pageHeroInner}`}>
-          <nav className={s.breadcrumb} aria-label="パンくず">
-            <ol>
-              <li><a href="/">ホーム</a></li>
-              <li aria-hidden="true" className={s.breadcrumbSep}>/</li>
-              <li><span aria-current="page">プライバシーポリシー</span></li>
-            </ol>
-          </nav>
-          <h1 className={s.pageH1}>プライバシーポリシー</h1>
-        </div>
-      </section>
-
-      {/* Policy Content */}
       <section className={s.section}>
-        <div className="container">
+        <div className={s.inner}>
           <div className={ps.contentWrap}>
             <p className={ps.meta}>
               2024年4月8日制定<br />
@@ -122,7 +110,7 @@ export default function PrivacyPolicyPage() {
                 <li key={p.heading} className={ps.policyItem}>
                   <h2 className={ps.policyHeading}>{p.heading}</h2>
                   {p.body && (
-                    <p className={ps.policyBody} style={{ whiteSpace: "pre-line" }}>
+                    <p className={ps.policyBody}>
                       {p.body}
                     </p>
                   )}
@@ -143,7 +131,6 @@ export default function PrivacyPolicyPage() {
         </div>
       </section>
 
-      <SiteFooter />
-    </>
+    </SubPage>
   );
 }
