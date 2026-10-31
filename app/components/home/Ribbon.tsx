@@ -4,10 +4,12 @@ import { useEffect, useRef } from "react";
 import s from "../../home.module.css";
 
 /*
- * スクロールに合わせて伸びるリボン（デザイナー支給の public/brand/ribbon_v3s.svg）。
+ * スクロールに合わせて伸びるリボン（デザイナー支給の SVG）。
  *
- * - パスは 1440 × 6028（Works 非表示時のページ）を基準に描かれている。
- *   横は画面幅に合わせて拡大縮小し、縦はセクションごとに区間を対応させて伸縮する
+ * - PC 用（public/brand/ribbon_v3s.svg、1440 × 6028）と
+ *   モバイル用（public/brand/ribbon_sp.svg、375 × 7894）を画面幅で切り替える。
+ *   どちらも Works 非表示時のページを基準に描かれている。
+ * - 横は画面幅に合わせて拡大縮小し、縦はセクションごとに区間を対応させて伸縮する
  *   （data-ribbon-anchor を付けた要素の上端が、Figma 上の各セクション上端に対応する）。
  *   セクションの高さが変わってもループやリングが同じセクション内に収まる。
  * - 先端は画面上端から 85% の高さを追いかける（stroke-dashoffset で伸縮）。
@@ -16,16 +18,41 @@ import s from "../../home.module.css";
  * - prefers-reduced-motion の人には、描き終えた状態で静止表示する。
  */
 
-const SOURCE_URL = "/brand/ribbon_v3s.svg";
-const SOURCE_WIDTH = 1440;
+type RibbonSource = {
+  url: string;
+  /** デザイン上のページ幅 */
+  width: number;
+  /**
+   * Figma 上の各セクション上端（px）。順番は data-ribbon-anchor の値（0 始まり）と対応する。
+   * 0: ページ上端 / 1: FV / 2: Concept / 3: Services / 4: Note / 5: Company / 6: News / 7: Contact / 8: Footer / 9: ページ下端
+   */
+  anchors: number[];
+  /** グラデーションの始点・終点（Figma 上の y 座標） */
+  gradientY1: number;
+  gradientY2: number;
+  /** 線の太さ（デザイン上の値。PC は画面幅に合わせて拡大縮小する） */
+  strokeWidth: number;
+};
 
-// Figma 上の各セクション上端（px）。順番は data-ribbon-anchor の値（0 始まり）と対応する。
-// 0: ページ上端 / 1: FV / 2: Concept / 3: Services / 4: Note / 5: Company / 6: News / 7: Contact / 8: Footer / 9: ページ下端
-const FIGMA_ANCHORS = [0, 133, 973, 2343, 3152, 3876, 4417, 5162, 5639, 6028];
+const PC_SOURCE: RibbonSource = {
+  url: "/brand/ribbon_v3s.svg",
+  width: 1440,
+  anchors: [0, 133, 973, 2343, 3152, 3876, 4417, 5162, 5639, 6028],
+  gradientY1: 1010,
+  gradientY2: 5510,
+  strokeWidth: 110,
+};
 
-// グラデーションの始点・終点（Figma 上の y 座標）
-const GRADIENT_Y1 = 1010;
-const GRADIENT_Y2 = 5510;
+// 各セクションの上端は Figma の「Mobile - ○○」フレームの高さを積み上げた値
+// （Header 56 / FV 516 / Concept 2111 / Services 1845 / Note 806 / Company 1035 / News 648 / Contact 431 / Footer 446）
+const SP_SOURCE: RibbonSource = {
+  url: "/brand/ribbon_sp.svg",
+  width: 375,
+  anchors: [0, 56, 572, 2683, 4528, 5334, 6369, 7017, 7448, 7894],
+  gradientY1: 560,
+  gradientY2: 7295.55,
+  strokeWidth: 48,
+};
 
 const APPEAR_SCROLL = 250;
 const APPEAR_OFFSET = 40;
@@ -42,15 +69,56 @@ function parsePath(d: string): Segment[] {
     if (/[A-Za-z]/.test(t)) segments.push({ cmd: t, nums: [] });
     else segments[segments.length - 1]?.nums.push(Number(t));
   }
-  return segments;
+  return joinSubpaths(segments);
 }
 
-function makeYMapper(actual: number[]) {
+/*
+ * Figma から書き出したパスは、ループやリングの部分が同じ点で区切られた別のサブパス（Z / M）になる。
+ * 破線（stroke-dasharray）はサブパスごとに最初からやり直して描かれるため、
+ * そのままだと後半のサブパスが先端より先まで一気に描かれてしまう。
+ * 同じ点でつながっている Z / M を取り除いて、1 本の連続した線にする。
+ */
+function joinSubpaths(segments: Segment[]): Segment[] {
+  const same = (ax: number, ay: number, bx: number, by: number) => Math.abs(ax - bx) < 0.01 && Math.abs(ay - by) < 0.01;
+  const out: Segment[] = [];
+  let cx = 0;
+  let cy = 0;
+  let sx = 0;
+  let sy = 0;
+  for (const seg of segments) {
+    const { cmd, nums } = seg;
+    if (cmd === "M" && nums.length >= 2) {
+      // 現在位置と同じ点からの M は、線をつなげたまま続ける
+      if (out.length > 0 && same(nums[0], nums[1], cx, cy)) {
+        if (nums.length > 2) out.push({ cmd: "L", nums: nums.slice(2) });
+      } else {
+        out.push(seg);
+      }
+      // Z が戻る先は、つなげた場合も含めて直前の M の位置
+      sx = nums[0];
+      sy = nums[1];
+      [cx, cy] = nums.slice(-2);
+      continue;
+    }
+    if (cmd === "Z" || cmd === "z") {
+      // 始点に戻っていない場合だけ、始点までの線として残す
+      if (!same(cx, cy, sx, sy)) out.push({ cmd: "L", nums: [sx, sy] });
+      cx = sx;
+      cy = sy;
+      continue;
+    }
+    out.push(seg);
+    if (nums.length >= 2) [cx, cy] = nums.slice(-2);
+  }
+  return out;
+}
+
+function makeYMapper(figma: number[], actual: number[]) {
   return (y: number) => {
     let i = 0;
-    while (i < FIGMA_ANCHORS.length - 2 && y > FIGMA_ANCHORS[i + 1]) i++;
-    const f0 = FIGMA_ANCHORS[i];
-    const f1 = FIGMA_ANCHORS[i + 1];
+    while (i < figma.length - 2 && y > figma[i + 1]) i++;
+    const f0 = figma[i];
+    const f1 = figma[i + 1];
     const a0 = actual[i];
     const a1 = actual[i + 1];
     return a0 + ((y - f0) / (f1 - f0)) * (a1 - a0);
@@ -137,7 +205,9 @@ export default function Ribbon() {
     if (!layer || !svg || !path || !gradient || !motion || !page) return;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let segments: Segment[] = [];
+    // 読み込んだパスを URL ごとに保持する（PC ⇔ モバイルの切り替えで読み直さない）
+    const loaded = new Map<string, Segment[]>();
+    const loading = new Set<string>();
     let total = 0;
     // サンプル点ごとの「そこまで描き終える先端の高さ」（単調非減少。ループは smoothLoops で均す）
     let sampleLengths: number[] = [];
@@ -147,21 +217,51 @@ export default function Ribbon() {
     let frame = 0;
     let disposed = false;
 
+    const load = (url: string) => {
+      if (loading.has(url)) return;
+      loading.add(url);
+      fetch(url)
+        .then((res) => res.text())
+        .then((text) => {
+          if (disposed) return;
+          const d = new DOMParser()
+            .parseFromString(text, "image/svg+xml")
+            .querySelector("path")
+            ?.getAttribute("d");
+          if (!d) return;
+          loaded.set(url, parsePath(d));
+          layout();
+        })
+        .catch(() => {
+          // リボンは装飾なので、読み込めなければ表示しないだけにする
+          loading.delete(url);
+        });
+    };
+
     const layout = () => {
-      if (segments.length === 0) return;
       const width = page.clientWidth;
+      const source = width <= MOBILE_MAX_WIDTH ? SP_SOURCE : PC_SOURCE;
+      const segments = loaded.get(source.url);
+      if (!segments) {
+        // 切り替え先のパスが届くまでは前のパスを出さない
+        total = 0;
+        path.removeAttribute("d");
+        load(source.url);
+        return;
+      }
       const height = page.scrollHeight;
       const pageTop = page.getBoundingClientRect().top + window.scrollY;
       const anchors = Array.from(page.querySelectorAll<HTMLElement>("[data-ribbon-anchor]"))
         .sort((a, b) => Number(a.dataset.ribbonAnchor) - Number(b.dataset.ribbonAnchor))
         .map((el) => el.getBoundingClientRect().top + window.scrollY - pageTop);
+      const figma = source.anchors;
       // アンカーが揃っていない場合は単純な縦方向の拡大縮小にする
       const actual =
-        anchors.length === FIGMA_ANCHORS.length - 2
+        anchors.length === figma.length - 2
           ? [0, ...anchors, height]
-          : FIGMA_ANCHORS.map((y) => (y / FIGMA_ANCHORS[FIGMA_ANCHORS.length - 1]) * height);
-      const mapY = makeYMapper(actual);
-      const sx = width / SOURCE_WIDTH;
+          : figma.map((y) => (y / figma[figma.length - 1]) * height);
+      const mapY = makeYMapper(figma, actual);
+      const sx = width / source.width;
 
       const d = segments
         .map(({ cmd, nums }) => {
@@ -177,9 +277,11 @@ export default function Ribbon() {
       svg.setAttribute("height", String(height));
       svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
       path.setAttribute("d", d);
-      gradient.setAttribute("y1", String(mapY(GRADIENT_Y1)));
-      gradient.setAttribute("y2", String(mapY(GRADIENT_Y2)));
-      const strokeWidth = width <= MOBILE_MAX_WIDTH ? 48 : Math.max(48, 110 * sx);
+      gradient.setAttribute("y1", String(mapY(source.gradientY1)));
+      gradient.setAttribute("y2", String(mapY(source.gradientY2)));
+      // モバイル用は 375〜767px の幅で同じ太さ（48px）のまま。PC 用は幅に合わせて細くし、48px を下限にする
+      const strokeWidth =
+        source === SP_SOURCE ? source.strokeWidth : Math.max(SP_SOURCE.strokeWidth, source.strokeWidth * sx);
       path.setAttribute("stroke-width", strokeWidth.toFixed(1));
 
       total = path.getTotalLength();
@@ -278,21 +380,8 @@ export default function Ribbon() {
         });
     };
 
-    fetch(SOURCE_URL)
-      .then((res) => res.text())
-      .then((text) => {
-        if (disposed) return;
-        const d = new DOMParser()
-          .parseFromString(text, "image/svg+xml")
-          .querySelector("path")
-          ?.getAttribute("d");
-        if (!d) return;
-        segments = parsePath(d);
-        layout();
-      })
-      .catch(() => {
-        // リボンは装飾なので、読み込めなければ表示しないだけにする
-      });
+    // 画面幅に応じたパスを読み込んでから配置する
+    layout();
 
     const resizeObserver = new ResizeObserver(requestLayout);
     resizeObserver.observe(page);
