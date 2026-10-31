@@ -47,6 +47,15 @@
   scroll-margin-top: var(--header-height);
 }
 
+/*
+ * 画面幅で出し分ける改行。<br className={s.pcOnly} /> のように <br> に付けて使う。
+ * - pcOnly: PC（768px 以上）のときだけ改行する
+ * - spOnly: スマートフォン（767px 以下）のときだけ改行する
+ */
+.pcOnly {
+  display: inline;
+}
+
 .spOnly {
   display: none;
 }
@@ -75,7 +84,6 @@
 .body {
   font-size: 16px;
   line-height: 2;
-  word-break: auto-phrase;
 }
 
 .block {
@@ -153,19 +161,6 @@
 
 .btnOutline:hover {
   background: var(--brand-white-hover);
-}
-
-.textLink {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 2;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  color: var(--brand-ink);
-}
-
-.textLink:hover {
-  color: var(--brand-pit-blue);
 }
 
 /* ===== リボン ===== */
@@ -509,7 +504,6 @@
   line-height: 2;
   font-weight: 700;
   color: var(--brand-pit-blue);
-  word-break: auto-phrase;
 }
 
 /*
@@ -634,11 +628,19 @@
   background: var(--brand-white);
 }
 
+/* チェック記号と見出しを別の列にし、見出しが改行しても 2 行目がチェックの下に回り込まないようにする */
 .reasonHeading {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4em;
   font-size: 18px;
   line-height: 1.35;
   font-weight: 700;
   color: var(--brand-ink);
+}
+
+.reasonCheck {
+  flex-shrink: 0;
 }
 
 /* ===== Services ===== */
@@ -765,6 +767,7 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   overflow: hidden;
   min-height: 4em;
   font-size: 16px;
@@ -838,7 +841,8 @@
 /* 文字を線より内側に寄せているのは意図的なデザイン（そろえない） */
 .infoTable {
   display: grid;
-  grid-template-columns: 220px 220px 400px 1fr;
+  /* 社名 / 代表者 / 事業内容 / 所在地 / 設立 */
+  grid-template-columns: 160px 140px 220px 200px 1fr;
   column-gap: 64px;
   row-gap: 32px;
   padding: 40px;
@@ -868,7 +872,7 @@
   display: block;
 }
 
-/* 4 列表示のときは最後の列が狭いので、住所などを途中で折り返さない */
+/* 横 1 列に並べるときは、住所などを途中で折り返さない */
 @media (min-width: 1280px) {
   .infoItem dd span {
     white-space: nowrap;
@@ -890,6 +894,8 @@
 .newsRow {
   display: grid;
   grid-template-columns: 120px 160px 1fr;
+  /* タグが 2 行になる行でも、日付・タイトルは上下中央にそろえる */
+  align-items: center;
   padding: 24px 14px;
   font-size: 13px;
   line-height: 1.4;
@@ -897,6 +903,13 @@
 
 .newsDate {
   font-family: var(--font-space), sans-serif;
+}
+
+/* タグが複数ある場合は 1 行に 1 つずつ */
+.newsCategory {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .newsRow:hover .newsTitle {
@@ -934,7 +947,6 @@
   font-size: 16px;
   line-height: 2;
   color: rgba(255, 255, 255, 0.85);
-  word-break: auto-phrase;
 }
 
 /* ===== Footer ===== */

@@ -1,5 +1,5 @@
 // note（https://note.com/pitdock）の記事を RSS から取得する。
-// トップページの「情報発信」セクションで最新記事を表示するために使う。
+// トップページの「コラム」セクションで最新記事を表示するために使う。
 
 export const NOTE_URL = "https://note.com/pitdock";
 const NOTE_RSS_URL = `${NOTE_URL}/rss`;

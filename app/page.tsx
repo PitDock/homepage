@@ -37,7 +37,7 @@ const problems = [
         でも、現場は動いていない。
       </>
     ),
-    body: "研修もした。それでも業務は変わらず、「やらされ感」だけが残っている状態。",
+    body: "研修もした。それでも業務は変わらず、「やらされ感」だけが残っている。",
   },
   {
     icon: "/icons/icon-concept-start.svg",
@@ -59,7 +59,7 @@ const problems = [
         説明できない。
       </>
     ),
-    body: "システムも導入した。コンサルも頼んだ。それでも数字として語れる変化がない。",
+    body: "システムも導入した。外部の支援も受けた。それでも目に見える変化がない。",
   },
   {
     icon: "/icons/icon-concept-consult.svg",
@@ -75,45 +75,45 @@ const problems = [
 
 const reasons = [
   {
-    heading: "現場に、本当に定着させる。",
-    body: "単なるツールの選定・導入だけで終わらせず、業務フローを設計し、組織の動き方が変わるところまで伴走いたします。",
+    heading: "戦略構築から実行まで一気通貫。",
+    body: "戦略を立てたチームが、そのままツール導入やシステム開発、現場への定着、公開の検証まで担当します。多重下請けによる不要な\"伝言ゲーム\"や無駄なマージンが発生しません。",
   },
   {
-    heading: "AIを、原理から理解している。",
-    body: "代表・小山は学生時代にAIを研究していました。流行りのツールを当てはめるのではなく、課題から逆算して設計します。",
+    heading: "経営・業務と技術、両方の目線で考える。",
+    body: "コンサルタントが技術を熟知した上で、課題の本質を改善する戦略を立てます。流行りのツールを当てはめるのではなく、「何を実現したいか」から逆算して設計します。",
   },
   {
-    heading: "戦略から開発まで、ワンチームで。",
-    body: "コンサルと開発会社の間で起きがちな「伝言ゲーム」。より合理的にプロジェクトが回るよう、構造的に整理します。",
+    heading: "小さく始めて、走りながら広げる。",
+    body: "まず一部の業務や機能から試し、効果を確かめてから広げます。ご予算に合わせて進め方を調整します。補助金の申請もサポートいたします。",
   },
 ];
 
 const services = [
   {
     name: "DXコンサルティング",
-    desc: "紙やExcelの業務を、仕組みに。ツール選定から現場への定着まで伴走します。",
+    desc: "事業・サービスの変革から業務フローの見直し、ツール選定、現場への定着まで伴走します。",
     tags: ["DX推進支援", "業務改善", "ツール導入"],
     illust: "/illustrations/illustration-dx.webp",
     href: "/service/dx-ax",
   },
   {
     name: "AXコンサルティング",
-    desc: "AIを前提に、業務と事業を組み直す。戦略立案からAI導入、新規事業提案まで。",
-    tags: ["AI導入", "生成AI活用", "新規事業"],
+    desc: "どこにAIが効くかの見極めから、活用方針づくり、導入・定着まで支援します。",
+    tags: ["AI導入", "生成AI", "AI駆動開発"],
     illust: "/illustrations/illustration-ax.webp",
     href: "/service/dx-ax",
   },
   {
     name: "システム開発",
-    desc: "要件定義から保守運用まで自社チームで一貫対応いたします。非効率な多重下請けもありません。",
-    tags: ["Webアプリ", "業務システム"],
+    desc: "要件整理から開発・保守運用まで、自社で一貫して対応します。下請けへの丸投げはしません。",
+    tags: ["Webアプリ", "スマホアプリ", "AI機能"],
     illust: "/illustrations/illustration-dev.webp",
     href: "/service/system-dev",
   },
   {
     name: "技術顧問",
-    desc: "CTOを採用する前に。月額2万円から経営＋技術目線で意思決定を支援いたします。",
-    tags: ["外部CTO", "技術選定"],
+    desc: "開発会社の見積の妥当性やIT投資の判断を、経営と技術の両方の目線でサポートします。月額2万円〜。",
+    tags: ["外部CTO", "ベンダー打合せ同席"],
     illust: "/illustrations/illustration-advisor.webp",
     href: "/service/tech-advisor",
   },
@@ -122,12 +122,13 @@ const services = [
 const companyInfo = [
   { label: "社名", value: ["PitDock株式会社"] },
   { label: "代表者", value: ["小山 望海"] },
-  { label: "事業内容", value: ["DX・AXを中心としたITコンサルティング", "システム開発", "自社プロダクトの開発・運営"] },
-  { label: "所在地／設立", value: ["〒150-0045", "東京都渋谷区神泉町10-15-301"] },
+  { label: "事業内容", value: ["DX・AXコンサルティング", "システム開発", "技術顧問", "自社プロダクトの開発・運営"] },
+  { label: "所在地", value: ["〒150-0045", "東京都渋谷区神泉町10-15-301"] },
+  { label: "設立", value: ["2024年4月8日"] },
 ];
 
-// 日付の新しい順に最新4件（全件は /news ページで確認できる）
-const latestNews = [...news].sort((a, b) => b.date.localeCompare(a.date) || b.id - a.id).slice(0, 4);
+// 日付の新しい順に最新5件（全件は /news ページで確認できる）
+const latestNews = [...news].sort((a, b) => b.date.localeCompare(a.date) || b.id - a.id).slice(0, 5);
 
 function isExternalUrl(url: string): boolean {
   return /^https?:\/\//i.test(url);
@@ -162,7 +163,7 @@ export default async function Home() {
             <p className={s.fvLead}>
               PitDockは、DX・AXコンサルティングや
               システム開発を通じて、
-              <br />
+              <br className={s.pcOnly} />
               お客様が成長し続けるための
               変革を共に進めるパートナーです。
             </p>
@@ -181,48 +182,63 @@ export default async function Home() {
               </p>
               <div className={s.conceptLead}>
                 <h2 id="concept-heading" className={s.conceptHeading}>
-                  ただのシステム化・<br className={s.spOnly} />
-                  AI化ではなく、<br className={s.spOnly} />
-                  根本から変えること。
+                  ただのシステム化やAI化のような<br className={s.spOnly} />小手先ではない、<br className={s.pcOnly} />真の変革を支援します。
                 </h2>
                 <p className={s.body}>
-                  やみくもにAIツールを導入しただけでは、現場は変わりません。業務のやり方から事業のあり方まで、根本から見直して、現場に根づく形で変える。それが私たちのトランスフォーメーションです。
+                  システムやAIを導入するだけでは、会社は変わりません。事業・業務を見直し、課題の根本を解決する。そして、変わり続けられる会社になる。それが、私たちの考えるトランスフォーメーションです。
                 </p>
               </div>
             </div>
 
-            <ul className={s.problemGrid} role="list">
-              {problems.map((p) => (
-                <li key={p.icon} className={s.problem}>
-                  <div className={s.problemHead}>
-                    <img src={p.icon} alt="" className={s.problemIcon} width={60} height={60} />
-                    <h3 className={s.problemHeading}>{p.heading}</h3>
-                  </div>
-                  <p className={s.body}>{p.body}</p>
-                  <a href={CONSULT_URL} className={s.textLink}>
-                    詳しく相談する
-                  </a>
-                </li>
-              ))}
-            </ul>
-
             <div className={s.block}>
               <div className={s.secHead}>
                 <SectionHeading>
-                  なぜ、PitDockが
+                  PitDockが
                   <br className={s.spOnly} />
-                  選ばれるのか。
+                  大切にしていること
                 </SectionHeading>
-                <p className={s.body}>私たちがいちばん、大切にしていること。責任を持って、お取り組みいたします。</p>
+                <p className={s.body}>ゴールはシステムやツールの導入ではなく、IT投資に見合った成果が出ること</p>
               </div>
               <ul className={s.reasonGrid} role="list">
                 {reasons.map((r) => (
                   <li key={r.heading} className={s.reasonCard}>
-                    <h3 className={s.reasonHeading}>✓ {r.heading}</h3>
+                    <h3 className={s.reasonHeading}>
+                      <span className={s.reasonCheck} aria-hidden="true">
+                        ✓
+                      </span>
+                      <span>{r.heading}</span>
+                    </h3>
                     <p className={s.body}>{r.body}</p>
                   </li>
                 ))}
               </ul>
+            </div>
+
+            <div className={s.block}>
+              <div className={s.secHead}>
+                <SectionHeading>
+                  こんなところで
+                  <br className={s.spOnly} />
+                  立ち止まっていませんか。
+                </SectionHeading>
+              </div>
+              <ul className={s.problemGrid} role="list">
+                {problems.map((p) => (
+                  <li key={p.icon} className={s.problem}>
+                    <div className={s.problemHead}>
+                      <img src={p.icon} alt="" className={s.problemIcon} width={60} height={60} />
+                      <h3 className={s.problemHeading}>{p.heading}</h3>
+                    </div>
+                    <p className={s.body}>{p.body}</p>
+                  </li>
+                ))}
+              </ul>
+              {/* 各項目ごとではなく、一覧の最後にまとめて 1 つ置く */}
+              <div>
+                <a href={CONSULT_URL} className={s.btn}>
+                  詳しく相談する
+                </a>
+              </div>
             </div>
           </div>
         </section>
@@ -232,14 +248,10 @@ export default async function Home() {
           <div className={`${s.inner} ${s.block}`}>
             <div className={s.secHead}>
               <SectionHeading id="services-heading">
-                クライアントの課題に
-                <br className={s.spOnly} />
-                合わせて、最適な形で
-                <br className={s.spOnly} />
-                関わります。
+                サービス
               </SectionHeading>
               <p className={s.body}>
-                戦略づくりから開発、技術判断のサポートまで。フェーズや体制に合わせて、関わり方を選べます。
+                戦略構築から開発、技術判断のサポートまで。目指す姿やフェーズとご予算に応じて柔軟に対応します。
               </p>
             </div>
             <ul className={s.serviceGrid} role="list">
@@ -266,17 +278,15 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Note */}
-        <section id="note" className={s.section} data-ribbon-anchor="3" aria-labelledby="note-heading">
+        {/* Column */}
+        <section id="column" className={s.section} data-ribbon-anchor="3" aria-labelledby="note-heading">
           <div className={`${s.inner} ${s.noteInner}`}>
             <div className={s.secHead}>
               <SectionHeading id="note-heading">
-                PitDockの考えや取り組みを、
-                <br className={s.spOnly} />
-                発信しています。
+                コラム
               </SectionHeading>
               <p className={s.body}>
-                技術やAIの話から、プロジェクトで得た気づきまで。PitDockのいまを、noteで綴っています。
+                DX・AIを経営・業務の目線で、進め方のポイントや、発注する側が知っておきたいことをnoteで発信しています。
               </p>
             </div>
             {noteArticles.length > 0 ? (
@@ -326,17 +336,17 @@ export default async function Home() {
                 loading="lazy"
               />
               <h2 id="company-heading" className={s.profileHeading}>
-                「技術」を原理から
+                すべての企業が、
                 <br className={s.spOnly} />
-                理解しているから、
-                <br className={s.spOnly} />
-                「事業」の話ができる。
+                テクノロジーを味方にできる社会へ。
               </h2>
               <div className={s.profileText}>
                 <p className={s.body}>
-                  DXやAX（AIトランスフォーメーション）は、一朝一夕には成し遂げられません。技術の選定、業務プロセスの再設計、組織の変化、そして現場への定着――いくつもの壁を越えて、初めて成果になります。
+                  DXやAXは、ツールを入れて終わりではありません。課題の深掘り、分析、業務の再設計、技術の選定、組織の変化、現場への定着など、いくつもの壁を越えて初めて成果になります。
                   <br className={s.pcOnly} />
-                  私自身、学生時代にAIの研究をしていました。PitDockのメンバーも、AIの仕組みを原理から理解した上で、目の前の事業に何ができるかを具体的に設計します。流行りのツールを当てはめるのではなく、課題から逆算する。その姿勢を、これからも変えるつもりはありません。
+                  私は大学院でAIを研究したあと、ITコンサルタントとして多くのプロジェクトに携わってきました。そこで感じたのは、せっかくのIT投資が投資額に見合った成果に結びついていないケースが多いということ、多くの中小企業が予算や人員不足が原因で遅れをとっていることです。
+                  <br className={s.pcOnly} />
+                  PitDockは、ただシステム化したり流行りのツールを当てはめるのではなく、「何が本当の課題なのか」「何をするべきなのか」を徹底的に掘り下げます。やるべきではないIT投資は率直にお伝えします。会社の規模にかかわらず、すべての企業がテクノロジーを味方に走り続けられるよう、共に歩むパートナーであり続けます。
                 </p>
                 <p className={s.profileName}>
                   <span>代表取締役 / CEO</span>
@@ -374,7 +384,12 @@ export default async function Home() {
                     <time className={s.newsDate} dateTime={n.date.replace(/\./g, "-")}>
                       {n.date}
                     </time>
-                    <span className={s.newsCategory}>{n.tags[0]}</span>
+                    {/* タグが複数あるときは 1 行に 1 つずつ並べる */}
+                    <span className={s.newsCategory}>
+                      {n.tags.map((t) => (
+                        <span key={t}>{t}</span>
+                      ))}
+                    </span>
                     <span className={s.newsTitle}>{n.title}</span>
                   </a>
                 </li>
