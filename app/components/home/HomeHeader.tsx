@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import s from "../../home.module.css";
-import { CONSULT_URL, INQUIRY_URL, homeNavItems } from "./links";
+import { CONSULT_URL, INQUIRY_URL, headerNavItems } from "./links";
 
 export default function HomeHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -32,10 +32,22 @@ export default function HomeHeader() {
         </a>
 
         <nav className={s.headerNav} aria-label="メインナビゲーション">
-          <ul role="list">
-            {homeNavItems.map((item) => (
-              <li key={item.href}>
+          <ul role="list" className={s.headerNavList}>
+            {headerNavItems.map((item) => (
+              <li key={item.href} className={item.children ? s.hasDropdown : undefined}>
                 <a href={item.href}>{item.label}</a>
+                {/* カーソルを合わせる（キーボードではフォーカスする）と開くプルダウン */}
+                {item.children && (
+                  <div className={s.dropdown}>
+                    <ul role="list" className={s.dropdownList} aria-label={`${item.label}の一覧`}>
+                      {item.children.map((child) => (
+                        <li key={child.href}>
+                          <a href={child.href}>{child.label}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </li>
             ))}
           </ul>
@@ -78,11 +90,22 @@ export default function HomeHeader() {
         </div>
         <nav aria-label="メニュー内ナビゲーション">
           <ul role="list" className={s.menuNav}>
-            {homeNavItems.map((item) => (
+            {headerNavItems.map((item) => (
               <li key={item.href}>
                 <a href={item.href} onClick={close}>
                   {item.label}
                 </a>
+                {item.children && (
+                  <ul role="list" className={s.menuSubNav} aria-label={`${item.label}の一覧`}>
+                    {item.children.map((child) => (
+                      <li key={child.href}>
+                        <a href={child.href} onClick={close}>
+                          {child.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>
