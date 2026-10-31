@@ -17,7 +17,7 @@ export type NavItem = {
 export const homeNavItems: NavItem[] = [
   { label: "サービス", href: "#services" },
   { label: "情報発信", href: "#note" },
-  { label: "会社情報", href: "#company" },
+  { label: "会社概要", href: "/company-info" },
   { label: "お知らせ", href: "#news" },
 ];
 
