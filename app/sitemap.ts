@@ -4,7 +4,7 @@ import { SITE_URL } from "../lib/seo/site";
 // lastModified はページ内容を実際に更新した日（YYYY-MM-DD）。ページを更新したら合わせて書き換える。
 // ビルド日時を入れると全ページが毎回「更新」扱いになり、Google に lastmod を信用されなくなるため。
 const routes: { path: string; lastModified: string; changeFrequency?: MetadataRoute.Sitemap[number]["changeFrequency"]; priority?: number }[] = [
-  { path: "/", lastModified: "2026-10-07", changeFrequency: "weekly", priority: 1 },
+  { path: "/", lastModified: "2026-10-31", changeFrequency: "weekly", priority: 1 },
   { path: "/company-info", lastModified: "2026-10-01", changeFrequency: "monthly", priority: 0.8 },
   { path: "/contact", lastModified: "2026-10-11", changeFrequency: "monthly", priority: 0.8 },
   { path: "/privacy", lastModified: "2026-08-09", changeFrequency: "yearly", priority: 0.3 },
