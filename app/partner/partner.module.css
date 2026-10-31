@@ -23,6 +23,13 @@
   padding: 140px 0 var(--space-section);
 }
 
+/* 共通ヘッダー（PC 幅では高さ 88px、旧ヘッダーより 16px 高い）の分だけ下げる（app/page.module.css の .pageHero と同じ） */
+@media (min-width: 1152px) {
+  .partnerHero {
+    margin-top: 16px;
+  }
+}
+
 .partnerHeroOrb {
   position: absolute;
   right: -200px;

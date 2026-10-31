@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Nav from "../components/Nav";
-import Footer from "../components/Footer";
+import SiteHeader from "../components/site/SiteHeader";
+import SiteFooter from "../components/site/SiteFooter";
 import FaqAccordion from "../components/FaqAccordion";
 import { AgentNotice, HoneypotField, useFormGuard } from "../components/FormGuard";
 import { CONTACT_FAQS } from "../../lib/seo/faqs";
@@ -481,7 +481,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <Nav />
+      <SiteHeader />
 
       {/* ============ 【1】Page Hero ============ */}
       <section className={`${s.pageHero} ${cs.contactHero}`}>
@@ -1183,7 +1183,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
 
       {/* モバイル限定のスクロール追従CTA */}
       <nav

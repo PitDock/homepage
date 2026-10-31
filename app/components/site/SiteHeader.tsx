@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import s from "../../home.module.css";
+import s from "./site.module.css";
+import { brandFontVariables } from "../../fonts";
 import { CONSULT_URL, INQUIRY_URL, headerNavItems } from "./links";
 
-export default function HomeHeader() {
+export default function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function HomeHeader() {
   const close = () => setMenuOpen(false);
 
   return (
-    <header className={s.header}>
+    <header className={`${s.header} ${brandFontVariables}`} data-site-header="">
       <div className={s.headerInner}>
         <a href="/" className={s.headerLogo} aria-label="PitDock株式会社 トップへ">
           <img src="/brand/logo.svg" alt="PitDock" width={202} height={32} />

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Nav from "../../../../components/Nav";
-import Footer from "../../../../components/Footer";
+import SiteHeader from "../../../../components/site/SiteHeader";
+import SiteFooter from "../../../../components/site/SiteFooter";
 import { createPageMetadata } from "../../../../../lib/seo/metadata";
 import s from "../../../../page.module.css";
 import ts from "../../duosub/terms/terms.module.css";
@@ -19,7 +19,7 @@ const CONTACT_FORM_URL =
 export default function GentleDiaryPrivacyPage() {
   return (
     <>
-      <Nav />
+      <SiteHeader />
 
       <section className={s.pageHero}>
         <div className={`container ${ts.pageHeroInner}`}>
@@ -199,7 +199,7 @@ export default function GentleDiaryPrivacyPage() {
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
     </>
   );
 }

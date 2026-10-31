@@ -1,4 +1,4 @@
-// トップページ（新デザイン）で使うリンク先。
+// サイト共通（ヘッダー・フッター・トップページ）で使うリンク先。
 // 無料相談フォームに営業の連絡が大量に届くのを避けるため、
 // 「無料相談」系と「お問い合わせ」系でフォームを分けている。
 
@@ -14,11 +14,12 @@ export type NavItem = {
   children?: { label: string; href: string }[];
 };
 
+/** トップページ内のセクションへのリンクは、どのページからでも飛べるよう "/#..." で書く */
 export const homeNavItems: NavItem[] = [
-  { label: "サービス", href: "#services" },
-  { label: "コラム", href: "#column" },
+  { label: "サービス", href: "/#services" },
+  { label: "コラム", href: "/#column" },
   { label: "会社概要", href: "/company-info" },
-  { label: "お知らせ", href: "#news" },
+  { label: "お知らせ", href: "/news" },
 ];
 
 /** サービスの各ページ（ヘッダー・メニューの「サービス」の下層） */
@@ -31,6 +32,6 @@ export const serviceNavItems = [
 
 /** ヘッダー・メニュー用（「サービス」に下層リンクを付け、フッターには載せない「パートナー募集」を加える） */
 export const headerNavItems: NavItem[] = [
-  ...homeNavItems.map((item) => (item.href === "#services" ? { ...item, children: serviceNavItems } : item)),
+  ...homeNavItems.map((item) => (item.href === "/#services" ? { ...item, children: serviceNavItems } : item)),
   { label: "パートナー募集", href: "/partner" },
 ];

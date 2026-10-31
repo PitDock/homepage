@@ -1,9 +1,9 @@
-import { Space_Grotesk, Zen_Kaku_Gothic_New } from "next/font/google";
-import HomeHeader from "./components/home/HomeHeader";
-import HomeFooter from "./components/home/HomeFooter";
+import SiteHeader from "./components/site/SiteHeader";
+import SiteFooter from "./components/site/SiteFooter";
 import FvVideo from "./components/home/FvVideo";
 import Ribbon from "./components/home/Ribbon";
-import { CONSULT_URL } from "./components/home/links";
+import { CONSULT_URL } from "./components/site/links";
+import { brandFontVariables } from "./fonts";
 import s from "./home.module.css";
 // ニュースデータは lib/data/news.ts で一元管理。/news ページでも同データを参照している。
 import { news } from "../lib/data/news";
@@ -11,22 +11,6 @@ import { NOTE_URL, fetchLatestNoteArticles } from "../lib/data/note";
 
 // note の RSS を定期的に取り直す（Next.js の制約で値はリテラルで書く。lib/data/note.ts の NOTE_REVALIDATE_SECONDS と揃える）
 export const revalidate = 3600;
-
-const zenKaku = Zen_Kaku_Gothic_New({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  // 日本語フォントは容量が大きいため preload せず、表示時に必要な分だけ読み込ませる
-  preload: false,
-  variable: "--font-zen",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-space",
-});
 
 const problems = [
   {
@@ -147,8 +131,8 @@ export default async function Home() {
   const noteArticles = await fetchLatestNoteArticles(4);
 
   return (
-    <div className={`${s.page} ${zenKaku.variable} ${spaceGrotesk.variable}`}>
-      <HomeHeader />
+    <div className={`${s.page} ${brandFontVariables}`}>
+      <SiteHeader />
       <Ribbon />
 
       <main className={s.main}>
@@ -425,7 +409,7 @@ export default async function Home() {
         </section>
       </main>
 
-      <HomeFooter />
+      <SiteFooter ribbonAnchor="7" />
     </div>
   );
 }

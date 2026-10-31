@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Nav from "../components/Nav";
-import Footer from "../components/Footer";
+import SiteHeader from "../components/site/SiteHeader";
+import SiteFooter from "../components/site/SiteFooter";
 import { AgentNotice, HoneypotField, useFormGuard } from "../components/FormGuard";
 import s from "../page.module.css";
 import p from "./partner.module.css";
@@ -273,7 +273,7 @@ export default function PartnerPage() {
 
   return (
     <>
-      <Nav />
+      <SiteHeader />
 
       <main ref={mainRef}>
         {/* ======================================
@@ -724,7 +724,7 @@ export default function PartnerPage() {
         </section>
       </main>
 
-      <Footer />
+      <SiteFooter />
     </>
   );
 }

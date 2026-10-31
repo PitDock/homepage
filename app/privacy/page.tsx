@@ -1,5 +1,5 @@
-import Nav from "../components/Nav";
-import Footer from "../components/Footer";
+import SiteHeader from "../components/site/SiteHeader";
+import SiteFooter from "../components/site/SiteFooter";
 import s from "../page.module.css";
 import ps from "./privacy.module.css";
 
@@ -82,7 +82,7 @@ const policies: {
 export default function PrivacyPolicyPage() {
   return (
     <>
-      <Nav />
+      <SiteHeader />
 
       {/* Page Hero */}
       <section className={s.pageHero}>
@@ -143,7 +143,7 @@ export default function PrivacyPolicyPage() {
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
     </>
   );
 }

@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
-import Nav from "../../components/Nav";
-import Footer from "../../components/Footer";
+import SiteHeader from "../../components/site/SiteHeader";
+import SiteFooter from "../../components/site/SiteFooter";
 import { createPageMetadata } from "../../../lib/seo/metadata";
 import s from "../../page.module.css";
 import ns from "./news4.module.css";
@@ -37,7 +37,7 @@ export default function News4Page() {
 
   return (
     <>
-      <Nav />
+      <SiteHeader />
 
       <section className={s.pageHero}>
         <div className={`container ${ns.heroInner}`}>
@@ -99,7 +99,7 @@ export default function News4Page() {
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
     </>
   );
 }

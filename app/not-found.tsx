@@ -2,8 +2,8 @@
 
 import React, { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import Nav from "./components/Nav";
-import Footer from "./components/Footer";
+import SiteHeader from "./components/site/SiteHeader";
+import SiteFooter from "./components/site/SiteFooter";
 import s from "./not-found.module.css";
 
 function ParticleCanvas() {
@@ -86,7 +86,7 @@ export default function NotFound() {
 
   return (
     <>
-      <Nav />
+      <SiteHeader />
       <main className={s.main}>
         <ParticleCanvas />
         <div className={s.glow} aria-hidden="true" />
@@ -111,7 +111,7 @@ export default function NotFound() {
           </div>
         </div>
       </main>
-      <Footer />
+      <SiteFooter />
     </>
   );
 }

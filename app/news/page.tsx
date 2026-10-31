@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import Nav from "../components/Nav";
-import Footer from "../components/Footer";
+import SiteHeader from "../components/site/SiteHeader";
+import SiteFooter from "../components/site/SiteFooter";
 import s from "../page.module.css";
 import { news } from "../../lib/data/news";
 import type { NewsEntry } from "../../lib/data/news";
@@ -116,7 +116,7 @@ export default function NewsPage() {
 
   return (
     <>
-      <Nav />
+      <SiteHeader />
 
       {/* Page Hero */}
       <section className={s.pageHero}>
@@ -146,7 +146,7 @@ export default function NewsPage() {
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
     </>
   );
 }

@@ -1,4 +1,5 @@
-import s from "../../home.module.css";
+import s from "./site.module.css";
+import { brandFontVariables } from "../../fonts";
 import { INQUIRY_URL, headerNavItems } from "./links";
 
 const serviceItems = headerNavItems.filter((item) => item.children);
@@ -12,10 +13,15 @@ const socialLinks = [
   { name: "LINE", href: "https://line.me/R/ti/p/%40532icqyy", icon: "/icons/icon-line.svg" },
 ];
 
-export default function HomeFooter() {
+type Props = {
+  /** トップページのリボンの位置合わせ用（app/components/home/Ribbon.tsx の data-ribbon-anchor） */
+  ribbonAnchor?: string;
+};
+
+export default function SiteFooter({ ribbonAnchor }: Props) {
   return (
-    <footer className={s.footer} data-ribbon-anchor="7">
-      <div className={s.inner}>
+    <footer className={`${s.footer} ${brandFontVariables}`} data-ribbon-anchor={ribbonAnchor}>
+      <div className={s.footerInner}>
         <div className={s.footerTop}>
           <div className={s.footerBrand}>
             <a href="/" className={s.footerLogo} aria-label="PitDock株式会社 トップへ">

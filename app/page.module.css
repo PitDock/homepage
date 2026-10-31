@@ -1337,6 +1337,17 @@
   max-width: 1720px;
 }
 
+/*
+ * 各ページの上部余白は旧ヘッダー（高さ 72px）を前提にしている。
+ * 共通ヘッダー（app/components/site/SiteHeader.tsx、PC 幅では高さ 88px）が載っているページでは、
+ * その差の 16px だけページ上部を下げる（ヘッダーの裏に隠れる部分なので見た目の隙間は出ない）
+ */
+@media (min-width: 1152px) {
+  :global(body):has([data-site-header]) .pageHero {
+    margin-top: 16px;
+  }
+}
+
 /* 利用規約ページ（グローバル Nav 無し）：ヘッダー分の余白を詰める */
 .pageHeroTerms {
   padding: 24px 0 36px;

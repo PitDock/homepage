@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import Nav from "../../components/Nav";
-import Footer from "../../components/Footer";
+import SiteHeader from "../../components/site/SiteHeader";
+import SiteFooter from "../../components/site/SiteFooter";
 import s from "../../page.module.css";
 
 const CONTACT_URL = "/contact";
@@ -73,7 +73,7 @@ export default function SystemDevPage() {
 
   return (
     <>
-      <Nav />
+      <SiteHeader />
 
       {/* Page Hero */}
       <section className={s.pageHero}>
@@ -148,7 +148,7 @@ export default function SystemDevPage() {
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
     </>
   );
 }
