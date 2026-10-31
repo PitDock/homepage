@@ -1,0 +1,1254 @@
+/*
+ * トップページ（Figma「pitdock-desktop」準拠）
+ * 数値は 1440px 幅のデザインの値をそのまま使い、767px 以下は 375px 幅のモバイルデザインに切り替える。
+ * 中間幅はカードの列数を 4 → 2 → 1 と減らして対応する。
+ */
+
+.page {
+  /* Figma の変数名に合わせたカラートークン */
+  --brand-pit-blue: #14509E;
+  --brand-dock-blue: #3AA0E8;
+  --brand-ink: #0E1B2C;
+  --brand-tint: #EEF5FC;
+  --brand-gray: #5A616B;
+  --brand-white: #FFFFFF;
+  /* Note カードの枠線・文字（Figma の値） */
+  --note-border: #C7CCD1;
+  --note-title: #1A1D21;
+  --note-date: #8A9099;
+  /* ホバー時（色を少し暗くする） */
+  --brand-pit-blue-hover: #0F3F7E;
+  --brand-white-hover: #DCE9F7;
+
+  --header-height: 88px;
+  --section-pad-y: 100px;
+  --section-pad-x: 80px;
+
+  position: relative;
+  /* リボンが左右にはみ出しても横スクロールを出さない */
+  overflow-x: clip;
+  /* セクションの背景は透明にして、ページ全体のグラデーションの上にリボンを通す */
+  background: linear-gradient(180deg, var(--brand-white) 0%, var(--brand-tint) 100%);
+  color: var(--brand-ink);
+  font-family: var(--font-space), var(--font-zen), "Hiragino Sans", sans-serif;
+  font-size: 16px;
+  line-height: 2;
+}
+
+:global(body):has(.page) {
+  background: var(--brand-white);
+}
+
+.page ul {
+  list-style: none;
+}
+
+.page [id] {
+  scroll-margin-top: var(--header-height);
+}
+
+.spOnly {
+  display: none;
+}
+
+/* ===== 共通 ===== */
+
+/*
+ * 重なり順: ページ背景 → 帯の背景色（Contact・フッター）→ リボン → コンテンツ。
+ * セクション自体は position を持たせず、中身の .inner だけをリボンより前面に出す。
+ */
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.main {
+  padding-top: var(--header-height);
+}
+
+.section {
+  padding: var(--section-pad-y) var(--section-pad-x);
+}
+
+.body {
+  font-size: 16px;
+  line-height: 2;
+  word-break: auto-phrase;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.secHead {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.secHeading {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 28px;
+  line-height: 1.5;
+  font-weight: 700;
+  color: var(--brand-ink);
+}
+
+.pMark {
+  flex-shrink: 0;
+  width: 36px;
+  height: 28px;
+  object-fit: contain;
+  margin-top: 7px;
+}
+
+.btn,
+.btnWhite {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 36px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 2;
+  transition: background-color 0.2s;
+}
+
+.btn {
+  background: var(--brand-pit-blue);
+  color: var(--brand-white);
+}
+
+.btn:hover {
+  background: var(--brand-pit-blue-hover);
+}
+
+.btnWhite {
+  background: var(--brand-white);
+  color: var(--brand-pit-blue);
+}
+
+.btnWhite:hover {
+  background: var(--brand-white-hover);
+}
+
+.btnOutline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 48px;
+  border: 1px solid var(--brand-pit-blue);
+  color: var(--brand-pit-blue);
+  font-size: 16px;
+  font-weight: 700;
+  transition: background-color 0.2s;
+}
+
+.btnOutline:hover {
+  background: var(--brand-white-hover);
+}
+
+.textLink {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 2;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  color: var(--brand-ink);
+}
+
+.textLink:hover {
+  color: var(--brand-pit-blue);
+}
+
+/* ===== リボン ===== */
+
+.ribbonLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition: opacity 0.8s ease-out;
+}
+
+.ribbonLayer[data-faded="true"] {
+  opacity: 0;
+}
+
+.ribbonSvg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+}
+
+.ribbonMotion {
+  opacity: 0;
+}
+
+/* ===== Header ===== */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--header-height);
+  padding: 0 var(--section-pad-x);
+  background: var(--brand-tint);
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1280px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.headerLogo img {
+  width: 202px;
+  height: auto;
+}
+
+.headerNav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.headerNav ul {
+  display: flex;
+  gap: 36px;
+}
+
+.headerNav ul a {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 2;
+  color: var(--brand-pit-blue);
+  transition: color 0.2s;
+}
+
+.headerNav ul a:hover {
+  color: var(--brand-pit-blue-hover);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  background: var(--brand-pit-blue);
+}
+
+/* ===== メニュー（モバイル・タブレット） ===== */
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 24px 40px;
+  overflow-y: auto;
+  background: var(--brand-tint);
+}
+
+.menu[hidden] {
+  display: none;
+}
+
+.menuTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.menuTop .headerLogo img {
+  width: 140px;
+}
+
+.menuClose,
+.menuCloseBottom {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  background: none;
+  color: var(--brand-pit-blue);
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.menuClose {
+  flex-direction: column;
+  gap: 2px;
+  padding: 0;
+}
+
+.menuCloseLabel {
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.closeIcon {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.closeIcon::before,
+.closeIcon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  margin-top: -1px;
+  background: currentColor;
+}
+
+.closeIcon::before {
+  transform: rotate(45deg);
+}
+
+.closeIcon::after {
+  transform: rotate(-45deg);
+}
+
+.menuNav {
+  margin-top: 16px;
+}
+
+.menuNav li:not(:last-child) {
+  border-bottom: 1px solid var(--brand-dock-blue);
+}
+
+.menuNav a {
+  display: block;
+  padding: 18px 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--brand-pit-blue);
+}
+
+.menuCtas {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.menuCtaPrimary,
+.menuCtaSecondary {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.menuCtaPrimary {
+  padding: 18px;
+  background: var(--brand-pit-blue);
+  color: var(--brand-white);
+}
+
+.menuCtaPrimary:hover {
+  background: var(--brand-pit-blue-hover);
+}
+
+.menuCtaSecondary {
+  padding: 8px;
+  border: 1px solid var(--brand-pit-blue);
+  background: var(--brand-white);
+  color: var(--brand-pit-blue);
+}
+
+.menuCtaSecondary:hover {
+  background: var(--brand-white-hover);
+}
+
+.menuCloseBottom {
+  align-self: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 4px 8px;
+  font-size: 14px;
+}
+
+.menuCloseBottom .closeIcon {
+  width: 14px;
+  height: 14px;
+}
+
+/* ===== FV ===== */
+
+.fv {
+  height: 840px;
+  padding: 0 var(--section-pad-x);
+}
+
+.fvInner {
+  /* 動画を下のブレンドに参加させるため、FV だけは重なりのまとまり（stacking context）を作らない */
+  z-index: auto;
+  height: 100%;
+  padding-top: 116px;
+}
+
+.fvCatch {
+  position: relative;
+  z-index: 2;
+  font-size: 28px;
+  line-height: 1.5;
+  font-weight: 700;
+  color: var(--brand-ink);
+}
+
+/* 見出しより右に下げているのは意図的なデザイン（そろえない） */
+.fvLead {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  margin: 76px 0 0 40px;
+  font-size: 16px;
+  line-height: 2;
+  font-weight: 700;
+  color: var(--brand-pit-blue);
+  word-break: auto-phrase;
+}
+
+/*
+ * ロゴ動画はリード文の背面に置く（文字が手前、動画は背景）。
+ * 動画の白い背景が四角く見えてリボンを切らないよう、乗算で白を背景になじませる
+ * （リボンはロゴの下から現れ、ロゴの文字には重ならない）。
+ */
+.fvVideoWrap {
+  mix-blend-mode: multiply;
+  position: absolute;
+  top: 280px;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.fvVideo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--brand-white);
+}
+
+/* ===== Concept ===== */
+
+.conceptInner {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+
+.conceptCatch {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 見出しと同じ左揃え */
+.bt {
+  font-family: var(--font-space), sans-serif;
+  font-size: 48px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.btPit {
+  color: var(--brand-pit-blue);
+}
+
+.btDock {
+  color: var(--brand-dock-blue);
+}
+
+.conceptLead {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 728px;
+}
+
+.conceptLead .body {
+  max-width: 608px;
+}
+
+.conceptHeading {
+  font-size: 28px;
+  line-height: 1.5;
+  font-weight: 700;
+  color: var(--brand-ink);
+}
+
+.problemGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 60px;
+}
+
+.problem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.problemHead {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.problemIcon {
+  width: 60px;
+  height: 60px;
+}
+
+.problemHeading {
+  font-size: 22px;
+  line-height: 1.45;
+  font-weight: 700;
+  color: var(--brand-pit-blue);
+}
+
+.reasonGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.reasonCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--brand-dock-blue);
+  background: var(--brand-white);
+}
+
+.reasonHeading {
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--brand-ink);
+}
+
+/* ===== Services ===== */
+
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* グリッドの行で高さが揃う */
+.serviceCard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid var(--brand-dock-blue);
+  background: var(--brand-white);
+}
+
+.cardTitle {
+  font-size: 22px;
+  line-height: 1.45;
+  font-weight: 700;
+  color: var(--brand-pit-blue);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* 装飾用のチップ（リンクではない） */
+.tag {
+  padding: 4px 10px;
+  border-radius: 2px;
+  background: var(--brand-tint);
+  color: var(--brand-pit-blue);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.serviceIllust {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.serviceIllust img {
+  width: 180px;
+  height: 124px;
+  object-fit: contain;
+}
+
+.cardLink {
+  margin-top: auto;
+  align-self: flex-start;
+  font-size: 12px;
+  line-height: 1.4;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: var(--brand-ink);
+}
+
+.cardLink:hover {
+  color: var(--brand-pit-blue);
+}
+
+/* ===== Note ===== */
+
+.noteInner {
+  display: flex;
+  flex-direction: column;
+  gap: 54px;
+}
+
+.noteGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.noteCard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--note-border);
+  background: var(--brand-white);
+}
+
+.noteThumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 120px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--note-border);
+  background: var(--brand-tint);
+}
+
+.noteThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.noteThumb img.noteThumbFallback {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  opacity: 0.35;
+}
+
+.noteBody {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  padding: 13px 22px 38px;
+}
+
+.noteTitle {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  min-height: 4em;
+  font-size: 16px;
+  line-height: 2;
+  color: var(--note-title);
+  transition: color 0.2s;
+}
+
+.noteCard:hover .noteTitle {
+  color: var(--brand-pit-blue);
+}
+
+.noteDate {
+  font-family: var(--font-space), sans-serif;
+  font-size: 10px;
+  line-height: 1.2;
+  color: var(--note-date);
+}
+
+/* ===== Company ===== */
+
+.companyInner {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.profile {
+  display: grid;
+  grid-template-columns: 244px 1fr;
+  grid-template-areas:
+    "photo heading"
+    "photo text";
+  grid-template-rows: auto 1fr;
+  column-gap: 40px;
+  row-gap: 20px;
+}
+
+.profilePhoto {
+  grid-area: photo;
+  width: 244px;
+  height: 225px;
+  object-fit: cover;
+}
+
+.profileHeading {
+  grid-area: heading;
+  font-size: 24px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: var(--brand-ink);
+}
+
+.profileText {
+  grid-area: text;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profileName {
+  font-size: 16px;
+  line-height: 2;
+  font-weight: 700;
+}
+
+.profileName span + span {
+  margin-left: 1em;
+}
+
+/* 文字を線より内側に寄せているのは意図的なデザイン（そろえない） */
+.infoTable {
+  display: grid;
+  grid-template-columns: 220px 220px 400px 1fr;
+  column-gap: 64px;
+  row-gap: 32px;
+  padding: 40px;
+  border-top: 1px solid var(--brand-dock-blue);
+  border-bottom: 1px solid var(--brand-dock-blue);
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.infoItem dt {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--brand-pit-blue);
+}
+
+.infoItem dd {
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.infoItem dd span {
+  display: block;
+}
+
+/* 4 列表示のときは最後の列が狭いので、住所などを途中で折り返さない */
+@media (min-width: 1280px) {
+  .infoItem dd span {
+    white-space: nowrap;
+  }
+}
+
+/* ===== News ===== */
+
+.newsList {
+  margin: 80px 0;
+  border-top: 1px solid var(--brand-dock-blue);
+}
+
+.newsList li {
+  border-bottom: 1px solid var(--brand-dock-blue);
+}
+
+/* 日付・カテゴリを線より内側に寄せているのは意図的なデザイン（そろえない） */
+.newsRow {
+  display: grid;
+  grid-template-columns: 120px 160px 1fr;
+  padding: 24px 14px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.newsDate {
+  font-family: var(--font-space), sans-serif;
+}
+
+.newsRow:hover .newsTitle {
+  color: var(--brand-pit-blue);
+  text-decoration: underline;
+}
+
+/* ===== Contact ===== */
+
+.contact {
+  padding: var(--section-pad-y) var(--section-pad-x);
+  background: var(--brand-pit-blue);
+}
+
+.contactInner {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.contactText {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contactHeading {
+  font-size: 28px;
+  line-height: 1.5;
+  font-weight: 700;
+  color: var(--brand-white);
+}
+
+.contactBody {
+  font-size: 16px;
+  line-height: 2;
+  color: rgba(255, 255, 255, 0.85);
+  word-break: auto-phrase;
+}
+
+/* ===== Footer ===== */
+
+.footer {
+  padding: 80px var(--section-pad-x);
+  background: var(--brand-tint);
+}
+
+.footerTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.footerTop nav {
+  display: flex;
+  gap: 64px;
+}
+
+.footerBrand {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.footerLogo img {
+  width: 227px;
+  height: auto;
+}
+
+.footerCatch {
+  font-size: 16px;
+  line-height: 2;
+  font-weight: 700;
+  color: var(--brand-pit-blue);
+}
+
+.footerSocial {
+  display: flex;
+  gap: 20px;
+}
+
+.footerSocial img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.footerSocial a {
+  display: block;
+  transition: opacity 0.2s;
+}
+
+.footerSocial a:hover {
+  opacity: 0.7;
+}
+
+.footerLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.footerLinks li {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.footerLinks a {
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: var(--brand-pit-blue);
+}
+
+.footerLinks a:hover {
+  color: var(--brand-pit-blue-hover);
+  text-decoration: underline;
+}
+
+.copyright {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--brand-dock-blue);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--brand-pit-blue);
+}
+
+/* ===== 中間幅 ===== */
+
+@media (max-width: 1279px) {
+  .reasonGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .infoTable {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 1199px) {
+  .serviceGrid,
+  .noteGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ヘッダーのナビが入りきらない幅ではハンバーガーメニューにする */
+@media (max-width: 1023px) {
+  .page {
+    --header-height: 56px;
+  }
+
+  .header {
+    padding: 0 40px;
+  }
+
+  .headerLogo img {
+    width: 140px;
+  }
+
+  .headerNav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .problemGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .menu {
+    display: none;
+  }
+}
+
+/* ===== モバイル（375px デザイン） ===== */
+
+@media (max-width: 767px) {
+  .page {
+    --section-pad-y: 64px;
+    --section-pad-x: 24px;
+    font-size: 15px;
+  }
+
+  .spOnly {
+    display: inline;
+  }
+
+  .pcOnly {
+    display: none;
+  }
+
+  .header {
+    padding: 0 24px;
+  }
+
+  .body,
+  .contactBody {
+    font-size: 15px;
+  }
+
+  .secHeading,
+  .conceptHeading,
+  .contactHeading {
+    font-size: 22px;
+  }
+
+  .secHeading {
+    gap: 6px;
+  }
+
+  .pMark {
+    width: 30px;
+    height: 25px;
+    margin-top: 4px;
+  }
+
+  .block {
+    gap: 32px;
+  }
+
+  /* FV: キャッチ → リード文 → ロゴ動画 */
+  .fv {
+    height: auto;
+    padding: 40px var(--section-pad-x) 0;
+  }
+
+  .fvInner {
+    padding-top: 0;
+  }
+
+  .fvCatch {
+    font-size: 22px;
+  }
+
+  .fvLead {
+    margin: 24px 0 0 12px;
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  /* 画面幅いっぱい（375 × 211） */
+  .fvVideoWrap {
+    position: relative;
+    top: auto;
+    width: calc(100% + 48px);
+    margin: 32px -24px 0;
+    aspect-ratio: 375 / 211;
+  }
+
+  .conceptInner {
+    gap: 64px;
+  }
+
+  .bt {
+    font-size: 34px;
+  }
+
+  /* アイコンと見出しを横並びにしてスクロール量を減らす */
+  .problemGrid {
+    gap: 40px;
+  }
+
+  .problemHead {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .problemIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .problemHeading,
+  .cardTitle {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .serviceGrid,
+  .noteGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .serviceIllust img {
+    width: 120px;
+    height: 83px;
+  }
+
+  .noteInner {
+    gap: 40px;
+  }
+
+  /* Note: サムネイル・タイトル・日付のリスト形式 */
+  .noteGrid {
+    gap: 12px;
+  }
+
+  .noteCard {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+  }
+
+  .noteThumb {
+    width: 112px;
+    height: 59px;
+    border: 1px solid var(--note-border);
+  }
+
+  .noteBody {
+    flex: 1;
+    min-width: 0;
+    gap: 4px;
+    padding: 0;
+  }
+
+  .noteTitle {
+    min-height: 0;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .noteDate {
+    font-size: 12px;
+  }
+
+  /* Company: 写真と見出しを横並び → 本文 → 代表名 */
+  .companyInner {
+    gap: 40px;
+  }
+
+  .profile {
+    grid-template-columns: 104px 1fr;
+    grid-template-areas:
+      "photo heading"
+      "text text";
+    grid-template-rows: auto auto;
+    column-gap: 16px;
+  }
+
+  .profilePhoto {
+    width: 104px;
+    height: 96px;
+  }
+
+  .profileHeading {
+    align-self: center;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .profileName {
+    font-size: 15px;
+  }
+
+  .profileName span {
+    display: block;
+  }
+
+  .profileName span + span {
+    margin-left: 0;
+  }
+
+  /* 情報表は縦に並べ、文字は線より 16px 内側 */
+  .infoTable {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+    padding: 24px 16px;
+  }
+
+  .infoItem {
+    gap: 8px;
+  }
+
+  /* News: 「日付・カテゴリ」の行とタイトルの行の 2 段 */
+  .newsList {
+    margin: 40px 0;
+  }
+
+  .newsRow {
+    grid-template-columns: auto 1fr;
+    column-gap: 16px;
+    row-gap: 8px;
+    padding: 20px 12px;
+  }
+
+  .newsTitle {
+    grid-column: 1 / -1;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .contactInner {
+    gap: 40px;
+  }
+
+  .footer {
+    padding: 48px var(--section-pad-x);
+  }
+
+  .footerTop {
+    flex-direction: column;
+  }
+
+  .footerBrand {
+    gap: 24px;
+  }
+
+  .footerLogo img {
+    width: 180px;
+  }
+
+  .footerCatch {
+    font-size: 14px;
+  }
+
+  .footerLinks {
+    gap: 16px;
+  }
+}
