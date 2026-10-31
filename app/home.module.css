@@ -1001,11 +1001,25 @@
   line-height: 1.4;
   font-weight: 700;
   color: var(--brand-pit-blue);
+  white-space: nowrap;
 }
 
 .footerLinks a:hover {
   color: var(--brand-pit-blue-hover);
   text-decoration: underline;
+}
+
+/* 「サービス」の下に字下げして並べる下層リンク */
+.footerSubLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+  padding-left: 12px;
+}
+
+.footerLinks .footerSubLinks a {
+  font-size: 13px;
 }
 
 .copyright {
@@ -1068,6 +1082,11 @@
 @media (max-width: 1023px) {
   .problemGrid {
     grid-template-columns: 1fr;
+  }
+
+  /* ロゴとリンク 3 列が横に並びきらないので、リンクはロゴの下の段に並べる */
+  .footerTop {
+    flex-direction: column;
   }
 }
 
@@ -1299,10 +1318,6 @@
     padding: 48px var(--section-pad-x);
   }
 
-  .footerTop {
-    flex-direction: column;
-  }
-
   .footerBrand {
     gap: 24px;
   }
@@ -1317,5 +1332,11 @@
 
   .footerLinks {
     gap: 16px;
+  }
+
+  /* 横に 3 列は入りきらないため、3 列目（お問い合わせ・プライバシーポリシー）は下の段に回す */
+  .footerTop nav {
+    flex-wrap: wrap;
+    gap: 32px;
   }
 }

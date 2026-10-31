@@ -1,5 +1,8 @@
 import s from "../../home.module.css";
-import { INQUIRY_URL, homeNavItems } from "./links";
+import { INQUIRY_URL, headerNavItems } from "./links";
+
+const serviceItems = headerNavItems.filter((item) => item.children);
+const otherItems = headerNavItems.filter((item) => !item.children);
 
 const socialLinks = [
   { name: "LinkedIn", href: "https://www.linkedin.com/company/pitdock/", icon: "/icons/icon-linkedin.svg" },
@@ -29,9 +32,26 @@ export default function HomeFooter() {
               ))}
             </ul>
           </div>
+          {/* ヘッダーと同じ項目。1 列目に「サービス」と下層リンク、2 列目にそれ以外、3 列目にお問い合わせ・プライバシーポリシー・個人情報の取り扱い */}
           <nav aria-label="フッターナビゲーション">
             <ul role="list" className={s.footerLinks}>
-              {homeNavItems.map((item) => (
+              {serviceItems.map((item) => (
+                <li key={item.href}>
+                  <a href={item.href}>{item.label}</a>
+                  {item.children && (
+                    <ul role="list" className={s.footerSubLinks} aria-label={`${item.label}の一覧`}>
+                      {item.children.map((child) => (
+                        <li key={child.href}>
+                          <a href={child.href}>{child.label}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+            <ul role="list" className={s.footerLinks}>
+              {otherItems.map((item) => (
                 <li key={item.href}>
                   <a href={item.href}>{item.label}</a>
                 </li>
@@ -45,6 +65,9 @@ export default function HomeFooter() {
               </li>
               <li>
                 <a href="/privacy">プライバシーポリシー</a>
+              </li>
+              <li>
+                <a href="/personal-info">個人情報の取り扱いについて</a>
               </li>
             </ul>
           </nav>
