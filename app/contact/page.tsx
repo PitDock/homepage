@@ -79,17 +79,6 @@ function IconMoon({ className }: IconProps) {
   );
 }
 
-/** 資料の準備は不要（書類＋斜線） */
-function IconDocumentOff({ className }: IconProps) {
-  return (
-    <svg {...svgBase} className={className}>
-      <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z" />
-      <polyline points="14 3 14 8 19 8" />
-      <line x1="4" y1="20" x2="20" y2="4" />
-    </svg>
-  );
-}
-
 /** 相談例（吹き出し） */
 function IconChat({ className }: IconProps) {
   return (
