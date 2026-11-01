@@ -145,11 +145,9 @@ export default async function Home() {
               走り続ける
             </h1>
             <p className={s.fvLead}>
-              PitDockは、DX・AXコンサルティングや
-              システム開発を通じて、
+              PitDockは、DX・AXコンサルティングやシステム開発を通じて、
               <br className={s.pcOnly} />
-              お客様が成長し続けるための
-              変革を共に進めるパートナーです。
+              お客様が成長し続けるための変革を共に進めるパートナーです。
             </p>
             <div className={s.fvVideoWrap}>
               <FvVideo />

@@ -30,7 +30,7 @@ export default function SiteFooter({ ribbonAnchor }: Props) {
             <p className={s.footerCatch}>
               テクノロジーを味方に走り続ける<br/>
               <span className={s.footerCatchSub}>
-                PitDockは、DX・AXコンサルティングや システム開発を通じて、<br className={s.pcOnly} />
+                PitDockは、DX・AXコンサルティングやシステム開発を通じて、<br className={s.pcOnly} />
                 お客様が成長し続けるための変革を共に進めるパートナーです。
               </span>
             </p>
