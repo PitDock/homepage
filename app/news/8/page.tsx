@@ -3,7 +3,7 @@ import { createPageMetadata } from "../../../lib/seo/metadata";
 import SubPage from "../../components/sub/SubPage";
 import PageHero from "../../components/sub/PageHero";
 import s from "../../components/sub/sub.module.css";
-import ns from "./news8.module.css";
+import ns from "../newsArticle.module.css";
 
 export const metadata: Metadata = createPageMetadata({
   title: "社名変更のお知らせ（GOWS合同会社 → PitDock株式会社） | PitDock株式会社",

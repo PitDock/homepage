@@ -726,12 +726,12 @@ type Props = { heading: React.ReactNode; body?: React.ReactNode; href: string; l
 - 外部リンクの `target="_blank"` の判定（`isExternalNewsUrl`）は残す。
 - 並び順（今は id の降順、トップは日付の降順）はデザインの範囲外なので、変えない。
 
-### 8.8 `/news/4`・`/news/8`（詳細）
+### 8.8 `/news/4`・`/news/8`・`/news/10`（詳細）
 
 | ブロック | 指定 |
 |---|---|
 | ヒーロー | `PageHero`、`titleSize="long"`、`en` なし、`lead` なし |
-| 本文の枠（`.article`） | 最大幅 800px で左寄せ（`margin: 0`）。トップの本文も左揃えなので、それに合わせる |
+| 本文の枠（`.article`） | 最大幅の指定なし（`.inner` の最大幅 1280px いっぱいに広げる）。枠の中の文字は左揃え |
 | 日付（`.meta`） | Space Grotesk、14px / 1.4、gray。下に 28px。日付の下に `1px solid var(--brand-dock-blue)` の線を引き、線の下 32px から本文を始める |
 | 本文の段落 | 16px / 2 / ink（≤767px は 15px）、段落の間は 1.25em |
 | 見出し（news8 の「変更内容」`changeTableHeading`） | h2 にPマークを付けて小さくした形: `display:flex; gap:6px;`、20px / 1.5 / 700 / ink、Pマークは 30×25（SPと同じ大きさ）。上に 60px、下に 24px |

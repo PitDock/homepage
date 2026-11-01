@@ -28,7 +28,7 @@ const problems = [
     heading: (
       <>
         AIを使いたい。<br className={s.spOnly} />
-        でも、何から始めればいいか、<br className={s.spOnly} />
+        でも、何から始めれば良いか<br className={s.spOnly} />
         わからない。
       </>
     ),
@@ -97,7 +97,7 @@ const services = [
   {
     name: "技術顧問",
     desc: "開発会社の見積の妥当性やIT投資の判断を、経営と技術の両方の目線でサポートします。月額2万円〜。",
-    tags: ["外部CTO", "ベンダー打合せ同席"],
+    tags: ["外部CTO"],
     illust: "/illustrations/illustration-advisor.webp",
     href: "/service/tech-advisor",
   },
