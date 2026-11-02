@@ -6,8 +6,8 @@ import s from "../../home.module.css";
 /*
  * スクロールに合わせて伸びるリボン（デザイナー支給の SVG）。
  *
- * - PC 用（public/brand/ribbon_v3s.svg、1440 × 6028）と
- *   モバイル用（public/brand/ribbon_sp.svg、375 × 7894）を画面幅で切り替える。
+ * - PC 用（public/brand/ribbon_rainbow_pc.svg、1440 × 6028）と
+ *   モバイル用（public/brand/ribbon_rainbow_sp.svg、375 × 8132）を画面幅で切り替える。
  *   どちらも Works 非表示時のページを基準に描かれている。
  * - 横は画面幅に合わせて拡大縮小し、縦はセクションごとに区間を対応させて伸縮する
  *   （data-ribbon-anchor を付けた要素の上端が、Figma 上の各セクション上端に対応する）。
@@ -36,7 +36,7 @@ type RibbonSource = {
 };
 
 const PC_SOURCE: RibbonSource = {
-  url: "/brand/ribbon_v3s.svg",
+  url: "/brand/ribbon_rainbow_pc.svg",
   width: 1440,
   anchors: [0, 133, 973, 2343, 3152, 3876, 4417, 5162, 5639, 6028],
   gradientY1: 1010,
@@ -44,14 +44,15 @@ const PC_SOURCE: RibbonSource = {
   strokeWidth: 110,
 };
 
-// 各セクションの上端は Figma の「Mobile - ○○」フレームの高さを積み上げた値
-// （Header 56 / FV 516 / Concept 2111 / Services 1845 / Note 806 / Company 1035 / News 648 / Contact 431 / Footer 446）
+// 各セクションの上端。旧 SP（高さ 7894）の Figma フレーム高さを積み上げた値
+// （Header 56 / FV 516 / Concept 2111 / Services 1845 / Note 806 / Company 1035 / News 648 / Contact 431 / Footer 446）を、
+// 新 SP の高さ 8132 に合わせて比例配分した暫定値。Figma の正確な値が分かれば差し替える
 const SP_SOURCE: RibbonSource = {
-  url: "/brand/ribbon_sp.svg",
+  url: "/brand/ribbon_rainbow_sp.svg",
   width: 375,
-  anchors: [0, 56, 572, 2683, 4528, 5334, 6369, 7017, 7448, 7894],
+  anchors: [0, 58, 589, 2764, 4664, 5495, 6561, 7229, 7673, 8132],
   gradientY1: 560,
-  gradientY2: 7295.55,
+  gradientY2: 7620,
   strokeWidth: 48,
 };
 
@@ -85,7 +86,14 @@ function joinSubpaths(segments: Segment[]): Segment[] {
   let cy = 0;
   let sx = 0;
   let sy = 0;
-  for (const seg of segments) {
+  for (const raw of segments) {
+    // 水平線（H x）・垂直線（V y）は数値が 1 つずつで、座標を (x, y) の組で変換できないため、L に直す
+    const seg =
+      raw.cmd === "H"
+        ? { cmd: "L", nums: raw.nums.flatMap((x) => [x, cy]) }
+        : raw.cmd === "V"
+          ? { cmd: "L", nums: raw.nums.flatMap((y) => [cx, y]) }
+          : raw;
     const { cmd, nums } = seg;
     if (cmd === "M" && nums.length >= 2) {
       // 現在位置と同じ点からの M は、線をつなげたまま続ける
@@ -405,8 +413,12 @@ export default function Ribbon() {
         <defs>
           <linearGradient ref={gradientRef} id="home-ribbon-gradient" gradientUnits="userSpaceOnUse" x1="0" x2="0">
             <stop offset="0" stopColor="#14509E" />
-            <stop offset="0.35" stopColor="#3AA0E8" />
-            <stop offset="0.7" stopColor="#4FD1B5" />
+            <stop offset="0.18" stopColor="#3AA0E8" />
+            <stop offset="0.36" stopColor="#35C8C0" />
+            <stop offset="0.52" stopColor="#6BD36B" />
+            <stop offset="0.66" stopColor="#F5C542" />
+            <stop offset="0.8" stopColor="#F28C3A" />
+            <stop offset="0.9" stopColor="#E9557A" />
             <stop offset="1" stopColor="#8C7BE8" />
           </linearGradient>
         </defs>
@@ -414,7 +426,7 @@ export default function Ribbon() {
           <path
             ref={pathRef}
             stroke="url(#home-ribbon-gradient)"
-            strokeOpacity={0.5}
+            strokeOpacity={0.75}
             strokeLinecap="round"
             strokeLinejoin="round"
           />
