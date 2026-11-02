@@ -19,8 +19,12 @@ export default function CompanyPage() {
               <dd className={s.dataValue}>PitDock株式会社（PitDock, Inc.）</dd>
             </div>
             <div className={s.dataRow}>
+              <dt className={s.dataLabel}>創業</dt>
+              <dd className={s.dataValue}>2022年12月1日</dd>
+            </div>
+            <div className={s.dataRow}>
               <dt className={s.dataLabel}>設立</dt>
-              <dd className={s.dataValue}>2024年4月8日<br />(2026年8月16日 社名変更)</dd>
+              <dd className={s.dataValue}>2024年4月8日<br /><span className={cs.dataNote}>(2026年8月16日 社名変更)</span></dd>
             </div>
             <div className={s.dataRow}>
               <dt className={s.dataLabel}>代表取締役</dt>
@@ -71,9 +75,9 @@ export default function CompanyPage() {
             <p className={`${s.body} ${cs.profileBio}`}>
                   埼玉県さいたま市出身。{"\n"}
                   北海道大学・大学院で画像認識を中心にAIや機械学習の研究を行い、情報理工学の修士号を取得。{"\n"}
-                  2018年4月に新卒でフューチャーアーキテクト株式会社にITコンサルタントとして入社。{"\n"}
+                  新卒でフューチャーアーキテクト株式会社にITコンサルタントとして入社。{"\n"}
                   金融業界や小売業のプロジェクトでコンサルタント兼エンジニアとして従事。{"\n"}
-                  2022年8月にフリーランスとして独立。{"\n"}
+                  独立後、教育業界・エンタメ業界・飲食業界・観光業界・人材業界など幅広い業界のコンサルティングに従事。{"\n"}
                   2024年4月にPitDock株式会社を設立。
             </p>
           </div>

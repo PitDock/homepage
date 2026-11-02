@@ -1,3 +1,9 @@
+/* 会社概要の補足（設立日の社名変更日など） */
+.dataNote {
+  font-size: 13px;
+  font-weight: 400;
+}
+
 /* 会社概要（docs/subpages-design-spec.md §8.4） */
 .profile {
   display: grid;
