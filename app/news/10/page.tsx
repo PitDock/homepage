@@ -30,12 +30,12 @@ export default function News10Page() {
       <section className={s.section}>
         <div className={s.inner}>
           <article className={ns.article}>
-            <p className={ns.meta}>2026年11月1日</p>
+            <p className={ns.meta}>2026年11月3日</p>
 
             <div className={ns.body}>
               <p>平素より格別のご高配を賜り、厚く御礼申し上げます。</p>
               <p>
-                このたび弊社は、2026年11月1日に公式ホームページをリニューアルいたしましたのでお知らせいたします。
+                このたび弊社は、2026年11月3日に公式ホームページをリニューアルいたしましたのでお知らせいたします。
               </p>
               <p>
                 今回のリニューアルでは、サイト全体のデザインを一新するとともに、弊社のサービスや取り組みをより分かりやすくお伝えできるよう、構成を見直しました。
