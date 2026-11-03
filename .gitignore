@@ -4,3 +4,5 @@ node_modules/
 
 base/*
 .claude/*
+*.tsbuildinfo
+.DS_Store

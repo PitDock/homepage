@@ -1,0 +1,53 @@
+/* お知らせ一覧（docs/subpages-design-spec.md §8.7。値はトップの .newsList / .newsRow と同じ） */
+.newsList {
+  border-top: 1px solid var(--brand-dock-blue);
+}
+
+.newsList > li {
+  border-bottom: 1px solid var(--brand-dock-blue);
+}
+
+.newsRow {
+  display: grid;
+  grid-template-columns: 120px 160px 1fr;
+  align-items: center;
+  padding: 24px 14px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.newsDate {
+  font-family: var(--font-space), sans-serif;
+}
+
+.newsCategory {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* トップは 13px。一覧ページは主役なので一段大きくする */
+.newsTitle {
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.newsRow:hover .newsTitle {
+  color: var(--brand-pit-blue);
+  text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+  .newsRow {
+    grid-template-columns: auto 1fr;
+    column-gap: 16px;
+    row-gap: 8px;
+    padding: 20px 12px;
+  }
+
+  .newsTitle {
+    grid-column: 1 / -1;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}

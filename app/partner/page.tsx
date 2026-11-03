@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Nav from "../components/Nav";
-import Footer from "../components/Footer";
+import { useState } from "react";
+import SubPage from "../components/sub/SubPage";
+import PageHero from "../components/sub/PageHero";
+import SectionHeading from "../components/sub/SectionHeading";
 import { AgentNotice, HoneypotField, useFormGuard } from "../components/FormGuard";
-import s from "../page.module.css";
+import s from "../components/sub/sub.module.css";
 import p from "./partner.module.css";
 
 // ---- データ定義 ----
@@ -12,8 +13,6 @@ import p from "./partner.module.css";
 type Role = {
   id: string;
   label: string;
-  badgeClass: string;
-  badgeText: string;
   h3: string;
   desc: string;
   fits: string[];
@@ -24,8 +23,6 @@ const roles: Role[] = [
   {
     id: "consultant",
     label: "ITコンサルタント",
-    badgeClass: p.partnerRoleBadgeBlue,
-    badgeText: "IT Consultant",
     h3: "ITコンサルタント",
     desc: "DX推進・業務改革・AI活用の企画や導入支援を担当します。クライアントとの上流コミュニケーションから要件整理まで、コンサルタントとして幅広く関与いただきます。",
     fits: [
@@ -37,6 +34,7 @@ const roles: Role[] = [
       "DX推進・業務改革・AI活用の企画・導入経験",
       "クライアントワーク・提案資料作成",
       "業務フロー整理・要件定義",
+      "エンジニア経験など、技術面も踏まえて提案・判断できる知見",
       "プロジェクトのPM・PMO",
       "特定業種（金融・製造・小売・教育等）の深い知見",
     ],
@@ -44,8 +42,6 @@ const roles: Role[] = [
   {
     id: "engineer",
     label: "システム / フルスタックエンジニア",
-    badgeClass: p.partnerRoleBadgeGreen,
-    badgeText: "Engineer",
     h3: "システムエンジニア / フルスタックエンジニア",
     desc: "WebアプリやシステムのFE・BE・フルスタック開発を担当します。要件定義フェーズへの参加も歓迎しています。",
     fits: [
@@ -64,8 +60,6 @@ const roles: Role[] = [
   {
     id: "ai",
     label: "AI・機械学習エンジニア",
-    badgeClass: p.partnerRoleBadgePurple,
-    badgeText: "AI Engineer",
     h3: "AI・機械学習エンジニア",
     desc: "生成AI活用・RAG構築・MLモデル開発など、AI領域の技術支援を担当します。ビジネス側との要件調整経験がある方を特に歓迎します。",
     fits: [
@@ -175,24 +169,6 @@ export default function PartnerPage() {
   const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const { honeypotRef, getGuard } = useFormGuard();
 
-  // IntersectionObserver による reveal アニメーション
-  const mainRef = useRef<HTMLElement>(null);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add(s.revealed);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
-    );
-    document.querySelectorAll(`.${s.reveal}`).forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
   // フォームハンドラ
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -272,131 +248,47 @@ export default function PartnerPage() {
   };
 
   return (
-    <>
-      <Nav />
+    <SubPage>
+      {/* Section 1: Hero */}
+      <PageHero
+        breadcrumbs={[{ label: "ホーム", href: "/" }, { label: "パートナー募集" }]}
+        title={
+          <>
+            あなたの専門性を、<em className={p.heroEm}>本物の課題解決</em>に使ってほしい。
+          </>
+        }
+        lead={
+          <>
+            PitDock株式会社は、DX・AX推進とシステム開発を手がけています。<br />
+            事業の最前線で動く案件に、一緒に向き合ってくれるコンサルタントやエンジニアを随時募集しています。
+          </>
+        }
+        actions={
+          <>
+            <a href="#entry" className={s.btn}>
+              まず話を聞く
+            </a>
+            <a href="#roles" className={s.btnOutline}>
+              募集職種を見る
+            </a>
+          </>
+        }
+      />
 
-      <main ref={mainRef}>
-        {/* ======================================
-            Section 1: Hero
-            ====================================== */}
-        <section className={p.partnerHero}>
-          <div className={p.partnerHeroOrb} aria-hidden="true" />
-          <div className="container">
-            <nav className={s.breadcrumb} aria-label="パンくず">
-              <ol>
-                <li><a href="/">ホーム</a></li>
-                <li aria-hidden="true" className={s.breadcrumbSep}>/</li>
-                <li><span aria-current="page">パートナー募集</span></li>
-              </ol>
-            </nav>
+      {/* Section 2: 募集職種 */}
+      <section className={s.section} id="roles">
+        <div className={`${s.inner} ${s.block}`}>
+          <SectionHeading>
+            こんな方を探しています。
+          </SectionHeading>
 
-            <h1 className={p.partnerHeroH1}>
-              あなたの専門性を、<br />
-              <em>本物の課題解決</em>に使ってほしい。
-            </h1>
-
-            <p className={p.partnerHeroSub}>
-              PitDock株式会社は、DX・AX推進とシステム開発を手がけるITコンサルティング会社です。
-              事業の最前線で動く案件に、一緒に向き合ってくれるコンサルタントやエンジニアを随時募集しています。「請負って終わり」ではなく、戦略から実装まで本質的な課題解決を追求するチームに、参加しませんか。
-            </p>
-
-            <div className={p.partnerHeroCtaRow}>
-              <a href="#entry" className={p.partnerBtnPrimary}>まず話を聞く</a>
-              <a href="#roles" className={p.partnerBtnGhost}>募集職種を見る</a>
-            </div>
-          </div>
-        </section>
-
-        {/* ======================================
-            Section 2: PitDockと一緒に働くとは
-            ====================================== */}
-        <section className={p.partnerWorkSection}>
-          <div className="container">
-            <div className={`${p.partnerSectionHead} ${s.reveal}`}>
-              <span className={p.partnerSectionLabel}>WORK WITH US</span>
-              <h2 className={p.partnerSectionH2}>
-                PitDockのパートナー
-              </h2>
-              <p className={p.partnerSectionDesc}>
-                PitDockが扱う案件は「ツールを入れて終わり」の仕事ではありません。
-                クライアントの経営課題・業務課題を深掘りし、テクノロジーで本質的に解決するプロジェクトに参画いただきます。
-              </p>
-            </div>
-
-            <div className={p.partnerWorkGrid}>
-              {/* カード1 */}
-              <div className={`${p.partnerWorkCard} ${s.reveal}`} style={{ transitionDelay: "0s" }}>
-                <div>
-                  <span
-                    className={p.partnerWorkKeyword}
-                    style={{ background: "var(--gradient-accent)" }}
-                  >
-                    上流から
-                  </span>
-                  <h3 className={p.partnerWorkH3}>上流工程から参画できる</h3>
-                  <p className={p.partnerWorkBody}>
-                    要件整理・業務設計・戦略立案フェーズから関与いただける案件が多くあります。
-                    「言われたものを作る」ではなく、課題の設定から一緒に考えるポジションです。
-                  </p>
-                </div>
-              </div>
-
-              {/* カード2 */}
-              <div className={`${p.partnerWorkCard} ${s.reveal}`} style={{ transitionDelay: "0.08s" }}>
-                <div>
-                  <span
-                    className={p.partnerWorkKeyword}
-                    style={{ background: "linear-gradient(135deg, #2DD4BF, #22D3EE)" }}
-                  >
-                    多業種
-                  </span>
-                  <h3 className={p.partnerWorkH3}>多様な業種の案件に関われる</h3>
-                  <p className={p.partnerWorkBody}>
-                    製造・小売・金融・教育・ヘルスケアなど、幅広い業種のクライアントと向き合います。
-                    特定業種の専門性だけでなく、横断的な視点が身につきます。
-                  </p>
-                </div>
-              </div>
-
-              {/* カード3 */}
-              <div className={`${p.partnerWorkCard} ${s.reveal}`} style={{ transitionDelay: "0.16s" }}>
-                <div>
-                  <span
-                    className={p.partnerWorkKeyword}
-                    style={{ background: "linear-gradient(135deg, #E8A838, #F0C060)" }}
-                  >
-                    AI活用
-                  </span>
-                  <h3 className={p.partnerWorkH3}>AI・AX領域の案件にも携われる</h3>
-                  <p className={p.partnerWorkBody}>
-                    生成AI活用やAIの実装を伴う案件に参画する機会があります。
-                    実務を通じて、AI活用の実践知見や市場価値の高いスキルを磨けます。
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ======================================
-            Section 3: 募集職種
-            ====================================== */}
-        <section className={p.partnerRoleSection} id="roles">
-          <div className="container">
-            <div className={`${p.partnerSectionHead} ${p.center} ${s.reveal}`}>
-              <span className={p.partnerSectionLabel}>ROLES</span>
-              <h2 className={p.partnerSectionH2}>こんな方を探しています。</h2>
-              <p className={p.partnerSectionDesc}>
-                職種を問わず、「ビジネスとテクノロジーの両方を理解して動ける人」を求めています。
-                以下はあくまで参考です。「自分はどこに当てはまるか」が気になれば、まず話しましょう。
-              </p>
-            </div>
-
+          <div>
             {/* タブバー */}
             <ul className={p.partnerRoleTabList} role="tablist">
               {roles.map((role, i) => (
                 <li key={role.id} role="presentation">
                   <button
+                    type="button"
                     role="tab"
                     aria-selected={activeTab === i}
                     aria-controls={`panel-${role.id}`}
@@ -417,26 +309,33 @@ export default function PartnerPage() {
                 id={`panel-${role.id}`}
                 role="tabpanel"
                 aria-labelledby={`tab-${role.id}`}
-                className={`${p.partnerRolePanel} ${activeTab === i ? p.partnerRolePanelActive : ""}`}
+                className={`${s.card} ${p.partnerRolePanel}`}
                 hidden={activeTab !== i}
               >
                 <div className={p.partnerRolePanelInfo}>
-                  <span className={`${p.partnerRoleBadge} ${role.badgeClass}`}>{role.badgeText}</span>
-                  <h3 className={p.partnerRolePanelH3}>{role.h3}</h3>
-                  <p className={p.partnerRolePanelDesc}>{role.desc}</p>
-                  <p className={p.partnerRoleFitLabel}>こんな方に向いています</p>
+                  <h3 className={s.cardTitle}>{role.h3}</h3>
+                  <p className={s.body}>{role.desc}</p>
+                  <p className={p.partnerRoleLabel}>こんな方に向いています</p>
                   <ul className={p.partnerRoleFitList}>
                     {role.fits.map((fit) => (
-                      <li key={fit}><span aria-hidden="true">✓</span> {fit}</li>
+                      <li key={fit}>
+                        <span aria-hidden="true" className={p.partnerRoleMark}>
+                          ✓
+                        </span>
+                        {fit}
+                      </li>
                     ))}
                   </ul>
                 </div>
                 <div className={p.partnerRolePanelSkills}>
-                  <p className={p.partnerRoleSkillLabel}>求めるスキル・経験</p>
-                  <ul className={p.partnerSkillList}>
+                  <p className={p.partnerRoleLabel}>求めるスキル・経験</p>
+                  <ul className={p.partnerRoleFitList}>
                     {role.skills.map((skill) => (
-                      <li key={skill} className={p.partnerSkillItem}>
-                        <span aria-hidden="true">/</span> {skill}
+                      <li key={skill}>
+                        <span aria-hidden="true" className={p.partnerRoleMark}>
+                          /
+                        </span>
+                        {skill}
                       </li>
                     ))}
                   </ul>
@@ -445,286 +344,279 @@ export default function PartnerPage() {
             ))}
 
             {/* 締めメッセージ */}
-            <div className={`${p.partnerRoleNote} ${s.reveal}`}>
-              肩書きや職種の分類よりも大切にしているのは、「クライアントの課題を自分ごとにして考えられるか」です。「言われたことをやる」より「なぜそれが必要かを考えながら動く」スタンスを持つ方と働きたいと思っています。
-            </div>
+            <p className={`${s.body} ${p.partnerRoleNote}`}>
+              肩書きや職種の分類よりも大切にしているのは、「クライアントの課題を自分ごとにして考えられるか」です。<br className={s.pcOnly} />
+              「言われたことをやる」より「なぜそれが必要かを考えながら動く」スタンスを持つ方と働きたいと思っています。
+            </p>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* ======================================
-            Section 4: 参画の流れ
-            ====================================== */}
-        <section className={p.partnerStepSection}>
-          <div className="container">
-            <div className={`${p.partnerSectionHead} ${p.center} ${s.reveal}`}>
-              <span className={p.partnerSectionLabel}>PROCESS</span>
-              <h2 className={p.partnerSectionH2}>参画までの流れ</h2>
-              <p className={p.partnerSectionDesc}>
-                気軽な一歩から始まります。まずはカジュアルに話しましょう。
-              </p>
-            </div>
+      {/* Section 3: 参画の流れ */}
+      <section className={s.section}>
+        <div className={`${s.inner} ${s.block}`}>
+          <SectionHeading lead="気軽な一歩から始まります。まずはカジュアルに話しましょう。">参画までの流れ</SectionHeading>
 
-            <ol className={p.partnerStepList}>
-              {steps.map((step, i) => (
-                <li key={step.num} className={`${p.partnerStepItem} ${s.reveal}`} style={{ transitionDelay: `${i * 0.08}s` }}>
-                  <div className={p.partnerStepNum} aria-hidden="true">{step.num}</div>
-                  <div className={p.partnerStepContent}>
-                    <h3 className={p.partnerStepH3}>{step.h3}</h3>
-                    <p className={p.partnerStepBody}>{step.body}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-
-        {/* ======================================
-            Section 5: FAQ
-            ====================================== */}
-        <section className={p.partnerFaqSection}>
-          <div className="container">
-            <div className={`${p.partnerSectionHead} ${p.center} ${s.reveal}`}>
-              <span className={p.partnerSectionLabel}>FAQ</span>
-              <h2 className={p.partnerSectionH2}>よくあるご質問</h2>
-            </div>
-
-            <div className={p.partnerFaqGrid}>
-              {faqs.map((faq, i) => (
-                <div key={i} className={`${p.partnerFaqCard} ${s.reveal}`} style={{ transitionDelay: `${i * 0.08}s` }}>
-                  <div className={p.partnerFaqQ}>
-                    <span className={p.partnerFaqQMark} aria-hidden="true">Q</span>
-                    <p className={p.partnerFaqQText}>{faq.q}</p>
-                  </div>
-                  <div className={p.partnerFaqA}>
-                    <span className={p.partnerFaqAMark} aria-hidden="true">A</span>
-                    <p className={p.partnerFaqAText}>{faq.a}</p>
-                  </div>
+          <ol className={s.rowList}>
+            {steps.map((step) => (
+              <li key={step.num} className={s.rowItem}>
+                <span className={s.rowNum} aria-hidden="true">
+                  {step.num}
+                </span>
+                <div className={s.rowContent}>
+                  <h3 className={s.rowTitle}>{step.h3}</h3>
+                  <p className={s.body}>{step.body}</p>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
-        {/* ======================================
-            Section 6: エントリーフォーム
-            ====================================== */}
-        <section className={p.partnerEntrySection} id="entry">
-          <div className={p.partnerEntryBg} aria-hidden="true" />
-          <div className="container">
-            <div className={`${p.partnerSectionHead} ${p.center} ${s.reveal}`}>
-              <span className={p.partnerSectionLabel}>ENTRY</span>
-              <h2 className={p.partnerSectionH2}>まず話を聞く</h2>
-              <p className={p.partnerSectionDesc}>
+      {/* Section 4: FAQ */}
+      <section className={s.section}>
+        <div className={`${s.inner} ${s.block}`}>
+          <SectionHeading>よくあるご質問</SectionHeading>
+
+          <div className={s.grid2}>
+            {faqs.map((faq) => (
+              <div key={faq.q} className={`${s.card} ${p.partnerFaqCard}`}>
+                <div className={p.partnerFaqRow}>
+                  <span className={p.partnerFaqQMark} aria-hidden="true">
+                    Q
+                  </span>
+                  <p className={p.partnerFaqQText}>{faq.q}</p>
+                </div>
+                <div className={p.partnerFaqRow}>
+                  <span className={p.partnerFaqAMark} aria-hidden="true">
+                    A
+                  </span>
+                  <p className={s.body}>{faq.a}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Section 5: エントリーフォーム */}
+      <section className={s.section} id="entry">
+        <div className={s.inner}>
+          <SectionHeading
+            lead={
+              <>
                 フォームから送信いただくと、翌営業日中にご連絡します。
                 「まだ迷っている」という段階でも歓迎です。
+              </>
+            }
+          >
+            まず話を聞く
+          </SectionHeading>
+
+          {submitStatus === "success" ? (
+            <div className={p.partnerSuccessBox} role="status" aria-live="polite">
+              <div className={p.partnerSuccessIcon} aria-hidden="true">
+                ✓
+              </div>
+              <h2 className={p.partnerSuccessH2}>受け付けました</h2>
+              <p className={s.body}>
+                ご応募ありがとうございます。<br />
+                翌営業日中にご入力いただいたメールアドレス宛にご連絡させていただきます。
               </p>
             </div>
-
-            {submitStatus === "success" ? (
-              <div className={p.partnerSuccessBox}>
-                <div className={p.partnerSuccessIcon} aria-hidden="true">✓</div>
-                <h2 className={p.partnerSuccessH2}>受け付けました</h2>
-                <p className={p.partnerSuccessText}>
-                  ご応募ありがとうございます。<br />
-                  翌営業日中にご入力いただいたメールアドレス宛にご連絡させていただきます。
-                </p>
-              </div>
-            ) : (
-              <form className={`${p.partnerEntryForm} ${s.reveal}`} onSubmit={handleSubmit} noValidate>
-                <AgentNotice />
-                <HoneypotField inputRef={honeypotRef} />
-                <div className={p.partnerFormGrid}>
-                  {/* お名前 */}
-                  <div className={`${p.partnerFieldWrap} ${p.partnerFieldFull}`}>
-                    <label className={p.partnerLabel} htmlFor="partner-name">
-                      お名前 <span className={p.partnerRequired}>必須</span>
-                    </label>
-                    <input
-                      id="partner-name"
-                      name="name"
-                      type="text"
-                      className={p.partnerInput}
-                      placeholder="山田 太郎"
-                      value={form.name}
-                      onChange={handleTextChange}
-                    />
-                    {errors.name && <p className={p.partnerErrorMsg}>{errors.name}</p>}
-                  </div>
-
-                  {/* メールアドレス */}
-                  <div className={p.partnerFieldWrap}>
-                    <label className={p.partnerLabel} htmlFor="partner-email">
-                      メールアドレス <span className={p.partnerRequired}>必須</span>
-                    </label>
-                    <input
-                      id="partner-email"
-                      name="email"
-                      type="email"
-                      className={p.partnerInput}
-                      placeholder="taro.yamada@example.com"
-                      value={form.email}
-                      onChange={handleTextChange}
-                    />
-                    {errors.email && <p className={p.partnerErrorMsg}>{errors.email}</p>}
-                  </div>
-
-                  {/* 電話番号 */}
-                  <div className={p.partnerFieldWrap}>
-                    <label className={p.partnerLabel} htmlFor="partner-tel">
-                      電話番号
-                      <span style={{ fontSize: "11px", color: "var(--color-muted)", fontWeight: 400 }}>（任意）</span>
-                    </label>
-                    <input
-                      id="partner-tel"
-                      name="tel"
-                      type="tel"
-                      className={p.partnerInput}
-                      placeholder="090-0000-0000"
-                      value={form.tel}
-                      onChange={handleTextChange}
-                    />
-                  </div>
-
-                  <hr className={p.partnerFormDivider} />
-
-                  {/* 職種 */}
-                  <div className={`${p.partnerFieldWrap} ${p.partnerFieldFull}`}>
-                    <p className={p.partnerLabel}>
-                      あなたの職種 <span className={p.partnerRequired}>必須</span>
-                    </p>
-                    <div className={p.partnerCheckGroup} role="group" aria-label="職種">
-                      {roleOptions.map((option) => (
-                        <label key={option} className={p.partnerCheckItem}>
-                          <input
-                            type="checkbox"
-                            checked={form.roles.includes(option)}
-                            onChange={(e) => handleRoleChange(option, e.target.checked)}
-                          />
-                          {option}
-                        </label>
-                      ))}
-                    </div>
-                    {errors.roles && <p className={p.partnerErrorMsg}>{errors.roles}</p>}
-                  </div>
-
-                  {/* 稼働状況 */}
-                  <div className={`${p.partnerFieldWrap} ${p.partnerFieldFull}`}>
-                    <p className={p.partnerLabel}>
-                      現在の稼働状況 <span className={p.partnerRequired}>必須</span>
-                    </p>
-                    <div className={p.partnerRadioGroup} role="group" aria-label="稼働状況">
-                      {statusOptions.map((option) => (
-                        <label key={option} className={p.partnerRadioItem}>
-                          <input
-                            type="radio"
-                            name="status"
-                            value={option}
-                            checked={form.status === option}
-                            onChange={handleTextChange}
-                          />
-                          {option}
-                        </label>
-                      ))}
-                    </div>
-                    {errors.status && <p className={p.partnerErrorMsg}>{errors.status}</p>}
-                  </div>
-
-                  {/* 稼働可能時間 */}
-                  <div className={`${p.partnerFieldWrap} ${p.partnerFieldFull}`}>
-                    <label className={p.partnerLabel} htmlFor="partner-avail-hours">
-                      稼働可能時間 <span className={p.partnerRequired}>必須</span>
-                    </label>
-                    <select
-                      id="partner-avail-hours"
-                      name="availHours"
-                      className={p.partnerSelect}
-                      value={form.availHours}
-                      onChange={handleTextChange}
-                    >
-                      <option value="">選択してください</option>
-                      {availHoursOptions.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
-                    {errors.availHours && <p className={p.partnerErrorMsg}>{errors.availHours}</p>}
-                  </div>
-
-                  <hr className={p.partnerFormDivider} />
-
-                  {/* スキル・経験 */}
-                  <div className={`${p.partnerFieldWrap} ${p.partnerFieldFull}`}>
-                    <label className={p.partnerLabel} htmlFor="partner-skills">
-                      スキル・経験の概要
-                      <span style={{ fontSize: "11px", color: "var(--color-muted)", fontWeight: 400 }}>（任意）</span>
-                    </label>
-                    <textarea
-                      id="partner-skills"
-                      name="skills"
-                      className={p.partnerTextarea}
-                      placeholder="例：Webアプリ開発10年、直近はNext.js/TypeScript中心。DX推進の上流支援経験あり。"
-                      value={form.skills}
-                      onChange={handleTextChange}
-                      rows={4}
-                    />
-                  </div>
-
-                  {/* メッセージ */}
-                  <div className={`${p.partnerFieldWrap} ${p.partnerFieldFull}`}>
-                    <label className={p.partnerLabel} htmlFor="partner-message">
-                      ご希望・その他メッセージ
-                      <span style={{ fontSize: "11px", color: "var(--color-muted)", fontWeight: 400 }}>（任意）</span>
-                    </label>
-                    <textarea
-                      id="partner-message"
-                      name="message"
-                      className={p.partnerTextarea}
-                      placeholder="稼働開始希望時期や条件など、自由にご記入ください。"
-                      value={form.message}
-                      onChange={handleTextChange}
-                      rows={4}
-                    />
-                  </div>
-
-                  {/* プライバシーポリシー */}
-                  <label className={p.partnerPrivacyCheck}>
-                    <input
-                      type="checkbox"
-                      checked={form.privacy}
-                      onChange={handlePrivacyChange}
-                    />
-                    <span>
-                      <a href="/privacy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>および
-                      <a href="/personal-info" target="_blank" rel="noopener noreferrer">個人情報の取り扱いについて</a>
-                      に同意する
-                    </span>
+          ) : (
+            <form className={p.partnerEntryForm} onSubmit={handleSubmit} noValidate>
+              <AgentNotice />
+              <HoneypotField inputRef={honeypotRef} />
+              <div className={p.partnerFormGrid}>
+                {/* お名前 */}
+                <div className={`${p.partnerFieldWrap} ${p.partnerFieldFull}`}>
+                  <label className={p.partnerLabel} htmlFor="partner-name">
+                    お名前 <span className={p.partnerRequired}>必須</span>
                   </label>
-                  {errors.privacy && <p className={p.partnerErrorMsg} style={{ gridColumn: "1 / -1" }}>{errors.privacy}</p>}
-
-                  {submitStatus === "error" && (
-                    <p className={p.partnerSubmitError}>
-                      送信に失敗しました。しばらくしてから再度お試しください。
-                    </p>
-                  )}
-
-                  <div className={p.partnerSubmitRow}>
-                    <button
-                      type="submit"
-                      className={p.partnerSubmitBtn}
-                      disabled={submitStatus === "loading"}
-                    >
-                      {submitStatus === "loading" ? "送信中..." : "送信する"}
-                    </button>
-                  </div>
+                  <input
+                    id="partner-name"
+                    name="name"
+                    type="text"
+                    className={p.partnerInput}
+                    placeholder="山田 太郎"
+                    value={form.name}
+                    onChange={handleTextChange}
+                  />
+                  {errors.name && <p className={p.partnerErrorMsg}>{errors.name}</p>}
                 </div>
-              </form>
-            )}
-          </div>
-        </section>
-      </main>
 
-      <Footer />
-    </>
+                {/* メールアドレス */}
+                <div className={p.partnerFieldWrap}>
+                  <label className={p.partnerLabel} htmlFor="partner-email">
+                    メールアドレス <span className={p.partnerRequired}>必須</span>
+                  </label>
+                  <input
+                    id="partner-email"
+                    name="email"
+                    type="email"
+                    className={p.partnerInput}
+                    placeholder="taro.yamada@example.com"
+                    value={form.email}
+                    onChange={handleTextChange}
+                  />
+                  {errors.email && <p className={p.partnerErrorMsg}>{errors.email}</p>}
+                </div>
+
+                {/* 電話番号 */}
+                <div className={p.partnerFieldWrap}>
+                  <label className={p.partnerLabel} htmlFor="partner-tel">
+                    電話番号
+                    <span className={p.partnerOptional}>（任意）</span>
+                  </label>
+                  <input
+                    id="partner-tel"
+                    name="tel"
+                    type="tel"
+                    className={p.partnerInput}
+                    placeholder="090-0000-0000"
+                    value={form.tel}
+                    onChange={handleTextChange}
+                  />
+                </div>
+
+                <hr className={p.partnerFormDivider} />
+
+                {/* 職種 */}
+                <div className={`${p.partnerFieldWrap} ${p.partnerFieldFull}`}>
+                  <p className={p.partnerLabel}>
+                    あなたの職種 <span className={p.partnerRequired}>必須</span>
+                  </p>
+                  <div className={p.partnerCheckGroup} role="group" aria-label="職種">
+                    {roleOptions.map((option) => (
+                      <label key={option} className={p.partnerCheckItem}>
+                        <input
+                          type="checkbox"
+                          checked={form.roles.includes(option)}
+                          onChange={(e) => handleRoleChange(option, e.target.checked)}
+                        />
+                        {option}
+                      </label>
+                    ))}
+                  </div>
+                  {errors.roles && <p className={p.partnerErrorMsg}>{errors.roles}</p>}
+                </div>
+
+                {/* 稼働状況 */}
+                <div className={`${p.partnerFieldWrap} ${p.partnerFieldFull}`}>
+                  <p className={p.partnerLabel}>
+                    現在の稼働状況 <span className={p.partnerRequired}>必須</span>
+                  </p>
+                  <div className={p.partnerRadioGroup} role="group" aria-label="稼働状況">
+                    {statusOptions.map((option) => (
+                      <label key={option} className={p.partnerRadioItem}>
+                        <input
+                          type="radio"
+                          name="status"
+                          value={option}
+                          checked={form.status === option}
+                          onChange={handleTextChange}
+                        />
+                        {option}
+                      </label>
+                    ))}
+                  </div>
+                  {errors.status && <p className={p.partnerErrorMsg}>{errors.status}</p>}
+                </div>
+
+                {/* 稼働可能時間 */}
+                <div className={`${p.partnerFieldWrap} ${p.partnerFieldFull}`}>
+                  <label className={p.partnerLabel} htmlFor="partner-avail-hours">
+                    稼働可能時間 <span className={p.partnerRequired}>必須</span>
+                  </label>
+                  <select
+                    id="partner-avail-hours"
+                    name="availHours"
+                    className={p.partnerSelect}
+                    value={form.availHours}
+                    onChange={handleTextChange}
+                  >
+                    <option value="">選択してください</option>
+                    {availHoursOptions.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.availHours && <p className={p.partnerErrorMsg}>{errors.availHours}</p>}
+                </div>
+
+                <hr className={p.partnerFormDivider} />
+
+                {/* スキル・経験 */}
+                <div className={`${p.partnerFieldWrap} ${p.partnerFieldFull}`}>
+                  <label className={p.partnerLabel} htmlFor="partner-skills">
+                    スキル・経験の概要
+                    <span className={p.partnerOptional}>（任意）</span>
+                  </label>
+                  <textarea
+                    id="partner-skills"
+                    name="skills"
+                    className={p.partnerTextarea}
+                    placeholder="例：Webアプリ開発10年、直近はNext.js/TypeScript中心。DX推進の上流支援経験あり。"
+                    value={form.skills}
+                    onChange={handleTextChange}
+                    rows={4}
+                  />
+                </div>
+
+                {/* メッセージ */}
+                <div className={`${p.partnerFieldWrap} ${p.partnerFieldFull}`}>
+                  <label className={p.partnerLabel} htmlFor="partner-message">
+                    ご希望・その他メッセージ
+                    <span className={p.partnerOptional}>（任意）</span>
+                  </label>
+                  <textarea
+                    id="partner-message"
+                    name="message"
+                    className={p.partnerTextarea}
+                    placeholder="稼働開始希望時期や条件など、自由にご記入ください。"
+                    value={form.message}
+                    onChange={handleTextChange}
+                    rows={4}
+                  />
+                </div>
+
+                {/* プライバシーポリシー */}
+                <label className={p.partnerPrivacyCheck}>
+                  <input
+                    type="checkbox"
+                    checked={form.privacy}
+                    onChange={handlePrivacyChange}
+                  />
+                  <span>
+                    <a href="/privacy" target="_blank" rel="noopener noreferrer" className={s.textLink}>プライバシーポリシー</a>および
+                    <a href="/personal-info" target="_blank" rel="noopener noreferrer" className={s.textLink}>個人情報の取り扱いについて</a>
+                    に同意する
+                  </span>
+                </label>
+                {errors.privacy && <p className={`${p.partnerErrorMsg} ${p.partnerFieldFull}`}>{errors.privacy}</p>}
+
+                {submitStatus === "error" && (
+                  <p className={p.partnerSubmitError}>
+                    送信に失敗しました。しばらくしてから再度お試しください。
+                  </p>
+                )}
+
+                <div className={p.partnerSubmitRow}>
+                  <button
+                    type="submit"
+                    className={p.partnerSubmitBtn}
+                    disabled={submitStatus === "loading"}
+                  >
+                    {submitStatus === "loading" ? "送信中..." : "送信する"}
+                  </button>
+                </div>
+              </div>
+            </form>
+          )}
+        </div>
+      </section>
+    </SubPage>
   );
 }

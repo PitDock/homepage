@@ -10,6 +10,12 @@ export const contentType = "image/png";
 // SITE_DESCRIPTION の要約（発注者確認済み・§10-1）
 const TAGLINE = "DX・AXコンサルティング × システム開発";
 const DOMAIN_LABEL = "pit-dock.com";
+// フッターと同じキャッチコピー・説明文
+const CATCH = "テクノロジーを味方に走り続ける";
+const LEAD_LINES = [
+  "PitDockは、DX・AXコンサルティングやシステム開発を通じて、",
+  "お客様が成長し続けるための変革を共に進めるパートナーです。",
+];
 
 /**
  * Google Fonts の CSS2 API は `text` パラメータを渡すと、
@@ -18,9 +24,9 @@ const DOMAIN_LABEL = "pit-dock.com";
  * ttf (truetype) 形式の URL が返るため、ImageResponse の fonts
  * オプションにそのまま渡せる（satori は truetype/opentype のみ対応）。
  */
-async function loadSubsetGoogleFont(text: string): Promise<ArrayBuffer | null> {
+async function loadSubsetGoogleFont(text: string, weight: 400 | 700): Promise<ArrayBuffer | null> {
   try {
-    const cssUrl = `https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&text=${encodeURIComponent(text)}`;
+    const cssUrl = `https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@${weight}&text=${encodeURIComponent(text)}`;
     const cssRes = await fetch(cssUrl);
     if (!cssRes.ok) return null;
     const css = await cssRes.text();
@@ -38,8 +44,12 @@ export default async function Image() {
   const logoBuffer = await readFile(join(process.cwd(), "public/images/logo_white.png"));
   const logoSrc = `data:image/png;base64,${logoBuffer.toString("base64")}`;
 
-  // タグライン + フッターのドメイン表記で使う文字だけをサブセット化対象にする
-  const fontData = await loadSubsetGoogleFont(`${TAGLINE}${DOMAIN_LABEL}`);
+  // 画像内で使う文字だけをサブセット化対象にする（見出し類は 700、説明文は 400）
+  const [fontBold, fontRegular] = await Promise.all([
+    loadSubsetGoogleFont(`${TAGLINE}${CATCH}${DOMAIN_LABEL}`, 700),
+    loadSubsetGoogleFont(LEAD_LINES.join(""), 400),
+  ]);
+  const fontFamily = fontBold || fontRegular ? "Noto Sans JP" : undefined;
 
   return new ImageResponse(
     (
@@ -86,27 +96,62 @@ export default async function Image() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={logoSrc}
-          width={420}
-          height={66}
-          style={{ position: "absolute", left: 80, top: 88 }}
+          width={380}
+          height={60}
+          style={{ position: "absolute", left: 80, top: 80 }}
         />
 
-        {/* タグライン */}
+        {/* 本文ブロック: タグライン → キャッチコピー → 説明文 */}
         <div
           style={{
             position: "absolute",
             left: 80,
-            top: 88 + 66 + 40,
-            maxWidth: 880,
-            fontSize: 40,
-            fontWeight: 700,
-            lineHeight: 1.4,
-            color: "#F4F7FF",
-            fontFamily: fontData ? "Noto Sans JP" : undefined,
+            top: 180,
+            width: 1040,
             display: "flex",
+            flexDirection: "column",
+            fontFamily,
           }}
         >
-          {TAGLINE}
+          <div
+            style={{
+              fontSize: 26,
+              fontWeight: 700,
+              color: "#4F8EF7",
+              display: "flex",
+            }}
+          >
+            {TAGLINE}
+          </div>
+          <div
+            style={{
+              marginTop: 18,
+              fontSize: 52,
+              fontWeight: 700,
+              lineHeight: 1.3,
+              color: "#F4F7FF",
+              display: "flex",
+            }}
+          >
+            {CATCH}
+          </div>
+          <div
+            style={{
+              marginTop: 32,
+              fontSize: 28,
+              fontWeight: 400,
+              lineHeight: 1.65,
+              color: "#B7C4E6",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            {LEAD_LINES.map((line) => (
+              <div key={line} style={{ display: "flex" }}>
+                {line}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* フッター右下: ドメイン */}
@@ -127,9 +172,14 @@ export default async function Image() {
     ),
     {
       ...size,
-      fonts: fontData
-        ? [{ name: "Noto Sans JP", data: fontData, weight: 700 as const, style: "normal" as const }]
-        : [],
+      fonts: [
+        ...(fontBold
+          ? [{ name: "Noto Sans JP", data: fontBold, weight: 700 as const, style: "normal" as const }]
+          : []),
+        ...(fontRegular
+          ? [{ name: "Noto Sans JP", data: fontRegular, weight: 400 as const, style: "normal" as const }]
+          : []),
+      ],
     }
   );
 }

@@ -1,0 +1,551 @@
+/*
+ * 共通ヘッダー・フッター（SiteHeader / SiteFooter）。
+ * トップページの新デザインと同じ見た目を、どのページに置いても再現できるよう、
+ * 色・フォント・高さの指定をこのファイルの中で完結させている（ページ側の CSS に依存しない）。
+ */
+
+.header,
+.footer {
+  /* Figma の変数名に合わせたカラートークン（app/home.module.css と同じ値） */
+  --brand-pit-blue: #14509E;
+  --brand-dock-blue: #3AA0E8;
+  --brand-ink: #0E1B2C;
+  --brand-tint: #EEF5FC;
+  --brand-white: #FFFFFF;
+  --brand-pit-blue-hover: #0F3F7E;
+  --brand-white-hover: #DCE9F7;
+  --section-pad-x: 80px;
+
+  color: var(--brand-ink);
+  font-family: var(--font-space), var(--font-zen), "Hiragino Sans", sans-serif;
+  font-size: 16px;
+  line-height: 2;
+}
+
+.header {
+  /* ヘッダーの高さ。ページ側でヘッダー分の余白を取るときはこの値に合わせる */
+  --header-height: 88px;
+}
+
+.header ul,
+.footer ul {
+  list-style: none;
+}
+
+.btnOutline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 48px;
+  border: 1px solid var(--brand-pit-blue);
+  color: var(--brand-pit-blue);
+  font-size: 16px;
+  font-weight: 700;
+  transition: background-color 0.2s;
+}
+
+.btnOutline:hover {
+  background: var(--brand-white-hover);
+}
+
+
+/* ===== Header ===== */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--header-height);
+  padding: 0 var(--section-pad-x);
+  background: var(--brand-tint);
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1280px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.headerLogo img {
+  width: 202px;
+  height: auto;
+}
+
+.headerNav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.headerNavList {
+  display: flex;
+  gap: 36px;
+}
+
+.headerNavList > li > a {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 2;
+  color: var(--brand-pit-blue);
+  transition: color 0.2s;
+}
+
+.headerNavList > li > a:hover {
+  color: var(--brand-pit-blue-hover);
+}
+
+/* 「サービス」のプルダウン。カーソルを合わせる（キーボードではフォーカスする）と開く */
+.hasDropdown {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 1;
+  /* ヘッダーの下端まで透明の余白で埋め、カーソルを移しても閉じないようにする */
+  padding-top: calc((var(--header-height) - 32px) / 2);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, 4px);
+  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+}
+
+.hasDropdown:hover .dropdown,
+.hasDropdown:focus-within .dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+.dropdownList {
+  min-width: 240px;
+  padding: 8px 0;
+  border: 1px solid var(--brand-dock-blue);
+  background: var(--brand-white);
+  box-shadow: 0 8px 24px rgba(14, 27, 44, 0.08);
+}
+
+.dropdownList a {
+  display: block;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--brand-pit-blue);
+  white-space: nowrap;
+  transition: background-color 0.2s;
+}
+
+.dropdownList a:hover {
+  background: var(--brand-tint);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  background: var(--brand-pit-blue);
+}
+
+/* ===== メニュー（モバイル・タブレット） ===== */
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 24px 40px;
+  overflow-y: auto;
+  background: var(--brand-tint);
+}
+
+.menu[hidden] {
+  display: none;
+}
+
+.menuTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.menuTop .headerLogo img {
+  width: 140px;
+}
+
+.menuClose,
+.menuCloseBottom {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  background: none;
+  color: var(--brand-pit-blue);
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.menuClose {
+  flex-direction: column;
+  gap: 2px;
+  padding: 0;
+}
+
+.menuCloseLabel {
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.closeIcon {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.closeIcon::before,
+.closeIcon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  margin-top: -1px;
+  background: currentColor;
+}
+
+.closeIcon::before {
+  transform: rotate(45deg);
+}
+
+.closeIcon::after {
+  transform: rotate(-45deg);
+}
+
+.menuNav {
+  margin-top: 16px;
+}
+
+.menuNav > li:not(:last-child) {
+  border-bottom: 1px solid var(--brand-dock-blue);
+}
+
+.menuNav > li > a {
+  display: block;
+  padding: 18px 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--brand-pit-blue);
+}
+
+/* 「サービス」の下に字下げして並べる下層リンク */
+.menuSubNav {
+  margin-top: -8px;
+  padding: 0 0 12px 16px;
+}
+
+.menuSubNav a {
+  display: block;
+  padding: 8px 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--brand-pit-blue);
+}
+
+.menuCtas {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.menuCtaPrimary,
+.menuCtaSecondary {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.menuCtaPrimary {
+  padding: 18px;
+  background: var(--brand-pit-blue);
+  color: var(--brand-white);
+}
+
+.menuCtaPrimary:hover {
+  background: var(--brand-pit-blue-hover);
+}
+
+.menuCtaSecondary {
+  padding: 8px;
+  border: 1px solid var(--brand-pit-blue);
+  background: var(--brand-white);
+  color: var(--brand-pit-blue);
+}
+
+.menuCtaSecondary:hover {
+  background: var(--brand-white-hover);
+}
+
+.menuCloseBottom {
+  align-self: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 4px 8px;
+  font-size: 14px;
+}
+
+.menuCloseBottom .closeIcon {
+  width: 14px;
+  height: 14px;
+}
+
+/* ===== Footer ===== */
+
+.footer {
+  padding: 80px var(--section-pad-x);
+  background: var(--brand-tint);
+}
+
+.footerTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.footerTop nav {
+  display: flex;
+  gap: 64px;
+}
+
+.footerBrand {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.footerLogo img {
+  width: 227px;
+  height: auto;
+}
+
+.footerCatch {
+  font-size: 16px;
+  line-height: 2;
+  font-weight: 700;
+  color: var(--brand-pit-blue);
+}
+
+.footerCatchSub {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.9;
+  font-weight: 400;
+  color: var(--brand-ink);
+}
+
+.footerSocial {
+  display: flex;
+  gap: 20px;
+}
+
+.footerSocial img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.footerSocial a {
+  display: block;
+  transition: opacity 0.2s;
+}
+
+.footerSocial a:hover {
+  opacity: 0.7;
+}
+
+.footerLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.footerLinks li {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.footerLinks a {
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: var(--brand-pit-blue);
+  white-space: nowrap;
+}
+
+.footerLinks a:hover {
+  color: var(--brand-pit-blue-hover);
+  text-decoration: underline;
+}
+
+/* 「サービス」の下に字下げして並べる下層リンク */
+.footerSubLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+  padding-left: 12px;
+}
+
+.footerLinks .footerSubLinks a {
+  font-size: 13px;
+}
+
+.copyright {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--brand-dock-blue);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--brand-pit-blue);
+}
+
+
+/* フッターの中身。トップページではリボンより前面に出す */
+.footerInner {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ===== 中間幅 ===== */
+
+/* ヘッダーのナビ（5 項目）が入りきらない幅ではハンバーガーメニューにする */
+@media (max-width: 1151px) {
+  .header {
+    --header-height: 56px;
+    padding: 0 40px;
+  }
+
+  .headerLogo img {
+    width: 140px;
+  }
+
+  .headerNav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+@media (min-width: 1152px) {
+  .menu {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  /* ロゴとリンク 3 列が横に並びきらないので、リンクはロゴの下の段に並べる */
+  .footerTop {
+    flex-direction: column;
+  }
+}
+
+/* ===== モバイル ===== */
+
+@media (max-width: 767px) {
+  .header,
+  .footer {
+    --section-pad-x: 24px;
+  }
+
+  .header {
+    padding: 0 24px;
+  }
+
+  .footer {
+    padding: 48px var(--section-pad-x);
+  }
+
+  .footerBrand {
+    gap: 24px;
+  }
+
+  .footerLogo img {
+    width: 180px;
+  }
+
+  .footerCatch {
+    font-size: 14px;
+  }
+
+  .footerCatchSub {
+    font-size: 13px;
+  }
+
+  .footerLinks {
+    gap: 16px;
+  }
+
+  /* 横に 3 列は入りきらないため、3 列目（お問い合わせ・プライバシーポリシーなど）は下の段に回す */
+  .footerTop nav {
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+}
+
+/*
+ * 画面幅で出し分ける改行。<br className={s.pcOnly} /> のように <br> に付けて使う。
+ * - pcOnly: PC（768px 以上）のときだけ改行する
+ * - spOnly: スマートフォン（767px 以下）のときだけ改行する
+ */
+.pcOnly {
+  display: inline;
+}
+
+.spOnly {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .pcOnly {
+    display: none;
+  }
+
+  .spOnly {
+    display: inline;
+  }
+}

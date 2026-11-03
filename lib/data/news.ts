@@ -74,4 +74,11 @@ export const news: NewsEntry[] = [
     title: "「企業名鑑」に弊社の紹介記事「技術を成果に変える」が掲載されました。",
     url: "https://kigyo-meikan.com/archives/pit-dock/",
   },
+  {
+    id: 10,
+    tags: ["お知らせ"],
+    date: "2026.11.03",
+    title: "ホームページリニューアルのお知らせ",
+    url: "/news/10",
+  },
 ];
