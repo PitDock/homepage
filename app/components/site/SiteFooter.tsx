@@ -71,6 +71,9 @@ export default function SiteFooter({ ribbonAnchor }: Props) {
             </ul>
             <ul role="list" className={s.footerLinks}>
               <li>
+                <a href="/contact">無料相談</a>
+              </li>
+              <li>
                 <a href={INQUIRY_URL} target="_blank" rel="noopener noreferrer">
                   お問い合わせ
                 </a>
