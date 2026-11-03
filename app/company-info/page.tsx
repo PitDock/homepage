@@ -20,7 +20,7 @@ export default function CompanyPage() {
             </div>
             <div className={s.dataRow}>
               <dt className={s.dataLabel}>創業</dt>
-              <dd className={s.dataValue}>2022年12月1日</dd>
+              <dd className={s.dataValue}>2022年7月19日</dd>
             </div>
             <div className={s.dataRow}>
               <dt className={s.dataLabel}>設立</dt>
