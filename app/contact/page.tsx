@@ -156,7 +156,7 @@ function IconChevronDown({ className }: IconProps) {
 
 const TRUST_BADGES = [
   { label: "相談無料", Icon: IconNoCost },
-  { label: "所要30分", Icon: IconClock },
+  { label: "所要時間30分", Icon: IconClock },
   { label: "オンライン（全国対応）", Icon: IconMonitor },
   { label: "平日夜間・土日祝も対応", Icon: IconMoon },
 ] as const;
@@ -623,7 +623,7 @@ export default function ContactPage() {
                 01
               </span>
               <div className={s.rowContent}>
-                <h3 className={s.rowTitle}>フォームを送信（所要1分）</h3>
+                <h3 className={s.rowTitle}>フォームを送信（所要時間1分）</h3>
                 <p className={s.body}>
                   必須はお名前・メールアドレス・ご相談テーマの3つだけです。日程のご希望は任意で、後からメールで調整することもできます。
                 </p>
@@ -637,9 +637,7 @@ export default function ContactPage() {
               <div className={s.rowContent}>
                 <h3 className={s.rowTitle}>翌営業日までにご返信・日程確定</h3>
                 <p className={s.body}>
-                  ご入力のメールアドレス宛に
-                  <strong className={s.strong}>翌営業日（土日祝を除く）までに</strong>
-                  ご連絡し、日程を確定します。いただいた候補日で調整がつかない場合は、こちらから候補をご提案します。
+                  ご入力のメールアドレス宛に翌営業日（土日祝を除く）までにご連絡し、日程を確定します。いただいた候補日で調整がつかない場合は、こちらから候補をご提案します。
                 </p>
               </div>
             </li>
@@ -673,7 +671,7 @@ export default function ContactPage() {
 
       {/* ============ 【6】フォーム ============ */}
       <section id="form" ref={formSectionRef} className={s.section}>
-        <div className={`${s.inner} ${cs.formInner}`}>
+        <div className={s.inner}>
           {status === "success" ? (
             <div
               className={cs.successBox}
@@ -738,7 +736,7 @@ export default function ContactPage() {
                       )}
                       {submittedForm.company.trim() && (
                         <div className={cs.submittedRow}>
-                          <p className={cs.submittedLabel}>会社名・屋号</p>
+                          <p className={cs.submittedLabel}>会社名</p>
                           <p className={cs.submittedValue}>{submittedForm.company}</p>
                         </div>
                       )}
@@ -778,8 +776,7 @@ export default function ContactPage() {
             <>
               <SectionHeading>無料相談のお申し込み</SectionHeading>
               <p className={`${s.body} ${cs.formLead}`}>
-                入力は1分ほどで完了します。必須はお名前・メールアドレス・ご相談テーマの
-                <strong className={s.strong}>3つだけ</strong>です。
+                入力は1分ほどで完了します。必須はお名前・メールアドレス・ご相談テーマの3つだけです。
                 <br />
                 詳しい内容は、当日お話しいただければ大丈夫です。
               </p>
@@ -933,10 +930,10 @@ export default function ContactPage() {
                     </p>
                   </div>
 
-                  {/* 会社名・屋号 */}
+                  {/* 会社名 */}
                   <div className={`${cs.fieldWrap} ${cs.fullWidth}`}>
                     <label className={cs.label} htmlFor="company">
-                      会社名・屋号 <span className={cs.optional}>任意</span>
+                      会社名 <span className={cs.optional}>任意</span>
                     </label>
                     <input
                       id="company"
