@@ -77,7 +77,7 @@ export const news: NewsEntry[] = [
   {
     id: 10,
     tags: ["お知らせ"],
-    date: "2026.11.01",
+    date: "2026.11.03",
     title: "ホームページリニューアルのお知らせ",
     url: "/news/10",
   },
