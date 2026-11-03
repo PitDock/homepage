@@ -1,0 +1,29 @@
+/* 料金表の強調金額（docs/subpages-design-spec.md §8.2） */
+.priceWrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 12px;
+}
+
+.priceHighlight {
+  font-family: var(--font-space), sans-serif;
+  font-size: 32px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--brand-pit-blue);
+}
+
+.priceNote {
+  font-size: 14px;
+  line-height: 1.8;
+  font-weight: 400;
+  color: var(--brand-gray);
+}
+
+@media (max-width: 767px) {
+  .priceWrap {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

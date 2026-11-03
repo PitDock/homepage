@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "../../../../../lib/seo/metadata";
-import s from "../../../../page.module.css";
-import ts from "../../duosub/terms/terms.module.css";
-import ps from "../privacy/privacy.module.css";
+import SubPage from "../../../../components/sub/SubPage";
+import PageHero from "../../../../components/sub/PageHero";
+import s from "../../../../components/sub/sub.module.css";
+import ts from "../../../../components/sub/terms.module.css";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Gentle Diary 利用規約",
@@ -13,40 +14,19 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function GentleDiaryTermsPage() {
   return (
-    <>
-      <section className={`${s.pageHero} ${s.pageHeroTerms}`}>
-        <div className={`container ${ts.pageHeroInner}`}>
-          <nav className={s.breadcrumb} aria-label="パンくず">
-            <ol>
-              <li>
-                <a href="/">ホーム</a>
-              </li>
-              <li aria-hidden="true" className={s.breadcrumbSep}>
-                /
-              </li>
-              <li>
-                <a href="/service/products">サービス・プロダクト</a>
-              </li>
-              <li aria-hidden="true" className={s.breadcrumbSep}>
-                /
-              </li>
-              <li>
-                <a href="/service/products/gentle-diary">Gentle Diary</a>
-              </li>
-              <li aria-hidden="true" className={s.breadcrumbSep}>
-                /
-              </li>
-              <li>
-                <span aria-current="page">利用規約</span>
-              </li>
-            </ol>
-          </nav>
-          <h1 className={s.pageH1}>Gentle Diary - 利用規約</h1>
-        </div>
-      </section>
+    <SubPage>
+      <PageHero
+        breadcrumbs={[
+          { label: "ホーム", href: "/" },
+          { label: "サービス・プロダクト", href: "/service/products" },
+          { label: "Gentle Diary", href: "/service/products/gentle-diary" },
+          { label: "利用規約" },
+        ]}
+        title="Gentle Diary - 利用規約"
+      />
 
-      <section className={`${s.section} ${s.sectionTerms}`}>
-        <div className="container">
+      <section className={s.section}>
+        <div className={s.inner}>
           <div className={ts.contentWrap}>
             <p className={ts.meta}>
               2026年2月1日制定
@@ -112,7 +92,7 @@ export default function GentleDiaryTermsPage() {
                 <li>本サービスは、所定の方法により利用登録を行うことで利用できます。</li>
                 <li>
                   運営者は、以下の場合、事前の通知なく利用登録を拒否または取消すことがあります。
-                  <ul className={ps.bulletList}>
+                  <ul className={ts.bulletList}>
                     <li>虚偽の情報を登録した場合</li>
                     <li>本規約に違反した場合</li>
                     <li>その他、運営者が不適切と判断した場合</li>
@@ -314,6 +294,6 @@ export default function GentleDiaryTermsPage() {
           </div>
         </div>
       </section>
-    </>
+    </SubPage>
   );
 }

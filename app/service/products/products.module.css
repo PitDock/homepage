@@ -1,0 +1,61 @@
+/* 自社プロダクト一覧（docs/subpages-design-spec.md §8.3） */
+.productList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 要素セレクタ併記で sub.module.css の .card より優先 */
+li.productCard {
+  flex-direction: row;
+  gap: 40px;
+  padding: 20px;
+}
+
+.productThumb {
+  position: relative;
+  flex-shrink: 0;
+  width: 360px;
+  aspect-ratio: 16 / 10;
+  background: var(--brand-tint);
+  overflow: hidden;
+}
+
+.productThumb img {
+  object-fit: contain;
+}
+
+.productBody {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.productSubtitle {
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 700;
+  color: var(--brand-ink);
+}
+
+.productDesc {
+  white-space: pre-line;
+}
+
+.productActions {
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+@media (max-width: 1023px) {
+  li.productCard {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .productThumb {
+    width: 100%;
+  }
+}

@@ -1,36 +1,45 @@
+/*
+ * よくあるご質問（/contact のみで使用）。docs/subpages-design-spec.md §8.5
+ * 色は SubPage（sub.module.css の .page）のトークンを継承する。
+ */
+
 .tabList {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 
 .tab {
-  padding: 10px 22px;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--color-border);
-  background: transparent;
-  color: var(--color-text-sub);
-  font-family: var(--font);
+  padding: 8px 20px;
+  border: 1px solid var(--brand-pit-blue);
+  border-radius: 0;
+  background: var(--brand-white);
+  color: var(--brand-pit-blue);
+  font-family: inherit;
   font-size: 14px;
-  font-weight: 600;
+  line-height: 1.6;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .tab:hover {
-  border-color: var(--color-accent);
-  color: var(--color-text);
+  background: var(--brand-white-hover);
 }
 
-.tabActive {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: #fff;
+.tabActive,
+.tabActive:hover {
+  background: var(--brand-pit-blue);
+  color: var(--brand-white);
 }
 
 .item {
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--brand-dock-blue);
+}
+
+.item:first-child {
+  border-top: 1px solid var(--brand-dock-blue);
 }
 
 .question {
@@ -39,35 +48,46 @@
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  padding: 24px 0;
+  padding: 24px 14px;
   background: none;
   border: none;
   cursor: pointer;
-  font-family: var(--font);
+  font-family: inherit;
   font-size: 18px;
-  font-weight: 600;
-  color: var(--color-text);
+  line-height: 1.6;
+  font-weight: 700;
+  color: var(--brand-ink);
   text-align: left;
+  transition: color 0.2s;
+}
+
+.question:hover {
+  color: var(--brand-pit-blue);
 }
 
 .toggle {
-  font-size: 22px;
-  font-weight: 400;
-  color: var(--color-accent);
   flex-shrink: 0;
+  font-family: var(--font-space), sans-serif;
+  font-size: 24px;
   line-height: 1;
+  font-weight: 400;
+  color: var(--brand-pit-blue);
 }
 
 .answer {
-  font-size: 14px;
-  color: var(--color-text-sub);
-  line-height: 1.75;
-  padding: 0 0 24px;
+  padding: 0 14px 24px;
+  font-size: 16px;
+  line-height: 2;
+  color: var(--brand-ink);
   white-space: pre-line;
 }
 
 @media (max-width: 767px) {
   .question {
     font-size: 16px;
+  }
+
+  .answer {
+    font-size: 15px;
   }
 }

@@ -1,87 +1,80 @@
-.pageHeroInner {
-  padding-top: 52px;
-}
-
+/* プライバシーポリシー（docs/subpages-design-spec.md §8.9 規約文書レイアウト） */
 .contentWrap {
   max-width: 880px;
-  margin: 0 auto;
   font-size: 15px;
-  line-height: 1.95;
-  color: var(--color-text-sub);
-}
-
-.meta {
-  text-align: right;
-  font-size: 14px;
-  color: var(--color-text-sub);
-  line-height: 1.85;
-  margin-bottom: 32px;
-}
-
-.divider {
-  border: none;
-  border-top: 1px solid var(--color-border);
-  margin: 0 0 40px;
-}
-
-.lead {
-  font-size: 15px;
-  color: var(--color-text-sub);
-  line-height: 1.95;
-  margin-bottom: 40px;
+  line-height: 2;
+  color: var(--brand-ink);
 }
 
 .policyList {
-  list-style: none;
   counter-reset: policy;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
+  border-top: 1px solid var(--brand-dock-blue);
 }
 
 .policyItem {
   counter-increment: policy;
   position: relative;
-  padding: 24px 28px 24px 56px;
-  background: var(--color-bg-secondary);
-  border: 1px solid var(--color-border);
-  border-left: 3px solid var(--color-accent);
-  border-radius: 12px;
+  padding: 32px 0 32px 56px;
+  border-bottom: 1px solid var(--note-border);
 }
 
+.policyItem:last-child {
+  border-bottom-color: var(--brand-dock-blue);
+}
+
+/* 条項番号は装飾（dock-blue）。見出しの文言で内容は伝わる */
 .policyItem::before {
   content: counter(policy);
   position: absolute;
-  top: 24px;
-  left: 20px;
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--color-accent);
-  font-family: "Inter", sans-serif;
+  top: 34px;
+  left: 0;
+  width: 40px;
+  font-family: var(--font-space), sans-serif;
+  font-size: 24px;
   line-height: 1;
+  font-weight: 700;
+  color: var(--brand-dock-blue);
 }
 
 .policyHeading {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--color-text);
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  font-size: 18px;
   line-height: 1.5;
+  font-weight: 700;
+  color: var(--brand-ink);
 }
 
 .policyBody {
+  font-size: 15px;
+  line-height: 2;
+  color: var(--brand-ink);
+  white-space: pre-line;
+}
+
+.meta {
+  text-align: right;
+  margin-bottom: 32px;
   font-size: 14px;
-  color: var(--color-text-sub);
-  line-height: 1.95;
+  line-height: 1.8;
+  color: var(--brand-gray);
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--brand-dock-blue);
+  margin: 0 0 40px;
+}
+
+.lead {
+  margin-bottom: 48px;
+  font-size: 15px;
+  line-height: 2;
+  color: var(--brand-ink);
 }
 
 .subList {
-  list-style: none;
-  padding: 0;
-  margin: 12px 0 0;
   counter-reset: subitem;
+  margin: 12px 0 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -91,9 +84,9 @@
   counter-increment: subitem;
   position: relative;
   padding-left: 44px;
-  font-size: 14px;
-  color: var(--color-text-sub);
-  line-height: 1.85;
+  font-size: 15px;
+  line-height: 2;
+  color: var(--brand-ink);
 }
 
 .subItem::before {
@@ -103,40 +96,40 @@
   left: 0;
   width: 36px;
   text-align: right;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--color-accent);
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-space), sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--brand-pit-blue);
 }
 
 .subItem strong {
   display: block;
-  color: var(--color-text);
-  font-weight: 600;
-  margin-bottom: 2px;
+  font-weight: 700;
+  color: var(--brand-pit-blue);
 }
 
 @media (max-width: 767px) {
-  .pageHeroInner {
-    padding-top: 48px;
-  }
-
   .meta {
     font-size: 13px;
   }
 
   .policyItem {
-    padding: 20px 20px 20px 48px;
+    padding: 24px 0 24px 40px;
   }
 
   .policyItem::before {
-    top: 20px;
-    left: 16px;
-    font-size: 16px;
+    top: 26px;
+    font-size: 20px;
   }
 
   .policyHeading {
     font-size: 16px;
+  }
+
+  .policyBody,
+  .subItem {
+    font-size: 14px;
+    line-height: 1.9;
   }
 
   .subItem {
@@ -145,6 +138,5 @@
 
   .subItem::before {
     width: 28px;
-    font-size: 12px;
   }
 }
