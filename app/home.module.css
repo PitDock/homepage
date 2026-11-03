@@ -368,6 +368,17 @@
   color: var(--brand-pit-blue);
 }
 
+.cardTitleLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cardTitleLink:hover,
+.cardTitleLink:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;

@@ -239,7 +239,11 @@ export default async function Home() {
             <ul className={s.serviceGrid} role="list">
               {services.map((sv) => (
                 <li key={sv.name} className={s.serviceCard}>
-                  <h3 className={s.cardTitle}>{sv.name}</h3>
+                  <h3 className={s.cardTitle}>
+                    <a href={sv.href} className={s.cardTitleLink}>
+                      {sv.name}
+                    </a>
+                  </h3>
                   <p className={s.body}>{sv.desc}</p>
                   <ul className={s.tags} role="list" aria-label="対応内容">
                     {sv.tags.map((t) => (
