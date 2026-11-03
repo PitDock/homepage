@@ -234,6 +234,14 @@
   background: var(--brand-white);
 }
 
+/* 自動再生が拒否された際に iOS Safari 等が重ねる再生ボタンを隠し、ポスター表示のままにする */
+.fvVideo::-webkit-media-controls,
+.fvVideo::-webkit-media-controls-start-playback-button,
+.fvVideo::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
 /* ===== Concept ===== */
 
 .conceptInner {
