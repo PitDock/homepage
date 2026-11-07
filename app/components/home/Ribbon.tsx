@@ -15,8 +15,8 @@ import s from "../../home.module.css";
  * - 先端は画面の縦方向の真ん中（上端から 50%）を追いかける（stroke-dashoffset で伸縮）。
  *   ページ最下部で先端が線の終わりに届かない場合は、最後の 1 画面分で伸び方を速めて描き切る。
  * - 最初のスクロール（約 250px）で、40px 下から浮かび上がりながらフェードイン。
- * - 描き終えた後も消さずに表示したままにする。
- * - prefers-reduced-motion の人には、描き終えた状態で静止表示する。
+ * - 最後（Contact のリング）まで描き終えたら、少し間を置いてフェードアウトする。上にスクロールして戻れば再び表示する。
+ * - prefers-reduced-motion の人には、描き終えた状態で静止表示する（フェードアウトもしない）。
  */
 
 type RibbonSource = {
@@ -350,6 +350,7 @@ export default function Ribbon() {
       if (reducedMotion.matches) {
         path.style.strokeDashoffset = "0";
         path.style.visibility = "visible";
+        path.classList.remove(s.ribbonPathDone);
         motion.style.opacity = "1";
         motion.style.transform = "none";
         return;
@@ -366,6 +367,8 @@ export default function Ribbon() {
       path.style.strokeDashoffset = String(total - drawn);
       // 長さ 0 でも丸い線端だけが点として描かれてしまうため、伸び始めるまでは隠す
       path.style.visibility = drawn > 0 ? "visible" : "hidden";
+      // 最後（Contact のリング）まで描き終えたらフェードアウトする
+      path.classList.toggle(s.ribbonPathDone, drawn >= total - 0.5);
     };
 
     const requestUpdate = () => {
@@ -425,6 +428,7 @@ export default function Ribbon() {
         <g ref={motionRef} className={s.ribbonMotion}>
           <path
             ref={pathRef}
+            className={s.ribbonPath}
             stroke="url(#home-ribbon-gradient)"
             strokeOpacity={0.75}
             strokeLinecap="round"
