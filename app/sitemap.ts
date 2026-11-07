@@ -25,6 +25,7 @@ const routes: { path: string; lastModified: string; changeFrequency?: MetadataRo
   { path: "/news/4", lastModified: "2026-11-01", changeFrequency: "yearly", priority: 0.6 },
   { path: "/news/8", lastModified: "2026-11-01", changeFrequency: "yearly", priority: 0.6 },
   { path: "/news/10", lastModified: "2026-11-01", changeFrequency: "yearly", priority: 0.6 },
+  { path: "/news/11", lastModified: "2026-11-07", changeFrequency: "yearly", priority: 0.6 },
   { path: "/partner", lastModified: "2026-11-01", changeFrequency: "monthly", priority: 0.8 },
 ];
 

@@ -738,6 +738,7 @@ type Props = { heading: React.ReactNode; body?: React.ReactNode; href: string; l
 | 変更内容の表（`changeTable`） | `.dataTable` と同じ値（ラベル列の幅は 160px） |
 | 紙面画像（news4 の `pressFigure`） | 枠線 `1px solid var(--note-border)`、角丸 0、背景白、画像どうしの間隔 24px |
 | リンク（`.linkList a`） | `.textLink`。上に 40px |
+| 音声の埋め込みプレイヤー（news11 の `.player` / `.playerFrame`、2026-11-07 追加） | 幅 100%・最大 640px・左揃え、高さは埋め込み側の固定値（Spotify for Creators は 102px）、枠線・背景・角丸なし。前に Pマーク付き h2（`changeTableHeading`）を置く。iframe には `title` と `loading="lazy"`。詳細は `docs/news11-radio-design.md` §3 |
 
 ### 8.9 `/privacy`・`/personal-info`（規約文書のレイアウト）
 
