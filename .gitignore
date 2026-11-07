@@ -6,3 +6,4 @@ base/*
 .claude/*
 *.tsbuildinfo
 .DS_Store
+docs/*
