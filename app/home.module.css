@@ -188,8 +188,8 @@
 .fvCatch {
   position: relative;
   z-index: 2;
-  font-size: 28px;
-  line-height: 1.5;
+  font-size: 56px;
+  line-height: 1.4;
   font-weight: 700;
   color: var(--brand-ink);
 }
@@ -754,7 +754,7 @@
   }
 
   .fvCatch {
-    font-size: 22px;
+    font-size: 32px;
   }
 
   .fvLead {

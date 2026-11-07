@@ -140,7 +140,7 @@ export default async function Home() {
         <section className={s.fv} data-ribbon-anchor="0" aria-labelledby="fv-heading">
           <div className={`${s.inner} ${s.fvInner}`}>
             <h1 id="fv-heading" className={s.fvCatch}>
-              テクノロジーを味方に
+              テクノロジーを味方に、
               <br className={s.spOnly} />
               走り続ける
             </h1>
