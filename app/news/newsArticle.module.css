@@ -56,7 +56,7 @@
   gap: 12px;
 }
 
-/* Spotify 埋め込みプレイヤー（/news/11、docs/news11-radio-design.md §3） */
+/* Spotify 埋め込みプレイヤー（/news/11、docs/subpages-design-spec.md §8.8） */
 .player {
   width: 100%;
   max-width: 640px;
