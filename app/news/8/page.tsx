@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "../../../lib/seo/metadata";
+import { HOME_OG_IMAGE, SITE_NAME } from "../../../lib/seo/site";
 import SubPage from "../../components/sub/SubPage";
 import PageHero from "../../components/sub/PageHero";
 import s from "../../components/sub/sub.module.css";
@@ -10,6 +11,9 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "GOWS合同会社は2026年8月16日、組織形態を株式会社へ変更し、商号をPitDock株式会社（PitDock, Inc.）に変更いたしました。",
   path: "/news/8",
+  // ページ別OGPは作らず、トップページの画像を使う
+  image: HOME_OG_IMAGE,
+  imageAlt: SITE_NAME,
   type: "article",
   keywords: ["PitDock", "社名変更", "GOWS合同会社", "組織変更", "お知らせ"],
 });

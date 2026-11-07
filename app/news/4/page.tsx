@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
 import { createPageMetadata } from "../../../lib/seo/metadata";
+import { HOME_OG_IMAGE, SITE_NAME } from "../../../lib/seo/site";
 import SubPage from "../../components/sub/SubPage";
 import PageHero from "../../components/sub/PageHero";
 import s from "../../components/sub/sub.module.css";
@@ -14,6 +15,9 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "2025年10月28日(火)の朝日新聞朝刊にてマイベストプロ東京が紹介する専門家として弊社代表の小山が掲載されました。「マイベストプロ東京」は、東京都を拠点に活躍するさまざまな専門家が掲載されている、朝日新聞が運営するWebガイドです。",
   path: "/news/4",
+  // ページ別OGPは作らず、トップページの画像を使う
+  image: HOME_OG_IMAGE,
+  imageAlt: SITE_NAME,
   type: "article",
   keywords: ["PitDock", "朝日新聞", "マイベストプロ", "メディア掲載", "小山望海"],
 });

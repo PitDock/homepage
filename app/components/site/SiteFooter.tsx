@@ -28,7 +28,7 @@ export default function SiteFooter({ ribbonAnchor }: Props) {
               <img src="/brand/logo.svg" alt="PitDock" width={227} height={36} />
             </a>
             <p className={s.footerCatch}>
-              テクノロジーを味方に走り続ける<br/>
+              テクノロジーを味方に、走り続ける<br/>
               <span className={s.footerCatchSub}>
                 PitDockは、DX・AXコンサルティングやシステム開発を通じて、<br className={s.pcOnly} />
                 お客様が成長し続けるための変革を共に進めるパートナーです。

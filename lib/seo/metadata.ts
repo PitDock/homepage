@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "./site";
+import { SITE_NAME, SITE_URL } from "./site";
 
 type PageMetadataOptions = {
   title: string;
@@ -9,6 +9,11 @@ type PageMetadataOptions = {
   skipTitle?: boolean;
   /** true のとき title.template を適用しない */
   absoluteTitle?: boolean;
+  /**
+   * 渡したときだけ og:image / twitter:image を出力する。
+   * 省略時は、そのルートの opengraph-image.tsx から Next.js が og:image を入れ、twitter:image も同じ画像で補完する。
+   * ここで既定値を入れると、ページ別の画像より優先されてしまう。
+   */
   image?: string;
   imageAlt?: string;
   keywords?: string[];
@@ -27,14 +32,14 @@ export function createPageMetadata({
   path,
   skipTitle = false,
   absoluteTitle = false,
-  image = DEFAULT_OG_IMAGE,
+  image,
   imageAlt,
   keywords,
   noIndex = false,
   type = "website",
 }: PageMetadataOptions): Metadata {
   const url = absoluteUrl(path);
-  const imageUrl = image.startsWith("http") ? image : absoluteUrl(image);
+  const imageUrl = image ? (image.startsWith("http") ? image : absoluteUrl(image)) : undefined;
 
   return {
     ...(skipTitle
@@ -52,18 +57,14 @@ export function createPageMetadata({
       siteName: SITE_NAME,
       title,
       description,
-      images: [
-        {
-          url: imageUrl,
-          alt: imageAlt ?? title,
-        },
-      ],
+      // images キーがあると opengraph-image.tsx の画像が使われないため、画像がないときはキーごと出さない
+      ...(imageUrl ? { images: [{ url: imageUrl, alt: imageAlt ?? title }] } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [imageUrl],
+      ...(imageUrl ? { images: [imageUrl] } : {}),
     },
     robots: noIndex
       ? { index: false, follow: false }

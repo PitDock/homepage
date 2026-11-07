@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "../../../../../lib/seo/metadata";
+import { HOME_OG_IMAGE, SITE_NAME } from "../../../../../lib/seo/site";
 import SubPage from "../../../../components/sub/SubPage";
 import PageHero from "../../../../components/sub/PageHero";
 import s from "../../../../components/sub/sub.module.css";
@@ -10,6 +11,9 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "PitDock株式会社が提供するアプリケーション「Gentle Diary」における個人情報およびプライバシー情報の取り扱いについて定めたプライバシーポリシーです。",
   path: "/service/products/gentle-diary/privacy",
+  // ページ別OGPは作らず、トップページの画像を使う
+  image: HOME_OG_IMAGE,
+  imageAlt: SITE_NAME,
 });
 
 const CONTACT_FORM_URL =
