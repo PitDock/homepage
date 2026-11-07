@@ -167,6 +167,16 @@
   opacity: 0;
 }
 
+/* 最後のリングを描き終えたら、少し間を置いてスッと消す（上に戻れば再び表示） */
+.ribbonPath {
+  transition: opacity 0.4s ease;
+}
+
+.ribbonPathDone {
+  opacity: 0;
+  transition: opacity 0.6s ease 0.3s;
+}
+
 /* ===== FV ===== */
 
 .fv {
@@ -188,8 +198,8 @@
 .fvCatch {
   position: relative;
   z-index: 2;
-  font-size: 28px;
-  line-height: 1.5;
+  font-size: 56px;
+  line-height: 1.4;
   font-weight: 700;
   color: var(--brand-ink);
 }
@@ -754,7 +764,7 @@
   }
 
   .fvCatch {
-    font-size: 22px;
+    font-size: 32px;
   }
 
   .fvLead {
