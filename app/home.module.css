@@ -516,6 +516,55 @@
   color: var(--note-date);
 }
 
+.noteMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* NEW／人気ラベル。§14 のタグと同じ角丸 2px。影・グラデーション・アニメーションは使わない */
+.noteBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: 36px; /* 「NEW」と「人気」の幅をそろえる */
+  padding: 3px 6px;
+  border: 1px solid var(--brand-pit-blue);
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.noteBadgeNew {
+  background: var(--brand-pit-blue);
+  color: var(--brand-white);
+  font-family: var(--font-space), sans-serif;
+  letter-spacing: 0.06em;
+}
+
+/* tint と白いカード背景の差が小さいため、枠でラベルの形を見せる */
+.noteBadgePopular {
+  background: var(--brand-tint);
+  color: var(--brand-pit-blue);
+  font-family: var(--font-zen), sans-serif;
+  letter-spacing: 0.04em;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ===== Company ===== */
 
 .companyInner {

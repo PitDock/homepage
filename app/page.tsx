@@ -7,9 +7,9 @@ import { brandFontVariables } from "./fonts";
 import s from "./home.module.css";
 // ニュースデータは lib/data/news.ts で一元管理。/news ページでも同データを参照している。
 import { news } from "../lib/data/news";
-import { NOTE_URL, fetchLatestNoteArticles } from "../lib/data/note";
+import { NOTE_URL, fetchColumnNoteArticles } from "../lib/data/note";
 
-// note の RSS を定期的に取り直す（Next.js の制約で値はリテラルで書く。lib/data/note.ts の NOTE_REVALIDATE_SECONDS と揃える）
+// note の記事（スキ数・RSS）を定期的に取り直す（Next.js の制約で値はリテラルで書く。lib/data/note.ts の NOTE_REVALIDATE_SECONDS と揃える）
 export const revalidate = 3600;
 
 const problems = [
@@ -128,7 +128,7 @@ function SectionHeading({ id, children }: { id?: string; children: React.ReactNo
 }
 
 export default async function Home() {
-  const noteArticles = await fetchLatestNoteArticles(4);
+  const noteArticles = await fetchColumnNoteArticles(4);
 
   return (
     <div className={`${s.page} ${brandFontVariables}`}>
@@ -290,9 +290,20 @@ export default async function Home() {
                       </div>
                       <div className={s.noteBody}>
                         <p className={s.noteTitle}>{a.title}</p>
-                        <time className={s.noteDate} dateTime={a.date.replace(/\./g, "-")}>
-                          {a.date}
-                        </time>
+                        <div className={s.noteMeta}>
+                          <time className={s.noteDate} dateTime={a.date.replace(/\./g, "-")}>
+                            {a.date}
+                          </time>
+                          {a.badge === "new" && (
+                            <span className={`${s.noteBadge} ${s.noteBadgeNew}`}>
+                              <span aria-hidden="true">NEW</span>
+                              <span className={s.srOnly}>新着</span>
+                            </span>
+                          )}
+                          {a.badge === "popular" && (
+                            <span className={`${s.noteBadge} ${s.noteBadgePopular}`}>人気</span>
+                          )}
+                        </div>
                       </div>
                     </a>
                   </li>
