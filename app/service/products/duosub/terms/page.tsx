@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "../../../../../lib/seo/metadata";
+import { HOME_OG_IMAGE, SITE_NAME } from "../../../../../lib/seo/site";
 import SubPage from "../../../../components/sub/SubPage";
 import PageHero from "../../../../components/sub/PageHero";
 import s from "../../../../components/sub/sub.module.css";
@@ -10,6 +11,9 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "Duosubアプリの利用規約。料金、禁止事項、免責、個人情報の取扱い、準拠法および裁判管轄などを定めます。",
   path: "/service/products/duosub/terms",
+  // ページ別OGPは作らず、トップページの画像を使う
+  image: HOME_OG_IMAGE,
+  imageAlt: SITE_NAME,
 });
 
 export default function DuosubTermsPage() {

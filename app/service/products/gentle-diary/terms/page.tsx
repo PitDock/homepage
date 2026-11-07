@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "../../../../../lib/seo/metadata";
+import { HOME_OG_IMAGE, SITE_NAME } from "../../../../../lib/seo/site";
 import SubPage from "../../../../components/sub/SubPage";
 import PageHero from "../../../../components/sub/PageHero";
 import s from "../../../../components/sub/sub.module.css";
@@ -10,6 +11,9 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "PitDock株式会社が提供するアプリケーション「Gentle Diary」の利用に関する規約です。",
   path: "/service/products/gentle-diary/terms",
+  // ページ別OGPは作らず、トップページの画像を使う
+  image: HOME_OG_IMAGE,
+  imageAlt: SITE_NAME,
 });
 
 export default function GentleDiaryTermsPage() {
