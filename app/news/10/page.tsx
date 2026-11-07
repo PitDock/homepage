@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "../../../lib/seo/metadata";
+import { HOME_OG_IMAGE, SITE_NAME } from "../../../lib/seo/site";
 import SubPage from "../../components/sub/SubPage";
 import PageHero from "../../components/sub/PageHero";
 import s from "../../components/sub/sub.module.css";
@@ -10,6 +11,9 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "公式ホームページをリニューアルいたしました。サイト全体のデザインを一新し、サービスや取り組みをより分かりやすくお伝えできるよう構成を見直しました。",
   path: "/news/10",
+  // ページ別OGPは作らず、トップページの画像を使う
+  image: HOME_OG_IMAGE,
+  imageAlt: SITE_NAME,
   type: "article",
   keywords: ["PitDock", "ホームページリニューアル", "サイトリニューアル", "お知らせ"],
 });

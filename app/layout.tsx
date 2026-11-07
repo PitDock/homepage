@@ -5,7 +5,6 @@ import { JsonLd } from "./components/JsonLd";
 import { createPageMetadata } from "../lib/seo/metadata";
 import { organizationJsonLd, webSiteJsonLd } from "../lib/seo/json-ld";
 import {
-  DEFAULT_OG_IMAGE,
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_NAME_KANA,
@@ -27,8 +26,6 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     path: "/",
     skipTitle: true,
-    image: DEFAULT_OG_IMAGE,
-    imageAlt: SITE_NAME,
     keywords: [
       "PitDock",
       SITE_NAME_KANA,

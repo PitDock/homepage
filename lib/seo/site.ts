@@ -18,7 +18,11 @@ export const SITE_NAME_KANA_SHORT = "ピットドック";
 export const SITE_DESCRIPTION =
   "中小企業・スタートアップのDX推進・AI活用（AX）を戦略立案から実装まで支援。PitDock株式会社のITコンサルティング・システム開発サービス。";
 
-export const DEFAULT_OG_IMAGE = "/opengraph-image";
+/**
+ * トップページのOGP画像（app/opengraph-image.tsx）。
+ * ページ別OGPを作らないページ（ニュース、自社プロダクトLPの規約ページ等）が createPageMetadata() の image に渡す。
+ */
+export const HOME_OG_IMAGE = "/opengraph-image";
 
 export const ORGANIZATION = {
   name: SITE_NAME,

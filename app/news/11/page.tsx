@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "../../../lib/seo/metadata";
+import { HOME_OG_IMAGE, SITE_NAME } from "../../../lib/seo/site";
 import SubPage from "../../components/sub/SubPage";
 import PageHero from "../../components/sub/PageHero";
 import s from "../../components/sub/sub.module.css";
@@ -10,6 +11,9 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "金沢シーサイドFMの番組「社長！あなたの〇〇教えてください。」に、弊社代表取締役の小山望海が出演しました。エピソード「PitDock株式会社」は2026年11月4日よりSpotifyで配信中です（約16分）。",
   path: "/news/11",
+  // ページ別OGPは作らず、トップページの画像を使う
+  image: HOME_OG_IMAGE,
+  imageAlt: SITE_NAME,
   type: "article",
   keywords: [
     "PitDock",
