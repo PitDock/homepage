@@ -21,7 +21,7 @@ const routes: { path: string; lastModified: string; changeFrequency?: MetadataRo
   { path: "/service/products/gentle-diary", lastModified: "2026-10-10", changeFrequency: "weekly", priority: 0.8 },
   { path: "/service/products/gentle-diary/terms", lastModified: "2026-11-03", changeFrequency: "yearly", priority: 0.4 },
   { path: "/service/products/gentle-diary/privacy", lastModified: "2026-11-03", changeFrequency: "yearly", priority: 0.4 },
-  { path: "/news", lastModified: "2026-11-07", changeFrequency: "weekly", priority: 0.8 },
+  { path: "/news", lastModified: "2026-11-21", changeFrequency: "weekly", priority: 0.8 },
   { path: "/news/4", lastModified: "2026-11-03", changeFrequency: "yearly", priority: 0.6 },
   { path: "/news/8", lastModified: "2026-11-03", changeFrequency: "yearly", priority: 0.6 },
   { path: "/news/10", lastModified: "2026-11-03", changeFrequency: "yearly", priority: 0.6 },
